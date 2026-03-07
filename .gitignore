@@ -6,6 +6,9 @@
 *.egg
 *.egg-info
 
+# virtual environments
+.venv/
+
 # training related
 *log*
 *.log
@@ -19,5 +22,17 @@
 *.jsonl
 res_*
 
+# allow results directory JSONs to be tracked
+!results/**/*.json
+
+# allow config JSONs
+!.markdownlint.json
+
+# allow uv.lock (matched by *log* pattern)
+!uv.lock
+
 # mac hidden
 *.DS_Store*
+
+# secrets
+.env
