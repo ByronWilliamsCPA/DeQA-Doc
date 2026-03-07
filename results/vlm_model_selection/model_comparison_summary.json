@@ -1,0 +1,387 @@
+{
+  "qwen3-vl-8b__synthetic__separate_prompts": {
+    "model": "qwen3-vl-8b",
+    "dataset": "synthetic",
+    "strategy": "separate_prompts",
+    "n_images": 10,
+    "avg_latency_ms": 5167.026201408589,
+    "p50_latency_ms": 3953.3797620097175,
+    "p95_latency_ms": 11516.553508923964,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.6356728843082121,
+        "plcc": 0.4722454591087235,
+        "mae": 0.7302413189576202,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "sharpness": {
+        "srcc": 0.6316336271613782,
+        "plcc": 0.5987188584568336,
+        "mae": 1.0504697906553764,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "color": {
+        "srcc": 0.4848811378764269,
+        "plcc": 0.5339544024658689,
+        "mae": 0.7569432708931166,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      }
+    }
+  },
+  "qwen3.5-27b__synthetic__separate_prompts": {
+    "model": "qwen3.5-27b",
+    "dataset": "synthetic",
+    "strategy": "separate_prompts",
+    "n_images": 10,
+    "avg_latency_ms": 68803.04173470358,
+    "p50_latency_ms": 58565.576961962506,
+    "p95_latency_ms": 120815.64102645207,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.5685352436149611,
+        "plcc": 0.6440975356697185,
+        "mae": 0.9461841851336814,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "sharpness": {
+        "srcc": 0.44552956562436014,
+        "plcc": 0.7243204585795224,
+        "mae": 0.7844442398973899,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "color": {
+        "srcc": 0.24154385594221672,
+        "plcc": 0.35932391836033756,
+        "mae": 1.112829849009869,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      }
+    }
+  },
+  "gemini-flash-lite__synthetic__separate_prompts": {
+    "model": "gemini-flash-lite",
+    "dataset": "synthetic",
+    "strategy": "separate_prompts",
+    "n_images": 10,
+    "avg_latency_ms": 4564.1233836940955,
+    "p50_latency_ms": 4160.063895978965,
+    "p95_latency_ms": 6485.258224949937,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.6963106238227913,
+        "plcc": 0.7258038606103413,
+        "mae": 1.3447776110341938,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "sharpness": {
+        "srcc": 0.6963106238227913,
+        "plcc": 0.7821701255110378,
+        "mae": 1.4867305831510007,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "color": {
+        "srcc": 0.6963106238227913,
+        "plcc": 0.7437284902551837,
+        "mae": 1.4272149274012134,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      }
+    }
+  },
+  "gemini-flash-image__synthetic__separate_prompts": {
+    "model": "gemini-flash-image",
+    "dataset": "synthetic",
+    "strategy": "separate_prompts",
+    "n_images": 10,
+    "avg_latency_ms": 4664.119572000345,
+    "p50_latency_ms": 4675.278837996302,
+    "p95_latency_ms": 5264.349030671292,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.36058790975563576,
+        "plcc": 0.6360540451765127,
+        "mae": 1.0666395276090743,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "sharpness": {
+        "srcc": 0.5859001137386332,
+        "plcc": 0.7986041420608303,
+        "mae": 0.7294557705370739,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "color": {
+        "srcc": 0.37521411769677243,
+        "plcc": 0.4438719001904178,
+        "mae": 1.2195094805454894,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      }
+    }
+  },
+  "grok-4.1-fast__synthetic__separate_prompts": {
+    "model": "grok-4.1-fast",
+    "dataset": "synthetic",
+    "strategy": "separate_prompts",
+    "n_images": 10,
+    "avg_latency_ms": 35118.666720198235,
+    "p50_latency_ms": 23926.66163900867,
+    "p95_latency_ms": 64525.6872644415,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.22247460415730486,
+        "plcc": -0.02766508732973598,
+        "mae": 1.6096038258117893,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "sharpness": {
+        "srcc": -0.4178554470186724,
+        "plcc": -0.4024880919175969,
+        "mae": 2.1091095129550395,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "color": {
+        "srcc": -0.07106690545187014,
+        "plcc": -0.023465049727810966,
+        "mae": 1.5862435373637613,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      }
+    }
+  },
+  "qwen3.5-flash__synthetic__separate_prompts": {
+    "model": "qwen3.5-flash",
+    "dataset": "synthetic",
+    "strategy": "separate_prompts",
+    "n_images": 10,
+    "avg_latency_ms": 47712.532867799746,
+    "p50_latency_ms": 43609.37757600914,
+    "p95_latency_ms": 74936.06466740601,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.5658384576654014,
+        "plcc": 0.6493090485615277,
+        "mae": 0.8434127100359181,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "sharpness": {
+        "srcc": 0.4245647833431964,
+        "plcc": 0.6688816260522437,
+        "mae": 1.0280685170998176,
+        "n_valid": 9,
+        "n_total": 10,
+        "parse_rate": 0.9
+      },
+      "color": {
+        "srcc": 0.22732056912722473,
+        "plcc": 0.46859400571018045,
+        "mae": 0.8840929625224032,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      }
+    }
+  },
+  "kimi-k2.5__synthetic__separate_prompts": {
+    "model": "kimi-k2.5",
+    "dataset": "synthetic",
+    "strategy": "separate_prompts",
+    "n_images": 10,
+    "avg_latency_ms": 11973.87857469148,
+    "p50_latency_ms": 9695.518210501177,
+    "p95_latency_ms": 19003.51134999655,
+    "dimensions": {
+      "overall": {
+        "srcc": null,
+        "plcc": null,
+        "mae": null,
+        "n_valid": 0,
+        "n_total": 10,
+        "parse_rate": 0.0
+      },
+      "sharpness": {
+        "srcc": null,
+        "plcc": null,
+        "mae": null,
+        "n_valid": 0,
+        "n_total": 10,
+        "parse_rate": 0.0
+      },
+      "color": {
+        "srcc": null,
+        "plcc": null,
+        "mae": null,
+        "n_valid": 0,
+        "n_total": 10,
+        "parse_rate": 0.0
+      }
+    }
+  },
+  "qwen3-vl-8b__diqa5000__overall_only": {
+    "model": "qwen3-vl-8b",
+    "dataset": "diqa5000",
+    "strategy": "overall_only",
+    "n_images": 5,
+    "avg_latency_ms": 7630.598173209,
+    "p50_latency_ms": 7754.201269999612,
+    "p95_latency_ms": 10024.357168795541,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.5773502691896257,
+        "plcc": 0.6489464630347914,
+        "mae": 0.5252,
+        "n_valid": 5,
+        "n_total": 5,
+        "parse_rate": 1.0
+      },
+      "sharpness": {
+        "srcc": null,
+        "plcc": null,
+        "mae": null,
+        "n_valid": 0,
+        "n_total": 5,
+        "parse_rate": 0.0
+      },
+      "color": {
+        "srcc": null,
+        "plcc": null,
+        "mae": null,
+        "n_valid": 0,
+        "n_total": 5,
+        "parse_rate": 0.0
+      }
+    }
+  },
+  "qwen3-vl-8b__diqa5000__separate_prompts": {
+    "model": "qwen3-vl-8b",
+    "dataset": "diqa5000",
+    "strategy": "separate_prompts",
+    "n_images": 10,
+    "avg_latency_ms": 18046.893801097758,
+    "p50_latency_ms": 18241.339125001105,
+    "p95_latency_ms": 23236.281056411095,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.5918640302493727,
+        "plcc": 0.5755064530748236,
+        "mae": 0.4392999999999999,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "sharpness": {
+        "srcc": 0.33267210840002365,
+        "plcc": 0.40734892876402473,
+        "mae": 0.9561,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "color": {
+        "srcc": 0.3113995776646092,
+        "plcc": 0.17549182181503045,
+        "mae": 0.9098999999999998,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      }
+    }
+  },
+  "qwen3.5-27b__diqa5000__separate_prompts": {
+    "model": "qwen3.5-27b",
+    "dataset": "diqa5000",
+    "strategy": "separate_prompts",
+    "n_images": 10,
+    "avg_latency_ms": 64547.99073660397,
+    "p50_latency_ms": 58623.791630991036,
+    "p95_latency_ms": 94402.45774294599,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.2611164839335467,
+        "plcc": 0.432814984890703,
+        "mae": 1.0313,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "sharpness": {
+        "srcc": 0.40741767253225397,
+        "plcc": 0.3604530958368097,
+        "mae": 1.5453,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "color": {
+        "srcc": 0.28949874578229834,
+        "plcc": 0.30427026253841033,
+        "mae": 0.7739,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      }
+    }
+  },
+  "gemini-flash-image__diqa5000__separate_prompts": {
+    "model": "gemini-flash-image",
+    "dataset": "diqa5000",
+    "strategy": "separate_prompts",
+    "n_images": 10,
+    "avg_latency_ms": 9289.975549589144,
+    "p50_latency_ms": 9317.90762199671,
+    "p95_latency_ms": 12640.43720603804,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.7236272269866326,
+        "plcc": 0.7997306770250932,
+        "mae": 0.6058999999999999,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "sharpness": {
+        "srcc": NaN,
+        "plcc": NaN,
+        "mae": 1.6453,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      },
+      "color": {
+        "srcc": 0.14382024188056616,
+        "plcc": 0.19626355979861784,
+        "mae": 1.3699,
+        "n_valid": 10,
+        "n_total": 10,
+        "parse_rate": 1.0
+      }
+    }
+  }
+}

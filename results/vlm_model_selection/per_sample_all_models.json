@@ -1,0 +1,2325 @@
+[
+  {
+    "dataset": "diqa5000",
+    "image_id": "train_res_00001.jpg",
+    "full_path": "train_res_00001.jpg",
+    "ground_truth": {
+      "gt_overall": 3.187,
+      "gt_sharpness": 3.613,
+      "gt_color": 3.307,
+      "ori_image": "train_ori_00001.jpg"
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__overall_only": {
+        "strategy": "overall_only",
+        "ratings": {
+          "overall": "good"
+        },
+        "scores": {
+          "overall": 4.0
+        },
+        "raw_responses": {
+          "overall": "good"
+        },
+        "latency_ms": 9568.3250320144
+      },
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 4.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "latency_ms": 19438.946359965485
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 42145.84624901181
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 9178.459049027879
+      }
+    }
+  },
+  {
+    "dataset": "diqa5000",
+    "image_id": "train_res_00002.jpg",
+    "full_path": "train_res_00002.jpg",
+    "ground_truth": {
+      "gt_overall": 3.1,
+      "gt_sharpness": 3.42,
+      "gt_color": 3.22,
+      "ori_image": "train_ori_00001.jpg"
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__overall_only": {
+        "strategy": "overall_only",
+        "ratings": {
+          "overall": "fair"
+        },
+        "scores": {
+          "overall": 3.0
+        },
+        "raw_responses": {
+          "overall": "fair"
+        },
+        "latency_ms": 10138.365202990826
+      },
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 2.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "good"
+        },
+        "latency_ms": 21896.882250963245
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "poor"
+        },
+        "latency_ms": 96007.52950098831
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "excellent",
+          "color": "bad"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 5.0,
+          "color": 1.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "excellent",
+          "color": "bad"
+        },
+        "latency_ms": 7413.471515988931
+      }
+    }
+  },
+  {
+    "dataset": "diqa5000",
+    "image_id": "train_res_00003.jpg",
+    "full_path": "train_res_00003.jpg",
+    "ground_truth": {
+      "gt_overall": 3.067,
+      "gt_sharpness": 3.42,
+      "gt_color": 3.133,
+      "ori_image": "train_ori_00001.jpg"
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__overall_only": {
+        "strategy": "overall_only",
+        "ratings": {
+          "overall": "good"
+        },
+        "scores": {
+          "overall": 4.0
+        },
+        "raw_responses": {
+          "overall": "good"
+        },
+        "latency_ms": 4727.7846520300955
+      },
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 4.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "latency_ms": 14492.223644978367
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 76437.64968501637
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "poor"
+        },
+        "latency_ms": 10902.88155694725
+      }
+    }
+  },
+  {
+    "dataset": "diqa5000",
+    "image_id": "train_res_00004.jpg",
+    "full_path": "train_res_00004.jpg",
+    "ground_truth": {
+      "gt_overall": 3.233,
+      "gt_sharpness": 3.54,
+      "gt_color": 3.36,
+      "ori_image": "train_ori_00001.jpg"
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__overall_only": {
+        "strategy": "overall_only",
+        "ratings": {
+          "overall": "good"
+        },
+        "scores": {
+          "overall": 4.0
+        },
+        "raw_responses": {
+          "overall": "good"
+        },
+        "latency_ms": 5964.314709010068
+      },
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 4.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "latency_ms": 18347.748347034212
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 38335.162531002425
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 6511.5614219685085
+      }
+    }
+  },
+  {
+    "dataset": "diqa5000",
+    "image_id": "train_res_00005.jpg",
+    "full_path": "train_res_00005.jpg",
+    "ground_truth": {
+      "gt_overall": 3.013,
+      "gt_sharpness": 3.367,
+      "gt_color": 3.16,
+      "ori_image": "train_ori_00001.jpg"
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__overall_only": {
+        "strategy": "overall_only",
+        "ratings": {
+          "overall": "fair"
+        },
+        "scores": {
+          "overall": 3.0
+        },
+        "raw_responses": {
+          "overall": "fair"
+        },
+        "latency_ms": 7754.201269999612
+      },
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 2.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "good"
+        },
+        "latency_ms": 24163.076409022324
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "poor"
+        },
+        "latency_ms": 92440.70337200537
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "excellent",
+          "color": "bad"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 5.0,
+          "color": 1.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "excellent",
+          "color": "bad"
+        },
+        "latency_ms": 5926.8042870098725
+      }
+    }
+  },
+  {
+    "dataset": "diqa5000",
+    "image_id": "train_res_00006.jpg",
+    "full_path": "train_res_00006.jpg",
+    "ground_truth": {
+      "gt_overall": 3.253,
+      "gt_sharpness": 3.4,
+      "gt_color": 3.287,
+      "ori_image": "train_ori_00001.jpg"
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 4.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "latency_ms": 14111.160238971934
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "fair"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 3.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "fair"
+        },
+        "latency_ms": 59370.90093200095
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "poor"
+        },
+        "latency_ms": 7114.508863014635
+      }
+    }
+  },
+  {
+    "dataset": "diqa5000",
+    "image_id": "train_res_00007.jpg",
+    "full_path": "train_res_00007.jpg",
+    "ground_truth": {
+      "gt_overall": 3.147,
+      "gt_sharpness": 3.187,
+      "gt_color": 3.253,
+      "ori_image": "train_ori_00001.jpg"
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 2.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "latency_ms": 17292.02046105638
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 4.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "poor"
+        },
+        "latency_ms": 57876.68232998112
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "excellent",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 5.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "excellent",
+          "color": "poor"
+        },
+        "latency_ms": 9457.356194965541
+      }
+    }
+  },
+  {
+    "dataset": "diqa5000",
+    "image_id": "train_res_00008.jpg",
+    "full_path": "train_res_00008.jpg",
+    "ground_truth": {
+      "gt_overall": 3.167,
+      "gt_sharpness": 3.2,
+      "gt_color": 3.167,
+      "ori_image": "train_ori_00001.jpg"
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 4.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "latency_ms": 22103.53118099738
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "Good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 57113.513240998145
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "latency_ms": 11273.185255995486
+      }
+    }
+  },
+  {
+    "dataset": "diqa5000",
+    "image_id": "train_res_00009.jpg",
+    "full_path": "train_res_00009.jpg",
+    "ground_truth": {
+      "gt_overall": 3.407,
+      "gt_sharpness": 3.32,
+      "gt_color": 3.367,
+      "ori_image": "train_ori_00001.jpg"
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "latency_ms": 10488.419215020258
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 37084.80063499883
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 13357.49898100039
+      }
+    }
+  },
+  {
+    "dataset": "diqa5000",
+    "image_id": "train_res_00010.jpg",
+    "full_path": "train_res_00010.jpg",
+    "ground_truth": {
+      "gt_overall": 3.113,
+      "gt_sharpness": 3.08,
+      "gt_color": 3.153,
+      "ori_image": "train_ori_00001.jpg"
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 2.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "good"
+        },
+        "latency_ms": 18134.929902967997
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "fair"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 3.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "Fair"
+        },
+        "latency_ms": 88667.11889003636
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "latency_ms": 11764.028369972948
+      }
+    }
+  },
+  {
+    "dataset": "synthetic",
+    "image_id": "id_standard_0006.jpg",
+    "full_path": "/tmp/ood_poc_test/id_standard/id_standard_0006.jpg",
+    "ground_truth": {
+      "category": "id_standard",
+      "is_ood": false,
+      "ood_reason": null,
+      "generation_params": {
+        "script": "Latn",
+        "dpi": 200,
+        "quality_tier": "MEDIUM",
+        "color_mode": "color",
+        "font_family": "DejaVuSans",
+        "font_style": "sans",
+        "writing_direction": "ltr"
+      },
+      "gt_scores": {
+        "overall": 3.0393552193313913,
+        "sharpness": 3.164105695083484,
+        "color": 2.9212517655550854
+      },
+      "gt_categories": {
+        "overall": "fair",
+        "sharpness": "fair",
+        "color": "fair"
+      }
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "latency_ms": 3299.1612320183776
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "poor",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 2.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "poor",
+          "color": "excellent"
+        },
+        "latency_ms": 28106.03775200434
+      },
+      "gemini-flash-lite__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "Excellent",
+          "sharpness": "Excellent",
+          "color": "Excellent"
+        },
+        "latency_ms": 5124.26528299693
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "fair",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 3.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "fair",
+          "color": "poor"
+        },
+        "latency_ms": 4348.284695995972
+      },
+      "grok-4.1-fast__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 24363.372198014986
+      },
+      "qwen3.5-flash__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 4.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "latency_ms": 47531.404890003614
+      },
+      "kimi-k2.5__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {},
+        "scores": {},
+        "raw_responses": {
+          "overall": "",
+          "sharpness": "",
+          "color": ""
+        },
+        "latency_ms": 17904.638497973792
+      }
+    }
+  },
+  {
+    "dataset": "synthetic",
+    "image_id": "id_standard_0028.jpg",
+    "full_path": "/tmp/ood_poc_test/id_standard/id_standard_0028.jpg",
+    "ground_truth": {
+      "category": "id_standard",
+      "is_ood": false,
+      "ood_reason": null,
+      "generation_params": {
+        "script": "Latn",
+        "dpi": 200,
+        "quality_tier": "MEDIUM",
+        "color_mode": "color",
+        "font_family": "NotoSans-Regular",
+        "font_style": "sans",
+        "writing_direction": "ltr"
+      },
+      "gt_scores": {
+        "overall": 3.049589512170375,
+        "sharpness": 2.9717208995712396,
+        "color": 3.1746113200185486
+      },
+      "gt_categories": {
+        "overall": "fair",
+        "sharpness": "fair",
+        "color": "fair"
+      }
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "good",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 4.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "good",
+          "color": "poor"
+        },
+        "latency_ms": 4470.191940024961
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 2.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "excellent"
+        },
+        "latency_ms": 121363.21347299963
+      },
+      "gemini-flash-lite__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "Excellent",
+          "sharpness": "Excellent",
+          "color": "Excellent"
+        },
+        "latency_ms": 5443.372023000848
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "fair",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 3.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "fair",
+          "color": "excellent"
+        },
+        "latency_ms": 4972.5392909604125
+      },
+      "grok-4.1-fast__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 22816.803035966586
+      },
+      "qwen3.5-flash__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "fair",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 3.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "fair",
+          "color": "poor"
+        },
+        "latency_ms": 81210.07574000396
+      },
+      "kimi-k2.5__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {},
+        "scores": {},
+        "raw_responses": {
+          "overall": "",
+          "sharpness": "",
+          "color": ""
+        },
+        "latency_ms": 9494.662529032212
+      }
+    }
+  },
+  {
+    "dataset": "synthetic",
+    "image_id": "id_standard_0070.jpg",
+    "full_path": "/tmp/ood_poc_test/id_standard/id_standard_0070.jpg",
+    "ground_truth": {
+      "category": "id_standard",
+      "is_ood": false,
+      "ood_reason": null,
+      "generation_params": {
+        "script": "Latn",
+        "dpi": 200,
+        "quality_tier": "MEDIUM",
+        "color_mode": "color",
+        "font_family": "DejaVuSans",
+        "font_style": "sans",
+        "writing_direction": "ltr"
+      },
+      "gt_scores": {
+        "overall": 3.0699543635430118,
+        "sharpness": 2.985736786574813,
+        "color": 2.7894433873776676
+      },
+      "gt_categories": {
+        "overall": "fair",
+        "sharpness": "fair",
+        "color": "fair"
+      }
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 4220.051248965319
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 2.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "Poor",
+          "color": "excellent"
+        },
+        "latency_ms": 57897.21178996842
+      },
+      "gemini-flash-lite__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "Excellent",
+          "sharpness": "Excellent",
+          "color": "Excellent"
+        },
+        "latency_ms": 3946.1376709514298
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "fair",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 3.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "fair",
+          "color": "poor"
+        },
+        "latency_ms": 5226.431082002819
+      },
+      "grok-4.1-fast__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "poor",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 2.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "poor",
+          "color": "excellent"
+        },
+        "latency_ms": 46815.74778701179
+      },
+      "qwen3.5-flash__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "good",
+          "color": "fair"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 4.0,
+          "color": 3.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "good",
+          "color": "fair"
+        },
+        "latency_ms": 44132.9736780026
+      },
+      "kimi-k2.5__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {},
+        "scores": {},
+        "raw_responses": {
+          "overall": "",
+          "sharpness": "",
+          "color": ""
+        },
+        "latency_ms": 9404.99558096053
+      }
+    }
+  },
+  {
+    "dataset": "synthetic",
+    "image_id": "ood_heavily_degraded_0000.jpg",
+    "full_path": "/tmp/ood_poc_test/ood_heavily_degraded/ood_heavily_degraded_0000.jpg",
+    "ground_truth": {
+      "category": "ood_heavily_degraded",
+      "is_ood": true,
+      "ood_reason": "Heavily degraded documents (beyond DIQA-5000 range)",
+      "generation_params": {
+        "script": "Latn",
+        "dpi": 100,
+        "quality_tier": "DEGRADED",
+        "color_mode": "grayscale",
+        "font_family": "NotoSans-Regular",
+        "font_style": "sans",
+        "writing_direction": "ltr"
+      },
+      "gt_scores": {
+        "overall": 1.613132152010835,
+        "sharpness": 1.1014286299831628,
+        "color": 1.576540229811844
+      },
+      "gt_categories": {
+        "overall": "poor",
+        "sharpness": "bad",
+        "color": "poor"
+      }
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 2.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "latency_ms": 3466.6872160159983
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 2.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "latency_ms": 86016.63603202906
+      },
+      "gemini-flash-lite__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 2.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "Poor",
+          "sharpness": "Poor",
+          "color": "Poor"
+        },
+        "latency_ms": 4373.9901210065
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 2.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "latency_ms": 5283.605315024033
+      },
+      "grok-4.1-fast__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "**poor**\n\nThe provided text simulates a low-quality document image. Readability is compromised by:\n- Short, fragmented lines that make it hard to follow continuous text",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "latency_ms": 55016.577126982156
+      },
+      "qwen3.5-flash__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 2.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "latency_ms": 32817.86243501119
+      },
+      "kimi-k2.5__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {},
+        "scores": {},
+        "raw_responses": {
+          "overall": "",
+          "sharpness": "",
+          "color": ""
+        },
+        "latency_ms": 9896.373891970143
+      }
+    }
+  },
+  {
+    "dataset": "synthetic",
+    "image_id": "ood_pristine_0000.jpg",
+    "full_path": "/tmp/ood_poc_test/ood_pristine/ood_pristine_0000.jpg",
+    "ground_truth": {
+      "category": "ood_pristine",
+      "is_ood": true,
+      "ood_reason": "Pristine documents (unnaturally clean for DIQA-5000)",
+      "generation_params": {
+        "script": "Latn",
+        "dpi": 400,
+        "quality_tier": "PRISTINE",
+        "color_mode": "color",
+        "font_family": "DejaVuSans",
+        "font_style": "sans",
+        "writing_direction": "ltr"
+      },
+      "gt_scores": {
+        "overall": 4.806996640227892,
+        "sharpness": 4.759152959942971,
+        "color": 4.428074608043278
+      },
+      "gt_categories": {
+        "overall": "excellent",
+        "sharpness": "excellent",
+        "color": "good"
+      }
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 4.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "latency_ms": 8296.806995989755
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "fair"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 3.0
+        },
+        "raw_responses": {
+          "overall": "Excellent",
+          "sharpness": "excellent",
+          "color": "Fair"
+        },
+        "latency_ms": 49172.50091099413
+      },
+      "gemini-flash-lite__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "Excellent",
+          "color": "Excellent"
+        },
+        "latency_ms": 4423.24831901351
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "latency_ms": 4713.761929015163
+      },
+      "grok-4.1-fast__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 2.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "excellent"
+        },
+        "latency_ms": 23489.951080002356
+      },
+      "qwen3.5-flash__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "good",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 4.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "good",
+          "color": "excellent"
+        },
+        "latency_ms": 34923.58656000579
+      },
+      "kimi-k2.5__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {},
+        "scores": {},
+        "raw_responses": {
+          "overall": "",
+          "sharpness": "",
+          "color": ""
+        },
+        "latency_ms": 14723.710801976267
+      }
+    }
+  },
+  {
+    "dataset": "synthetic",
+    "image_id": "ood_script_ethiopic_0000.jpg",
+    "full_path": "/tmp/ood_poc_test/ood_script_ethiopic/ood_script_ethiopic_0000.jpg",
+    "ground_truth": {
+      "category": "ood_script_ethiopic",
+      "is_ood": true,
+      "ood_reason": "Ethiopic script (never in DIQA-5000)",
+      "generation_params": {
+        "script": "Ethi",
+        "dpi": 200,
+        "quality_tier": "MEDIUM",
+        "color_mode": "color",
+        "font_family": "NotoSansEthiopic-Regular",
+        "font_style": "sans",
+        "writing_direction": "ltr"
+      },
+      "gt_scores": {
+        "overall": 2.981402296978527,
+        "sharpness": 2.8670049025024094,
+        "color": 2.73131998362303
+      },
+      "gt_categories": {
+        "overall": "fair",
+        "sharpness": "fair",
+        "color": "fair"
+      }
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 2.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "latency_ms": 3686.708275054116
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 2.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "good"
+        },
+        "latency_ms": 83305.62073201872
+      },
+      "gemini-flash-lite__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "Excellent",
+          "sharpness": "Excellent",
+          "color": "Excellent"
+        },
+        "latency_ms": 3813.8951449654996
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "latency_ms": 4139.378065010533
+      },
+      "grok-4.1-fast__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "bad",
+          "sharpness": "poor",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 1.0,
+          "sharpness": 2.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "bad",
+          "sharpness": "poor",
+          "color": "good"
+        },
+        "latency_ms": 16199.312703043688
+      },
+      "qwen3.5-flash__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 2.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "",
+          "color": "excellent"
+        },
+        "latency_ms": 50692.79824895784
+      },
+      "kimi-k2.5__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {},
+        "scores": {},
+        "raw_responses": {
+          "overall": "",
+          "sharpness": "",
+          "color": ""
+        },
+        "latency_ms": 8622.642749978695
+      }
+    }
+  },
+  {
+    "dataset": "synthetic",
+    "image_id": "ood_script_myanmar_0000.jpg",
+    "full_path": "/tmp/ood_poc_test/ood_script_myanmar/ood_script_myanmar_0000.jpg",
+    "ground_truth": {
+      "category": "ood_script_myanmar",
+      "is_ood": true,
+      "ood_reason": "Myanmar script (never in DIQA-5000)",
+      "generation_params": {
+        "script": "Mymr",
+        "dpi": 200,
+        "quality_tier": "MEDIUM",
+        "color_mode": "color",
+        "font_family": "NotoSansMyanmar-Regular",
+        "font_style": "sans",
+        "writing_direction": "ltr"
+      },
+      "gt_scores": {
+        "overall": 2.9060866978055246,
+        "sharpness": 2.744599210289631,
+        "color": 3.1409987572012272
+      },
+      "gt_categories": {
+        "overall": "fair",
+        "sharpness": "fair",
+        "color": "fair"
+      }
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 4.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "latency_ms": 3100.021189020481
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "fair",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 3.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "fair",
+          "color": "good"
+        },
+        "latency_ms": 59233.94213395659
+      },
+      "gemini-flash-lite__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "Excellent",
+          "sharpness": "Excellent",
+          "color": "excellent"
+        },
+        "latency_ms": 3670.8870899747126
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "good",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 4.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "good",
+          "color": "poor"
+        },
+        "latency_ms": 4073.3223159913905
+      },
+      "grok-4.1-fast__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "latency_ms": 20270.16856201226
+      },
+      "qwen3.5-flash__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 43085.781474015675
+      },
+      "kimi-k2.5__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {},
+        "scores": {},
+        "raw_responses": {
+          "overall": "",
+          "sharpness": "",
+          "color": ""
+        },
+        "latency_ms": 19902.589138015173
+      }
+    }
+  },
+  {
+    "dataset": "synthetic",
+    "image_id": "ood_script_tibetan_0000.jpg",
+    "full_path": "/tmp/ood_poc_test/ood_script_tibetan/ood_script_tibetan_0000.jpg",
+    "ground_truth": {
+      "category": "ood_script_tibetan",
+      "is_ood": true,
+      "ood_reason": "Tibetan script (never in DIQA-5000)",
+      "generation_params": {
+        "script": "Tibt",
+        "dpi": 200,
+        "quality_tier": "MEDIUM",
+        "color_mode": "color",
+        "font_family": "NotoSerifTibetan-Regular",
+        "font_style": "serif",
+        "writing_direction": "ltr"
+      },
+      "gt_scores": {
+        "overall": 2.9857043012676017,
+        "sharpness": 2.7968866676189026,
+        "color": 3.3146358057746594
+      },
+      "gt_categories": {
+        "overall": "fair",
+        "sharpness": "fair",
+        "color": "fair"
+      }
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "good",
+          "color": "fair"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 4.0,
+          "color": 3.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "good",
+          "color": "fair"
+        },
+        "latency_ms": 4557.82155302586
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 4.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "latency_ms": 36680.193396052346
+      },
+      "gemini-flash-lite__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "Excellent",
+          "sharpness": "Excellent",
+          "color": "Excellent"
+        },
+        "latency_ms": 3617.6632870337926
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "good",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 4.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "good",
+          "color": "poor"
+        },
+        "latency_ms": 4636.795746977441
+      },
+      "grok-4.1-fast__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 72305.86828599917
+      },
+      "qwen3.5-flash__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "excellent",
+          "color": "fair"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 5.0,
+          "color": 3.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "excellent",
+          "color": "fair"
+        },
+        "latency_ms": 67267.82891200855
+      },
+      "kimi-k2.5__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {},
+        "scores": {},
+        "raw_responses": {
+          "overall": "",
+          "sharpness": "",
+          "color": ""
+        },
+        "latency_ms": 8352.780600020196
+      }
+    }
+  },
+  {
+    "dataset": "synthetic",
+    "image_id": "ood_very_high_dpi_0000.jpg",
+    "full_path": "/tmp/ood_poc_test/ood_very_high_dpi/ood_very_high_dpi_0000.jpg",
+    "ground_truth": {
+      "category": "ood_very_high_dpi",
+      "is_ood": true,
+      "ood_reason": "Very high resolution (600 DPI archival)",
+      "generation_params": {
+        "script": "Latn",
+        "dpi": 600,
+        "quality_tier": "HIGH",
+        "color_mode": "color",
+        "font_family": "NotoSans-Regular",
+        "font_style": "sans",
+        "writing_direction": "ltr"
+      },
+      "gt_scores": {
+        "overall": 4.103625788972736,
+        "sharpness": 4.192538175076498,
+        "color": 3.8558318187697855
+      },
+      "gt_categories": {
+        "overall": "good",
+        "sharpness": "good",
+        "color": "good"
+      }
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 4.0,
+          "sharpness": 4.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "good",
+          "sharpness": "good",
+          "color": "good"
+        },
+        "latency_ms": 14150.891564961057
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "Good"
+        },
+        "latency_ms": 120146.38581400504
+      },
+      "gemini-flash-lite__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "Excellent",
+          "color": "Excellent"
+        },
+        "latency_ms": 7337.710571999196
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "latency_ms": 5240.813572017942
+      },
+      "grok-4.1-fast__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "latency_ms": 20318.22179397568
+      },
+      "qwen3.5-flash__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "good"
+        },
+        "latency_ms": 35950.91835403582
+      },
+      "kimi-k2.5__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {},
+        "scores": {},
+        "raw_responses": {
+          "overall": "",
+          "sharpness": "",
+          "color": ""
+        },
+        "latency_ms": 8733.206038014032
+      }
+    }
+  },
+  {
+    "dataset": "synthetic",
+    "image_id": "ood_very_low_dpi_0000.jpg",
+    "full_path": "/tmp/ood_poc_test/ood_very_low_dpi/ood_very_low_dpi_0000.jpg",
+    "ground_truth": {
+      "category": "ood_very_low_dpi",
+      "is_ood": true,
+      "ood_reason": "Very low resolution (72 DPI thumbnails)",
+      "generation_params": {
+        "script": "Latn",
+        "dpi": 72,
+        "quality_tier": "LOW",
+        "color_mode": "color",
+        "font_family": "NotoSans-Regular",
+        "font_style": "sans",
+        "writing_direction": "ltr"
+      },
+      "gt_scores": {
+        "overall": 2.0036230826498334,
+        "sharpness": 1.5495202418468819,
+        "color": 2.2048569501872595
+      },
+      "gt_categories": {
+        "overall": "poor",
+        "sharpness": "poor",
+        "color": "poor"
+      }
+    },
+    "model_ratings": {
+      "qwen3-vl-8b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 2.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "latency_ms": 2421.9207990099676
+      },
+      "qwen3.5-27b__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 2.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "latency_ms": 46108.67531300755
+      },
+      "gemini-flash-lite__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "poor",
+          "sharpness": "poor",
+          "color": "poor"
+        },
+        "scores": {
+          "overall": 2.0,
+          "sharpness": 2.0,
+          "color": 2.0
+        },
+        "raw_responses": {
+          "overall": "Poor",
+          "sharpness": "Poor",
+          "color": "Poor"
+        },
+        "latency_ms": 3890.0643259985372
+      },
+      "gemini-flash-image__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "bad",
+          "sharpness": "bad",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 1.0,
+          "sharpness": 1.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "bad",
+          "sharpness": "bad",
+          "color": "good"
+        },
+        "latency_ms": 4006.263707007747
+      },
+      "grok-4.1-fast__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "scores": {
+          "overall": 5.0,
+          "sharpness": 5.0,
+          "color": 5.0
+        },
+        "raw_responses": {
+          "overall": "excellent",
+          "sharpness": "excellent",
+          "color": "excellent"
+        },
+        "latency_ms": 49590.64462897368
+      },
+      "qwen3.5-flash__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "good"
+        },
+        "scores": {
+          "overall": 3.0,
+          "sharpness": 2.0,
+          "color": 4.0
+        },
+        "raw_responses": {
+          "overall": "fair",
+          "sharpness": "poor",
+          "color": "good"
+        },
+        "latency_ms": 39512.09838595241
+      },
+      "kimi-k2.5__separate_prompts": {
+        "strategy": "separate_prompts",
+        "ratings": {},
+        "scores": {},
+        "raw_responses": {
+          "overall": "",
+          "sharpness": "",
+          "color": ""
+        },
+        "latency_ms": 12703.185918973759
+      }
+    }
+  }
+]
