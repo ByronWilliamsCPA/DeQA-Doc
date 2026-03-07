@@ -1,0 +1,152 @@
+# ============================================================================
+# Basic CI for DeQA-Doc
+# ============================================================================
+# Lightweight checks suited for a research codebase with heavy GPU deps.
+# Tests requiring torch/CUDA are excluded — run those locally with GPU.
+# ============================================================================
+
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Quality Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76  # v2.14.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86  # v5.4.2
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install linting tools
+        run: uv tool install ruff && uv tool install bandit
+
+      # Lint new/local code only (not upstream DeQA-Score or Llamafactory)
+      - name: Ruff format check (results/)
+        run: |
+          if [ -d results/ ]; then
+            ruff format --check results/ || echo "::warning::Formatting issues in results/"
+          fi
+
+      - name: Ruff lint (results/)
+        run: |
+          if [ -d results/ ]; then
+            ruff check results/ --output-format=github || echo "::warning::Lint issues in results/"
+          fi
+
+      - name: Python syntax check (all .py files)
+        run: |
+          echo "Checking Python syntax..."
+          find . -name "*.py" -not -path "./.git/*" -not -path "./.venv/*" | \
+            xargs python -m py_compile 2>&1 | tee /tmp/syntax.log || true
+          if [ -s /tmp/syntax.log ]; then
+            echo "::warning::Syntax issues found — see log above"
+          fi
+
+      - name: Bandit security scan (results/)
+        run: |
+          if [ -d results/ ]; then
+            bandit -r results/ -ll || echo "::warning::Security issues in results/"
+          fi
+
+      - name: Check for secrets/credentials
+        run: |
+          echo "Scanning for potential secrets..."
+          FOUND=0
+          # Check for hardcoded API keys/tokens
+          if grep -rE "(api_key|api_secret|password|token)\s*=\s*[\"'][^\"']{8,}[\"']" \
+               --include="*.py" --include="*.sh" --include="*.yaml" --include="*.yml" \
+               --exclude-dir=.git . 2>/dev/null; then
+            echo "::error::Potential hardcoded secret detected"
+            FOUND=1
+          fi
+          # Check for .env committed
+          if git ls-files --error-unmatch .env 2>/dev/null; then
+            echo "::error::.env file is tracked by git"
+            FOUND=1
+          fi
+          if [ "$FOUND" -eq 1 ]; then
+            exit 1
+          fi
+          echo "No secrets detected."
+
+  security:
+    name: Security Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76  # v2.14.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+
+      - name: Set up Python
+        uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55  # v5.5.0
+        with:
+          python-version: "3.11"
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@8ff85221d12737ec1137e6a892722e5130f32d05  # v3.28.8
+        with:
+          languages: python
+          queries: security-extended
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@8ff85221d12737ec1137e6a892722e5130f32d05  # v3.28.8
+        with:
+          category: "/language:python"
+
+  dependency-review:
+    name: Dependency Review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76  # v2.14.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@3b139cfc5fae8b618d3eae3675e383bb1769c019  # v4.5.0
+        with:
+          fail-on-severity: high
+          comment-summary-in-pr: always
