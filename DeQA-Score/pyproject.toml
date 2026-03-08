@@ -29,7 +29,7 @@ dependencies = [
     "gradio==3.35.2",
     "gradio_client==0.2.9",
     "requests",
-    "httpx==0.24.0",
+    "httpx>=0.24.0",
     "uvicorn",
     "fastapi",
     "icecream",
@@ -43,6 +43,7 @@ dependencies = [
 [project.optional-dependencies]
 train = ["deepspeed==0.9.5", "ninja", "wandb"]
 dev = ["pytest", "ruff", "protobuf"]
+api = ["anthropic>=0.43.0", "openai>=1.0.0"]
 
 [project.urls]
 "Bug Tracker" = "https://github.com/zhiyuanyou/DeQA-Score/issues"
