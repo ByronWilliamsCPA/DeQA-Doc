@@ -18,12 +18,14 @@
 # result related
 *answer*
 *ckpt*
+checkpoints/
 *.json
 *.jsonl
 res_*
 
-# allow results directory JSONs to be tracked
+# allow results directory JSONs and per-sample JSONL checkpoints to be tracked
 !results/**/*.json
+!results/**/*.jsonl
 
 # allow config JSONs
 !.markdownlint.json
@@ -34,5 +36,17 @@ res_*
 # mac hidden
 *.DS_Store*
 
+# test sample images
+results/vlm_teacher_eval/smoke_test_results/sample_images/
+results/vlm_teacher_eval/full_eval/data/res/
+
+# binary embeddings and model artifacts
+*.npz
+results/siglip2_diqa5000/embeddings/
+
+# large research data (keep code, exclude data)
+research/ocr_iqa_correlation/data/
+
 # secrets
 .env
+.gcp/
