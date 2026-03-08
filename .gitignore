@@ -30,8 +30,9 @@ res_*
 # allow config JSONs
 !.markdownlint.json
 
-# allow uv.lock (matched by *log* pattern)
+# allow uv.lock and research backlog (matched by *log* pattern)
 !uv.lock
+!research/backlog.md
 
 # mac hidden
 *.DS_Store*

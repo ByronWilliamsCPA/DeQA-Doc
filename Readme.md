@@ -59,6 +59,8 @@ python scripts/validate_ood_checkpoint.py \
 - `tier1_ood_detector/` -- Mahalanobis OOD detector methodology and calibration
 - `vlm_model_selection/` -- VLM model comparison for Tier-2 cross-validation (selected Qwen3-VL-8B)
 
+See [research/INDEX.md](research/INDEX.md) for the full research index, experiment registry, hypothesis backlog, and data inventory.
+
 ## Original DeQA-Doc
 
 > **Paper**: [DeQA-Doc: Adapting DeQA-Score to Document Image Quality Assessment](https://arxiv.org/abs/2507.12796)
