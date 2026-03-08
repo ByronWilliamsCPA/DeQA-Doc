@@ -1,0 +1,156 @@
+{
+  "1_single_all3": {
+    "metrics": {
+      "overall": {
+        "srcc": 0.7153,
+        "mae": 1.4697,
+        "bias": 1.4697
+      },
+      "sharpness": {
+        "srcc": 0.8559,
+        "mae": 1.529,
+        "bias": 1.529
+      },
+      "color_fidelity": {
+        "srcc": 0.839,
+        "mae": 1.4979,
+        "bias": 1.4979
+      }
+    },
+    "wsrcc": 0.7814,
+    "n": 23,
+    "avg_latency_ms": 15347
+  },
+  "2_separate_3": {
+    "metrics": {
+      "overall": {
+        "srcc": 0.8588,
+        "mae": 1.3437,
+        "bias": 1.3437
+      },
+      "sharpness": {
+        "srcc": 0.8804,
+        "mae": 1.2203,
+        "bias": 1.2203
+      },
+      "color_fidelity": {
+        "srcc": 0.8824,
+        "mae": 1.2023,
+        "bias": 1.2023
+      }
+    },
+    "wsrcc": 0.8701,
+    "n": 23,
+    "avg_latency_ms": 48423
+  },
+  "3_hybrid": {
+    "metrics": {
+      "overall": {
+        "srcc": 0.8128,
+        "mae": 1.4437,
+        "bias": 1.4437
+      },
+      "sharpness": {
+        "srcc": 0.8763,
+        "mae": 1.1725,
+        "bias": 1.1725
+      },
+      "color_fidelity": {
+        "srcc": 0.8726,
+        "mae": 1.1501,
+        "bias": 1.1501
+      }
+    },
+    "wsrcc": 0.8436,
+    "n": 23,
+    "avg_latency_ms": 81617
+  },
+  "4_few_shot": {
+    "metrics": {
+      "overall": {
+        "srcc": 0.8626,
+        "mae": 1.0521,
+        "bias": 1.048
+      },
+      "sharpness": {
+        "srcc": 0.8946,
+        "mae": 1.1545,
+        "bias": 1.1377
+      },
+      "color_fidelity": {
+        "srcc": 0.8911,
+        "mae": 1.106,
+        "bias": 1.0805
+      }
+    },
+    "wsrcc": 0.8777,
+    "n": 23,
+    "avg_latency_ms": 20892
+  },
+  "5_multi_sample": {
+    "metrics": {
+      "overall": {
+        "srcc": 0.8725,
+        "mae": 1.461,
+        "bias": 1.461
+      },
+      "sharpness": {
+        "srcc": 0.8928,
+        "mae": 1.5377,
+        "bias": 1.5377
+      },
+      "color_fidelity": {
+        "srcc": 0.8713,
+        "mae": 1.537,
+        "bias": 1.537
+      }
+    },
+    "wsrcc": 0.8773,
+    "n": 23,
+    "avg_latency_ms": 92753
+  },
+  "6_res_2048": {
+    "metrics": {
+      "overall": {
+        "srcc": 0.849,
+        "mae": 1.4176,
+        "bias": 1.4176
+      },
+      "sharpness": {
+        "srcc": 0.9032,
+        "mae": 1.416,
+        "bias": 1.416
+      },
+      "color_fidelity": {
+        "srcc": 0.8988,
+        "mae": 1.4501,
+        "bias": 1.4501
+      }
+    },
+    "wsrcc": 0.875,
+    "n": 23,
+    "avg_latency_ms": 13463
+  },
+  "7_no_resize": {
+    "metrics": {
+      "overall": {
+        "srcc": 0.9061,
+        "mae": 1.3915,
+        "bias": 1.3915
+      },
+      "sharpness": {
+        "srcc": 0.9277,
+        "mae": 1.3594,
+        "bias": 1.3594
+      },
+      "color_fidelity": {
+        "srcc": 0.9162,
+        "mae": 1.3892,
+        "bias": 1.3892
+      }
+    },
+    "wsrcc": 0.914,
+    "n": 23,
+    "avg_latency_ms": 15106
+  }
+}

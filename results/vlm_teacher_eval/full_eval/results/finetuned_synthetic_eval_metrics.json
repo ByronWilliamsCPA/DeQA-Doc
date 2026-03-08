@@ -1,0 +1,482 @@
+{
+  "siglip2_iqa_base_86m": {
+    "all": {
+      "n": 520,
+      "subset": "all",
+      "overall_srcc": 0.4955,
+      "overall_srcc_ci": "[0.4189, 0.5615]",
+      "overall_mae": 0.5639,
+      "overall_bias": -0.302,
+      "sharpness_srcc": 0.5768,
+      "sharpness_srcc_ci": "[0.5065, 0.6357]",
+      "sharpness_mae": 0.695,
+      "sharpness_bias": -0.4857,
+      "color_srcc": 0.507,
+      "color_srcc_ci": "[0.4370, 0.5714]",
+      "color_mae": 0.5512,
+      "color_bias": -0.3078,
+      "wsrcc": 0.5187
+    },
+    "in_distribution": {
+      "n": 150,
+      "subset": "id",
+      "overall_srcc": 0.6291,
+      "overall_srcc_ci": "[0.5382, 0.7038]",
+      "overall_mae": 0.4142,
+      "overall_bias": -0.2044,
+      "sharpness_srcc": 0.6385,
+      "sharpness_srcc_ci": "[0.5441, 0.7109]",
+      "sharpness_mae": 0.5135,
+      "sharpness_bias": -0.406,
+      "color_srcc": 0.6418,
+      "color_srcc_ci": "[0.5415, 0.7200]",
+      "color_mae": 0.4232,
+      "color_bias": -0.2018,
+      "wsrcc": 0.6346
+    },
+    "out_of_distribution": {
+      "n": 370,
+      "subset": "ood",
+      "overall_srcc": 0.5272,
+      "overall_srcc_ci": "[0.4333, 0.6026]",
+      "overall_mae": 0.6245,
+      "overall_bias": -0.3415,
+      "sharpness_srcc": 0.6378,
+      "sharpness_srcc_ci": "[0.5571, 0.6989]",
+      "sharpness_mae": 0.7685,
+      "sharpness_bias": -0.5181,
+      "color_srcc": 0.5442,
+      "color_srcc_ci": "[0.4524, 0.6183]",
+      "color_mae": 0.603,
+      "color_bias": -0.3507,
+      "wsrcc": 0.5591
+    },
+    "per_category": {
+      "id_cyrillic": {
+        "n": 50,
+        "is_ood": false,
+        "srcc_overall": 0.5998,
+        "mae_overall": 0.4674,
+        "bias_overall": -0.2764
+      },
+      "id_standard": {
+        "n": 100,
+        "is_ood": false,
+        "srcc_overall": 0.6892,
+        "mae_overall": 0.3875,
+        "bias_overall": -0.1684
+      },
+      "ood_adversarial_fraktur": {
+        "n": 20,
+        "is_ood": true,
+        "srcc_overall": 0.598,
+        "mae_overall": 0.4311,
+        "bias_overall": -0.1933
+      },
+      "ood_adversarial_nastaliq": {
+        "n": 20,
+        "is_ood": true,
+        "srcc_overall": 0.0399,
+        "mae_overall": 0.7851,
+        "bias_overall": -0.7825
+      },
+      "ood_binarized": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": -0.4991,
+        "mae_overall": 0.4605,
+        "bias_overall": 0.1549
+      },
+      "ood_cjk_vertical": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": -0.3625,
+        "mae_overall": 0.6413,
+        "bias_overall": -0.5296
+      },
+      "ood_form_layout": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": -0.0939,
+        "mae_overall": 0.2743,
+        "bias_overall": 0.2414
+      },
+      "ood_heavily_degraded": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": -0.0478,
+        "mae_overall": 0.8736,
+        "bias_overall": 0.8736
+      },
+      "ood_multiscript": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.7717,
+        "mae_overall": 0.5675,
+        "bias_overall": -0.5675
+      },
+      "ood_pristine": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": -0.0038,
+        "mae_overall": 1.1953,
+        "bias_overall": -1.1953
+      },
+      "ood_script_ethiopic": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.2117,
+        "mae_overall": 0.6821,
+        "bias_overall": -0.6505
+      },
+      "ood_script_myanmar": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": -0.079,
+        "mae_overall": 0.6367,
+        "bias_overall": -0.5785
+      },
+      "ood_script_tibetan": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.4908,
+        "mae_overall": 0.7913,
+        "bias_overall": -0.7755
+      },
+      "ood_very_high_dpi": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.0739,
+        "mae_overall": 0.6134,
+        "bias_overall": -0.6134
+      },
+      "ood_very_low_dpi": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.1413,
+        "mae_overall": 0.1558,
+        "bias_overall": 0.0786
+      }
+    }
+  },
+  "hyperiqa_plus_plus": {
+    "all": {
+      "n": 520,
+      "subset": "all",
+      "overall_srcc": 0.5888,
+      "overall_srcc_ci": "[0.5148, 0.6452]",
+      "overall_mae": 0.7387,
+      "overall_bias": -0.6589,
+      "sharpness_srcc": 0.6227,
+      "sharpness_srcc_ci": "[0.5616, 0.6753]",
+      "sharpness_mae": 0.9215,
+      "sharpness_bias": -0.7893,
+      "color_srcc": 0.6061,
+      "color_srcc_ci": "[0.5401, 0.6615]",
+      "color_mae": 0.6556,
+      "color_bias": -0.545,
+      "wsrcc": 0.6016
+    },
+    "in_distribution": {
+      "n": 150,
+      "subset": "id",
+      "overall_srcc": 0.7565,
+      "overall_srcc_ci": "[0.7071, 0.7940]",
+      "overall_mae": 0.794,
+      "overall_bias": -0.794,
+      "sharpness_srcc": 0.7342,
+      "sharpness_srcc_ci": "[0.6823, 0.7737]",
+      "sharpness_mae": 0.9566,
+      "sharpness_bias": -0.9566,
+      "color_srcc": 0.7675,
+      "color_srcc_ci": "[0.7149, 0.8048]",
+      "color_mae": 0.6502,
+      "color_bias": -0.6411,
+      "wsrcc": 0.7537
+    },
+    "out_of_distribution": {
+      "n": 370,
+      "subset": "ood",
+      "overall_srcc": 0.5404,
+      "overall_srcc_ci": "[0.4494, 0.6201]",
+      "overall_mae": 0.7162,
+      "overall_bias": -0.6041,
+      "sharpness_srcc": 0.5878,
+      "sharpness_srcc_ci": "[0.5051, 0.6589]",
+      "sharpness_mae": 0.9072,
+      "sharpness_bias": -0.7215,
+      "color_srcc": 0.5275,
+      "color_srcc_ci": "[0.4334, 0.6054]",
+      "color_mae": 0.6577,
+      "color_bias": -0.506,
+      "wsrcc": 0.549
+    },
+    "per_category": {
+      "id_cyrillic": {
+        "n": 50,
+        "is_ood": false,
+        "srcc_overall": 0.745,
+        "mae_overall": 0.801,
+        "bias_overall": -0.801
+      },
+      "id_standard": {
+        "n": 100,
+        "is_ood": false,
+        "srcc_overall": 0.7528,
+        "mae_overall": 0.7906,
+        "bias_overall": -0.7906
+      },
+      "ood_adversarial_fraktur": {
+        "n": 20,
+        "is_ood": true,
+        "srcc_overall": 0.7594,
+        "mae_overall": 0.751,
+        "bias_overall": -0.751
+      },
+      "ood_adversarial_nastaliq": {
+        "n": 20,
+        "is_ood": true,
+        "srcc_overall": 0.5579,
+        "mae_overall": 0.5618,
+        "bias_overall": -0.5136
+      },
+      "ood_binarized": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": -0.3562,
+        "mae_overall": 0.3995,
+        "bias_overall": -0.2361
+      },
+      "ood_cjk_vertical": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.5675,
+        "mae_overall": 1.0109,
+        "bias_overall": -1.0109
+      },
+      "ood_form_layout": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.131,
+        "mae_overall": 0.3791,
+        "bias_overall": -0.3396
+      },
+      "ood_heavily_degraded": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": -0.2489,
+        "mae_overall": 0.401,
+        "bias_overall": 0.401
+      },
+      "ood_multiscript": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.1591,
+        "mae_overall": 0.7089,
+        "bias_overall": -0.6613
+      },
+      "ood_pristine": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.1346,
+        "mae_overall": 1.77,
+        "bias_overall": -1.77
+      },
+      "ood_script_ethiopic": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.7362,
+        "mae_overall": 0.7356,
+        "bias_overall": -0.7356
+      },
+      "ood_script_myanmar": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.3904,
+        "mae_overall": 0.5306,
+        "bias_overall": -0.3797
+      },
+      "ood_script_tibetan": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.4785,
+        "mae_overall": 0.6478,
+        "bias_overall": -0.5922
+      },
+      "ood_very_high_dpi": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": -0.3539,
+        "mae_overall": 1.2398,
+        "bias_overall": -1.2398
+      },
+      "ood_very_low_dpi": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.1052,
+        "mae_overall": 0.1347,
+        "bias_overall": -0.0432
+      }
+    }
+  },
+  "deqa_doc_3specialists": {
+    "all": {
+      "n": 520,
+      "subset": "all",
+      "overall_srcc": 0.6964,
+      "overall_srcc_ci": "[0.6428, 0.7377]",
+      "overall_mae": 0.5817,
+      "overall_bias": 0.4897,
+      "sharpness_srcc": 0.778,
+      "sharpness_srcc_ci": "[0.7394, 0.8104]",
+      "sharpness_mae": 0.5022,
+      "sharpness_bias": 0.3134,
+      "color_srcc": 0.6866,
+      "color_srcc_ci": "[0.6326, 0.7304]",
+      "color_mae": 0.6579,
+      "color_bias": 0.6139,
+      "wsrcc": 0.7143
+    },
+    "in_distribution": {
+      "n": 150,
+      "subset": "id",
+      "overall_srcc": 0.7496,
+      "overall_srcc_ci": "[0.7008, 0.7910]",
+      "overall_mae": 0.5257,
+      "overall_bias": 0.4959,
+      "sharpness_srcc": 0.7662,
+      "sharpness_srcc_ci": "[0.7181, 0.8055]",
+      "sharpness_mae": 0.3775,
+      "sharpness_bias": 0.3067,
+      "color_srcc": 0.7843,
+      "color_srcc_ci": "[0.7290, 0.8212]",
+      "color_mae": 0.6696,
+      "color_bias": 0.6662,
+      "wsrcc": 0.7624
+    },
+    "out_of_distribution": {
+      "n": 370,
+      "subset": "ood",
+      "overall_srcc": 0.6954,
+      "overall_srcc_ci": "[0.6339, 0.7474]",
+      "overall_mae": 0.6044,
+      "overall_bias": 0.4872,
+      "sharpness_srcc": 0.7769,
+      "sharpness_srcc_ci": "[0.7295, 0.8115]",
+      "sharpness_mae": 0.5528,
+      "sharpness_bias": 0.3161,
+      "color_srcc": 0.6935,
+      "color_srcc_ci": "[0.6279, 0.7431]",
+      "color_mae": 0.6531,
+      "color_bias": 0.5927,
+      "wsrcc": 0.7153
+    },
+    "per_category": {
+      "id_cyrillic": {
+        "n": 50,
+        "is_ood": false,
+        "srcc_overall": 0.7653,
+        "mae_overall": 0.4456,
+        "bias_overall": 0.3748
+      },
+      "id_standard": {
+        "n": 100,
+        "is_ood": false,
+        "srcc_overall": 0.7443,
+        "mae_overall": 0.5658,
+        "bias_overall": 0.5565
+      },
+      "ood_adversarial_fraktur": {
+        "n": 20,
+        "is_ood": true,
+        "srcc_overall": 0.7053,
+        "mae_overall": 0.6233,
+        "bias_overall": 0.6233
+      },
+      "ood_adversarial_nastaliq": {
+        "n": 20,
+        "is_ood": true,
+        "srcc_overall": 0.609,
+        "mae_overall": 0.6005,
+        "bias_overall": 0.6005
+      },
+      "ood_binarized": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": -0.4901,
+        "mae_overall": 0.6901,
+        "bias_overall": 0.687
+      },
+      "ood_cjk_vertical": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.7722,
+        "mae_overall": 0.6255,
+        "bias_overall": 0.6237
+      },
+      "ood_form_layout": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.1244,
+        "mae_overall": 1.0566,
+        "bias_overall": 1.0566
+      },
+      "ood_heavily_degraded": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.1564,
+        "mae_overall": 1.5597,
+        "bias_overall": 1.5597
+      },
+      "ood_multiscript": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.6512,
+        "mae_overall": 0.486,
+        "bias_overall": 0.4804
+      },
+      "ood_pristine": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.0225,
+        "mae_overall": 0.2858,
+        "bias_overall": -0.2389
+      },
+      "ood_script_ethiopic": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.7962,
+        "mae_overall": 0.358,
+        "bias_overall": 0.1915
+      },
+      "ood_script_myanmar": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.786,
+        "mae_overall": 0.4341,
+        "bias_overall": 0.3233
+      },
+      "ood_script_tibetan": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.4879,
+        "mae_overall": 0.5326,
+        "bias_overall": -0.0527
+      },
+      "ood_very_high_dpi": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": -0.1996,
+        "mae_overall": 0.3534,
+        "bias_overall": 0.3534
+      },
+      "ood_very_low_dpi": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.0038,
+        "mae_overall": 0.2561,
+        "bias_overall": 0.209
+      }
+    }
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "google/gemini-2.5-pro": {
+    "all": {
+      "n": 425,
+      "subset": "all",
+      "overall_srcc": 0.4687,
+      "overall_srcc_ci": "[0.3851, 0.5429]",
+      "overall_mae": 1.0911,
+      "overall_bias": -0.6623,
+      "sharpness_srcc": 0.5905,
+      "sharpness_srcc_ci": "[0.5212, 0.6523]",
+      "sharpness_mae": 1.0217,
+      "sharpness_bias": -0.4213,
+      "color_srcc": 0.3438,
+      "color_srcc_ci": "[0.2493, 0.4371]",
+      "color_mae": 1.0241,
+      "color_bias": -0.4152,
+      "wsrcc": 0.4679
+    },
+    "in_distribution": {
+      "n": 125,
+      "subset": "id",
+      "overall_srcc": 0.2832,
+      "overall_srcc_ci": "[0.1153, 0.4422]",
+      "overall_mae": 1.1801,
+      "overall_bias": -0.9749,
+      "sharpness_srcc": 0.5926,
+      "sharpness_srcc_ci": "[0.4721, 0.6911]",
+      "sharpness_mae": 1.1028,
+      "sharpness_bias": -0.8146,
+      "color_srcc": 0.1554,
+      "color_srcc_ci": "[-0.0177, 0.3380]",
+      "color_mae": 0.9592,
+      "color_bias": -0.5836,
+      "wsrcc": 0.3286
+    },
+    "out_of_distribution": {
+      "n": 300,
+      "subset": "ood",
+      "overall_srcc": 0.5194,
+      "overall_srcc_ci": "[0.4284, 0.6040]",
+      "overall_mae": 1.054,
+      "overall_bias": -0.5321,
+      "sharpness_srcc": 0.6115,
+      "sharpness_srcc_ci": "[0.5356, 0.6753]",
+      "sharpness_mae": 0.988,
+      "sharpness_bias": -0.2575,
+      "color_srcc": 0.3985,
+      "color_srcc_ci": "[0.2898, 0.5005]",
+      "color_mae": 1.0511,
+      "color_bias": -0.345,
+      "wsrcc": 0.5122
+    },
+    "per_category": {
+      "id_cyrillic": {
+        "n": 39,
+        "is_ood": false,
+        "srcc_overall": 0.3549,
+        "mae_overall": 1.4041,
+        "bias_overall": -1.4041
+      },
+      "id_standard": {
+        "n": 86,
+        "is_ood": false,
+        "srcc_overall": 0.2617,
+        "mae_overall": 1.0785,
+        "bias_overall": -0.7803
+      },
+      "ood_adversarial_fraktur": {
+        "n": 16,
+        "is_ood": true,
+        "srcc_overall": 0.2161,
+        "mae_overall": 0.9644,
+        "bias_overall": -0.7827
+      },
+      "ood_adversarial_nastaliq": {
+        "n": 16,
+        "is_ood": true,
+        "srcc_overall": -0.091,
+        "mae_overall": 1.8866,
+        "bias_overall": -1.8215
+      },
+      "ood_binarized": {
+        "n": 19,
+        "is_ood": true,
+        "srcc_overall": -0.3,
+        "mae_overall": 1.5201,
+        "bias_overall": -1.075
+      },
+      "ood_cjk_vertical": {
+        "n": 28,
+        "is_ood": true,
+        "srcc_overall": 0.3895,
+        "mae_overall": 0.8324,
+        "bias_overall": -0.3064
+      },
+      "ood_form_layout": {
+        "n": 25,
+        "is_ood": true,
+        "srcc_overall": -0.1621,
+        "mae_overall": 0.728,
+        "bias_overall": -0.7091
+      },
+      "ood_heavily_degraded": {
+        "n": 28,
+        "is_ood": true,
+        "srcc_overall": 0.0876,
+        "mae_overall": 0.3161,
+        "bias_overall": 0.1207
+      },
+      "ood_multiscript": {
+        "n": 24,
+        "is_ood": true,
+        "srcc_overall": 0.5937,
+        "mae_overall": 1.2891,
+        "bias_overall": -1.233
+      },
+      "ood_pristine": {
+        "n": 18,
+        "is_ood": true,
+        "srcc_overall": -0.1959,
+        "mae_overall": 1.7083,
+        "bias_overall": -1.5634
+      },
+      "ood_script_ethiopic": {
+        "n": 21,
+        "is_ood": true,
+        "srcc_overall": 0.4572,
+        "mae_overall": 0.9716,
+        "bias_overall": -0.5697
+      },
+      "ood_script_myanmar": {
+        "n": 27,
+        "is_ood": true,
+        "srcc_overall": 0.218,
+        "mae_overall": 1.1177,
+        "bias_overall": 0.6055
+      },
+      "ood_script_tibetan": {
+        "n": 28,
+        "is_ood": true,
+        "srcc_overall": 0.3065,
+        "mae_overall": 1.0932,
+        "bias_overall": 0.6964
+      },
+      "ood_very_high_dpi": {
+        "n": 20,
+        "is_ood": true,
+        "srcc_overall": 0.1163,
+        "mae_overall": 1.0798,
+        "bias_overall": -0.6955
+      },
+      "ood_very_low_dpi": {
+        "n": 30,
+        "is_ood": true,
+        "srcc_overall": 0.1151,
+        "mae_overall": 0.8953,
+        "bias_overall": -0.8953
+      }
+    }
+  }
+}

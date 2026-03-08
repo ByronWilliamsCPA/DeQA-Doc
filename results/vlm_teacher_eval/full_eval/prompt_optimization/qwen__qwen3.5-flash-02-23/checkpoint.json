@@ -1,0 +1,2270 @@
+{
+  "1_single_all3": {
+    "test_res_00771.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.8,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 26989,
+      "gt": {
+        "file": "test_res_00771.jpg",
+        "gt_overall": 1.607,
+        "gt_sharpness": 1.587,
+        "gt_color": 1.947
+      }
+    },
+    "test_res_00724.jpg": {
+      "scores": {
+        "overall": 2.0,
+        "sharpness": 1.5,
+        "color_fidelity": 3.0
+      },
+      "latency_ms": 14724,
+      "gt": {
+        "file": "test_res_00724.jpg",
+        "gt_overall": 1.227,
+        "gt_sharpness": 1.013,
+        "gt_color": 1.307
+      }
+    },
+    "test_res_00501.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.5,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 15886,
+      "gt": {
+        "file": "test_res_00501.jpg",
+        "gt_overall": 1.147,
+        "gt_sharpness": 0.967,
+        "gt_color": 1.173
+      }
+    },
+    "test_res_00584.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.0,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 38780,
+      "gt": {
+        "file": "test_res_00584.jpg",
+        "gt_overall": 1.647,
+        "gt_sharpness": 1.793,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00582.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.5,
+        "color_fidelity": 3.0
+      },
+      "latency_ms": 38325,
+      "gt": {
+        "file": "test_res_00582.jpg",
+        "gt_overall": 1.793,
+        "gt_sharpness": 1.767,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00653.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.0,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 12657,
+      "gt": {
+        "file": "test_res_00653.jpg",
+        "gt_overall": 2.127,
+        "gt_sharpness": 1.713,
+        "gt_color": 2.287
+      }
+    },
+    "test_res_00495.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 14094,
+      "gt": {
+        "file": "test_res_00495.jpg",
+        "gt_overall": 1.86,
+        "gt_sharpness": 2.14,
+        "gt_color": 2.06
+      }
+    },
+    "test_res_00638.jpg": {
+      "scores": {
+        "overall": 4.5,
+        "sharpness": 4.5,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 6279,
+      "gt": {
+        "file": "test_res_00638.jpg",
+        "gt_overall": 2.507,
+        "gt_sharpness": 2.26,
+        "gt_color": 2.407
+      }
+    },
+    "test_res_00417.jpg": {
+      "scores": {
+        "overall": 4.5,
+        "sharpness": 4.5,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 25033,
+      "gt": {
+        "file": "test_res_00417.jpg",
+        "gt_overall": 1.987,
+        "gt_sharpness": 1.907,
+        "gt_color": 2.147
+      }
+    },
+    "test_res_00240.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 8223,
+      "gt": {
+        "file": "test_res_00240.jpg",
+        "gt_overall": 2.58,
+        "gt_sharpness": 2.707,
+        "gt_color": 2.907
+      }
+    },
+    "test_res_00514.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.5,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 16611,
+      "gt": {
+        "file": "test_res_00514.jpg",
+        "gt_overall": 2.927,
+        "gt_sharpness": 2.913,
+        "gt_color": 2.92
+      }
+    },
+    "test_res_00785.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 15258,
+      "gt": {
+        "file": "test_res_00785.jpg",
+        "gt_overall": 2.847,
+        "gt_sharpness": 2.793,
+        "gt_color": 2.787
+      }
+    },
+    "test_res_00110.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 4.5,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 33195,
+      "gt": {
+        "file": "test_res_00110.jpg",
+        "gt_overall": 2.993,
+        "gt_sharpness": 3.327,
+        "gt_color": 2.96
+      }
+    },
+    "test_res_00258.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.5,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 13875,
+      "gt": {
+        "file": "test_res_00258.jpg",
+        "gt_overall": 3.093,
+        "gt_sharpness": 3.267,
+        "gt_color": 3.36
+      }
+    },
+    "test_res_00380.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 6516,
+      "gt": {
+        "file": "test_res_00380.jpg",
+        "gt_overall": 2.913,
+        "gt_sharpness": 2.953,
+        "gt_color": 3.087
+      }
+    },
+    "test_res_00615.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 4953,
+      "gt": {
+        "file": "test_res_00615.jpg",
+        "gt_overall": 3.627,
+        "gt_sharpness": 3.387,
+        "gt_color": 3.653
+      }
+    },
+    "test_res_00885.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 9554,
+      "gt": {
+        "file": "test_res_00885.jpg",
+        "gt_overall": 3.64,
+        "gt_sharpness": 3.433,
+        "gt_color": 3.76
+      }
+    },
+    "test_res_00815.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 12818,
+      "gt": {
+        "file": "test_res_00815.jpg",
+        "gt_overall": 3.707,
+        "gt_sharpness": 3.573,
+        "gt_color": 3.64
+      }
+    },
+    "test_res_00902.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 11895,
+      "gt": {
+        "file": "test_res_00902.jpg",
+        "gt_overall": 3.78,
+        "gt_sharpness": 3.833,
+        "gt_color": 3.74
+      }
+    },
+    "test_res_00298.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 7396,
+      "gt": {
+        "file": "test_res_00298.jpg",
+        "gt_overall": 3.593,
+        "gt_sharpness": 3.427,
+        "gt_color": 3.473
+      }
+    },
+    "test_res_00352.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 9269,
+      "gt": {
+        "file": "test_res_00352.jpg",
+        "gt_overall": 4.04,
+        "gt_sharpness": 3.973,
+        "gt_color": 4.08
+      }
+    },
+    "test_res_00648.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 4101,
+      "gt": {
+        "file": "test_res_00648.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.907,
+        "gt_color": 4.02
+      }
+    },
+    "test_res_00351.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 6572,
+      "gt": {
+        "file": "test_res_00351.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.993,
+        "gt_color": 4.047
+      }
+    }
+  },
+  "2_separate_3": {
+    "test_res_00771.jpg": {
+      "scores": {
+        "overall": 3.6,
+        "sharpness": 3.0,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 49618,
+      "gt": {
+        "file": "test_res_00771.jpg",
+        "gt_overall": 1.607,
+        "gt_sharpness": 1.587,
+        "gt_color": 1.947
+      }
+    },
+    "test_res_00724.jpg": {
+      "scores": {
+        "overall": 2.5,
+        "sharpness": 2.0,
+        "color_fidelity": 2.0
+      },
+      "latency_ms": 59046,
+      "gt": {
+        "file": "test_res_00724.jpg",
+        "gt_overall": 1.227,
+        "gt_sharpness": 1.013,
+        "gt_color": 1.307
+      }
+    },
+    "test_res_00501.jpg": {
+      "scores": {
+        "overall": 3.0,
+        "sharpness": 3.0,
+        "color_fidelity": 3.0
+      },
+      "latency_ms": 113272,
+      "gt": {
+        "file": "test_res_00501.jpg",
+        "gt_overall": 1.147,
+        "gt_sharpness": 0.967,
+        "gt_color": 1.173
+      }
+    },
+    "test_res_00584.jpg": {
+      "scores": {
+        "overall": 3.0,
+        "sharpness": 2.5,
+        "color_fidelity": 2.5
+      },
+      "latency_ms": 64226,
+      "gt": {
+        "file": "test_res_00584.jpg",
+        "gt_overall": 1.647,
+        "gt_sharpness": 1.793,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00582.jpg": {
+      "scores": {
+        "overall": 3.0,
+        "sharpness": 2.8,
+        "color_fidelity": 2.5
+      },
+      "latency_ms": 62078,
+      "gt": {
+        "file": "test_res_00582.jpg",
+        "gt_overall": 1.793,
+        "gt_sharpness": 1.767,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00653.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.0,
+        "color_fidelity": 3.0
+      },
+      "latency_ms": 55654,
+      "gt": {
+        "file": "test_res_00653.jpg",
+        "gt_overall": 2.127,
+        "gt_sharpness": 1.713,
+        "gt_color": 2.287
+      }
+    },
+    "test_res_00495.jpg": {
+      "scores": {
+        "overall": 3.0,
+        "sharpness": 3.5,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 63306,
+      "gt": {
+        "file": "test_res_00495.jpg",
+        "gt_overall": 1.86,
+        "gt_sharpness": 2.14,
+        "gt_color": 2.06
+      }
+    },
+    "test_res_00638.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.0,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 56216,
+      "gt": {
+        "file": "test_res_00638.jpg",
+        "gt_overall": 2.507,
+        "gt_sharpness": 2.26,
+        "gt_color": 2.407
+      }
+    },
+    "test_res_00417.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 58511,
+      "gt": {
+        "file": "test_res_00417.jpg",
+        "gt_overall": 1.987,
+        "gt_sharpness": 1.907,
+        "gt_color": 2.147
+      }
+    },
+    "test_res_00240.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.5,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 95290,
+      "gt": {
+        "file": "test_res_00240.jpg",
+        "gt_overall": 2.58,
+        "gt_sharpness": 2.707,
+        "gt_color": 2.907
+      }
+    },
+    "test_res_00514.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.8,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 38491,
+      "gt": {
+        "file": "test_res_00514.jpg",
+        "gt_overall": 2.927,
+        "gt_sharpness": 2.913,
+        "gt_color": 2.92
+      }
+    },
+    "test_res_00785.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 4.8,
+        "color_fidelity": 4.7
+      },
+      "latency_ms": 43590,
+      "gt": {
+        "file": "test_res_00785.jpg",
+        "gt_overall": 2.847,
+        "gt_sharpness": 2.793,
+        "gt_color": 2.787
+      }
+    },
+    "test_res_00110.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.8,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 56820,
+      "gt": {
+        "file": "test_res_00110.jpg",
+        "gt_overall": 2.993,
+        "gt_sharpness": 3.327,
+        "gt_color": 2.96
+      }
+    },
+    "test_res_00258.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 4.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 48371,
+      "gt": {
+        "file": "test_res_00258.jpg",
+        "gt_overall": 3.093,
+        "gt_sharpness": 3.267,
+        "gt_color": 3.36
+      }
+    },
+    "test_res_00380.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.5,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 48255,
+      "gt": {
+        "file": "test_res_00380.jpg",
+        "gt_overall": 2.913,
+        "gt_sharpness": 2.953,
+        "gt_color": 3.087
+      }
+    },
+    "test_res_00615.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 20173,
+      "gt": {
+        "file": "test_res_00615.jpg",
+        "gt_overall": 3.627,
+        "gt_sharpness": 3.387,
+        "gt_color": 3.653
+      }
+    },
+    "test_res_00885.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 27485,
+      "gt": {
+        "file": "test_res_00885.jpg",
+        "gt_overall": 3.64,
+        "gt_sharpness": 3.433,
+        "gt_color": 3.76
+      }
+    },
+    "test_res_00815.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 18973,
+      "gt": {
+        "file": "test_res_00815.jpg",
+        "gt_overall": 3.707,
+        "gt_sharpness": 3.573,
+        "gt_color": 3.64
+      }
+    },
+    "test_res_00902.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 17962,
+      "gt": {
+        "file": "test_res_00902.jpg",
+        "gt_overall": 3.78,
+        "gt_sharpness": 3.833,
+        "gt_color": 3.74
+      }
+    },
+    "test_res_00298.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 28263,
+      "gt": {
+        "file": "test_res_00298.jpg",
+        "gt_overall": 3.593,
+        "gt_sharpness": 3.427,
+        "gt_color": 3.473
+      }
+    },
+    "test_res_00352.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 4.5,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 43703,
+      "gt": {
+        "file": "test_res_00352.jpg",
+        "gt_overall": 4.04,
+        "gt_sharpness": 3.973,
+        "gt_color": 4.08
+      }
+    },
+    "test_res_00648.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 22142,
+      "gt": {
+        "file": "test_res_00648.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.907,
+        "gt_color": 4.02
+      }
+    },
+    "test_res_00351.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 22295,
+      "gt": {
+        "file": "test_res_00351.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.993,
+        "gt_color": 4.047
+      }
+    }
+  },
+  "3_hybrid": {
+    "test_res_00771.jpg": {
+      "scores": {
+        "overall": 3.8,
+        "sharpness": 3.5,
+        "color_fidelity": 3.0
+      },
+      "latency_ms": 50465,
+      "gt": {
+        "file": "test_res_00771.jpg",
+        "gt_overall": 1.607,
+        "gt_sharpness": 1.587,
+        "gt_color": 1.947
+      }
+    },
+    "test_res_00724.jpg": {
+      "scores": {
+        "overall": 2.5,
+        "sharpness": 2.0,
+        "color_fidelity": 2.0
+      },
+      "latency_ms": 48511,
+      "gt": {
+        "file": "test_res_00724.jpg",
+        "gt_overall": 1.227,
+        "gt_sharpness": 1.013,
+        "gt_color": 1.307
+      }
+    },
+    "test_res_00501.jpg": {
+      "scores": {
+        "overall": 3.0,
+        "sharpness": 2.5,
+        "color_fidelity": 3.0
+      },
+      "latency_ms": 48427,
+      "gt": {
+        "file": "test_res_00501.jpg",
+        "gt_overall": 1.147,
+        "gt_sharpness": 0.967,
+        "gt_color": 1.173
+      }
+    },
+    "test_res_00584.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 2.5,
+        "color_fidelity": 2.5
+      },
+      "latency_ms": 70447,
+      "gt": {
+        "file": "test_res_00584.jpg",
+        "gt_overall": 1.647,
+        "gt_sharpness": 1.793,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00582.jpg": {
+      "scores": {
+        "overall": 3.8,
+        "sharpness": 2.5,
+        "color_fidelity": 2.5
+      },
+      "latency_ms": 66962,
+      "gt": {
+        "file": "test_res_00582.jpg",
+        "gt_overall": 1.793,
+        "gt_sharpness": 1.767,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00653.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.2,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 49704,
+      "gt": {
+        "file": "test_res_00653.jpg",
+        "gt_overall": 2.127,
+        "gt_sharpness": 1.713,
+        "gt_color": 2.287
+      }
+    },
+    "test_res_00495.jpg": {
+      "scores": {
+        "overall": 3.8,
+        "sharpness": 3.0,
+        "color_fidelity": 3.0
+      },
+      "latency_ms": 45264,
+      "gt": {
+        "file": "test_res_00495.jpg",
+        "gt_overall": 1.86,
+        "gt_sharpness": 2.14,
+        "gt_color": 2.06
+      }
+    },
+    "test_res_00638.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.0,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 70871,
+      "gt": {
+        "file": "test_res_00638.jpg",
+        "gt_overall": 2.507,
+        "gt_sharpness": 2.26,
+        "gt_color": 2.407
+      }
+    },
+    "test_res_00417.jpg": {
+      "scores": {
+        "overall": 4.5,
+        "sharpness": 4.0,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 24473,
+      "gt": {
+        "file": "test_res_00417.jpg",
+        "gt_overall": 1.987,
+        "gt_sharpness": 1.907,
+        "gt_color": 2.147
+      }
+    },
+    "test_res_00240.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 60510,
+      "gt": {
+        "file": "test_res_00240.jpg",
+        "gt_overall": 2.58,
+        "gt_sharpness": 2.707,
+        "gt_color": 2.907
+      }
+    },
+    "test_res_00514.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 60427,
+      "gt": {
+        "file": "test_res_00514.jpg",
+        "gt_overall": 2.927,
+        "gt_sharpness": 2.913,
+        "gt_color": 2.92
+      }
+    },
+    "test_res_00785.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 4.5,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 49582,
+      "gt": {
+        "file": "test_res_00785.jpg",
+        "gt_overall": 2.847,
+        "gt_sharpness": 2.793,
+        "gt_color": 2.787
+      }
+    },
+    "test_res_00110.jpg": {
+      "scores": {
+        "overall": 4.5,
+        "sharpness": 4.5,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 895620,
+      "gt": {
+        "file": "test_res_00110.jpg",
+        "gt_overall": 2.993,
+        "gt_sharpness": 3.327,
+        "gt_color": 2.96
+      }
+    },
+    "test_res_00258.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 4.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 40657,
+      "gt": {
+        "file": "test_res_00258.jpg",
+        "gt_overall": 3.093,
+        "gt_sharpness": 3.267,
+        "gt_color": 3.36
+      }
+    },
+    "test_res_00380.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.5,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 46798,
+      "gt": {
+        "file": "test_res_00380.jpg",
+        "gt_overall": 2.913,
+        "gt_sharpness": 2.953,
+        "gt_color": 3.087
+      }
+    },
+    "test_res_00615.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 22634,
+      "gt": {
+        "file": "test_res_00615.jpg",
+        "gt_overall": 3.627,
+        "gt_sharpness": 3.387,
+        "gt_color": 3.653
+      }
+    },
+    "test_res_00885.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 4.5,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 42932,
+      "gt": {
+        "file": "test_res_00885.jpg",
+        "gt_overall": 3.64,
+        "gt_sharpness": 3.433,
+        "gt_color": 3.76
+      }
+    },
+    "test_res_00815.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 22974,
+      "gt": {
+        "file": "test_res_00815.jpg",
+        "gt_overall": 3.707,
+        "gt_sharpness": 3.573,
+        "gt_color": 3.64
+      }
+    },
+    "test_res_00902.jpg": {
+      "scores": {
+        "overall": 4.5,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 38323,
+      "gt": {
+        "file": "test_res_00902.jpg",
+        "gt_overall": 3.78,
+        "gt_sharpness": 3.833,
+        "gt_color": 3.74
+      }
+    },
+    "test_res_00298.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 21005,
+      "gt": {
+        "file": "test_res_00298.jpg",
+        "gt_overall": 3.593,
+        "gt_sharpness": 3.427,
+        "gt_color": 3.473
+      }
+    },
+    "test_res_00352.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 4.8,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 50416,
+      "gt": {
+        "file": "test_res_00352.jpg",
+        "gt_overall": 4.04,
+        "gt_sharpness": 3.973,
+        "gt_color": 4.08
+      }
+    },
+    "test_res_00648.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 14199,
+      "gt": {
+        "file": "test_res_00648.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.907,
+        "gt_color": 4.02
+      }
+    },
+    "test_res_00351.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 4.6,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 36011,
+      "gt": {
+        "file": "test_res_00351.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.993,
+        "gt_color": 4.047
+      }
+    }
+  },
+  "4_few_shot": {
+    "test_res_00771.jpg": {
+      "scores": {
+        "overall": 2.5,
+        "sharpness": 2.4,
+        "color_fidelity": 2.6
+      },
+      "latency_ms": 13576,
+      "gt": {
+        "file": "test_res_00771.jpg",
+        "gt_overall": 1.607,
+        "gt_sharpness": 1.587,
+        "gt_color": 1.947
+      }
+    },
+    "test_res_00724.jpg": {
+      "scores": {
+        "overall": 2.0,
+        "sharpness": 1.8,
+        "color_fidelity": 2.5
+      },
+      "latency_ms": 12845,
+      "gt": {
+        "file": "test_res_00724.jpg",
+        "gt_overall": 1.227,
+        "gt_sharpness": 1.013,
+        "gt_color": 1.307
+      }
+    },
+    "test_res_00501.jpg": {
+      "scores": {
+        "overall": 2.5,
+        "sharpness": 2.5,
+        "color_fidelity": 3.0
+      },
+      "latency_ms": 27146,
+      "gt": {
+        "file": "test_res_00501.jpg",
+        "gt_overall": 1.147,
+        "gt_sharpness": 0.967,
+        "gt_color": 1.173
+      }
+    },
+    "test_res_00584.jpg": {
+      "scores": {
+        "overall": 1.6,
+        "sharpness": 1.6,
+        "color_fidelity": 1.6
+      },
+      "latency_ms": 20932,
+      "gt": {
+        "file": "test_res_00584.jpg",
+        "gt_overall": 1.647,
+        "gt_sharpness": 1.793,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00582.jpg": {
+      "scores": {
+        "overall": 3.7,
+        "sharpness": 3.8,
+        "color_fidelity": 3.6
+      },
+      "latency_ms": 16983,
+      "gt": {
+        "file": "test_res_00582.jpg",
+        "gt_overall": 1.793,
+        "gt_sharpness": 1.767,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00653.jpg": {
+      "scores": {
+        "overall": 2.3,
+        "sharpness": 2.1,
+        "color_fidelity": 2.5
+      },
+      "latency_ms": 20918,
+      "gt": {
+        "file": "test_res_00653.jpg",
+        "gt_overall": 2.127,
+        "gt_sharpness": 1.713,
+        "gt_color": 2.287
+      }
+    },
+    "test_res_00495.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.8,
+        "color_fidelity": 3.2
+      },
+      "latency_ms": 13851,
+      "gt": {
+        "file": "test_res_00495.jpg",
+        "gt_overall": 1.86,
+        "gt_sharpness": 2.14,
+        "gt_color": 2.06
+      }
+    },
+    "test_res_00638.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 3.8
+      },
+      "latency_ms": 9861,
+      "gt": {
+        "file": "test_res_00638.jpg",
+        "gt_overall": 2.507,
+        "gt_sharpness": 2.26,
+        "gt_color": 2.407
+      }
+    },
+    "test_res_00417.jpg": {
+      "scores": {
+        "overall": 3.3,
+        "sharpness": 3.2,
+        "color_fidelity": 3.4
+      },
+      "latency_ms": 14697,
+      "gt": {
+        "file": "test_res_00417.jpg",
+        "gt_overall": 1.987,
+        "gt_sharpness": 1.907,
+        "gt_color": 2.147
+      }
+    },
+    "test_res_00240.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.9,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 19418,
+      "gt": {
+        "file": "test_res_00240.jpg",
+        "gt_overall": 2.58,
+        "gt_sharpness": 2.707,
+        "gt_color": 2.907
+      }
+    },
+    "test_res_00514.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 13093,
+      "gt": {
+        "file": "test_res_00514.jpg",
+        "gt_overall": 2.927,
+        "gt_sharpness": 2.913,
+        "gt_color": 2.92
+      }
+    },
+    "test_res_00785.jpg": {
+      "scores": {
+        "overall": 4.8,
+        "sharpness": 4.8,
+        "color_fidelity": 4.8
+      },
+      "latency_ms": 12818,
+      "gt": {
+        "file": "test_res_00785.jpg",
+        "gt_overall": 2.847,
+        "gt_sharpness": 2.793,
+        "gt_color": 2.787
+      }
+    },
+    "test_res_00110.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 4.5,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 81442,
+      "gt": {
+        "file": "test_res_00110.jpg",
+        "gt_overall": 2.993,
+        "gt_sharpness": 3.327,
+        "gt_color": 2.96
+      }
+    },
+    "test_res_00258.jpg": {
+      "scores": {
+        "overall": 4.4,
+        "sharpness": 4.5,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 9956,
+      "gt": {
+        "file": "test_res_00258.jpg",
+        "gt_overall": 3.093,
+        "gt_sharpness": 3.267,
+        "gt_color": 3.36
+      }
+    },
+    "test_res_00380.jpg": {
+      "scores": {
+        "overall": 3.3,
+        "sharpness": 3.0,
+        "color_fidelity": 3.4
+      },
+      "latency_ms": 16720,
+      "gt": {
+        "file": "test_res_00380.jpg",
+        "gt_overall": 2.913,
+        "gt_sharpness": 2.953,
+        "gt_color": 3.087
+      }
+    },
+    "test_res_00615.jpg": {
+      "scores": {
+        "overall": 4.9,
+        "sharpness": 4.9,
+        "color_fidelity": 4.9
+      },
+      "latency_ms": 14530,
+      "gt": {
+        "file": "test_res_00615.jpg",
+        "gt_overall": 3.627,
+        "gt_sharpness": 3.387,
+        "gt_color": 3.653
+      }
+    },
+    "test_res_00885.jpg": {
+      "scores": {
+        "overall": 4.7,
+        "sharpness": 4.7,
+        "color_fidelity": 4.7
+      },
+      "latency_ms": 59475,
+      "gt": {
+        "file": "test_res_00885.jpg",
+        "gt_overall": 3.64,
+        "gt_sharpness": 3.433,
+        "gt_color": 3.76
+      }
+    },
+    "test_res_00815.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 22565,
+      "gt": {
+        "file": "test_res_00815.jpg",
+        "gt_overall": 3.707,
+        "gt_sharpness": 3.573,
+        "gt_color": 3.64
+      }
+    },
+    "test_res_00902.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.5,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 14436,
+      "gt": {
+        "file": "test_res_00902.jpg",
+        "gt_overall": 3.78,
+        "gt_sharpness": 3.833,
+        "gt_color": 3.74
+      }
+    },
+    "test_res_00298.jpg": {
+      "scores": {
+        "overall": 4.8,
+        "sharpness": 4.8,
+        "color_fidelity": 4.9
+      },
+      "latency_ms": 17558,
+      "gt": {
+        "file": "test_res_00298.jpg",
+        "gt_overall": 3.593,
+        "gt_sharpness": 3.427,
+        "gt_color": 3.473
+      }
+    },
+    "test_res_00352.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 20007,
+      "gt": {
+        "file": "test_res_00352.jpg",
+        "gt_overall": 4.04,
+        "gt_sharpness": 3.973,
+        "gt_color": 4.08
+      }
+    },
+    "test_res_00648.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 9271,
+      "gt": {
+        "file": "test_res_00648.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.907,
+        "gt_color": 4.02
+      }
+    },
+    "test_res_00351.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 18430,
+      "gt": {
+        "file": "test_res_00351.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.993,
+        "gt_color": 4.047
+      }
+    }
+  },
+  "5_multi_sample": {
+    "test_res_00771.jpg": {
+      "scores": {
+        "overall": 3.8,
+        "sharpness": 3.5,
+        "color_fidelity": 3.8
+      },
+      "latency_ms": 40714,
+      "gt": {
+        "file": "test_res_00771.jpg",
+        "gt_overall": 1.607,
+        "gt_sharpness": 1.587,
+        "gt_color": 1.947
+      }
+    },
+    "test_res_00724.jpg": {
+      "scores": {
+        "overall": 2.0,
+        "sharpness": 2.0,
+        "color_fidelity": 3.0
+      },
+      "latency_ms": 71524,
+      "gt": {
+        "file": "test_res_00724.jpg",
+        "gt_overall": 1.227,
+        "gt_sharpness": 1.013,
+        "gt_color": 1.307
+      }
+    },
+    "test_res_00501.jpg": {
+      "scores": {
+        "overall": 3.0,
+        "sharpness": 3.0,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 45094,
+      "gt": {
+        "file": "test_res_00501.jpg",
+        "gt_overall": 1.147,
+        "gt_sharpness": 0.967,
+        "gt_color": 1.173
+      }
+    },
+    "test_res_00584.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 4.0,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 77516,
+      "gt": {
+        "file": "test_res_00584.jpg",
+        "gt_overall": 1.647,
+        "gt_sharpness": 1.793,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00582.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.5,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 62914,
+      "gt": {
+        "file": "test_res_00582.jpg",
+        "gt_overall": 1.793,
+        "gt_sharpness": 1.767,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00653.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.0,
+        "color_fidelity": 3.8
+      },
+      "latency_ms": 42814,
+      "gt": {
+        "file": "test_res_00653.jpg",
+        "gt_overall": 2.127,
+        "gt_sharpness": 1.713,
+        "gt_color": 2.287
+      }
+    },
+    "test_res_00495.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.8,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 39420,
+      "gt": {
+        "file": "test_res_00495.jpg",
+        "gt_overall": 1.86,
+        "gt_sharpness": 2.14,
+        "gt_color": 2.06
+      }
+    },
+    "test_res_00638.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 41805,
+      "gt": {
+        "file": "test_res_00638.jpg",
+        "gt_overall": 2.507,
+        "gt_sharpness": 2.26,
+        "gt_color": 2.407
+      }
+    },
+    "test_res_00417.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 49541,
+      "gt": {
+        "file": "test_res_00417.jpg",
+        "gt_overall": 1.987,
+        "gt_sharpness": 1.907,
+        "gt_color": 2.147
+      }
+    },
+    "test_res_00240.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.5,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 62576,
+      "gt": {
+        "file": "test_res_00240.jpg",
+        "gt_overall": 2.58,
+        "gt_sharpness": 2.707,
+        "gt_color": 2.907
+      }
+    },
+    "test_res_00514.jpg": {
+      "scores": {
+        "overall": 4.7,
+        "sharpness": 4.8,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 49826,
+      "gt": {
+        "file": "test_res_00514.jpg",
+        "gt_overall": 2.927,
+        "gt_sharpness": 2.913,
+        "gt_color": 2.92
+      }
+    },
+    "test_res_00785.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 15620,
+      "gt": {
+        "file": "test_res_00785.jpg",
+        "gt_overall": 2.847,
+        "gt_sharpness": 2.793,
+        "gt_color": 2.787
+      }
+    },
+    "test_res_00110.jpg": {
+      "scores": {
+        "overall": 4.5,
+        "sharpness": 4.5,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 75399,
+      "gt": {
+        "file": "test_res_00110.jpg",
+        "gt_overall": 2.993,
+        "gt_sharpness": 3.327,
+        "gt_color": 2.96
+      }
+    },
+    "test_res_00258.jpg": {
+      "scores": {
+        "overall": 4.5,
+        "sharpness": 4.9,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 1182780,
+      "gt": {
+        "file": "test_res_00258.jpg",
+        "gt_overall": 3.093,
+        "gt_sharpness": 3.267,
+        "gt_color": 3.36
+      }
+    },
+    "test_res_00380.jpg": {
+      "scores": {
+        "overall": 3.8,
+        "sharpness": 3.5,
+        "color_fidelity": 3.8
+      },
+      "latency_ms": 54530,
+      "gt": {
+        "file": "test_res_00380.jpg",
+        "gt_overall": 2.913,
+        "gt_sharpness": 2.953,
+        "gt_color": 3.087
+      }
+    },
+    "test_res_00615.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 45982,
+      "gt": {
+        "file": "test_res_00615.jpg",
+        "gt_overall": 3.627,
+        "gt_sharpness": 3.387,
+        "gt_color": 3.653
+      }
+    },
+    "test_res_00885.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 15851,
+      "gt": {
+        "file": "test_res_00885.jpg",
+        "gt_overall": 3.64,
+        "gt_sharpness": 3.433,
+        "gt_color": 3.76
+      }
+    },
+    "test_res_00815.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 28667,
+      "gt": {
+        "file": "test_res_00815.jpg",
+        "gt_overall": 3.707,
+        "gt_sharpness": 3.573,
+        "gt_color": 3.64
+      }
+    },
+    "test_res_00902.jpg": {
+      "scores": {
+        "overall": 4.5,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 38721,
+      "gt": {
+        "file": "test_res_00902.jpg",
+        "gt_overall": 3.78,
+        "gt_sharpness": 3.833,
+        "gt_color": 3.74
+      }
+    },
+    "test_res_00298.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 21392,
+      "gt": {
+        "file": "test_res_00298.jpg",
+        "gt_overall": 3.593,
+        "gt_sharpness": 3.427,
+        "gt_color": 3.473
+      }
+    },
+    "test_res_00352.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 21809,
+      "gt": {
+        "file": "test_res_00352.jpg",
+        "gt_overall": 4.04,
+        "gt_sharpness": 3.973,
+        "gt_color": 4.08
+      }
+    },
+    "test_res_00648.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 25777,
+      "gt": {
+        "file": "test_res_00648.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.907,
+        "gt_color": 4.02
+      }
+    },
+    "test_res_00351.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 23053,
+      "gt": {
+        "file": "test_res_00351.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.993,
+        "gt_color": 4.047
+      }
+    }
+  },
+  "6_res_2048": {
+    "test_res_00771.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.0,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 12308,
+      "gt": {
+        "file": "test_res_00771.jpg",
+        "gt_overall": 1.607,
+        "gt_sharpness": 1.587,
+        "gt_color": 1.947
+      }
+    },
+    "test_res_00724.jpg": {
+      "scores": {
+        "overall": 2.0,
+        "sharpness": 2.0,
+        "color_fidelity": 3.0
+      },
+      "latency_ms": 12203,
+      "gt": {
+        "file": "test_res_00724.jpg",
+        "gt_overall": 1.227,
+        "gt_sharpness": 1.013,
+        "gt_color": 1.307
+      }
+    },
+    "test_res_00501.jpg": {
+      "scores": {
+        "overall": 3.0,
+        "sharpness": 2.8,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 24854,
+      "gt": {
+        "file": "test_res_00501.jpg",
+        "gt_overall": 1.147,
+        "gt_sharpness": 0.967,
+        "gt_color": 1.173
+      }
+    },
+    "test_res_00584.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.5,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 17659,
+      "gt": {
+        "file": "test_res_00584.jpg",
+        "gt_overall": 1.647,
+        "gt_sharpness": 1.793,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00582.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.5,
+        "color_fidelity": 2.5
+      },
+      "latency_ms": 10824,
+      "gt": {
+        "file": "test_res_00582.jpg",
+        "gt_overall": 1.793,
+        "gt_sharpness": 1.767,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00653.jpg": {
+      "scores": {
+        "overall": 3.2,
+        "sharpness": 2.8,
+        "color_fidelity": 3.8
+      },
+      "latency_ms": 25450,
+      "gt": {
+        "file": "test_res_00653.jpg",
+        "gt_overall": 2.127,
+        "gt_sharpness": 1.713,
+        "gt_color": 2.287
+      }
+    },
+    "test_res_00495.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.8,
+        "color_fidelity": 3.8
+      },
+      "latency_ms": 15799,
+      "gt": {
+        "file": "test_res_00495.jpg",
+        "gt_overall": 1.86,
+        "gt_sharpness": 2.14,
+        "gt_color": 2.06
+      }
+    },
+    "test_res_00638.jpg": {
+      "scores": {
+        "overall": 3.8,
+        "sharpness": 3.5,
+        "color_fidelity": 3.8
+      },
+      "latency_ms": 8606,
+      "gt": {
+        "file": "test_res_00638.jpg",
+        "gt_overall": 2.507,
+        "gt_sharpness": 2.26,
+        "gt_color": 2.407
+      }
+    },
+    "test_res_00417.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 9587,
+      "gt": {
+        "file": "test_res_00417.jpg",
+        "gt_overall": 1.987,
+        "gt_sharpness": 1.907,
+        "gt_color": 2.147
+      }
+    },
+    "test_res_00240.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 27478,
+      "gt": {
+        "file": "test_res_00240.jpg",
+        "gt_overall": 2.58,
+        "gt_sharpness": 2.707,
+        "gt_color": 2.907
+      }
+    },
+    "test_res_00514.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 8597,
+      "gt": {
+        "file": "test_res_00514.jpg",
+        "gt_overall": 2.927,
+        "gt_sharpness": 2.913,
+        "gt_color": 2.92
+      }
+    },
+    "test_res_00785.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 6035,
+      "gt": {
+        "file": "test_res_00785.jpg",
+        "gt_overall": 2.847,
+        "gt_sharpness": 2.793,
+        "gt_color": 2.787
+      }
+    },
+    "test_res_00110.jpg": {
+      "scores": {
+        "overall": 4.5,
+        "sharpness": 4.5,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 12931,
+      "gt": {
+        "file": "test_res_00110.jpg",
+        "gt_overall": 2.993,
+        "gt_sharpness": 3.327,
+        "gt_color": 2.96
+      }
+    },
+    "test_res_00258.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 19226,
+      "gt": {
+        "file": "test_res_00258.jpg",
+        "gt_overall": 3.093,
+        "gt_sharpness": 3.267,
+        "gt_color": 3.36
+      }
+    },
+    "test_res_00380.jpg": {
+      "scores": {
+        "overall": 4.8,
+        "sharpness": 4.8,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 8917,
+      "gt": {
+        "file": "test_res_00380.jpg",
+        "gt_overall": 2.913,
+        "gt_sharpness": 2.953,
+        "gt_color": 3.087
+      }
+    },
+    "test_res_00615.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 23289,
+      "gt": {
+        "file": "test_res_00615.jpg",
+        "gt_overall": 3.627,
+        "gt_sharpness": 3.387,
+        "gt_color": 3.653
+      }
+    },
+    "test_res_00885.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 8264,
+      "gt": {
+        "file": "test_res_00885.jpg",
+        "gt_overall": 3.64,
+        "gt_sharpness": 3.433,
+        "gt_color": 3.76
+      }
+    },
+    "test_res_00815.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 15333,
+      "gt": {
+        "file": "test_res_00815.jpg",
+        "gt_overall": 3.707,
+        "gt_sharpness": 3.573,
+        "gt_color": 3.64
+      }
+    },
+    "test_res_00902.jpg": {
+      "scores": {
+        "overall": 4.5,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 16281,
+      "gt": {
+        "file": "test_res_00902.jpg",
+        "gt_overall": 3.78,
+        "gt_sharpness": 3.833,
+        "gt_color": 3.74
+      }
+    },
+    "test_res_00298.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 8627,
+      "gt": {
+        "file": "test_res_00298.jpg",
+        "gt_overall": 3.593,
+        "gt_sharpness": 3.427,
+        "gt_color": 3.473
+      }
+    },
+    "test_res_00352.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 4872,
+      "gt": {
+        "file": "test_res_00352.jpg",
+        "gt_overall": 4.04,
+        "gt_sharpness": 3.973,
+        "gt_color": 4.08
+      }
+    },
+    "test_res_00648.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 5627,
+      "gt": {
+        "file": "test_res_00648.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.907,
+        "gt_color": 4.02
+      }
+    },
+    "test_res_00351.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 6903,
+      "gt": {
+        "file": "test_res_00351.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.993,
+        "gt_color": 4.047
+      }
+    }
+  },
+  "7_no_resize": {
+    "test_res_00771.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.0,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 18107,
+      "gt": {
+        "file": "test_res_00771.jpg",
+        "gt_overall": 1.607,
+        "gt_sharpness": 1.587,
+        "gt_color": 1.947
+      }
+    },
+    "test_res_00724.jpg": {
+      "scores": {
+        "overall": 2.5,
+        "sharpness": 2.0,
+        "color_fidelity": 3.0
+      },
+      "latency_ms": 21779,
+      "gt": {
+        "file": "test_res_00724.jpg",
+        "gt_overall": 1.227,
+        "gt_sharpness": 1.013,
+        "gt_color": 1.307
+      }
+    },
+    "test_res_00501.jpg": {
+      "scores": {
+        "overall": 2.5,
+        "sharpness": 2.5,
+        "color_fidelity": 3.0
+      },
+      "latency_ms": 12059,
+      "gt": {
+        "file": "test_res_00501.jpg",
+        "gt_overall": 1.147,
+        "gt_sharpness": 0.967,
+        "gt_color": 1.173
+      }
+    },
+    "test_res_00584.jpg": {
+      "scores": {
+        "overall": 3.0,
+        "sharpness": 3.0,
+        "color_fidelity": 2.5
+      },
+      "latency_ms": 39807,
+      "gt": {
+        "file": "test_res_00584.jpg",
+        "gt_overall": 1.647,
+        "gt_sharpness": 1.793,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00582.jpg": {
+      "scores": {
+        "overall": 3.5,
+        "sharpness": 3.5,
+        "color_fidelity": 3.0
+      },
+      "latency_ms": 13189,
+      "gt": {
+        "file": "test_res_00582.jpg",
+        "gt_overall": 1.793,
+        "gt_sharpness": 1.767,
+        "gt_color": 1.893
+      }
+    },
+    "test_res_00653.jpg": {
+      "scores": {
+        "overall": 3.0,
+        "sharpness": 2.5,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 8701,
+      "gt": {
+        "file": "test_res_00653.jpg",
+        "gt_overall": 2.127,
+        "gt_sharpness": 1.713,
+        "gt_color": 2.287
+      }
+    },
+    "test_res_00495.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.8,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 20666,
+      "gt": {
+        "file": "test_res_00495.jpg",
+        "gt_overall": 1.86,
+        "gt_sharpness": 2.14,
+        "gt_color": 2.06
+      }
+    },
+    "test_res_00638.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.5,
+        "color_fidelity": 4.0
+      },
+      "latency_ms": 16763,
+      "gt": {
+        "file": "test_res_00638.jpg",
+        "gt_overall": 2.507,
+        "gt_sharpness": 2.26,
+        "gt_color": 2.407
+      }
+    },
+    "test_res_00417.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 3.8,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 14721,
+      "gt": {
+        "file": "test_res_00417.jpg",
+        "gt_overall": 1.987,
+        "gt_sharpness": 1.907,
+        "gt_color": 2.147
+      }
+    },
+    "test_res_00240.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 3.5
+      },
+      "latency_ms": 11566,
+      "gt": {
+        "file": "test_res_00240.jpg",
+        "gt_overall": 2.58,
+        "gt_sharpness": 2.707,
+        "gt_color": 2.907
+      }
+    },
+    "test_res_00514.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.0,
+        "color_fidelity": 3.9
+      },
+      "latency_ms": 25032,
+      "gt": {
+        "file": "test_res_00514.jpg",
+        "gt_overall": 2.927,
+        "gt_sharpness": 2.913,
+        "gt_color": 2.92
+      }
+    },
+    "test_res_00785.jpg": {
+      "scores": {
+        "overall": 4.9,
+        "sharpness": 5.0,
+        "color_fidelity": 4.8
+      },
+      "latency_ms": 17800,
+      "gt": {
+        "file": "test_res_00785.jpg",
+        "gt_overall": 2.847,
+        "gt_sharpness": 2.793,
+        "gt_color": 2.787
+      }
+    },
+    "test_res_00110.jpg": {
+      "scores": {
+        "overall": 4.5,
+        "sharpness": 4.5,
+        "color_fidelity": 4.5
+      },
+      "latency_ms": 10418,
+      "gt": {
+        "file": "test_res_00110.jpg",
+        "gt_overall": 2.993,
+        "gt_sharpness": 3.327,
+        "gt_color": 2.96
+      }
+    },
+    "test_res_00258.jpg": {
+      "scores": {
+        "overall": 4.5,
+        "sharpness": 4.5,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 21695,
+      "gt": {
+        "file": "test_res_00258.jpg",
+        "gt_overall": 3.093,
+        "gt_sharpness": 3.267,
+        "gt_color": 3.36
+      }
+    },
+    "test_res_00380.jpg": {
+      "scores": {
+        "overall": 4.8,
+        "sharpness": 4.8,
+        "color_fidelity": 4.8
+      },
+      "latency_ms": 9153,
+      "gt": {
+        "file": "test_res_00380.jpg",
+        "gt_overall": 2.913,
+        "gt_sharpness": 2.953,
+        "gt_color": 3.087
+      }
+    },
+    "test_res_00615.jpg": {
+      "scores": {
+        "overall": 4.0,
+        "sharpness": 4.5,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 15940,
+      "gt": {
+        "file": "test_res_00615.jpg",
+        "gt_overall": 3.627,
+        "gt_sharpness": 3.387,
+        "gt_color": 3.653
+      }
+    },
+    "test_res_00885.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 5192,
+      "gt": {
+        "file": "test_res_00885.jpg",
+        "gt_overall": 3.64,
+        "gt_sharpness": 3.433,
+        "gt_color": 3.76
+      }
+    },
+    "test_res_00815.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 5456,
+      "gt": {
+        "file": "test_res_00815.jpg",
+        "gt_overall": 3.707,
+        "gt_sharpness": 3.573,
+        "gt_color": 3.64
+      }
+    },
+    "test_res_00902.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 23744,
+      "gt": {
+        "file": "test_res_00902.jpg",
+        "gt_overall": 3.78,
+        "gt_sharpness": 3.833,
+        "gt_color": 3.74
+      }
+    },
+    "test_res_00298.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 12620,
+      "gt": {
+        "file": "test_res_00298.jpg",
+        "gt_overall": 3.593,
+        "gt_sharpness": 3.427,
+        "gt_color": 3.473
+      }
+    },
+    "test_res_00352.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 12094,
+      "gt": {
+        "file": "test_res_00352.jpg",
+        "gt_overall": 4.04,
+        "gt_sharpness": 3.973,
+        "gt_color": 4.08
+      }
+    },
+    "test_res_00648.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 4747,
+      "gt": {
+        "file": "test_res_00648.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.907,
+        "gt_color": 4.02
+      }
+    },
+    "test_res_00351.jpg": {
+      "scores": {
+        "overall": 5.0,
+        "sharpness": 5.0,
+        "color_fidelity": 5.0
+      },
+      "latency_ms": 6200,
+      "gt": {
+        "file": "test_res_00351.jpg",
+        "gt_overall": 4.027,
+        "gt_sharpness": 3.993,
+        "gt_color": 4.047
+      }
+    }
+  }
+}
