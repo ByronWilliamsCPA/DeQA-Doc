@@ -14,8 +14,10 @@ misleading. All 13 models consulted unanimously agree on three critical findings
    dangerous overconfidence
 2. **The circular training problem is real and severe** — SigLIP2 pseudo-labels cannot improve
    SigLIP2's own blind spots
-3. **The checkpoint mismatch (445 missing keys) must be fixed first** — the 8-unit train/test
-   distance shift invalidates all threshold calibration
+3. ~~**The checkpoint mismatch (445 missing keys) must be fixed first**~~ **Resolved (2026-03-08).** Re-extracted
+   all 5,000 embeddings from the correct IQA-only checkpoint and re-fitted the OOD detector. The v2 detector
+   (`results/siglip2_diqa5000/ood_detector_v2.npz`) shows healthy train+val median=23.7, test median=31.4 with
+   no anomalous shift. See `results/siglip2_diqa5000/README.md` for details.
 
 The highest-impact, most feasible path forward is: **extract embeddings from public document
 datasets (RVL-CDIP, Tobacco800) as evaluation sets first**, then selectively expand the covariance
@@ -39,7 +41,7 @@ model with domain-validated documents.
 | Issue | Severity | Consensus |
 |-------|----------|-----------|
 | No real-world OOD evaluation | **Critical** | 13/13 models |
-| Checkpoint mismatch (8-unit train/test shift) | **Critical** | 13/13 models |
+| ~~Checkpoint mismatch (8-unit train/test shift)~~ | ~~**Critical**~~ **Resolved** | 13/13 models |
 | Single-source training data (DIQA-5000 only) | **High** | 13/13 models |
 | Synthetic OOD categories are "easy" (far from boundary) | **High** | 12/13 models |
 | No document type/script diversity metadata | **Medium** | 10/13 models |
@@ -107,8 +109,7 @@ python3 scripts/extract_siglip2_embeddings.py \
 synthetic). This will reveal which document types/categories are hardest to distinguish.
 
 ---
-
-## 3. Proposed Options — Consensus Evaluation
+0nsus Evaluation
 
 ### Option Rankings (13-Model Aggregate)
 

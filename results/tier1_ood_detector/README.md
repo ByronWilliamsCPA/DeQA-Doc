@@ -227,9 +227,10 @@ All artifacts stored at `/mnt/e/image_detection/embeddings/`:
 
 ## Limitations and Future Work
 
-1. **Train/test distance shift**: The current checkpoint has 445 missing / 368 unexpected keys, causing an
-   ~8-unit Mahalanobis distance shift between train and test splits. Re-fitting with a properly matched
-   checkpoint will eliminate this and allow using the fit p95 threshold directly.
+1. ~~**Train/test distance shift**~~ **Resolved.** The v1 checkpoint had 445 missing / 368 unexpected keys,
+   causing an ~8-unit Mahalanobis distance shift. The v2 OOD detector (`results/siglip2_diqa5000/ood_detector_v2.npz`)
+   was re-fitted on clean embeddings from the correct IQA-only checkpoint (22 expected missing keys, 0 unexpected).
+   The train+val p95 threshold (30.8) is now directly usable. See `results/siglip2_diqa5000/README.md` for full details.
 
 2. **Synthetic-only OOD evaluation**: All OOD documents are synthetically generated. Evaluation on real-world
    OOD datasets (Tobacco800, RVL-CDIP, CORD, handwritten forms) is needed to validate performance on natural
