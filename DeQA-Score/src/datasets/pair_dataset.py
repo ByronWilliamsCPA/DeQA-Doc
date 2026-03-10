@@ -77,7 +77,8 @@ class PairDataset(Dataset):
         return random.randint(0, len(self) - 1)
 
     def __getitem__(self, i):
-        while True:
+        max_retries = 50
+        for _retry in range(max_retries):
                 # Get idx_dataset, idx_sample
             try:
                 if i < self.nums_predata[0]:
@@ -93,12 +94,17 @@ class PairDataset(Dataset):
                             break
                 # Sample two items
                 item_A = self.get_one_item(idx_dataset, idx_sample)
-                while True:
+                for _inner_retry in range(100):
                     idx_sample_B = random.randint(
                         0, self.nums_eachdata[idx_dataset] - 1
                     )
                     if idx_sample_B != idx_sample:
                         break
+                else:
+                    raise RuntimeError(
+                        f"Could not sample a different index from dataset {idx_dataset} "
+                        f"(size={self.nums_eachdata[idx_dataset]})"
+                    )
                 item_B = self.get_one_item(idx_dataset, idx_sample_B)
                 return {
                     "item_A": item_A,
@@ -108,6 +114,9 @@ class PairDataset(Dataset):
                 print(ex)
                 i = self.next_rand()
                 continue
+        raise RuntimeError(
+            f"PairDataset.__getitem__ failed after {max_retries} retries for index {i}"
+        )
 
     def get_one_item(self, idx_dataset, idx_sample) -> Dict[str, torch.Tensor]:
         # For IQA data, i must be int
