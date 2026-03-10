@@ -66,6 +66,22 @@ MODELS: list[tuple[str, str]] = [
     ("qwen/qwen3-vl-8b-instruct", "VL"),
     ("qwen/qwen3-vl-8b-thinking", "VL"),
     ("qwen/qwen3.5-flash-02-23", "VL"),
+    # --- New models (batch 2) ---
+    ("qwen/qwen3.5-plus-02-15", "Strong"),
+    ("qwen/qwen3.5-122b-a10b", "Strong"),
+    ("qwen/qwen3-vl-235b-a22b-instruct", "Strong"),
+    ("google/gemini-3.1-flash-lite-preview", "Value"),
+    ("bytedance-seed/seed-1.6", "Strong"),
+    ("x-ai/grok-4.1-fast", "Strong"),
+    # z-ai/glm-5 and z-ai/glm-4.7-flash removed: no image input on OpenRouter
+    ("bytedance-seed/seed-1.6-flash", "Value"),
+    ("nvidia/nemotron-nano-12b-v2-vl", "VL"),
+    ("qwen/qwen3-vl-30b-a3b-thinking", "VL"),
+    ("qwen/qwen3-vl-235b-a22b-thinking", "VL"),
+    ("mistralai/mistral-small-3.1-24b-instruct", "Value"),
+    ("google/gemma-3-4b-it", "VL"),
+    ("google/gemma-3-12b-it", "VL"),
+    ("google/gemma-3-27b-it", "VL"),
 ]
 
 # Rate limiting per model (seconds between calls)
