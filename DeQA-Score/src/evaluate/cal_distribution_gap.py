@@ -120,7 +120,7 @@ if __name__ == "__main__":
         for pred_meta, gt_meta in zip(pred_metas, gt_metas):
             assert pred_meta["id"] == gt_meta["id"]
             if use_openset_probs:
-                pred_score, probs = cal_score(level_names, logits=pred_meta["logits"], use_openset_probs=True)
+                pred_score, probs = cal_score(level_names, probs=pred_meta["probs"], use_openset_probs=True)
             else:
                 pred_score, probs = cal_score(level_names, logits=pred_meta["logits"], use_openset_probs=False)
             pred_std = cal_std(pred_score, probs)
