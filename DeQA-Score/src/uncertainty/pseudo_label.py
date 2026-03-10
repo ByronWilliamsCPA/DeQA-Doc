@@ -19,6 +19,7 @@ from .gaussian_to_discrete import (
     siglip2_output_to_level_probs,
 )
 from .ood_wrapper import OODDetectorWrapper
+from .spread import SpreadComputer, SpreadResult
 from .vlm_validator import VLMValidator
 
 logger = logging.getLogger(__name__)
@@ -58,12 +59,14 @@ class PseudoLabelPipeline:
         cross_validator: CrossValidator,
         fusion: UncertaintyFusion,
         vlm_validator: VLMValidator | None = None,
+        spread_computer: SpreadComputer | None = None,
         image_root: str = "",
     ) -> None:
         self.ood_detector = ood_detector
         self.cross_validator = cross_validator
         self.fusion = fusion
         self.vlm_validator = vlm_validator
+        self.spread_computer = spread_computer
         self.image_root = image_root
 
     def process_single(
@@ -73,6 +76,7 @@ class PseudoLabelPipeline:
         siglip2_sigma_sq: float,
         embedding: np.ndarray,
         dimension: str,
+        spread_result: SpreadResult | None = None,
     ) -> PseudoLabelSample:
         """Process a single image+dimension through the pipeline.
 
@@ -80,7 +84,7 @@ class PseudoLabelPipeline:
             1. Convert SigLIP2 (μ, σ²) → level_probs
             2. Score OOD via Mahalanobis
             3. Cross-validate against DeQA predictions
-            4. Fuse signals → acceptance decision
+            4. Fuse signals → acceptance decision (with optional spread)
             5. Return PseudoLabelSample (VLM veto handled in process_batch)
 
         Args:
@@ -89,6 +93,9 @@ class PseudoLabelPipeline:
             siglip2_sigma_sq: SigLIP2 predicted variance.
             embedding: SigLIP2 768-dim embedding for OOD scoring.
             dimension: Quality dimension.
+            spread_result: Optional pre-computed spread from SpreadComputer.
+                Spread is per-image (shared across dimensions), so it should
+                be computed once per image and passed to all dimension calls.
 
         Returns:
             PseudoLabelSample with level_probs, weight, and tier.
@@ -107,8 +114,10 @@ class PseudoLabelPipeline:
                 siglip2_mu=siglip2_mu,
                 siglip2_sigma_sq=siglip2_sigma_sq,
             )
-            # 4. Fusion decision
-            decision = self.fusion.decide(cross_val, ood_result.mahalanobis_distance)
+            # 4. Fusion decision (with optional spread)
+            decision = self.fusion.decide(
+                cross_val, ood_result.mahalanobis_distance, spread_result
+            )
         else:
             # No DeQA prediction — use OOD score only
             from .cross_validator import CrossValidationResult
@@ -127,7 +136,7 @@ class PseudoLabelPipeline:
                 siglip2_entropy=discrete_entropy(level_probs),
             )
             decision = self.fusion.decide(
-                dummy_cross_val, ood_result.mahalanobis_distance
+                dummy_cross_val, ood_result.mahalanobis_distance, spread_result
             )
 
         mos = level_probs_to_mos(level_probs)
@@ -149,6 +158,7 @@ class PseudoLabelPipeline:
         siglip2_outputs: list[dict],
         embeddings: np.ndarray,
         dimensions: tuple[str, ...] = DIMENSIONS,
+        model_predictions: list[dict[str, float]] | None = None,
     ) -> list[PseudoLabelSample]:
         """Process a batch of images through the full pipeline.
 
@@ -164,11 +174,25 @@ class PseudoLabelPipeline:
                 }
             embeddings: Shape (N, 768) array of SigLIP2 embeddings.
             dimensions: Which dimensions to process.
+            model_predictions: Optional list of {model_name: raw_score} per
+                image, aligned with siglip2_outputs. Used for spread computation
+                when spread_computer is configured.
 
         Returns:
             List of PseudoLabelSample for all image+dimension combinations.
         """
         all_samples: list[PseudoLabelSample] = []
+
+        # Pre-compute spread per image (shared across dimensions)
+        spread_results: list[SpreadResult | None] = [None] * len(siglip2_outputs)
+        if self.spread_computer is not None and model_predictions is not None:
+            for i, preds in enumerate(model_predictions):
+                try:
+                    spread_results[i] = self.spread_computer.compute(preds)
+                except ValueError:
+                    logger.debug(
+                        "Spread skipped for image %d: insufficient models", i
+                    )
 
         # Pass 1: Process all without VLM
         for i, output in enumerate(siglip2_outputs):
@@ -187,6 +211,7 @@ class PseudoLabelPipeline:
                     siglip2_sigma_sq=sigma_sq,
                     embedding=embedding,
                     dimension=dim,
+                    spread_result=spread_results[i],
                 )
                 all_samples.append(sample)
 
