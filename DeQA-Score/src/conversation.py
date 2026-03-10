@@ -2,6 +2,7 @@ import dataclasses
 from enum import auto, Enum
 from typing import List, Tuple
 from src.constants import DEFAULT_IMAGE_TOKEN
+from src.mm_utils import expand2square
 
 class SeparatorStyle(Enum):
     """Different separator style."""
@@ -129,19 +130,7 @@ class Conversation:
                     from PIL import Image
                     msg, image, image_process_mode = msg
                     if image_process_mode == "Pad":
-                        def expand2square(pil_img, background_color=(122, 116, 104)):
-                            width, height = pil_img.size
-                            if width == height:
-                                return pil_img
-                            elif width > height:
-                                result = Image.new(pil_img.mode, (width, width), background_color)
-                                result.paste(pil_img, (0, (width - height) // 2))
-                                return result
-                            else:
-                                result = Image.new(pil_img.mode, (height, height), background_color)
-                                result.paste(pil_img, ((height - width) // 2, 0))
-                                return result
-                        image = expand2square(image)
+                        image = expand2square(image, background_color=(122, 116, 104))
                     elif image_process_mode in ["Default", "Crop"]:
                         pass
                     elif image_process_mode == "Resize":

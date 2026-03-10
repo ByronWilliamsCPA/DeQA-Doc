@@ -8,7 +8,7 @@ from typing import List
 from src.model.builder import load_pretrained_model
 
 from src.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, LEVEL_NAMES, LEVEL_SCORES, LEVEL_PREFIX
-from src.mm_utils import process_images, tokenizer_image_token, get_model_name_from_path, KeywordsStoppingCriteria
+from src.mm_utils import process_images, tokenizer_image_token, get_model_name_from_path, KeywordsStoppingCriteria, expand2square
 
 
 class Scorer(nn.Module):
@@ -25,21 +25,8 @@ class Scorer(nn.Module):
         self.image_processor = image_processor
         self.input_ids = tokenizer_image_token(prompt, tokenizer, IMAGE_TOKEN_INDEX, return_tensors='pt').unsqueeze(0).to(model.device)
 
-    def expand2square(self, pil_img, background_color):
-        width, height = pil_img.size
-        if width == height:
-            return pil_img
-        elif width > height:
-            result = Image.new(pil_img.mode, (width, width), background_color)
-            result.paste(pil_img, (0, (width - height) // 2))
-            return result
-        else:
-            result = Image.new(pil_img.mode, (height, height), background_color)
-            result.paste(pil_img, ((height - width) // 2, 0))
-            return result
-
     def forward(self, image: List[Image.Image]):
-        image = [self.expand2square(img, tuple(int(x*255) for x in self.image_processor.image_mean)) for img in image]
+        image = [expand2square(img, tuple(int(x*255) for x in self.image_processor.image_mean)) for img in image]
         with torch.inference_mode():
             image_tensor = self.image_processor.preprocess(image, return_tensors="pt")["pixel_values"].half().to(self.model.device)
             output_logits = self.model(

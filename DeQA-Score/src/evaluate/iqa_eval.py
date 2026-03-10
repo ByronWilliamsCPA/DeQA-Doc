@@ -11,7 +11,7 @@ from tqdm import tqdm
 
 from src.constants import DEFAULT_IMAGE_TOKEN, IMAGE_TOKEN_INDEX, LEVEL_PREFIX
 from src.conversation import conv_templates
-from src.mm_utils import get_model_name_from_path, tokenizer_image_token
+from src.mm_utils import get_model_name_from_path, tokenizer_image_token, expand2square
 from src.model.builder import load_pretrained_model
 
 
@@ -106,19 +106,6 @@ def main(args):
             llddata["probs"] = defaultdict(float)
 
             image = load_image(os.path.join(root_dir, filename))
-
-            def expand2square(pil_img, background_color):
-                width, height = pil_img.size
-                if width == height:
-                    return pil_img
-                elif width > height:
-                    result = Image.new(pil_img.mode, (width, width), background_color)
-                    result.paste(pil_img, (0, (width - height) // 2))
-                    return result
-                else:
-                    result = Image.new(pil_img.mode, (height, height), background_color)
-                    result.paste(pil_img, ((height - width) // 2, 0))
-                    return result
 
             image = expand2square(
                 image, tuple(int(x * 255) for x in image_processor.image_mean)
