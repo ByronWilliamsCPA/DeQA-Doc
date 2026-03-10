@@ -23,9 +23,11 @@ checkpoints/
 *.jsonl
 res_*
 
-# allow results directory JSONs and per-sample JSONL checkpoints to be tracked
+# allow results and research directory JSONs and checkpoints to be tracked
 !results/**/*.json
 !results/**/*.jsonl
+!research/**/*.json
+!research/**/*.jsonl
 
 # allow config JSONs
 !.markdownlint.json
@@ -47,6 +49,8 @@ results/siglip2_diqa5000/embeddings/
 
 # large research data (keep code, exclude data)
 research/ocr_iqa_correlation/data/
+research/vlm_calibration/data/
+research/vlm_calibration/calibrators/
 
 # secrets
 .env
