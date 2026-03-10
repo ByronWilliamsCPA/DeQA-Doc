@@ -50,10 +50,15 @@
 | [experiments.md](experiments.md) | Experiment registry (9 completed experiments) | ~250 lines |
 | [backlog.md](backlog.md) | Hypothesis/idea tracker with priorities | ~120 lines |
 | [data-inventory.md](data-inventory.md) | All datasets, artifacts, and scripts | ~120 lines |
-| **Research notes** | | |
-| [research.md](../research.md) | Technical handoff: VLM distillation strategy and execution plan | 211 lines |
+| **Research papers** | | |
 | [diqa_1.md](diqa_1.md) | Literature survey: DIQA-5000 dataset and VQualA 2025 analysis | 259 lines |
 | [diqa_2.md](diqa_2.md) | Competition landscape: all 7 DIQA teams and methods | ~100 lines |
+| [diqa_3.md](diqa_3.md) | Baseline MLLMs vs Traditional Vision ML: before and after training | ~260 lines |
+| [diqa_4_siglip2_training.md](diqa_4_siglip2_training.md) | Training SigLIP2-IQA-Base-86M: architecture, protocol, and results | ~250 lines |
+| [diqa_5_hyperiqa_training.md](diqa_5_hyperiqa_training.md) | Training HyperIQA++: CNN fine-tuning for document IQA | ~250 lines |
+| [diqa_6_ood_test_analysis.md](diqa_6_ood_test_analysis.md) | Model performance on 520-image synthetic OOD test set | ~350 lines |
+| **Technical notes** | | |
+| [research.md](../research.md) | Technical handoff: VLM distillation strategy and execution plan | 211 lines |
 | **Leaderboards** | | |
 | [LEADERBOARD_DIQA.md](../results/LEADERBOARD_DIQA.md) | Unified ranking: all models on DIQA-5000 test (n=1,000) | ~50 lines |
 | [LEADERBOARD_SYNTHETIC.md](../results/LEADERBOARD_SYNTHETIC.md) | Unified ranking: all models on synthetic OOD (n=520) | ~85 lines |
