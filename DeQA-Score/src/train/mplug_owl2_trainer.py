@@ -2,7 +2,6 @@ import os
 from typing import List, Optional
 
 import torch
-from icecream import ic
 from torch.utils.data import Sampler
 from transformers import Trainer
 from transformers.trainer import (ALL_LAYERNORM_LAYERS, get_parameter_names,
@@ -203,7 +202,7 @@ class MPLUGOwl2Trainer(Trainer):
                         "weight_decay": 0.0,
                     },
                 ]
-            ic(len(optimizer_grouped_parameters[0]['params']),len(optimizer_grouped_parameters[1]['params']))
+            print(f"Optimizer groups: {len(optimizer_grouped_parameters[0]['params'])} decay, {len(optimizer_grouped_parameters[1]['params'])} no-decay")
             optimizer_cls, optimizer_kwargs = Trainer.get_optimizer_cls_and_kwargs(self.args)
 
             if True:
