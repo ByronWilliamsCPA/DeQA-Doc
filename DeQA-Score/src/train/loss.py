@@ -5,6 +5,7 @@ import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModelForCausalLM, Seq2SeqTrainer
 from transformers import Qwen2_5_VLForConditionalGeneration, Qwen2_5_VLProcessor
 from typing import Optional, Union, Any, Dict
+from src.constants import LEVEL_NAMES
 
 
 
@@ -22,14 +23,17 @@ class DeQAScoreLoss(nn.Module):
             "sharpness": "The sharpness of the image is",
             "color_fidelity": "The color_fidelity of the image is"
         },
-        level_names=["excellent", "good", "fair", "poor", "bad"],
+        level_names=None,
     ):
         super().__init__()
         self.weight_desp = weight_desp
         self.weight_next_token = weight_next_token
         self.weight_in_level = weight_in_level
         self.weight_softkl = weight_softkl
-        
+
+        if level_names is None:
+            level_names = LEVEL_NAMES
+
         # 转换level_names为token ids
         self.level_ids = []
         for name in level_names:

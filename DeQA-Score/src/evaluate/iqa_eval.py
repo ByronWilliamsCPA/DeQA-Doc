@@ -9,7 +9,7 @@ import torch
 from PIL import Image
 from tqdm import tqdm
 
-from src.constants import DEFAULT_IMAGE_TOKEN, IMAGE_TOKEN_INDEX
+from src.constants import DEFAULT_IMAGE_TOKEN, IMAGE_TOKEN_INDEX, LEVEL_PREFIX
 from src.conversation import conv_templates
 from src.mm_utils import get_model_name_from_path, tokenizer_image_token
 from src.model.builder import load_pretrained_model
@@ -65,7 +65,7 @@ def main(args):
     image = None
 
     conv.append_message(conv.roles[1], None)
-    prompt = conv.get_prompt() + " The quality of the image is"
+    prompt = conv.get_prompt() + " " + LEVEL_PREFIX
 
     toks = args.level_names
     print(toks)
