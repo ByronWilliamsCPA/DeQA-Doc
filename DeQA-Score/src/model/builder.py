@@ -57,10 +57,7 @@ def load_pretrained_model(
         kwargs["torch_dtype"] = torch.float16
 
     if preprocessor_path is None:
-    # If model_base is provided, use it for the preprocessor, otherwise use model_path
-        #preprocessor_path = model_path
-        preprocessor_path = "/ossfs/workspace/MAGAer13__mplug-owl2-llama2-7b"
-    #import pdb;pdb.set_trace()
+        preprocessor_path = model_base if model_base is not None else model_path
     if "deqa" in model_name.lower():
         # Load LLaVA model
         if "lora" in model_name.lower() and model_base is None:
