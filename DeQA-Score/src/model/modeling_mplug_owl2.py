@@ -400,7 +400,7 @@ class MPLUGOwl2LlamaForCausalLM(LlamaForCausalLM, MPLUGOwl2MetaForCausalLM):
         target[:, self.config.level_ids] = level_probs
         target = target.detach()
 
-        pred_log = torch.log(preds)
+        pred_log = F.log_softmax(logits_level_ids, dim=1)
         loss_kl = F.kl_div(pred_log, target, reduction="batchmean")
         return loss_kl, idx_level_label, idx_level_logit
 

@@ -82,7 +82,7 @@ class DeQAScoreLoss(nn.Module):
         target = target.detach()
         
         # 计算KL散度
-        pred_log = torch.log(preds)
+        pred_log = F.log_softmax(logits_level, dim=1)
         loss_kl = F.kl_div(pred_log, target, reduction="batchmean")
         
         return loss_kl, idx_level_label
