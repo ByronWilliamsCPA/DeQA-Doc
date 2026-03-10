@@ -231,7 +231,9 @@ class TestSpreadTier2Trigger:
         f = UncertaintyFusion(spread_auto=0.25, spread_low=0.30)
         cv = _make_cross_val(jsd=0.03, sigma_sq=0.3, entropy=0.8)
         sr = _make_spread_result(spread=0.10, n_models_used=3)
-        decision = f.decide(cv, mahalanobis_distance=60.0, spread_result=sr)
+        decision = f.decide(
+            cv, mahalanobis_distance=MAHALANOBIS_HARD_REJECT + 5, spread_result=sr
+        )
         assert decision.tier == AcceptanceTier.HARD_REJECT
 
 

@@ -3,7 +3,11 @@
 import numpy as np
 import pytest
 
-from src.uncertainty.ood_wrapper import OODDetectorWrapper
+from src.uncertainty.ood_wrapper import (
+    MAHALANOBIS_HARD_REJECT,
+    MAHALANOBIS_OOD_THRESHOLD,
+    OODDetectorWrapper,
+)
 
 
 @pytest.fixture
@@ -101,3 +105,49 @@ class TestFromNpz:
 
         detector = OODDetectorWrapper.from_npz(str(npz_path), threshold=99.0)
         assert detector.threshold == 99.0
+
+
+class TestGroundTruthCalibration:
+    """Tests for calibrate_from_ground_truth class method."""
+
+    def test_calibrates_threshold_at_target_tpr(self, tmp_path):
+        """Threshold should be set so that target TPR% of OOD is caught."""
+        rng = np.random.default_rng(42)
+        dim = 3
+        mean = np.zeros(dim)
+        precision = np.eye(dim)
+
+        # ID cluster near origin, OOD cluster far away
+        n_id, n_ood = 100, 50
+        id_emb = rng.normal(0, 1, (n_id, dim))
+        ood_emb = rng.normal(10, 1, (n_ood, dim))
+
+        eval_emb = np.concatenate([id_emb, ood_emb])
+        labels = np.concatenate([np.zeros(n_id), np.ones(n_ood)])
+
+        npz_path = tmp_path / "detector.npz"
+        np.savez(npz_path, mean=mean, precision_matrix=precision)
+
+        eval_path = tmp_path / "eval.npz"
+        np.savez(eval_path, embeddings=eval_emb, labels=labels)
+
+        detector = OODDetectorWrapper.calibrate_from_ground_truth(
+            str(npz_path), str(eval_path), target_tpr=0.95
+        )
+
+        # Verify threshold catches >= 95% of OOD
+        ood_dists = np.linalg.norm(ood_emb, axis=1)  # identity precision → Euclidean
+        actual_tpr = np.mean(ood_dists > detector.threshold)
+        assert actual_tpr >= 0.94  # Allow slight float rounding
+
+    def test_default_threshold_constants(self):
+        """Module-level constants should match documented values."""
+        assert MAHALANOBIS_OOD_THRESHOLD == 55.37
+        assert MAHALANOBIS_HARD_REJECT == 61.62
+
+    def test_default_detector_uses_new_threshold(self):
+        """Default OODDetectorWrapper uses ground-truth-calibrated threshold."""
+        detector = OODDetectorWrapper(
+            mean=np.zeros(3), precision_matrix=np.eye(3)
+        )
+        assert detector.threshold == MAHALANOBIS_OOD_THRESHOLD
