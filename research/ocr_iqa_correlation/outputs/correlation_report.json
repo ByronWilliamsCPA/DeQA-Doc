@@ -1,0 +1,925 @@
+{
+  "n_base_images": 200,
+  "n_total_images": 1200,
+  "engines": [
+    "deepseek-ocr2",
+    "doctr",
+    "easyocr",
+    "gcloud_vision",
+    "glm-ocr",
+    "kraken",
+    "paddleocr",
+    "rapidocr",
+    "tesseract"
+  ],
+  "tiers": [
+    "DEGRADED",
+    "HIGH",
+    "LOW",
+    "MEDIUM",
+    "ORIGINAL",
+    "PRISTINE"
+  ],
+  "engine_correlations": {
+    "deepseek-ocr2": {
+      "srcc": -0.338608508330583,
+      "srcc_pvalue": 1.4137439983178844e-33,
+      "plcc": -0.14822092249742433,
+      "plcc_pvalue": 2.5002059791220023e-07,
+      "n_samples": 1200
+    },
+    "doctr": {
+      "srcc": -0.6315322539334045,
+      "srcc_pvalue": 1.512765043359951e-134,
+      "plcc": -0.5805312164903393,
+      "plcc_pvalue": 4.766705262421429e-109,
+      "n_samples": 1200
+    },
+    "easyocr": {
+      "srcc": -0.6373702774803077,
+      "srcc_pvalue": 8.918086308290151e-138,
+      "plcc": -0.5526597685593173,
+      "plcc_pvalue": 6.400068713151414e-97,
+      "n_samples": 1200
+    },
+    "gcloud_vision": {
+      "srcc": -0.4347110013004125,
+      "srcc_pvalue": 1.7172085661815686e-56,
+      "plcc": -0.432883533397586,
+      "plcc_pvalue": 5.555214945976949e-56,
+      "n_samples": 1200
+    },
+    "glm-ocr": {
+      "srcc": -0.34306273241356283,
+      "srcc_pvalue": 1.782682745860787e-34,
+      "plcc": -0.1458534423566794,
+      "plcc_pvalue": 3.8871158416374033e-07,
+      "n_samples": 1200
+    },
+    "kraken": {
+      "srcc": -0.36874089091028783,
+      "srcc_pvalue": 5.948954382100563e-40,
+      "plcc": -0.2929889157287272,
+      "plcc_pvalue": 3.496159277116686e-25,
+      "n_samples": 1200
+    },
+    "paddleocr": {
+      "srcc": -0.6581691279511077,
+      "srcc_pvalue": 7.152139520623053e-150,
+      "plcc": -0.6238437605735938,
+      "plcc_pvalue": 2.1309489824432137e-130,
+      "n_samples": 1200
+    },
+    "rapidocr": {
+      "srcc": -0.5430901014507422,
+      "srcc_pvalue": 5.149649811059437e-93,
+      "plcc": -0.41502504902351417,
+      "plcc_pvalue": 3.679270224692428e-51,
+      "n_samples": 1200
+    },
+    "tesseract": {
+      "srcc": -0.6469420630566687,
+      "srcc_pvalue": 3.171833780197357e-143,
+      "plcc": -0.5313153051349354,
+      "plcc_pvalue": 2.226613888700559e-88,
+      "n_samples": 1200
+    }
+  },
+  "paired_correlations": {
+    "deepseek-ocr2": {
+      "srcc": -0.35781210598894436,
+      "srcc_pvalue": 1.4325024172467158e-31,
+      "plcc": -0.11557784813306345,
+      "plcc_pvalue": 0.00024966655313504846,
+      "n_samples": 1000
+    },
+    "doctr": {
+      "srcc": -0.7169419059404137,
+      "srcc_pvalue": 1.4973750275981188e-158,
+      "plcc": -0.6134496998688936,
+      "plcc_pvalue": 1.9931110112074596e-104,
+      "n_samples": 1000
+    },
+    "easyocr": {
+      "srcc": -0.659172070331454,
+      "srcc_pvalue": 1.105553215809269e-125,
+      "plcc": -0.4897786929103685,
+      "plcc_pvalue": 1.86292399562006e-61,
+      "n_samples": 1000
+    },
+    "gcloud_vision": {
+      "srcc": -0.40325697509920344,
+      "srcc_pvalue": 2.1569084344544084e-40,
+      "plcc": -0.5053945743394131,
+      "plcc_pvalue": 6.026713707603008e-66,
+      "n_samples": 1000
+    },
+    "glm-ocr": {
+      "srcc": -0.3887822650556702,
+      "srcc_pvalue": 1.9786922641334334e-37,
+      "plcc": -0.10114411418603368,
+      "plcc_pvalue": 0.0013615822707797446,
+      "n_samples": 1000
+    },
+    "kraken": {
+      "srcc": -0.5087954431074057,
+      "srcc_pvalue": 5.9016148043455036e-67,
+      "plcc": -0.32273249215256056,
+      "plcc_pvalue": 1.1315243390537684e-25,
+      "n_samples": 1000
+    },
+    "paddleocr": {
+      "srcc": -0.7498939279837836,
+      "srcc_pvalue": 2.842972911996529e-181,
+      "plcc": -0.6916201444995781,
+      "plcc_pvalue": 3.45908792070753e-143,
+      "n_samples": 1000
+    },
+    "rapidocr": {
+      "srcc": -0.4919106379079029,
+      "srcc_pvalue": 4.686010454935935e-62,
+      "plcc": -0.3882417638549679,
+      "plcc_pvalue": 2.5361248349946084e-37,
+      "n_samples": 1000
+    },
+    "tesseract": {
+      "srcc": -0.6832209053825902,
+      "srcc_pvalue": 1.9459305849639917e-138,
+      "plcc": -0.5006297309907147,
+      "plcc_pvalue": 1.4958173317888472e-64,
+      "n_samples": 1000
+    }
+  },
+  "tier_stats": {
+    "DEGRADED": {
+      "deepseek-ocr2": {
+        "mean_cer": 1.165912205,
+        "std_cer": 3.295454286781349,
+        "mean_mos": 2.9472889999999996,
+        "std_mos": 0.3473221119925997,
+        "n": 200
+      },
+      "doctr": {
+        "mean_cer": 0.38509168000000005,
+        "std_cer": 0.23528358864323198,
+        "mean_mos": 2.9472889999999996,
+        "std_mos": 0.3473221119925997,
+        "n": 200
+      },
+      "easyocr": {
+        "mean_cer": 0.8104358650000001,
+        "std_cer": 0.33735011133791964,
+        "mean_mos": 2.9472889999999996,
+        "std_mos": 0.3473221119925997,
+        "n": 200
+      },
+      "gcloud_vision": {
+        "mean_cer": 0.33857487500000005,
+        "std_cer": 0.1919436191545824,
+        "mean_mos": 2.9472889999999996,
+        "std_mos": 0.3473221119925997,
+        "n": 200
+      },
+      "glm-ocr": {
+        "mean_cer": 0.6280628199999999,
+        "std_cer": 2.894047631961134,
+        "mean_mos": 2.9472889999999996,
+        "std_mos": 0.3473221119925997,
+        "n": 200
+      },
+      "kraken": {
+        "mean_cer": 0.9696363250000001,
+        "std_cer": 0.025644265671868532,
+        "mean_mos": 2.9472889999999996,
+        "std_mos": 0.3473221119925997,
+        "n": 200
+      },
+      "paddleocr": {
+        "mean_cer": 0.40974687000000004,
+        "std_cer": 0.26879256656855877,
+        "mean_mos": 2.9472889999999996,
+        "std_mos": 0.3473221119925997,
+        "n": 200
+      },
+      "rapidocr": {
+        "mean_cer": 0.584468105,
+        "std_cer": 0.4809286398204769,
+        "mean_mos": 2.9472889999999996,
+        "std_mos": 0.3473221119925997,
+        "n": 200
+      },
+      "tesseract": {
+        "mean_cer": 0.8110706999999999,
+        "std_cer": 0.39956026236544095,
+        "mean_mos": 2.9472889999999996,
+        "std_mos": 0.3473221119925997,
+        "n": 200
+      }
+    },
+    "HIGH": {
+      "deepseek-ocr2": {
+        "mean_cer": 1.849801645,
+        "std_cer": 8.411351622767521,
+        "mean_mos": 3.0725145000000005,
+        "std_mos": 0.31970723785949856,
+        "n": 200
+      },
+      "doctr": {
+        "mean_cer": 0.33230188999999993,
+        "std_cer": 0.24447307585832004,
+        "mean_mos": 3.0725145000000005,
+        "std_mos": 0.31970723785949856,
+        "n": 200
+      },
+      "easyocr": {
+        "mean_cer": 0.69109219,
+        "std_cer": 0.2240136532557645,
+        "mean_mos": 3.0725145000000005,
+        "std_mos": 0.31970723785949856,
+        "n": 200
+      },
+      "gcloud_vision": {
+        "mean_cer": 0.32830857,
+        "std_cer": 0.17809442055475827,
+        "mean_mos": 3.0725145000000005,
+        "std_mos": 0.31970723785949856,
+        "n": 200
+      },
+      "glm-ocr": {
+        "mean_cer": 0.266023905,
+        "std_cer": 0.17647535916556728,
+        "mean_mos": 3.0725145000000005,
+        "std_mos": 0.31970723785949856,
+        "n": 200
+      },
+      "kraken": {
+        "mean_cer": 0.96178662,
+        "std_cer": 0.034941224247378624,
+        "mean_mos": 3.0725145000000005,
+        "std_mos": 0.31970723785949856,
+        "n": 200
+      },
+      "paddleocr": {
+        "mean_cer": 0.337003305,
+        "std_cer": 0.24577508895722525,
+        "mean_mos": 3.0725145000000005,
+        "std_mos": 0.31970723785949856,
+        "n": 200
+      },
+      "rapidocr": {
+        "mean_cer": 0.5113246499999999,
+        "std_cer": 0.3072513712049264,
+        "mean_mos": 3.0725145000000005,
+        "std_mos": 0.31970723785949856,
+        "n": 200
+      },
+      "tesseract": {
+        "mean_cer": 0.72852805,
+        "std_cer": 0.41397566300992567,
+        "mean_mos": 3.0725145000000005,
+        "std_mos": 0.31970723785949856,
+        "n": 200
+      }
+    },
+    "LOW": {
+      "deepseek-ocr2": {
+        "mean_cer": 1.4485947449999999,
+        "std_cer": 4.78676748630735,
+        "mean_mos": 2.9420275000000005,
+        "std_mos": 0.39237135406875717,
+        "n": 200
+      },
+      "doctr": {
+        "mean_cer": 0.4072924149999999,
+        "std_cer": 0.23625575762739154,
+        "mean_mos": 2.9420275000000005,
+        "std_mos": 0.39237135406875717,
+        "n": 200
+      },
+      "easyocr": {
+        "mean_cer": 0.8038461500000001,
+        "std_cer": 0.20052277454769946,
+        "mean_mos": 2.9420275000000005,
+        "std_mos": 0.39237135406875717,
+        "n": 200
+      },
+      "gcloud_vision": {
+        "mean_cer": 0.348941155,
+        "std_cer": 0.20508367621656529,
+        "mean_mos": 2.9420275000000005,
+        "std_mos": 0.39237135406875717,
+        "n": 200
+      },
+      "glm-ocr": {
+        "mean_cer": 0.48918497,
+        "std_cer": 2.3066830272501444,
+        "mean_mos": 2.9420275000000005,
+        "std_mos": 0.39237135406875717,
+        "n": 200
+      },
+      "kraken": {
+        "mean_cer": 0.949508945,
+        "std_cer": 0.043682590096993726,
+        "mean_mos": 2.9420275000000005,
+        "std_mos": 0.39237135406875717,
+        "n": 200
+      },
+      "paddleocr": {
+        "mean_cer": 0.42228089999999996,
+        "std_cer": 0.2669273444005316,
+        "mean_mos": 2.9420275000000005,
+        "std_mos": 0.39237135406875717,
+        "n": 200
+      },
+      "rapidocr": {
+        "mean_cer": 0.60048103,
+        "std_cer": 0.2946606217181541,
+        "mean_mos": 2.9420275000000005,
+        "std_mos": 0.39237135406875717,
+        "n": 200
+      },
+      "tesseract": {
+        "mean_cer": 0.81894514,
+        "std_cer": 0.2695705338983109,
+        "mean_mos": 2.9420275000000005,
+        "std_mos": 0.39237135406875717,
+        "n": 200
+      }
+    },
+    "MEDIUM": {
+      "deepseek-ocr2": {
+        "mean_cer": 1.21762349,
+        "std_cer": 3.2442390097352183,
+        "mean_mos": 3.01505,
+        "std_mos": 0.36717810405850726,
+        "n": 200
+      },
+      "doctr": {
+        "mean_cer": 0.34909583999999994,
+        "std_cer": 0.23177172623761597,
+        "mean_mos": 3.01505,
+        "std_mos": 0.36717810405850726,
+        "n": 200
+      },
+      "easyocr": {
+        "mean_cer": 0.744682995,
+        "std_cer": 0.23175640138657436,
+        "mean_mos": 3.01505,
+        "std_mos": 0.36717810405850726,
+        "n": 200
+      },
+      "gcloud_vision": {
+        "mean_cer": 0.314555935,
+        "std_cer": 0.17813268318823688,
+        "mean_mos": 3.01505,
+        "std_mos": 0.36717810405850726,
+        "n": 200
+      },
+      "glm-ocr": {
+        "mean_cer": 0.271107985,
+        "std_cer": 0.18943889494764474,
+        "mean_mos": 3.01505,
+        "std_mos": 0.36717810405850726,
+        "n": 200
+      },
+      "kraken": {
+        "mean_cer": 0.9581355,
+        "std_cer": 0.03441457983369839,
+        "mean_mos": 3.01505,
+        "std_mos": 0.36717810405850726,
+        "n": 200
+      },
+      "paddleocr": {
+        "mean_cer": 0.342948625,
+        "std_cer": 0.2385929015349249,
+        "mean_mos": 3.01505,
+        "std_mos": 0.36717810405850726,
+        "n": 200
+      },
+      "rapidocr": {
+        "mean_cer": 0.5296721600000001,
+        "std_cer": 0.3616997304518824,
+        "mean_mos": 3.01505,
+        "std_mos": 0.36717810405850726,
+        "n": 200
+      },
+      "tesseract": {
+        "mean_cer": 0.74411994,
+        "std_cer": 0.2689728906821213,
+        "mean_mos": 3.01505,
+        "std_mos": 0.36717810405850726,
+        "n": 200
+      }
+    },
+    "ORIGINAL": {
+      "deepseek-ocr2": {
+        "mean_cer": 0.59360985,
+        "std_cer": 1.4095074930060207,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "doctr": {
+        "mean_cer": 0.18705333499999996,
+        "std_cer": 0.18715207596904387,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "easyocr": {
+        "mean_cer": 0.523771715,
+        "std_cer": 0.2200240280751486,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "gcloud_vision": {
+        "mean_cer": 0.28374441499999997,
+        "std_cer": 0.1819880146857281,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "glm-ocr": {
+        "mean_cer": 0.25727992499999996,
+        "std_cer": 0.18315054799770428,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "kraken": {
+        "mean_cer": 0.880033505,
+        "std_cer": 0.07460914891271696,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "paddleocr": {
+        "mean_cer": 0.18919358500000003,
+        "std_cer": 0.1876542274147928,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "rapidocr": {
+        "mean_cer": 0.38692591500000006,
+        "std_cer": 0.22405484304762924,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "tesseract": {
+        "mean_cer": 0.43671643000000004,
+        "std_cer": 0.23374155669761656,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      }
+    },
+    "PRISTINE": {
+      "deepseek-ocr2": {
+        "mean_cer": 0.59360985,
+        "std_cer": 1.4095074930060207,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "doctr": {
+        "mean_cer": 0.18705333499999996,
+        "std_cer": 0.18715207596904387,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "easyocr": {
+        "mean_cer": 0.523771715,
+        "std_cer": 0.2200240280751486,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "gcloud_vision": {
+        "mean_cer": 0.28368184,
+        "std_cer": 0.18187852925038842,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "glm-ocr": {
+        "mean_cer": 0.25727992499999996,
+        "std_cer": 0.18315054799770428,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "kraken": {
+        "mean_cer": 0.880033505,
+        "std_cer": 0.07460914891271696,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "paddleocr": {
+        "mean_cer": 0.18919358500000003,
+        "std_cer": 0.1876542274147928,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "rapidocr": {
+        "mean_cer": 0.38692591500000006,
+        "std_cer": 0.22405484304762924,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      },
+      "tesseract": {
+        "mean_cer": 0.43671643000000004,
+        "std_cer": 0.23374155669761656,
+        "mean_mos": 3.3540795,
+        "std_mos": 0.2551675461922029,
+        "n": 200
+      }
+    }
+  },
+  "tier_significance": {
+    "deepseek-ocr2": [
+      {
+        "tier_a": "ORIGINAL",
+        "tier_b": "PRISTINE",
+        "n_pairs": 200,
+        "statistic": null,
+        "pvalue": null,
+        "mean_diff": 0.0
+      },
+      {
+        "tier_a": "PRISTINE",
+        "tier_b": "HIGH",
+        "n_pairs": 200,
+        "statistic": 12460.0,
+        "pvalue": 1.697072309797997e-05,
+        "mean_diff": 1.2561917949999999
+      },
+      {
+        "tier_a": "HIGH",
+        "tier_b": "MEDIUM",
+        "n_pairs": 200,
+        "statistic": 9310.0,
+        "pvalue": 0.8167173975902142,
+        "mean_diff": -0.6321781550000001
+      },
+      {
+        "tier_a": "MEDIUM",
+        "tier_b": "LOW",
+        "n_pairs": 200,
+        "statistic": 10699.0,
+        "pvalue": 0.21421227832741796,
+        "mean_diff": 0.23097125500000007
+      },
+      {
+        "tier_a": "LOW",
+        "tier_b": "DEGRADED",
+        "n_pairs": 200,
+        "statistic": 10093.0,
+        "pvalue": 0.3349743990161635,
+        "mean_diff": -0.28268254
+      }
+    ],
+    "doctr": [
+      {
+        "tier_a": "ORIGINAL",
+        "tier_b": "PRISTINE",
+        "n_pairs": 200,
+        "statistic": null,
+        "pvalue": null,
+        "mean_diff": 0.0
+      },
+      {
+        "tier_a": "PRISTINE",
+        "tier_b": "HIGH",
+        "n_pairs": 200,
+        "statistic": 17364.5,
+        "pvalue": 2.1488316732326305e-23,
+        "mean_diff": 0.145248555
+      },
+      {
+        "tier_a": "HIGH",
+        "tier_b": "MEDIUM",
+        "n_pairs": 200,
+        "statistic": 11335.0,
+        "pvalue": 0.024058714861615135,
+        "mean_diff": 0.01679395
+      },
+      {
+        "tier_a": "MEDIUM",
+        "tier_b": "LOW",
+        "n_pairs": 200,
+        "statistic": 12174.0,
+        "pvalue": 0.0031276703175483517,
+        "mean_diff": 0.058196575
+      },
+      {
+        "tier_a": "LOW",
+        "tier_b": "DEGRADED",
+        "n_pairs": 200,
+        "statistic": 8916.0,
+        "pvalue": 0.8230012421258932,
+        "mean_diff": -0.022200735
+      }
+    ],
+    "easyocr": [
+      {
+        "tier_a": "ORIGINAL",
+        "tier_b": "PRISTINE",
+        "n_pairs": 200,
+        "statistic": null,
+        "pvalue": null,
+        "mean_diff": 0.0
+      },
+      {
+        "tier_a": "PRISTINE",
+        "tier_b": "HIGH",
+        "n_pairs": 200,
+        "statistic": 18216.0,
+        "pvalue": 2.1799528488095774e-26,
+        "mean_diff": 0.167320475
+      },
+      {
+        "tier_a": "HIGH",
+        "tier_b": "MEDIUM",
+        "n_pairs": 200,
+        "statistic": 12453.0,
+        "pvalue": 0.001683559913270783,
+        "mean_diff": 0.05359080499999999
+      },
+      {
+        "tier_a": "MEDIUM",
+        "tier_b": "LOW",
+        "n_pairs": 200,
+        "statistic": 12581.0,
+        "pvalue": 0.00035959869808771495,
+        "mean_diff": 0.05916315499999999
+      },
+      {
+        "tier_a": "LOW",
+        "tier_b": "DEGRADED",
+        "n_pairs": 200,
+        "statistic": 9143.0,
+        "pvalue": 0.739363528233111,
+        "mean_diff": 0.006589715000000012
+      }
+    ],
+    "gcloud_vision": [
+      {
+        "tier_a": "ORIGINAL",
+        "tier_b": "PRISTINE",
+        "n_pairs": 200,
+        "statistic": 0.0,
+        "pvalue": 0.9101437525605001,
+        "mean_diff": -6.257499999999999e-05
+      },
+      {
+        "tier_a": "PRISTINE",
+        "tier_b": "HIGH",
+        "n_pairs": 200,
+        "statistic": 13257.0,
+        "pvalue": 2.655759178484815e-07,
+        "mean_diff": 0.044626729999999996
+      },
+      {
+        "tier_a": "HIGH",
+        "tier_b": "MEDIUM",
+        "n_pairs": 200,
+        "statistic": 8585.0,
+        "pvalue": 0.9272873469857715,
+        "mean_diff": -0.013752635
+      },
+      {
+        "tier_a": "MEDIUM",
+        "tier_b": "LOW",
+        "n_pairs": 200,
+        "statistic": 11922.0,
+        "pvalue": 0.005145736144701138,
+        "mean_diff": 0.03438522
+      },
+      {
+        "tier_a": "LOW",
+        "tier_b": "DEGRADED",
+        "n_pairs": 200,
+        "statistic": 10134.0,
+        "pvalue": 0.41052235616554933,
+        "mean_diff": -0.010366279999999999
+      }
+    ],
+    "glm-ocr": [
+      {
+        "tier_a": "ORIGINAL",
+        "tier_b": "PRISTINE",
+        "n_pairs": 200,
+        "statistic": null,
+        "pvalue": null,
+        "mean_diff": 0.0
+      },
+      {
+        "tier_a": "PRISTINE",
+        "tier_b": "HIGH",
+        "n_pairs": 200,
+        "statistic": 5986.0,
+        "pvalue": 0.0034043245509763685,
+        "mean_diff": 0.008743980000000002
+      },
+      {
+        "tier_a": "HIGH",
+        "tier_b": "MEDIUM",
+        "n_pairs": 200,
+        "statistic": 7451.0,
+        "pvalue": 0.43992674549803423,
+        "mean_diff": 0.005084080000000003
+      },
+      {
+        "tier_a": "MEDIUM",
+        "tier_b": "LOW",
+        "n_pairs": 200,
+        "statistic": 9862.0,
+        "pvalue": 0.0003617261505337534,
+        "mean_diff": 0.218076985
+      },
+      {
+        "tier_a": "LOW",
+        "tier_b": "DEGRADED",
+        "n_pairs": 200,
+        "statistic": 7912.0,
+        "pvalue": 0.8567081635623721,
+        "mean_diff": 0.13887785
+      }
+    ],
+    "kraken": [
+      {
+        "tier_a": "ORIGINAL",
+        "tier_b": "PRISTINE",
+        "n_pairs": 200,
+        "statistic": null,
+        "pvalue": null,
+        "mean_diff": 0.0
+      },
+      {
+        "tier_a": "PRISTINE",
+        "tier_b": "HIGH",
+        "n_pairs": 200,
+        "statistic": 19653.0,
+        "pvalue": 3.1653479393249516e-34,
+        "mean_diff": 0.08175311499999999
+      },
+      {
+        "tier_a": "HIGH",
+        "tier_b": "MEDIUM",
+        "n_pairs": 200,
+        "statistic": 8590.0,
+        "pvalue": 0.9527303503036615,
+        "mean_diff": -0.0036511200000000016
+      },
+      {
+        "tier_a": "MEDIUM",
+        "tier_b": "LOW",
+        "n_pairs": 200,
+        "statistic": 8183.0,
+        "pvalue": 0.9886384435396891,
+        "mean_diff": -0.008626555
+      },
+      {
+        "tier_a": "LOW",
+        "tier_b": "DEGRADED",
+        "n_pairs": 200,
+        "statistic": 14556.0,
+        "pvalue": 7.462913508930117e-09,
+        "mean_diff": 0.02012738
+      }
+    ],
+    "paddleocr": [
+      {
+        "tier_a": "ORIGINAL",
+        "tier_b": "PRISTINE",
+        "n_pairs": 200,
+        "statistic": null,
+        "pvalue": null,
+        "mean_diff": 0.0
+      },
+      {
+        "tier_a": "PRISTINE",
+        "tier_b": "HIGH",
+        "n_pairs": 200,
+        "statistic": 18005.0,
+        "pvalue": 3.486515008507721e-25,
+        "mean_diff": 0.14780972000000003
+      },
+      {
+        "tier_a": "HIGH",
+        "tier_b": "MEDIUM",
+        "n_pairs": 200,
+        "statistic": 11197.0,
+        "pvalue": 0.08082627523664776,
+        "mean_diff": 0.005945319999999995
+      },
+      {
+        "tier_a": "MEDIUM",
+        "tier_b": "LOW",
+        "n_pairs": 200,
+        "statistic": 12844.0,
+        "pvalue": 0.00010448382621236015,
+        "mean_diff": 0.07933227500000001
+      },
+      {
+        "tier_a": "LOW",
+        "tier_b": "DEGRADED",
+        "n_pairs": 200,
+        "statistic": 9565.0,
+        "pvalue": 0.6820011427062633,
+        "mean_diff": -0.01253403
+      }
+    ],
+    "rapidocr": [
+      {
+        "tier_a": "ORIGINAL",
+        "tier_b": "PRISTINE",
+        "n_pairs": 200,
+        "statistic": null,
+        "pvalue": null,
+        "mean_diff": 0.0
+      },
+      {
+        "tier_a": "PRISTINE",
+        "tier_b": "HIGH",
+        "n_pairs": 200,
+        "statistic": 14434.0,
+        "pvalue": 9.124948285447877e-10,
+        "mean_diff": 0.12439873500000001
+      },
+      {
+        "tier_a": "HIGH",
+        "tier_b": "MEDIUM",
+        "n_pairs": 200,
+        "statistic": 11005.0,
+        "pvalue": 0.12195637176564533,
+        "mean_diff": 0.01834751
+      },
+      {
+        "tier_a": "MEDIUM",
+        "tier_b": "LOW",
+        "n_pairs": 200,
+        "statistic": 12815.0,
+        "pvalue": 0.0003707307103230786,
+        "mean_diff": 0.07080887
+      },
+      {
+        "tier_a": "LOW",
+        "tier_b": "DEGRADED",
+        "n_pairs": 200,
+        "statistic": 8823.0,
+        "pvalue": 0.8984413928780638,
+        "mean_diff": -0.016012924999999994
+      }
+    ],
+    "tesseract": [
+      {
+        "tier_a": "ORIGINAL",
+        "tier_b": "PRISTINE",
+        "n_pairs": 200,
+        "statistic": null,
+        "pvalue": null,
+        "mean_diff": 0.0
+      },
+      {
+        "tier_a": "PRISTINE",
+        "tier_b": "HIGH",
+        "n_pairs": 200,
+        "statistic": 18084.0,
+        "pvalue": 1.0069314588181429e-24,
+        "mean_diff": 0.29181162
+      },
+      {
+        "tier_a": "HIGH",
+        "tier_b": "MEDIUM",
+        "n_pairs": 200,
+        "statistic": 9999.0,
+        "pvalue": 0.08747161389845642,
+        "mean_diff": 0.015591890000000006
+      },
+      {
+        "tier_a": "MEDIUM",
+        "tier_b": "LOW",
+        "n_pairs": 200,
+        "statistic": 9347.0,
+        "pvalue": 0.0028808986281790897,
+        "mean_diff": 0.07482520000000001
+      },
+      {
+        "tier_a": "LOW",
+        "tier_b": "DEGRADED",
+        "n_pairs": 200,
+        "statistic": 7089.0,
+        "pvalue": 0.8186862804998056,
+        "mean_diff": -0.007874440000000003
+      }
+    ]
+  }
+}
