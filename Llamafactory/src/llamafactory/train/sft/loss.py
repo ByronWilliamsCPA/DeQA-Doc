@@ -154,7 +154,6 @@ def calculate_single_loss(
     if loss is not None and loss_kl is not None:
         # 获取weight_softkl，如果不存在则使用默认值1.0
         weight_softkl = getattr(actual_model.config, "weight_softkl", 1.0)
-        print("成功计算loss_kl:",loss_kl)
         loss = loss + weight_softkl * loss_kl
 
     return CausalLMOutputWithPast(
