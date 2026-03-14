@@ -220,7 +220,7 @@ class TestClusterDivergence:
             "deqa_specialist": 2.0,  # normalized: -1.0
             "qwen25vl": 2.0,     # normalized: -1.0
         })
-        # vision_mean = 2.0, mllm_mean = -1.0, divergence = 3.0
+        # vision cluster at 2.0, mllm cluster at -1.0 → divergence 3.0
         assert result.cluster_divergence == pytest.approx(3.0)
 
     def test_divergence_with_missing_vision(

@@ -19,8 +19,8 @@ class TestNormalizationParams:
     def test_fields(self) -> None:
         params = NormalizationParams(model_name="siglip2", mean=3.2, std=0.8)
         assert params.model_name == "siglip2"
-        assert params.mean == 3.2
-        assert params.std == 0.8
+        assert params.mean == pytest.approx(3.2)
+        assert params.std == pytest.approx(0.8)
 
 
 class TestModelNormalizerFit:
@@ -71,13 +71,13 @@ class TestModelNormalizerTransform:
         return ModelNormalizer(params=params)
 
     def test_transform_basic(self, fitted_normalizer: ModelNormalizer) -> None:
-        # (3.0 - 3.0) / 1.0 = 0.0
+        # model_a: mean=3.0, std=1.0 → z-score of 3.0 is 0.0
         assert fitted_normalizer.transform("model_a", 3.0) == pytest.approx(0.0)
-        # (5.0 - 3.0) / 1.0 = 2.0
+        # model_a: z-score of 5.0 is 2.0
         assert fitted_normalizer.transform("model_a", 5.0) == pytest.approx(2.0)
-        # (4.0 - 4.0) / 0.5 = 0.0
+        # model_b: mean=4.0, std=0.5 → z-score of 4.0 is 0.0
         assert fitted_normalizer.transform("model_b", 4.0) == pytest.approx(0.0)
-        # (5.0 - 4.0) / 0.5 = 2.0
+        # model_b: z-score of 5.0 is 2.0
         assert fitted_normalizer.transform("model_b", 5.0) == pytest.approx(2.0)
 
     def test_transform_unknown_model(self, fitted_normalizer: ModelNormalizer) -> None:

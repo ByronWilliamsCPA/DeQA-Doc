@@ -20,9 +20,9 @@ import numpy as np
 
 logger = logging.getLogger(__name__)
 
-# Ground-truth-calibrated thresholds from eval_id_ood.npz (1520 samples)
-MAHALANOBIS_OOD_THRESHOLD = 55.37  # TPR=0.95, FPR=0.146
-MAHALANOBIS_HARD_REJECT = 61.62  # TPR=0.80, FPR=0.126
+# Ground-truth-calibrated thresholds (eval_id_ood.npz, 1520 samples)
+MAHALANOBIS_OOD_THRESHOLD = 55.37  # soft flag
+MAHALANOBIS_HARD_REJECT = 61.62  # hard reject
 
 
 @dataclass(frozen=True)

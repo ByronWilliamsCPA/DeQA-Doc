@@ -8,7 +8,6 @@ from src.uncertainty.fusion import (
     AcceptanceTier,
     JSDThresholds,
     UncertaintyFusion,
-    UncertaintySignals,
 )
 from src.uncertainty.ood_wrapper import (
     MAHALANOBIS_HARD_REJECT,
@@ -173,7 +172,7 @@ class TestSpreadBackwardCompat:
         cv = _make_cross_val(jsd=0.03, sigma_sq=0.3, entropy=0.8)
         decision = fusion.decide(cv, mahalanobis_distance=30.0)
         assert decision.tier == AcceptanceTier.AUTO_ACCEPT
-        assert decision.signals.model_spread == 0.0
+        assert decision.signals.model_spread == pytest.approx(0.0)
         assert decision.signals.n_spread_models == 0
 
     def test_no_spread_thresholds_ignores_spread(self):
@@ -246,8 +245,8 @@ class TestSpreadSignalsMetadata:
         cv = _make_cross_val(jsd=0.03, sigma_sq=0.3, entropy=0.8)
         sr = _make_spread_result(spread=0.22, cluster_divergence=1.5, n_models_used=3)
         decision = f.decide(cv, mahalanobis_distance=30.0, spread_result=sr)
-        assert decision.signals.model_spread == 0.22
-        assert decision.signals.cluster_divergence == 1.5
+        assert decision.signals.model_spread == pytest.approx(0.22)
+        assert decision.signals.cluster_divergence == pytest.approx(1.5)
         assert decision.signals.n_spread_models == 3
 
     def test_spread_in_interpolate_weight(self):

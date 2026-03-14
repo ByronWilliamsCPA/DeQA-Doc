@@ -142,8 +142,8 @@ class TestGroundTruthCalibration:
 
     def test_default_threshold_constants(self):
         """Module-level constants should match documented values."""
-        assert MAHALANOBIS_OOD_THRESHOLD == 55.37
-        assert MAHALANOBIS_HARD_REJECT == 61.62
+        assert MAHALANOBIS_OOD_THRESHOLD == pytest.approx(55.37)
+        assert MAHALANOBIS_HARD_REJECT == pytest.approx(61.62)
 
     def test_default_detector_uses_new_threshold(self):
         """Default OODDetectorWrapper uses ground-truth-calibrated threshold."""
