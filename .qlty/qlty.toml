@@ -1,35 +1,37 @@
 config_version = "0"
 
-[smells]
-mode = "comment"
-
 exclude_patterns = [
   # Build artifacts and dependencies
-  "build/",
-  "dist/",
-  "*.egg-info/",
-  ".venv/",
+  "**/build/**",
+  "**/dist/**",
+  "**/*.egg-info/**",
+  "**/.venv/**",
 
   # Cache directories
-  ".mypy_cache/",
-  ".ruff_cache/",
-  ".pytest_cache/",
-  "__pycache__/",
+  "**/.mypy_cache/**",
+  "**/.ruff_cache/**",
+  "**/.pytest_cache/**",
+  "**/__pycache__/**",
 
   # Claude and temp directories
   "**/.claude/**",
-  "tmp_cleanup/",
+  "**/tmp_cleanup/**",
 
   # Generated and data files
   "*.lock",
-  "htmlcov/",
-  ".coverage",
+  "**/htmlcov/**",
+  "**/.coverage",
 
   # Model checkpoints and large files
   "*.pth",
   "*.pt",
   "*.bin",
-  "preprocessor/",
+  "**/preprocessor/**",
+
+  # Standard exclusions
+  "**/node_modules/**",
+  "**/vendor/**",
+  "**/target/**",
 ]
 
 test_patterns = [
@@ -39,25 +41,25 @@ test_patterns = [
   "**/test_*.*",
 ]
 
+[smells]
+mode = "comment"
+
+[[source]]
+name = "default"
+default = true
+
 # ---------------------------------------------------------------------------
 # Plugin configuration
 # ---------------------------------------------------------------------------
-
-# GitHub Actions linting
-[[plugin]]
-name = "actionlint"
 
 # Python security scanning
 [[plugin]]
 name = "bandit"
 
-[plugin.exclusions]
-- = "tests/**"
-- = "**/test_*.py"
-
 # Dependency vulnerability scanning
 [[plugin]]
-name = "osv-scanner"
+name = "trivy"
+drivers = ["config"]
 
 # Python quality (SonarQube rules)
 [[plugin]]
@@ -72,7 +74,7 @@ mode = "comment"
 # Python formatting & linting
 [[plugin]]
 name = "ruff"
-driver = "lint"
+drivers = ["lint"]
 
 # Secrets detection
 [[plugin]]
@@ -81,41 +83,4 @@ name = "trufflehog"
 # Markdown documentation linting
 [[plugin]]
 name = "markdownlint"
-
-# YAML configuration linting
-[[plugin]]
-name = "yamllint"
-
-# ---------------------------------------------------------------------------
-# Triage rules (suppress known false positives)
-# ---------------------------------------------------------------------------
-
-# Standard pytest assertions
-[[triage]]
-rule = "bandit:B101"
-level = "ignore"
-
-# TODO/NOTE comments are informational
-[[triage]]
-rule = "ripgrep:TODO"
-level = "ignore"
-
-[[triage]]
-rule = "ripgrep:NOTE"
-level = "ignore"
-
-[[triage]]
-rule = "radarlint-python:S1135"
-level = "ignore"
-
-# Upstream DeQA-Score code uses its own style — suppress formatting noise
-# Only enforce ruff on new code (results/, new scripts)
-[[triage]]
-rule = "ruff:E501"
-level = "ignore"
-path = "DeQA-Score/src/**"
-
-[[triage]]
-rule = "ruff:E501"
-level = "ignore"
-path = "Llamafactory/**"
+mode = "comment"
