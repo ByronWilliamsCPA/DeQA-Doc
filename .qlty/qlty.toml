@@ -32,6 +32,32 @@ exclude_patterns = [
   "**/node_modules/**",
   "**/vendor/**",
   "**/target/**",
+
+  # Upstream DeQA-Score code — uses its own style, Chinese comments
+  "DeQA-Score/src/conversation.py",
+  "DeQA-Score/src/datasets/**",
+  "DeQA-Score/src/evaluate/**",
+  "DeQA-Score/src/model/**",
+  "DeQA-Score/src/train/**",
+  "DeQA-Score/src/mm_utils.py",
+  "DeQA-Score/build_soft_labels/**",
+  "DeQA-Score/scripts/**",
+
+  # Research experiment scripts — one-off analysis, not production code
+  "research/**",
+  "modal/**",
+  "results/**",
+
+  # Upstream Llamafactory patches
+  "Llamafactory/**",
+
+  # Data expansion scripts — experimental pipeline
+  "DeQA-Score/src/expansion/**",
+  "DeQA-Score/tests/expansion/**",
+
+  # Project docs with complex tables
+  "PROJECT_REVIEW_REPORT.md",
+  "docs/**",
 ]
 
 test_patterns = [
@@ -52,9 +78,8 @@ default = true
 # Plugin configuration
 # ---------------------------------------------------------------------------
 
-# Python security scanning
-[[plugin]]
-name = "bandit"
+# Python security scanning handled by CI workflow (bandit in ci.yml)
+# Not enabled here — B101 false positives on pytest assert statements
 
 # Dependency vulnerability scanning
 [[plugin]]
