@@ -18,21 +18,61 @@
 # result related
 *answer*
 *ckpt*
+checkpoints/
 *.json
 *.jsonl
 res_*
 
-# allow results directory JSONs to be tracked
+# allow results and research directory JSONs and checkpoints to be tracked
 !results/**/*.json
+!results/**/*.jsonl
+!research/**/*.json
+!research/**/*.jsonl
 
 # allow config JSONs
 !.markdownlint.json
 
-# allow uv.lock (matched by *log* pattern)
+# allow uv.lock and research backlog (matched by *log* pattern)
 !uv.lock
+!research/backlog.md
 
 # mac hidden
 *.DS_Store*
 
+# test sample images
+results/vlm_teacher_eval/smoke_test_results/sample_images/
+results/vlm_teacher_eval/full_eval/data/res/
+
+# binary embeddings and model artifacts
+*.npz
+results/siglip2_diqa5000/embeddings/
+
+# large research data (keep code, exclude data)
+research/ocr_iqa_correlation/data/
+research/vlm_calibration/data/
+research/vlm_calibration/calibrators/
+
+# image files in research/results (test images, samples, OCR data)
+research/**/*.jpg
+research/**/*.png
+results/**/*.jpg
+results/**/*.png
+DeQA-Score/Data-DeQA-Score/DIQA-5000_1/
+
+# model checkpoints and weights
+*.bin
+*.model
+*.pkl
+*.safetensors
+
+# qlty cache (config tracked in .qlty/qlty.toml)
+.qlty/out
+.qlty/plugin_cachedir
+.qlty/results
+
+# Claude Code local state
+.claude/
+
 # secrets
 .env
+.gcp/
