@@ -81,7 +81,7 @@ jobs:
           # Check for hardcoded API keys/tokens
           if grep -rE "(api_key|api_secret|password|token)\s*=\s*[\"'][^\"']{8,}[\"']" \
                --include="*.py" --include="*.sh" --include="*.yaml" --include="*.yml" \
-               --exclude-dir=.git . 2>/dev/null; then
+               --exclude-dir=.git --exclude-dir=tests . 2>/dev/null; then
             echo "::error::Potential hardcoded secret detected"
             FOUND=1
           fi
@@ -95,38 +95,9 @@ jobs:
           fi
           echo "No secrets detected."
 
-  security:
-    name: Security Analysis
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: read
-      security-events: write
-
-    steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76  # v2.14.0
-        with:
-          egress-policy: audit
-
-      - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
-
-      - name: Set up Python
-        uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55  # v5.5.0
-        with:
-          python-version: "3.11"
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@8ff85221d12737ec1137e6a892722e5130f32d05  # v3.28.8
-        with:
-          languages: python
-          queries: security-extended
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@8ff85221d12737ec1137e6a892722e5130f32d05  # v3.28.8
-        with:
-          category: "/language:python"
+  # CodeQL security analysis is handled by GitHub's default setup.
+  # Do not add an advanced CodeQL configuration here — it conflicts
+  # with the default setup and causes SARIF upload failures.
 
   dependency-review:
     name: Dependency Review

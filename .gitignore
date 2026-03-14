@@ -52,6 +52,19 @@ research/ocr_iqa_correlation/data/
 research/vlm_calibration/data/
 research/vlm_calibration/calibrators/
 
+# image files in research/results (test images, samples, OCR data)
+research/**/*.jpg
+research/**/*.png
+results/**/*.jpg
+results/**/*.png
+DeQA-Score/Data-DeQA-Score/DIQA-5000_1/
+
+# model checkpoints and weights
+*.bin
+*.model
+*.pkl
+*.safetensors
+
 # qlty cache (config tracked in .qlty/qlty.toml)
 .qlty/out
 .qlty/plugin_cachedir
@@ -59,9 +72,6 @@ research/vlm_calibration/calibrators/
 
 # Claude Code local state
 .claude/
-
-# training data subsets
-DeQA-Score/Data-DeQA-Score/DIQA-5000_1/
 
 # secrets
 .env
