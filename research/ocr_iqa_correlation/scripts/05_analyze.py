@@ -45,12 +45,14 @@ def _build_master_dataset(
     """
     from research.ocr_iqa_correlation.analysis.cer_wer import compute_metrics
 
-    # Index GT text by image_id
+    # Index GT text and source_dataset by image_id
     gt_texts = {}
+    source_datasets = {}
     for sample in samples:
         gt_path = gt_text_dir / f"{sample['image_id']}.txt"
         if gt_path.exists():
             gt_texts[sample["image_id"]] = gt_path.read_text(encoding="utf-8")
+        source_datasets[sample["image_id"]] = sample.get("source_dataset", "unknown")
 
     # Index distortion metadata
     dist_by_key = {}
@@ -97,10 +99,7 @@ def _build_master_dataset(
         record = {
             "image_id": image_id,
             "tier": tier,
-            "source_dataset": next(
-                (s["source_dataset"] for s in samples if s["image_id"] == image_id),
-                "unknown",
-            ),
+            "source_dataset": source_datasets.get(image_id, "unknown"),
             "image_path": dist_record.get("image_path", ""),
             "gt_text_chars": len(gt_text),
             "seed": dist_record.get("seed"),
@@ -156,9 +155,16 @@ def main() -> None:
         engine_name = ocr_path.stem
         ocr_records[engine_name] = _load_jsonl(ocr_path)
 
-    # Load DeQA scores
+    # Load DeQA scores — normalize field names from Modal output
     deqa_path = DATA_DIR / "deqa_results" / "deqa_scores.jsonl"
-    deqa_records = _load_jsonl(deqa_path) if deqa_path.exists() else []
+    deqa_records = []
+    if deqa_path.exists():
+        raw_deqa = _load_jsonl(deqa_path)
+        for r in raw_deqa:
+            # Modal outputs deqa_overall_mos; normalize to deqa_mos for compat
+            if "deqa_overall_mos" in r and "deqa_mos" not in r:
+                r["deqa_mos"] = r["deqa_overall_mos"]
+            deqa_records.append(r)
 
     engines = sorted(ocr_records.keys())
     logger.info("Engines found: %s", engines)

@@ -1,0 +1,56 @@
+# SigLIP2-IQA v2.0 — Expanded training (DIQA-5000 + pseudo-labels)
+#
+# Template for training with VLM pseudo-labeled expansion data.
+# Update pseudo_label_jsonl path before use.
+#
+# Usage:
+#   uv run modal run modal/train_siglip2_iqa_v2.py --config modal/configs/siglip2_v2_expanded.yaml
+
+# Architecture (same as diqa_only)
+backbone_id: google/siglip2-base-patch16-naflex
+embed_dim: 768
+max_num_patches: 784
+head_hidden: 256
+head_dropout: 0.3
+use_attention_pooling: true
+
+# Phase 1: Head warmup (backbone frozen)
+phase1_epochs: 10
+phase1_lr: 1.0e-3
+phase1_freeze_backbone: true
+
+# Phase 2: Full fine-tuning
+phase2_epochs: 40
+phase2_lr: 1.0e-5
+phase2_scheduler: cosine_warm_restarts
+phase2_t0: 10
+phase2_t_mult: 2
+phase2_eta_min: 1.0e-7
+phase2_use_pcgrad: true
+
+# Optimization
+optimizer: adamw
+weight_decay: 0.01
+batch_size: 4
+gradient_accumulation: 4
+max_grad_norm: 1.0
+
+# Loss
+loss_lambda_gnll: 0.5
+label_normalization: linear_01
+
+# Data — DIQA-5000 + pseudo-labels
+data:
+  diqa_train_dir: Data-DeQA-Score/DIQA/train/res/
+  diqa_meta_dir: Data-DeQA-Score/DIQA/metas/
+  diqa_val_dir: Data-DeQA-Score/DIQA/val/res/
+  # TODO: Update with actual pseudo-label path after calibration
+  pseudo_label_jsonl: /data/pseudo_labels/calibrated_vlm_labels.jsonl
+  pseudo_label_weight: 0.5
+  public_data_jsonl: null
+  public_data_weight: 0.5
+  mix_strategy: interleave
+
+# Hardware
+gpu_type: A10
+seed: 42

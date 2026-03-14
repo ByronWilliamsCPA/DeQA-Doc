@@ -51,17 +51,23 @@ class DeQAScoreLoss(nn.Module):
         self.ce_loss = nn.CrossEntropyLoss()
 
     def find_prefix(self, labels, prefix):
-        """找到prefix在labels中的位置"""
+        """找到prefix在labels中的位置。返回-1表示未找到。"""
         batch_size = labels.shape[0]
         prefix_len = len(prefix)
         indices = []
-        
+
         for i in range(batch_size):
+            found = False
             for j in range(labels.shape[1] - prefix_len + 1):
                 if torch.all(labels[i, j:j+prefix_len] == prefix):
                     indices.append(j + prefix_len)
+                    found = True
                     break
-                    
+            if not found:
+                import logging
+                logging.warning(f"find_prefix: prefix not found in sample {i}, skipping from SoftKL")
+                indices.append(-1)
+
         return torch.tensor(indices, device=labels.device)
 
     def softkl_loss(self, logits, labels, level_probs, prefix):
@@ -69,20 +75,30 @@ class DeQAScoreLoss(nn.Module):
         batch_size = logits.shape[0]
         idx_prefix_label = self.find_prefix(labels, prefix)
         idx_level_label = idx_prefix_label
-        
+
+        # Filter out samples where prefix was not found (marked as -1)
+        valid_mask = idx_level_label >= 0
+        if not valid_mask.any():
+            return torch.tensor(0.0, device=logits.device), idx_level_label
+
+        valid_indices = torch.where(valid_mask)[0]
+        idx_level_label = idx_level_label[valid_indices]
+        logits_valid = logits[valid_indices]
+        level_probs_valid = level_probs[valid_indices] if level_probs.dim() > 1 else level_probs
+
         # 获取level token的logits
-        logits_level = logits[torch.arange(batch_size), idx_level_label]
-        
+        logits_level = logits_valid[torch.arange(len(valid_indices)), idx_level_label]
+
         # 计算预测的概率分布
         preds = torch.softmax(logits_level, dim=1)
-        
+
         # 创建目标分布
         target = torch.zeros_like(preds)
-        target[:, self.level_ids] = level_probs
+        target[:, self.level_ids] = level_probs_valid
         target = target.detach()
-        
+
         # 计算KL散度
-        pred_log = torch.log(preds)
+        pred_log = F.log_softmax(logits_level, dim=1)
         loss_kl = F.kl_div(pred_log, target, reduction="batchmean")
         
         return loss_kl, idx_level_label

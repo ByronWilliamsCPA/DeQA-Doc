@@ -67,7 +67,8 @@ class SingleDataset(Dataset):
         return random.randint(0, len(self) - 1)
 
     def __getitem__(self, i) -> Dict[str, torch.Tensor]:
-        while True:
+        max_retries = 50
+        for _retry in range(max_retries):
             try:
                 sources = self.list_data_dict[i]
                 if isinstance(i, int):
@@ -188,6 +189,9 @@ class SingleDataset(Dataset):
                 print(ex)
                 i = self.next_rand()
                 continue
+        raise RuntimeError(
+            f"SingleDataset.__getitem__ failed after {max_retries} retries for index {i}"
+        )
 
 
 @dataclass

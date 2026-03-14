@@ -1,0 +1,95 @@
+{
+  "baseline_spread": {
+    "mean": 0.1902,
+    "std": 0.0755,
+    "soft_threshold": 0.2657,
+    "hard_threshold": 0.3412
+  },
+  "ood_spread": {
+    "mean": 0.4217,
+    "std": 0.1706
+  },
+  "ood_classification": {
+    "in_distribution_like": 89,
+    "soft_ood": 90,
+    "strong_ood": 341
+  },
+  "cluster_divergence": {
+    "baseline": {
+      "inter_cluster_gap_mean": 0.1499,
+      "inter_cluster_gap_std": 0.1199,
+      "vision_intra_spread_mean": 0.1767,
+      "mllm_intra_spread_mean": 0.168,
+      "cluster_divergence_ratio": 0.87,
+      "pct_images_inter_gt_intra": 40.6
+    },
+    "ood": {
+      "inter_cluster_gap_mean": 0.3103,
+      "inter_cluster_gap_std": 0.2542,
+      "vision_intra_spread_mean": 0.3918,
+      "mllm_intra_spread_mean": 0.3822,
+      "cluster_divergence_ratio": 0.8019,
+      "pct_images_inter_gt_intra": 37.3077
+    }
+  },
+  "validation": {
+    "status": "validated",
+    "overall": {
+      "ensemble_srcc": 0.995,
+      "ensemble_plcc": 0.9953,
+      "ensemble_rmse": 2.9961
+    },
+    "per_spread_quantile": {
+      "Q1_low": {
+        "n_images": 250,
+        "srcc": 0.995,
+        "plcc": 0.9972,
+        "rmse": 3.0213,
+        "mean_spread": 0.1004
+      },
+      "Q2": {
+        "n_images": 250,
+        "srcc": 0.993,
+        "plcc": 0.9952,
+        "rmse": 3.0058,
+        "mean_spread": 0.1604
+      },
+      "Q3": {
+        "n_images": 250,
+        "srcc": 0.9934,
+        "plcc": 0.9949,
+        "rmse": 2.9789,
+        "mean_spread": 0.2096
+      },
+      "Q4_high": {
+        "n_images": 250,
+        "srcc": 0.9925,
+        "plcc": 0.9928,
+        "rmse": 2.9782,
+        "mean_spread": 0.2904
+      }
+    },
+    "spread_error_correlation": {
+      "siglip": {
+        "spread_error_srcc": -0.0393,
+        "p_value": 0.214899
+      },
+      "hyperiqa": {
+        "spread_error_srcc": -0.0743,
+        "p_value": 0.018853
+      },
+      "mllm": {
+        "spread_error_srcc": -0.0572,
+        "p_value": 0.07056
+      },
+      "vl": {
+        "spread_error_srcc": -0.0523,
+        "p_value": 0.098405
+      },
+      "frontier": {
+        "spread_error_srcc": -0.0396,
+        "p_value": 0.210331
+      }
+    }
+  }
+}

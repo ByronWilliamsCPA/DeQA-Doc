@@ -43,8 +43,9 @@ SYNTHETIC_META = SYNTHETIC_DIR / "metadata.jsonl"
 CHECKPOINT_DIR = EVAL_DIR / "checkpoints_synthetic"
 RESULTS_DIR = EVAL_DIR / "results"
 
-# Models to evaluate (all 7 base models from DIQA-5000 evaluation)
+# Models to evaluate (matches run_full_diqa_eval.py)
 MODELS: list[tuple[str, str]] = [
+    # --- Batch 1 (original 7 models) ---
     ("google/gemini-3-flash-preview", "Value"),
     ("openai/gpt-4.1", "Strong"),
     ("anthropic/claude-haiku-4.5", "Value"),
@@ -52,6 +53,21 @@ MODELS: list[tuple[str, str]] = [
     ("qwen/qwen3.5-flash-02-23", "VL"),
     ("qwen/qwen3-vl-8b-instruct", "Open"),
     ("qwen/qwen3-vl-8b-thinking", "Open"),
+    # --- Batch 2 (14 new models) ---
+    ("qwen/qwen3.5-plus-02-15", "Strong"),
+    ("qwen/qwen3.5-122b-a10b", "Strong"),
+    ("qwen/qwen3-vl-235b-a22b-instruct", "Strong"),
+    ("google/gemini-3.1-flash-lite-preview", "Value"),
+    ("bytedance-seed/seed-1.6", "Strong"),
+    ("x-ai/grok-4.1-fast", "Strong"),
+    ("bytedance-seed/seed-1.6-flash", "Value"),
+    ("nvidia/nemotron-nano-12b-v2-vl", "VL"),
+    ("qwen/qwen3-vl-30b-a3b-thinking", "VL"),
+    ("qwen/qwen3-vl-235b-a22b-thinking", "VL"),
+    ("mistralai/mistral-small-3.1-24b-instruct", "Value"),
+    ("google/gemma-3-4b-it", "VL"),
+    ("google/gemma-3-12b-it", "VL"),
+    ("google/gemma-3-27b-it", "VL"),
 ]
 
 RATE_LIMIT_S = 0.3
@@ -214,6 +230,11 @@ def srcc_fn(p: np.ndarray, t: np.ndarray) -> float:
     return float(stats.spearmanr(p, t).statistic)
 
 
+def plcc_fn(p: np.ndarray, t: np.ndarray) -> float:
+    """Pearson linear correlation."""
+    return float(stats.pearsonr(p, t).statistic)
+
+
 def bootstrap_ci(
     pred: np.ndarray, true: np.ndarray, metric_fn: Any,
     n_boot: int = BOOTSTRAP_N, seed: int = BOOTSTRAP_SEED,
@@ -344,11 +365,14 @@ def compute_metrics(
         true = np.array([getattr(gt_lookup[r.image], gt_attr) for r in valid])
 
         srcc, srcc_lo, srcc_hi = bootstrap_ci(pred, true, srcc_fn)
+        plcc, plcc_lo, plcc_hi = bootstrap_ci(pred, true, plcc_fn)
         mae = float(np.mean(np.abs(pred - true)))
         bias = float(np.mean(pred - true))
 
         metrics[f"{dim_name}_srcc"] = round(srcc, 4)
         metrics[f"{dim_name}_srcc_ci"] = f"[{srcc_lo:.4f}, {srcc_hi:.4f}]"
+        metrics[f"{dim_name}_plcc"] = round(plcc, 4)
+        metrics[f"{dim_name}_plcc_ci"] = f"[{plcc_lo:.4f}, {plcc_hi:.4f}]"
         metrics[f"{dim_name}_mae"] = round(mae, 4)
         metrics[f"{dim_name}_bias"] = round(bias, 4)
 
@@ -359,6 +383,20 @@ def compute_metrics(
             + 0.25 * metrics.get("sharpness_srcc", 0)
             + 0.25 * metrics.get("color_srcc", 0),
             4,
+        )
+
+    # MainScore = 0.5 * Score_overall + 0.25 * Score_sharpness + 0.25 * Score_color
+    # where Score_dim = 0.5 * (PLCC + SRCC)
+    if "overall_plcc" in metrics:
+        score_o = 0.5 * (metrics["overall_plcc"] + metrics["overall_srcc"])
+        score_s = 0.5 * (
+            metrics.get("sharpness_plcc", 0) + metrics.get("sharpness_srcc", 0)
+        )
+        score_c = 0.5 * (
+            metrics.get("color_plcc", 0) + metrics.get("color_srcc", 0)
+        )
+        metrics["mainscore"] = round(
+            0.5 * score_o + 0.25 * score_s + 0.25 * score_c, 4,
         )
 
     return metrics

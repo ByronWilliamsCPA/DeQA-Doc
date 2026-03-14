@@ -188,8 +188,25 @@ class CrossValidationSignals(BaseModel):
         extra = "forbid"
 
 
+class SpreadRecord(BaseModel):
+    """Multi-model spread result for one image.
+
+    Records the inter-model disagreement signal computed by
+    ``SpreadComputer``. Shared across dimensions (spread is per-image,
+    not per-dimension).
+    """
+
+    spread: float = Field(..., ge=0.0)
+    cluster_divergence: float = Field(..., ge=0.0)
+    ood_category: int = Field(..., ge=0, le=2, description="0=in-dist, 1=soft OOD, 2=strong OOD")
+    n_models: int = Field(..., ge=0)
+
+    class Config:
+        extra = "forbid"
+
+
 class UncertaintySignalsRecord(BaseModel):
-    """Four-signal uncertainty values for one dimension.
+    """Five-signal uncertainty values for one dimension.
 
     Mirrors ``UncertaintySignals`` dataclass from ``fusion.py``.
     """
@@ -198,6 +215,10 @@ class UncertaintySignalsRecord(BaseModel):
     cross_model_jsd: float
     siglip2_sigma_sq: float
     siglip2_entropy: float
+    # Signal 5: Multi-model spread (optional for backward compat)
+    model_spread: float = 0.0
+    cluster_divergence: float = 0.0
+    n_spread_models: int = 0
 
     class Config:
         extra = "forbid"
@@ -308,6 +329,7 @@ class ImageMetadataRecord(BaseModel):
 
     # Per-image signals
     ood: Optional[OODRecord] = None
+    spread: Optional[SpreadRecord] = None
     vlm_evals: List[VLMEvalRecord] = Field(default_factory=list)
 
     # Per-dimension quality data

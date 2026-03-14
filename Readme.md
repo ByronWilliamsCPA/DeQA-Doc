@@ -61,6 +61,48 @@ python scripts/validate_ood_checkpoint.py \
 
 See [research/INDEX.md](research/INDEX.md) for the full research index, experiment registry, hypothesis backlog, and data inventory.
 
+### Free Model Monitor (`results/vlm_teacher_eval/full_eval/check_free_models.py`)
+
+Daily check for free vision models on OpenRouter. Queries the `/models` API for `:free` models with image input, diffs against previous runs to detect newly appeared or removed models, and optionally auto-launches DIQA-5000 evaluation for new models.
+
+```bash
+cd DeQA-Score
+PYTHONPATH=./:$PYTHONPATH .venv/bin/python \
+    ../results/vlm_teacher_eval/full_eval/check_free_models.py          # dry run
+    ../results/vlm_teacher_eval/full_eval/check_free_models.py --run    # evaluate new/incomplete
+    ../results/vlm_teacher_eval/full_eval/check_free_models.py --json   # machine-readable output
+    ../results/vlm_teacher_eval/full_eval/check_free_models.py --all    # include completed models
+```
+
+State is tracked in `free_models_state.json` so successive runs can report additions and removals.
+
+### Technical Report Series (`research/papers/`)
+
+A 10-paper arXiv-style technical report series documenting the full research program. Each paper includes a figure generation script, a living research agenda, and a 5-model consensus peer review. Generated from the comprehensive evaluation in [`results/vlm_teacher_eval/full_eval/VLM_TEACHER_EVALUATION.md`](results/vlm_teacher_eval/full_eval/VLM_TEACHER_EVALUATION.md).
+
+| # | Title | Words | Focus |
+|---|-------|-------|-------|
+| 0 | [VQualA 2025 DIQA Challenge: A Competition Analysis](research/papers/00_competition_analysis/paper.md) | 3,939 | Competition landscape, all 7 team solutions |
+| 1 | [VLM Benchmark for Document Image Quality Assessment](research/papers/01_vlm_benchmark/paper.md) | 6,232 | 7 VLMs vs human MOS on DIQA-5000 |
+| 2 | [Cross-Domain Generalization of VLM Quality Assessors](research/papers/02_cross_domain/paper.md) | 5,407 | 13 OOD categories, ID vs OOD performance |
+| 3 | [Prompt Engineering for VLM-Based Quality Assessment](research/papers/03_prompt_engineering/paper.md) | 3,501 | 7-arm prompt comparison, regression to mean |
+| 4 | [Embedding-Space OOD Detection for Document Quality Pipelines](research/papers/04_ood_detection/paper.md) | 4,980 | Mahalanobis distance, AUROC 0.9963 |
+| 5 | [Off-the-Shelf NR-IQA Models on Document Images](research/papers/05_nriqa_baselines/paper.md) | 3,011 | 26 NR-IQA models, domain gap analysis |
+| 6 | [DeQA Quality Scores Predict OCR Accuracy](research/papers/06_ocr_iqa_correlation/paper.md) | 5,017 | 1,200 images x 4 OCR engines |
+| 7 | [Iterative Pseudo-Labeling Pipeline for Domain Expansion](research/papers/07_pseudo_labeling/paper.md) | 6,079 | End-to-end pipeline design (capstone) |
+| 8 | [Training SigLIP2-IQA-Base: A Lightweight Document IQA Model](research/papers/08_siglip2_training/paper.md) | 3,720 | 86M-param student, MainScore 0.886 |
+| 9 | [Training HyperIQA++: CNN Fine-Tuning for Document IQA](research/papers/09_hyperiqa_training/paper.md) | 3,124 | CNN baseline, generalization gap analysis |
+
+```bash
+# Generate all paper figures
+python research/papers/generate_all.py
+
+# Generate figures for specific papers
+python research/papers/generate_all.py --paper 1 6 8
+```
+
+**License**: CC BY-SA 4.0, Copyright 2025 Byron Williams
+
 ## Original DeQA-Doc
 
 > **Paper**: [DeQA-Doc: Adapting DeQA-Score to Document Image Quality Assessment](https://arxiv.org/abs/2507.12796)

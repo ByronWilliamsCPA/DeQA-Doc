@@ -67,13 +67,21 @@ Each finding has:
 ## P1 — Fix Before Claiming Pipeline Viability
 
 ### U-3: OOD Threshold Sensitivity Analysis
-- **Status**: `[ ]`
+- **Status**: `[x]`
 - **Priority**: P1
 - **Agreement**: 6/6 unanimous
 - **Source**: All models
 - **Finding**: The p95/p99 distance thresholds (30.8/58.2) and MOS disagreement cutoffs (0.5/1.0/1.5) are arbitrary with no ablation. No analysis shows how auto-accept/review/reject proportions change with threshold shifts.
 - **Action**: Sweep p90, p92, p95, p97, p99 distance thresholds and 0.3/0.5/0.8/1.0/1.5 MOS disagreement thresholds. Report % images in each tier and downstream impact.
-- **Resolution**: _pending_
+- **Resolution**: **Completed 2026-03-07.** Two-part sweep covering Tier-1 fusion thresholds and Tier-2 VLM veto thresholds on all 5,000 DIQA-5000 images (train+val for calibration, test for evaluation). Key findings:
+  - **σ²/entropy thresholds are dead code**: Current defaults (σ² auto=0.64, entropy auto=1.2) never trigger — actual σ² max ~0.12, entropy max ~0.70. Result: 93.7% AUTO_ACCEPT identical to `dm_only` profile.
+  - **Data-calibrated percentile thresholds work**: Using train+val percentiles (σ² p75/p90, entropy p75/p90) produces 65.4% AUTO_ACCEPT with meaningful tier differentiation (16.9% LOW_WEIGHT, 16.8% TIER2_TRIGGER).
+  - **d_M sweep**: AUTO_ACCEPT ranges from 25.3% (p90) to 45.7% (p99) on test, showing strong sensitivity.
+  - **Tier-2 VLM veto rates vary wildly by model**: At threshold=1.5, claude-haiku vetoes 0.5% while qwen3.5-flash vetoes 60.3%. Ensemble majority vote: 5.6%.
+  - **Per-dimension differences**: Sharpness has highest veto rates (e.g., gpt-4.1: 43.7% sharpness vs 27.9% overall), supporting per-dimension thresholds.
+  - **13-model consensus review** (same panel as U-2) validated the approach, recommending: `siglip2_output_to_level_probs()` for entropy, percentile-based hard-reject, train+val calibration discipline.
+  - Script: `research/threshold_sensitivity/run_sweep.py`, results: `results/threshold_sensitivity/sweep_results.json`, report: `results/threshold_sensitivity/sweep_report.md`
+  - **Limitation**: JSD thresholds not swept (DeQA per-image predictions unavailable). GT veto accuracy not computable (test set lacks GT MOS).
 
 ### U-4: Synthetic OOD Insufficient — Need Real-World OOD
 - **Status**: `[ ]`
@@ -103,23 +111,23 @@ Each finding has:
 - **Resolution**: _pending_
 
 ### N-1: sigma_pseudo=0.8 vs Actual MOS std=0.47
-- **Status**: `[ ]`
+- **Status**: `[x]`
 - **Priority**: P1
 - **Agreement**: 2/6 (Qwen Plus, MiniMax)
 - **Source**: Qwen Plus (primary), MiniMax M1
 - **Finding**: Stage 3 hardcodes `sigma_pseudo = 0.8` for uncertainty estimation, but DIQA-5000 human MOS std is only 0.47. This inflates uncertainty by ~70% and degrades soft-label quality — distributions will be too flat, reducing the training signal for the DeQA loss.
 - **Action**: Ablate sigma_pseudo at 0.47, 0.6, 0.8, 1.0. Measure impact on soft-label KL divergence from human distributions and downstream student wSRCC.
 - **Note**: The 0.8 value comes from DeQA-Score's original paper. The question is whether VLM inter-model variance justifies a higher sigma than human annotator variance.
-- **Resolution**: _pending_
+- **Resolution**: **Misunderstanding — the implemented pipeline does not use σ_pseudo=0.8 for soft-label generation.** Code trace: `pseudo_label.py:97` calls `siglip2_output_to_level_probs(mu, sigma_sq)` which uses SigLIP2's *predicted* σ² directly (`gaussian_to_discrete.py:132`). The σ_pseudo=0.8 value only appears in the *unimplemented* VLM consensus formula (`VLM_TEACHER_EVALUATION.md:570`). The `sigma_sq_auto=0.64` in `fusion.py:88` is a decision-gate threshold (not a soft-label parameter); U-3 proved it is dead code since actual σ² values max at ~0.12. **The real concern is reversed**: SigLIP2 predicts σ≈0.23 (p50 σ²=0.054) vs human MOS std=0.47, making distributions too *peaked*, not too flat. A sigma_floor/sigma_scale ablation is deferred to U-1 (end-to-end student training) where downstream wSRCC impact can be measured. The VLM_TEACHER_EVALUATION.md formula has been updated to recommend data-calibrated σ_pseudo.
 
 ### N-2: Pipeline Telemetry — Auto-Accept/Review/Reject Rates
-- **Status**: `[ ]`
+- **Status**: `[~]`
 - **Priority**: P1
 - **Agreement**: 2/6 (Qwen Plus, MiniMax)
 - **Source**: Qwen Plus (primary)
 - **Finding**: The pipeline's scalability is unknown without telemetry. What % of images trigger each tier? If review rate is >20%, the pipeline may be impractical. If reject rate is >5%, you're losing significant training data.
 - **Action**: Run the proposed Stage 4 logic on all 1,000 test images using existing Gemini + GPT-4.1 scores and OOD distances. Report tier distribution.
-- **Resolution**: _pending_
+- **Resolution**: **Partially addressed by U-3.** The threshold sensitivity sweep provides tier distributions under 12 threshold configurations. With data-calibrated thresholds on test: 65.4% AUTO_ACCEPT, 16.9% LOW_WEIGHT, 16.8% TIER2_TRIGGER, 0.9% HARD_REJECT (overall). Review rate (TIER2_TRIGGER) is <20% under all profiles except `strict`. See `results/threshold_sensitivity/sweep_report.md`. Still pending: telemetry with JSD signal (requires DeQA inference) and end-to-end pipeline run.
 
 ### N-3: Error Correlation Between Gemini and GPT-4.1
 - **Status**: `[ ]`
@@ -208,22 +216,22 @@ Each finding has:
 - **Resolution**: _pending_
 
 ### N-8: Per-Dimension Disagreement Thresholds
-- **Status**: `[ ]`
+- **Status**: `[~]`
 - **Priority**: P2
 - **Agreement**: 1/6 (Qwen Plus)
 - **Source**: Qwen Plus
 - **Finding**: Stage 1 uses a single >1.0 MOS disagreement threshold across all dimensions, but model accuracy varies substantially by dimension (e.g., color fidelity is hardest for most models). Per-dimension thresholds would be more principled.
 - **Action**: Compute per-dimension inter-model disagreement distributions on the 1,000-image test set. Set dimension-specific thresholds (e.g., 0.8 for color, 1.0 for overall, 1.0 for sharpness).
-- **Resolution**: _pending_
+- **Resolution**: **Data now available from U-3.** The Tier-2 VLM veto sweep reports per-dimension veto rates across 9 models × 5 thresholds. Key finding: sharpness has consistently higher veto rates than overall or color (e.g., at threshold=1.5, gpt-4.1 vetoes 43.7% sharpness vs 27.9% overall vs 23.1% color). This confirms per-dimension thresholds are needed. See `results/threshold_sensitivity/sweep_report.md` Section 5.3. Still pending: derive recommended per-dimension values.
 
 ### N-9: Disagreement Threshold Asymmetry (0.5 vs 1.0 vs 1.5)
-- **Status**: `[ ]`
+- **Status**: `[~]`
 - **Priority**: P2
 - **Agreement**: 1/6 (MiniMax)
 - **Source**: MiniMax M1
 - **Finding**: The pipeline uses three different MOS disagreement cutoffs: 0.5 (auto-accept), 1.0 (trigger third model in Stage 1), and 1.5 (reject in Stage 4). The 0.5 auto-accept is stricter than the 1.0 third-model trigger — this asymmetry is unexplained. Why would an image with 0.6 MOS disagreement need review (Stage 4) but not a third model (Stage 1)?
 - **Action**: Explain the rationale or unify the thresholds. The Stage 1 trigger and Stage 4 review thresholds should be derived from the same inter-model disagreement distribution.
-- **Resolution**: _pending_
+- **Resolution**: **Data now available from U-3.** The veto threshold sweep at [0.3, 0.5, 0.8, 1.0, 1.5] shows how veto rates change across the full range. At threshold=0.5, ensemble majority vetoes 94.7% of images (far too aggressive). At threshold=1.5, only 5.6% (very conservative). The data supports threshold=0.8-1.0 as a balanced range for the veto gate. See `results/threshold_sensitivity/sweep_report.md` Section 5.2. Still pending: formal rationale for the 0.5/1.0/1.5 asymmetry between pipeline stages.
 
 ### N-10: Explore Quantile Mapping vs. Isotonic Regression
 - **Status**: `[ ]`
@@ -278,9 +286,9 @@ Each finding has:
 | Priority | Count | Status |
 |----------|-------|--------|
 | P0 (blocking) | 2 | 1 resolved |
-| P1 (pre-viability) | 7 | 0 resolved |
-| P2 (pre-publication) | 14 | 0 resolved |
-| **Total** | **23** | **1 resolved** |
+| P1 (pre-viability) | 7 | 1 resolved, 1 partial |
+| P2 (pre-publication) | 14 | 2 partial |
+| **Total** | **23** | **2 resolved, 3 partial** |
 
 | Agreement Level | Count |
 |----------------|-------|
@@ -392,3 +400,4 @@ Each finding has:
 |------|--------|----------------|
 | 2026-03-07 | Initial tracker created from 6-model consensus review | All 23 items |
 | 2026-03-07 | U-2 resolved: isotonic calibration experiment completed on SigLIP2 (3 methods, 13-model consensus review) | U-2 |
+| 2026-03-07 | U-3 resolved: threshold sensitivity sweep (12 Tier-1 configs, 5 Tier-2 thresholds × 9 VLMs). N-2, N-8, N-9 partial. | U-3, N-2, N-8, N-9 |

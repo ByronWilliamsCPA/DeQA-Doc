@@ -1,0 +1,114 @@
+{
+  "arm1_baseline": {
+    "n_total": 1000,
+    "n_valid": 1000,
+    "success_rate": 1.0,
+    "overall_srcc": 0.7042,
+    "overall_srcc_ci": [
+      0.6687,
+      0.7372
+    ],
+    "overall_mae": 1.3986,
+    "overall_bias": 1.3972,
+    "sharpness_srcc": 0.746,
+    "sharpness_srcc_ci": [
+      0.7139,
+      0.7768
+    ],
+    "sharpness_mae": 1.4194,
+    "sharpness_bias": 1.411,
+    "color_srcc": 0.6992,
+    "color_srcc_ci": [
+      0.6628,
+      0.734
+    ],
+    "color_mae": 1.4122,
+    "color_bias": 1.4093,
+    "wsrcc": 0.7134,
+    "avg_latency_ms": 8304
+  },
+  "arm6_res2048": {
+    "n_total": 1000,
+    "n_valid": 1000,
+    "success_rate": 1.0,
+    "overall_srcc": 0.7173,
+    "overall_srcc_ci": [
+      0.6806,
+      0.7519
+    ],
+    "overall_mae": 1.4343,
+    "overall_bias": 1.4253,
+    "sharpness_srcc": 0.7381,
+    "sharpness_srcc_ci": [
+      0.7028,
+      0.7704
+    ],
+    "sharpness_mae": 1.4501,
+    "sharpness_bias": 1.431,
+    "color_srcc": 0.6949,
+    "color_srcc_ci": [
+      0.6566,
+      0.7296
+    ],
+    "color_mae": 1.4575,
+    "color_bias": 1.4552,
+    "wsrcc": 0.7169,
+    "avg_latency_ms": 9810
+  },
+  "arm7_no_resize": {
+    "n_total": 1000,
+    "n_valid": 1000,
+    "success_rate": 1.0,
+    "overall_srcc": 0.729,
+    "overall_srcc_ci": [
+      0.6932,
+      0.76
+    ],
+    "overall_mae": 1.3999,
+    "overall_bias": 1.3931,
+    "sharpness_srcc": 0.7581,
+    "sharpness_srcc_ci": [
+      0.7265,
+      0.7879
+    ],
+    "sharpness_mae": 1.4284,
+    "sharpness_bias": 1.4027,
+    "color_srcc": 0.6945,
+    "color_srcc_ci": [
+      0.6554,
+      0.7291
+    ],
+    "color_mae": 1.4487,
+    "color_bias": 1.4418,
+    "wsrcc": 0.7277,
+    "avg_latency_ms": 10285
+  },
+  "arm8_scale10": {
+    "n_total": 1000,
+    "n_valid": 999,
+    "success_rate": 0.999,
+    "overall_srcc": 0.7083,
+    "overall_srcc_ci": [
+      0.6709,
+      0.7423
+    ],
+    "overall_mae": 1.2317,
+    "overall_bias": 1.2277,
+    "sharpness_srcc": 0.7416,
+    "sharpness_srcc_ci": [
+      0.707,
+      0.7726
+    ],
+    "sharpness_mae": 1.2579,
+    "sharpness_bias": 1.247,
+    "color_srcc": 0.7205,
+    "color_srcc_ci": [
+      0.6844,
+      0.754
+    ],
+    "color_mae": 1.2583,
+    "color_bias": 1.255,
+    "wsrcc": 0.7197,
+    "avg_latency_ms": 8595
+  }
+}

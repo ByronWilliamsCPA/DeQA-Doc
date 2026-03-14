@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Step 4: Run DeQA scoring on all images.
 
-Must be run in the DeQA-Score venv due to torch/transformers version conflicts:
+Preferred method — run via Modal (GPU in the cloud):
+    uv run modal run modal/run_deqa_ocr_iqa.py --upload
+
+Alternative — local execution in the DeQA-Score venv (requires local GPU):
     cd DeQA-Score
-    PYTHONPATH=./:$PYTHONPATH .venv/bin/python \\
+    PYTHONPATH=./:$PYTHONPATH .venv/bin/python \
         -m research.ocr_iqa_correlation.scripts.04_run_deqa
 
 Usage:
