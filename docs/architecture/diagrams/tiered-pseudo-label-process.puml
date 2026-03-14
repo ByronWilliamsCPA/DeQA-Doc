@@ -1,0 +1,240 @@
+@startuml Tiered Pseudo-Label Process
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontSize 11
+skinparam activityDiamondFontSize 10
+skinparam activityFontSize 11
+skinparam noteFontSize 9
+skinparam legendFontSize 10
+skinparam arrowThickness 2
+
+title Tiered Pseudo-Label Process
+header Last updated: 2026-03-12
+
+start
+
+' ============================================================
+' PHASE 0: SigLIP2 INFERENCE
+' ============================================================
+
+#E3F2FD:SigLIP2-IQA v2 predicts per image
+per dimension (overall, sharpness, color)
+**Output:** (mu, sigma_sq) + 768-dim embedding;
+note right
+  **Source:** modal/siglip2_v2_model.py
+end note
+
+' ============================================================
+' PHASE 1: SIGNAL EXTRACTION
+' ============================================================
+
+fork
+  #F3E5F5:Convert (mu, sigma_sq) to
+  5-bin **level_probs**
+  via Gaussian CDF;
+  note right
+    gaussian_to_discrete.py
+  end note
+
+fork again
+  #F3E5F5:Compute **Mahalanobis d_M**
+  on 768-dim embedding
+  against DIQA-5000 reference;
+  note right
+    ood_wrapper.py
+  end note
+
+fork again
+  #F3E5F5:Compute **cross-model JSD**
+  SigLIP2 vs DeQA distributions;
+  note right
+    cross_validator.py
+  end note
+
+fork again
+  #F3E5F5:Extract **sigma_sq** (aleatoric)
+  + **entropy** H(level_probs);
+  note right
+    discrete_metrics.py
+  end note
+
+fork again
+  #F3E5F5:Compute **HyperIQA++ JSD**
+  in native 10-bin space
+  (SigLIP2 Gaussian → 10-bin via CDF);
+  note right
+    hyperiqa_adapter.py
+    native_10bin_jsd()
+  end note
+
+fork again
+  #F3E5F5:Compute **OCR CER**
+  (optional, requires text GT);
+  note right
+    External OCR engine
+    Default: disabled
+  end note
+
+end fork
+
+' ============================================================
+' PHASE 2: TIER CLASSIFICATION (fusion.py)
+' ============================================================
+
+#E1BEE7:Fuse 7 signals into
+acceptance decision;
+note right
+  **Source:** fusion.py
+  UncertaintyFusion.decide()
+end note
+
+if (d_M > 61.62 ?) then ([hard OOD])
+
+  #FF8A80:**HARD_REJECT**
+  weight = 0.0
+  Excluded entirely;
+  note right
+    GT TPR@80%
+    FPR = 12.6%
+  end note
+  #FF8A80:Discard sample;
+  kill
+
+else ([in range])
+
+  if (d_M > 55.37 ?) then ([soft OOD])
+
+    #FFE082:TIER2_TRIGGER
+    (OOD flagged);
+
+  else ([d_M ok])
+
+    if (all signals <= auto thresholds?) then ([yes])
+      note right
+        d_M <= 55.37
+        JSD <= 0.06
+        sigma_sq <= 0.072
+        entropy <= 0.625
+      end note
+
+      #A5D6A7:**AUTO_ACCEPT**
+      weight = continuous [hi..1.0];
+      #A5D6A7:Emit pseudo-label
+      confidence_weight interpolated
+      from signal proximity to thresholds;
+      stop
+
+    else ([no])
+
+      if (all signals <= low thresholds?) then ([yes])
+        note right
+          d_M <= 55.37
+          JSD <= 0.12
+          sigma_sq <= 0.09
+          entropy <= 0.685
+        end note
+
+        #E1BEE7:Interpolate weight from
+        worst signal position
+        (rank-based, range 0.3..0.6);
+
+        #90CAF9:**LOW_WEIGHT**
+        weight = 0.3 to 0.6;
+        #90CAF9:Emit pseudo-label
+        at reduced weight;
+        stop
+
+      else ([signal exceeded])
+
+        #FFE082:TIER2_TRIGGER
+        (signal exceeded);
+
+      endif
+
+    endif
+
+  endif
+
+endif
+
+' ============================================================
+' PHASE 2b: VLM VALIDATION (vlm_validator.py)
+' ============================================================
+
+#FFF8E1:Queue TIER2_TRIGGER samples
+sorted by descending JSD;
+note right
+  **Budget cap:** <= 10% of pool
+  Prioritized by highest uncertainty
+end note
+
+if (within budget cap?) then ([yes])
+
+  #FFF8E1:Call 3-model VLM ensemble
+  via OpenRouter API
+  (Gemini Flash Lite + Qwen 122B
+  + GPT-4.1 tiebreaker if >1.0 MOS);
+  note right
+    **Source:** vlm_validator.py
+    Primary: Gemini 3.1 Flash Lite
+    Secondary: Qwen 3.5-122B-A10B
+    Tiebreaker: GPT-4.1
+  end note
+
+  #FFF8E1:Parse VLM quality level
+  Compute abs(VLM_score - SigLIP2_mos);
+
+  if (level disagreement >= 1.5 ?) then ([veto])
+
+    #FF8A80:**VLM_VETOED**
+    weight = 0.0;
+    #FF8A80:Reject sample
+    (vlm_vetoed = True);
+    stop
+
+  else ([approve])
+
+    #90CAF9:Downgrade to **LOW_WEIGHT**;
+    #90CAF9:Emit pseudo-label
+    at reduced weight;
+    stop
+
+  endif
+
+else ([over budget])
+
+  #FF8A80:Reject sample
+  (unvalidated);
+  stop
+
+endif
+
+' ============================================================
+' LEGEND
+' ============================================================
+
+legend bottom left
+  |= Tier |= Weight |= Criteria |
+  | <#A5D6A7> AUTO_ACCEPT | continuous [hi..1.0] | All 7 signals below auto thresholds |
+  | <#90CAF9> LOW_WEIGHT | 0.3-0.6 | All below low thresholds, 1+ above auto |
+  | <#FFE082> TIER2_TRIGGER | 0.0 then varies | Any signal above low; queued for VLM ensemble |
+  | <#FF8A80> HARD_REJECT | 0.0 | d_M > 61.62 (extreme OOD) |
+
+  **7 Uncertainty Signals:**
+  1. Mahalanobis d_M (OOD on SigLIP2 embeddings)
+  2. Cross-model JSD (SigLIP2 vs DeQA)
+  3. sigma_sq (aleatoric variance)
+  4. entropy (discrete distribution)
+  5. Model spread (optional, 2+ models)
+  6. HyperIQA++ JSD (native 10-bin comparison)
+  7. OCR CER (optional, for text-GT datasets)
+
+  **Thresholds (data-calibrated 2026-03-12):**
+  OOD soft=55.37, hard=61.62
+  JSD auto/low=0.06/0.12
+  sigma_sq auto/low=0.072/0.09
+  entropy auto/low=0.625/0.685
+  VLM veto=1.5 levels (3-model ensemble)
+endlegend
+
+@enduml

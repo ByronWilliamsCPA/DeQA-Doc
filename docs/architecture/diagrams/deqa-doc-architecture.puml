@@ -1,0 +1,281 @@
+@startuml DeQA-Doc Architecture
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontSize 11
+skinparam packageStyle rectangle
+skinparam arrowThickness 2
+skinparam noteFontSize 9
+skinparam legendFontSize 10
+
+title DeQA-Doc: Document Image Quality Assessment Architecture
+header Last updated: 2026-03-12
+
+' ============================================================
+' EXTERNAL INPUTS
+' ============================================================
+
+rectangle "**External Inputs**" as ext #DDDDDD {
+  rectangle "Document Images\n(PDF pages, scans)" as images #DDDDDD
+  rectangle "DIQA-5000\nHuman Labels\n(MOS + std)" as diqa5000 #DDDDDD
+  rectangle "VQualA 2025\nChallenge Data" as vquala #DDDDDD
+}
+
+' ============================================================
+' DATA PREPARATION
+' ============================================================
+
+package "**Data Preparation**" as data_prep #FFF3E0 {
+  rectangle "Training JSON\n(conversations + level_probs\n+ gt_score + std)" as train_json #FFF3E0
+  rectangle "SingleDataset\n(per-image)" as single_ds #FFF3E0
+  rectangle "PairDataset\n(ranking pairs)" as pair_ds #FFF3E0
+}
+
+note right of data_prep
+  **Source:**
+  - src/datasets/single_dataset.py
+  - src/datasets/pair_dataset.py
+  - Data-DeQA-Score/DIQA/metas/
+
+  **Format:**
+  level_probs: [excellent, good, fair, poor, bad]
+  scores: [5, 4, 3, 2, 1]
+end note
+
+' ============================================================
+' TRAINING BACKENDS (3 parallel tracks)
+' ============================================================
+
+package "**Training Backend 1: mPLUG-Owl2-7B** (Primary)" as mplug #E8F5E9 {
+  rectangle "CLIP Vision\nEncoder" as clip #E8F5E9
+  rectangle "Visual\nAbstractor" as abstractor #E8F5E9
+  rectangle "LLaMA-2\nDecoder" as llama #E8F5E9
+
+  rectangle "DeQA Loss" as deqa_loss #C8E6C9 {
+    rectangle "Next-token CE" as ce_loss #C8E6C9
+    rectangle "SoftKL" as softkl #C8E6C9
+    rectangle "In-level" as inlevel #C8E6C9
+    rectangle "Ranking" as ranking #C8E6C9
+  }
+}
+
+note right of mplug
+  **Source:**
+  - src/train/train_mem.py
+  - src/train/loss.py
+  - src/model/modeling_mplug_owl2.py
+  - src/model/builder.py
+
+  **Infra:**
+  - DeepSpeed ZeRO-3
+  - 8x A6000 / 4x A100
+  - scripts/train.sh
+end note
+
+package "**Training Backend 2: SigLIP2-IQA v2** (86M, Modal)" as siglip #E3F2FD {
+  rectangle "SigLIP2-Base\nBackbone (768-dim)" as siglip_backbone #E3F2FD
+  rectangle "Attention Pooling\n+ Task Heads" as siglip_heads #E3F2FD
+  rectangle "Phase 1: Head Warmup\nPhase 2: Full FT + PCGrad" as siglip_phases #E3F2FD
+  rectangle "NormInNorm L1\n+ Gaussian NLL" as siglip_loss #BBDEFB
+}
+
+note right of siglip
+  **Source:**
+  - modal/siglip2_v2_model.py
+  - modal/train_siglip2_iqa_v2.py
+  - modal/siglip2_v2_data.py
+  - modal/pcgrad.py
+
+  **Output per dimension:**
+  (mu, sigma^2) for overall,
+  sharpness, color fidelity
+end note
+
+package "**Training Backend 3: Qwen2.5-VL-7B**" as qwen #FFEBEE {
+  rectangle "LLaMA-Factory\n+ DeQA Patches" as llamafactory #FFEBEE
+}
+
+note right of qwen
+  **Source:**
+  - Llamafactory/src/llamafactory/
+    train/sft/loss.py
+    data/collator.py
+    hyparams/finetuning_args.py
+end note
+
+' ============================================================
+' INFERENCE & SCORING
+' ============================================================
+
+package "**Inference & Evaluation**" as inference #E0F7FA {
+  rectangle "mPLUG-Owl2\nInference" as mplug_infer #E0F7FA
+  rectangle "SigLIP2\nInference" as siglip_infer #E0F7FA
+  rectangle "Qwen2.5-VL\nInference" as qwen_infer #E0F7FA
+  rectangle "Scorer API\n(from src import Scorer)" as scorer #B2EBF2
+  rectangle "Metrics:\nSRCC / PLCC\nKL / JS / Wasserstein" as metrics #E0F7FA
+}
+
+note bottom of inference
+  **Source:**
+  - src/evaluate/iqa_eval.py
+  - src/evaluate/iqa_eval_qwen.py
+  - src/evaluate/scorer.py
+  - src/evaluate/cal_plcc_srcc.py
+  - src/evaluate/cal_distribution_gap.py
+end note
+
+' ============================================================
+' UNCERTAINTY & PSEUDO-LABELING
+' ============================================================
+
+package "**Uncertainty Pipeline** (13 modules)" as uncertainty #F3E5F5 {
+  rectangle "OOD Detector\n(Mahalanobis\non SigLIP2 embeds)" as ood #F3E5F5
+  rectangle "Cross-Validator\n(SigLIP2 vs DeQA\nagreement)" as cross_val #F3E5F5
+  rectangle "7-Signal Fusion\n(OOD + JSD + σ² + entropy\n+ spread + HyperIQA++ + OCR)" as fusion #E1BEE7
+  rectangle "VLM Ensemble\n(Gemini Flash Lite\n+ Qwen 122B\n+ GPT-4.1 tiebreaker)" as vlm_val #F3E5F5
+  rectangle "Pseudo-Label\nOrchestrator" as pseudo_orch #E1BEE7
+  rectangle "Active Learning\n(BALD queue)" as active #F3E5F5
+  rectangle "Format Training\nData (JSON output)" as format_out #F3E5F5
+}
+
+note right of uncertainty
+  **Source:**
+  - src/uncertainty/pseudo_label.py
+  - src/uncertainty/ood_wrapper.py
+  - src/uncertainty/fusion.py
+  - src/uncertainty/vlm_validator.py
+  - src/uncertainty/hyperiqa_adapter.py
+  - src/uncertainty/active_learning.py
+
+  **Thresholds (data-calibrated 2026-03-12):**
+  OOD soft: 55.37, hard: 61.62
+  sigma_sq auto/low: 0.072/0.09
+  entropy auto/low: 0.625/0.685
+end note
+
+' ============================================================
+' VLM TEACHER EVALUATION
+' ============================================================
+
+package "**VLM Teacher Evaluation**" as vlm_eval #FFF8E1 {
+  rectangle "7 Prompt\nVariants" as prompts #FFF8E1
+  rectangle "OpenRouter\nAPI Client" as openrouter #FFF8E1
+  rectangle "Response\nParser" as parser #FFF8E1
+  rectangle "Full DIQA-5000\nEval Suite" as full_eval #FFF8E1
+}
+
+note bottom of vlm_eval
+  **Source:**
+  - results/vlm_teacher_eval/run_eval.py
+  - results/vlm_teacher_eval/vlm_client.py
+  - results/vlm_teacher_eval/full_eval/
+
+  **Models:** 7 VLMs via OpenRouter
+  **Selected ensemble:**
+  Gemini 3.1 Flash Lite (primary)
+  Qwen 3.5-122B-A10B (secondary)
+  GPT-4.1 (tiebreaker, >1.0 MOS)
+end note
+
+' ============================================================
+' RESEARCH
+' ============================================================
+
+package "**Research Infrastructure**" as research #FCE4EC {
+  rectangle "10-Paper Series\nGeneration" as papers #FCE4EC
+  rectangle "OOD Baselines\nThreshold Sweeps\nVLM Calibration" as experiments #FCE4EC
+}
+
+note bottom of research
+  **Source:**
+  - research/papers/generate_all.py
+  - research/ood_baselines/
+  - research/vlm_calibration/
+  - research/threshold_sensitivity/
+end note
+
+' ============================================================
+' CONNECTIONS
+' ============================================================
+
+' Data flow into preparation
+images --> train_json
+diqa5000 --> train_json
+vquala --> train_json
+train_json --> single_ds
+train_json --> pair_ds
+
+' Data into training backends
+single_ds --> clip : images
+pair_ds --> deqa_loss : pairs
+clip --> abstractor
+abstractor --> llama
+llama --> deqa_loss
+
+single_ds --> siglip_backbone
+siglip_backbone --> siglip_heads
+siglip_heads --> siglip_loss
+siglip_phases -[hidden]-> siglip_loss
+
+single_ds --> llamafactory
+
+' Training to inference
+mplug -[#2E7D32,bold]-> mplug_infer : checkpoint
+siglip -[#1565C0,bold]-> siglip_infer : checkpoint
+qwen -[#C62828,bold]-> qwen_infer : checkpoint
+
+mplug_infer --> scorer
+mplug_infer --> metrics
+siglip_infer --> metrics
+qwen_infer --> metrics
+
+' Uncertainty pipeline connections
+siglip_infer -[#7B1FA2]-> ood : embeddings
+mplug_infer -[#7B1FA2]-> cross_val : DeQA preds
+siglip_infer -[#7B1FA2]-> cross_val : SigLIP2 preds
+
+ood --> fusion
+cross_val --> fusion
+fusion --> pseudo_orch
+pseudo_orch --> vlm_val : borderline cases
+vlm_val --> pseudo_orch : accept/veto
+pseudo_orch --> format_out : accepted labels
+pseudo_orch --> active : rejected → human queue
+format_out -[#7B1FA2,dashed,thickness=3]-> train_json : **expand training data**
+
+' VLM teacher connections
+images --> prompts
+prompts --> openrouter
+openrouter --> parser
+parser --> full_eval
+full_eval --> vlm_val : teacher signal
+
+' Research connections
+metrics -[#880E4F,dashed]-> experiments
+full_eval -[#880E4F,dashed]-> papers
+
+' ============================================================
+' LEGEND
+' ============================================================
+
+legend bottom left
+  |= Color |= Subsystem |
+  | <#E8F5E9> | mPLUG-Owl2-7B Training (Primary) |
+  | <#E3F2FD> | SigLIP2-IQA v2 (86M, Modal Cloud) |
+  | <#FFEBEE> | Qwen2.5-VL-7B (LLaMA-Factory) |
+  | <#FFF3E0> | Data Preparation & Formats |
+  | <#E0F7FA> | Inference & Evaluation |
+  | <#F3E5F5> | Uncertainty & Pseudo-Labeling |
+  | <#FFF8E1> | VLM Teacher Evaluation |
+  | <#FCE4EC> | Research Infrastructure |
+  | <#DDDDDD> | External Inputs / Systems |
+
+  **Key Data Flow:**
+  ── Bold arrows: model checkpoints
+  --  Dashed: feedback loops (pseudo-labels → training, research)
+  ── Purple: uncertainty pipeline signals
+
+  **Quality Dimensions:** overall, sharpness, color fidelity
+  **Level Order:** [excellent, good, fair, poor, bad] = [5, 4, 3, 2, 1]
+endlegend
+
+@enduml
