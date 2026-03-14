@@ -6,8 +6,7 @@ with fully mocked components (no GPU or API calls needed).
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 import numpy as np
 import pytest
@@ -65,7 +64,7 @@ class TestProcessSingle:
 
     def test_returns_pseudo_label_sample(self) -> None:
         pipeline = _make_mock_pipeline()
-        embedding = np.random.randn(768).astype(np.float32)
+        embedding = np.random.default_rng(42).standard_normal(768).astype(np.float32)
         sample = pipeline.process_single(
             image_id="test.jpg",
             siglip2_mu=3.5,
@@ -81,19 +80,19 @@ class TestProcessSingle:
 
     def test_calls_ood_detector(self) -> None:
         pipeline = _make_mock_pipeline()
-        embedding = np.random.randn(768).astype(np.float32)
+        embedding = np.random.default_rng(42).standard_normal(768).astype(np.float32)
         pipeline.process_single("img.jpg", 3.0, 0.1, embedding, "overall")
         pipeline.ood_detector.score.assert_called_once_with(embedding)
 
     def test_calls_cross_validator_when_available(self) -> None:
         pipeline = _make_mock_pipeline(has_deqa=True)
-        embedding = np.random.randn(768).astype(np.float32)
+        embedding = np.random.default_rng(42).standard_normal(768).astype(np.float32)
         pipeline.process_single("img.jpg", 3.0, 0.1, embedding, "overall")
         pipeline.cross_validator.validate.assert_called_once()
 
     def test_skips_cross_validator_when_unavailable(self) -> None:
         pipeline = _make_mock_pipeline(has_deqa=False)
-        embedding = np.random.randn(768).astype(np.float32)
+        embedding = np.random.default_rng(42).standard_normal(768).astype(np.float32)
         pipeline.process_single("img.jpg", 3.0, 0.1, embedding, "overall")
         pipeline.cross_validator.validate.assert_not_called()
         # Fusion still called (with dummy cross-val result)
@@ -101,10 +100,10 @@ class TestProcessSingle:
 
     def test_tier_propagated(self) -> None:
         pipeline = _make_mock_pipeline(tier=AcceptanceTier.HARD_REJECT, weight=0.0)
-        embedding = np.random.randn(768).astype(np.float32)
+        embedding = np.random.default_rng(42).standard_normal(768).astype(np.float32)
         sample = pipeline.process_single("img.jpg", 3.0, 0.1, embedding, "overall")
         assert sample.tier == AcceptanceTier.HARD_REJECT
-        assert sample.confidence_weight == 0.0
+        assert sample.confidence_weight == pytest.approx(0.0)
 
 
 class TestProcessBatch:
@@ -123,7 +122,7 @@ class TestProcessBatch:
                 "color_sigma_sq": 0.3,
             }
         ]
-        embeddings = np.random.randn(1, 768).astype(np.float32)
+        embeddings = np.random.default_rng(42).standard_normal((1, 768)).astype(np.float32)
         samples = pipeline.process_batch(outputs, embeddings)
         assert len(samples) == 3  # 3 dimensions
         dims = {s.dimension for s in samples}
@@ -139,7 +138,7 @@ class TestProcessBatch:
                 # sharpness and color missing
             }
         ]
-        embeddings = np.random.randn(1, 768).astype(np.float32)
+        embeddings = np.random.default_rng(42).standard_normal((1, 768)).astype(np.float32)
         samples = pipeline.process_batch(outputs, embeddings)
         assert len(samples) == 1
         assert samples[0].dimension == "overall"
@@ -150,7 +149,7 @@ class TestProcessBatch:
             {"image_id": f"img{i}.jpg", "overall_mu": 3.0, "overall_sigma_sq": 0.2}
             for i in range(5)
         ]
-        embeddings = np.random.randn(5, 768).astype(np.float32)
+        embeddings = np.random.default_rng(42).standard_normal((5, 768)).astype(np.float32)
         samples = pipeline.process_batch(outputs, embeddings, dimensions=("overall",))
         assert len(samples) == 5
 

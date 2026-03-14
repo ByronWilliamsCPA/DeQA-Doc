@@ -6,7 +6,7 @@ VLMValidator.validate_single with mocked API, and select_tier2_queue capping.
 
 from __future__ import annotations
 
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 
@@ -14,7 +14,6 @@ from src.uncertainty.vlm_validator import (
     QUALITY_LEVEL_MAP,
     VLMBudgetTracker,
     VLMValidator,
-    VLMVetoResult,
     _parse_vlm_response,
 )
 
@@ -76,7 +75,7 @@ class TestVLMBudgetTracker:
     def test_initial_state(self) -> None:
         tracker = VLMBudgetTracker()
         assert tracker.total_calls == 0
-        assert tracker.total_cost_usd == 0.0
+        assert tracker.total_cost_usd == pytest.approx(0.0)
         assert tracker.vetoed_count == 0
         assert tracker.parse_failures == 0
 
@@ -122,7 +121,7 @@ class TestVLMValidatorSingle:
         with patch.object(v, "_call_api", return_value=("good", 150.0)):
             result = v.validate_single("img1", "/tmp/img.jpg", "overall", 4.0)
         assert result.vlm_label == "good"
-        assert result.vlm_score == 4.0
+        assert result.vlm_score == pytest.approx(4.0)
         assert result.is_vetoed is False
         assert result.parse_success is True
 

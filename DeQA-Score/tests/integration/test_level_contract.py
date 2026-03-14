@@ -29,8 +29,8 @@ class TestLevelConstants:
             assert LEVEL_SCORES[i] > LEVEL_SCORES[i + 1]
 
     def test_scores_range(self) -> None:
-        assert max(LEVEL_SCORES) == 5.0
-        assert min(LEVEL_SCORES) == 1.0
+        assert max(LEVEL_SCORES) == pytest.approx(5.0)
+        assert min(LEVEL_SCORES) == pytest.approx(1.0)
 
     def test_level_names_are_lowercase(self) -> None:
         for name in LEVEL_NAMES:
