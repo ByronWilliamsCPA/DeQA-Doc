@@ -462,7 +462,11 @@ class MPLUGOwl2LlamaForCausalLM(LlamaForCausalLM, MPLUGOwl2MetaForCausalLM):
 
         loss_kl = None
         if use_softkl_loss and labels is not None:
-            loss_kl, idx_level_label, idx_level_logit = self.softkl_loss(logits, labels, level_probs)
+            # Skip SoftKL for samples with sentinel level_probs (no ground truth)
+            if level_probs is not None and (level_probs < -9000).any():
+                loss_kl = None
+            else:
+                loss_kl, idx_level_label, idx_level_logit = self.softkl_loss(logits, labels, level_probs)
 
             def del_elements(source, idx):
                 """source: [B, N] / [B, N, V],

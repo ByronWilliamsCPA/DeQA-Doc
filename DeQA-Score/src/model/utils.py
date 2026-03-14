@@ -10,10 +10,13 @@ def extend_list(data_list, n, min_n):
     return data_list
 
 
-def find_prefix(input_ids, prefix):
+def find_prefix(input_ids, prefix, strict=True):
     """
+    Find the start position of prefix in each sequence of input_ids.
+
     input_ids: [B, N1], no start token
     prefix: [N2, ], no start token
+    strict: if True, asserts all sequences contain prefix; if False, returns -1 for missing
     """
     len_prefix = prefix.shape[0]  # N2
     # Create all possible windows of len_prefix
@@ -28,7 +31,13 @@ def find_prefix(input_ids, prefix):
         matches_int.argmax(dim=1),
         torch.tensor(-1, dtype=torch.int64),
     )
-    assert (indices >= 0).all(), "Some inputs do not contain prefix"
+    if strict:
+        assert (indices >= 0).all(), "Some inputs do not contain prefix"
+    else:
+        import logging
+        missing = (indices < 0).sum().item()
+        if missing > 0:
+            logging.warning(f"find_prefix: prefix not found in {missing}/{len(indices)} samples, skipping from SoftKL")
     return indices
 
 
