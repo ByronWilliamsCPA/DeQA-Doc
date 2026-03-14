@@ -186,6 +186,11 @@ class PseudoLabelPipeline:
         # Pre-compute spread per image (shared across dimensions)
         spread_results: list[SpreadResult | None] = [None] * len(siglip2_outputs)
         if self.spread_computer is not None and model_predictions is not None:
+            if len(model_predictions) != len(siglip2_outputs):
+                raise ValueError(
+                    f"model_predictions length ({len(model_predictions)}) must match "
+                    f"siglip2_outputs length ({len(siglip2_outputs)})"
+                )
             for i, preds in enumerate(model_predictions):
                 try:
                     spread_results[i] = self.spread_computer.compute(preds)

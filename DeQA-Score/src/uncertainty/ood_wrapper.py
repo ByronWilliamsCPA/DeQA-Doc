@@ -114,7 +114,7 @@ class OODDetectorWrapper:
         mean = data["mean"]
         precision_matrix = data["precision_matrix"]
 
-        eval_data = np.load(eval_npz_path, allow_pickle=True)
+        eval_data = np.load(eval_npz_path, allow_pickle=False)
         eval_emb = np.asarray(eval_data["embeddings"], dtype=np.float64)
         labels = eval_data["labels"]
 

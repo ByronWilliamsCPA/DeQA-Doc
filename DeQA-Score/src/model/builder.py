@@ -86,6 +86,9 @@ def load_pretrained_model(
 
             print("Loading additional mPLUG-Owl2 weights...")
             if os.path.exists(os.path.join(model_path, "non_lora_trainables.bin")):
+                # weights_only=False required: non_lora_trainables.bin may contain
+                # custom objects from the upstream mPLUG-Owl2 training pipeline.
+                # Only loads from trusted local paths or HuggingFace Hub.
                 non_lora_trainables = torch.load(
                     os.path.join(model_path, "non_lora_trainables.bin"),
                     map_location="cpu",
@@ -100,6 +103,7 @@ def load_pretrained_model(
                     cache_file = hf_hub_download(
                         repo_id=repo_id, filename=filename, subfolder=subfolder
                     )
+                    # weights_only=False: trusted HF Hub source (see note above)
                     return torch.load(cache_file, map_location="cpu", weights_only=False)
 
                 non_lora_trainables = load_from_hf(

@@ -139,6 +139,7 @@ def merge_records(
         "image_detection_id",
         "document",
         "ood",
+        "spread",
         "pipeline_run_id",
     ):
         update_val = getattr(update, field_name)

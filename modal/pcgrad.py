@@ -33,23 +33,37 @@ class PCGradStats:
 
 
 def _gather_grad_vector(model: nn.Module) -> torch.Tensor:
-    """Flatten all trainable gradients into a single 1D vector."""
+    """Flatten all trainable gradients into a single 1D vector.
+
+    Uses zeros for parameters with ``grad=None`` so that the vector length
+    is consistent regardless of which parameters received gradients.
+    """
     grads = []
     for p in model.parameters():
-        if p.requires_grad and p.grad is not None:
-            grads.append(p.grad.detach().flatten())
+        if p.requires_grad:
+            if p.grad is not None:
+                grads.append(p.grad.detach().flatten())
+            else:
+                grads.append(torch.zeros(p.numel(), device=p.device))
     if not grads:
         return torch.tensor([], device=next(model.parameters()).device)
     return torch.cat(grads)
 
 
 def _scatter_grad_vector(model: nn.Module, grad_vec: torch.Tensor) -> None:
-    """Assign values from a flat gradient vector back to model parameters."""
+    """Assign values from a flat gradient vector back to model parameters.
+
+    Iterates all ``requires_grad`` parameters (matching ``_gather_grad_vector``
+    ordering) so that offsets stay aligned even when some grads are ``None``.
+    """
     offset = 0
     for p in model.parameters():
-        if p.requires_grad and p.grad is not None:
-            numel = p.grad.numel()
-            p.grad.copy_(grad_vec[offset : offset + numel].view_as(p.grad))
+        if p.requires_grad:
+            numel = p.numel()
+            if p.grad is None:
+                p.grad = grad_vec[offset : offset + numel].view_as(p).clone()
+            else:
+                p.grad.copy_(grad_vec[offset : offset + numel].view_as(p))
             offset += numel
 
 
@@ -129,15 +143,7 @@ def pcgrad_step(
     optimizer.zero_grad()
 
     # Set gradients from the projected+summed vector
-    offset = 0
-    for p in model.parameters():
-        if p.requires_grad:
-            numel = p.numel()
-            if p.grad is None:
-                p.grad = summed[offset : offset + numel].view_as(p).clone()
-            else:
-                p.grad.copy_(summed[offset : offset + numel].view_as(p))
-            offset += numel
+    _scatter_grad_vector(model, summed)
 
     # Optimizer step
     if scaler is not None:

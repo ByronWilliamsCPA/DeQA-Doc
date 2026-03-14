@@ -44,8 +44,8 @@ data:
   diqa_train_dir: Data-DeQA-Score/DIQA/train/res/
   diqa_meta_dir: Data-DeQA-Score/DIQA/metas/
   diqa_val_dir: Data-DeQA-Score/DIQA/val/res/
-  # TODO: Update with actual pseudo-label path after calibration
-  pseudo_label_jsonl: /data/pseudo_labels/calibrated_vlm_labels.jsonl
+  # Set to actual pseudo-label path before training
+  pseudo_label_jsonl: null
   pseudo_label_weight: 0.5
   public_data_jsonl: null
   public_data_weight: 0.5
