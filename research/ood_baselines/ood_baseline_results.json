@@ -1,0 +1,154 @@
+{
+  "label_source": "ground_truth",
+  "methods": {
+    "mahalanobis": {
+      "auroc": 0.947,
+      "auroc_ci": [
+        0.9371,
+        0.9561
+      ],
+      "auprc": 0.8438,
+      "fpr_at_95tpr": 0.1435,
+      "fpr_at_99tpr": 0.1513
+    },
+    "knn_k10": {
+      "auroc": 0.957,
+      "auroc_ci": [
+        0.9481,
+        0.9652
+      ],
+      "auprc": 0.8686,
+      "fpr_at_95tpr": 0.1391,
+      "fpr_at_99tpr": 0.1774
+    },
+    "cosine": {
+      "auroc": 0.9494,
+      "auroc_ci": [
+        0.9389,
+        0.9588
+      ],
+      "auprc": 0.8478,
+      "fpr_at_95tpr": 0.1748,
+      "fpr_at_99tpr": 0.207
+    },
+    "energy": {
+      "auroc": 0.9106,
+      "auroc_ci": [
+        0.8962,
+        0.9245
+      ],
+      "auprc": 0.7576,
+      "fpr_at_95tpr": 0.2757,
+      "fpr_at_99tpr": 0.3643
+    }
+  },
+  "note": "Ground truth OOD labels from synthetic dataset (DIQA test=ID, synthetic OOD categories=OOD).",
+  "eval_set": {
+    "n_id": 1150,
+    "n_ood": 370,
+    "n_total": 1520
+  },
+  "per_category": {
+    "ood_adversarial_fraktur": {
+      "n_ood": 20,
+      "mahalanobis": 0.9583,
+      "knn_k10": 0.9661,
+      "cosine": 0.9647,
+      "energy": 0.9385
+    },
+    "ood_adversarial_nastaliq": {
+      "n_ood": 20,
+      "mahalanobis": 1.0,
+      "knn_k10": 0.9991,
+      "cosine": 0.992,
+      "energy": 0.9923
+    },
+    "ood_binarized": {
+      "n_ood": 30,
+      "mahalanobis": 0.9253,
+      "knn_k10": 0.9032,
+      "cosine": 0.8898,
+      "energy": 0.8551
+    },
+    "ood_cjk_vertical": {
+      "n_ood": 30,
+      "mahalanobis": 0.86,
+      "knn_k10": 0.8588,
+      "cosine": 0.824,
+      "energy": 0.7126
+    },
+    "ood_form_layout": {
+      "n_ood": 30,
+      "mahalanobis": 0.9531,
+      "knn_k10": 0.9603,
+      "cosine": 0.9592,
+      "energy": 0.9272
+    },
+    "ood_heavily_degraded": {
+      "n_ood": 30,
+      "mahalanobis": 1.0,
+      "knn_k10": 1.0,
+      "cosine": 1.0,
+      "energy": 0.9997
+    },
+    "ood_multiscript": {
+      "n_ood": 30,
+      "mahalanobis": 0.9615,
+      "knn_k10": 0.9756,
+      "cosine": 0.9785,
+      "energy": 0.9581
+    },
+    "ood_pristine": {
+      "n_ood": 30,
+      "mahalanobis": 0.9314,
+      "knn_k10": 0.9653,
+      "cosine": 0.9543,
+      "energy": 0.9188
+    },
+    "ood_script_ethiopic": {
+      "n_ood": 30,
+      "mahalanobis": 0.9453,
+      "knn_k10": 0.9213,
+      "cosine": 0.9441,
+      "energy": 0.8475
+    },
+    "ood_script_myanmar": {
+      "n_ood": 30,
+      "mahalanobis": 0.8766,
+      "knn_k10": 0.9526,
+      "cosine": 0.9121,
+      "energy": 0.8406
+    },
+    "ood_script_tibetan": {
+      "n_ood": 30,
+      "mahalanobis": 1.0,
+      "knn_k10": 0.9981,
+      "cosine": 0.9939,
+      "energy": 0.9739
+    },
+    "ood_very_high_dpi": {
+      "n_ood": 30,
+      "mahalanobis": 0.9209,
+      "knn_k10": 0.9583,
+      "cosine": 0.9488,
+      "energy": 0.9106
+    },
+    "ood_very_low_dpi": {
+      "n_ood": 30,
+      "mahalanobis": 1.0,
+      "knn_k10": 1.0,
+      "cosine": 1.0,
+      "energy": 1.0
+    }
+  },
+  "knn_sensitivity": {
+    "k1": 0.9558,
+    "k3": 0.9575,
+    "k5": 0.9575,
+    "k10": 0.957,
+    "k20": 0.9561,
+    "k50": 0.954,
+    "k100": 0.9515
+  },
+  "knn_best_k": "k3"
+}

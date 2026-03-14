@@ -8,7 +8,7 @@ deepspeed --include localhost:0,1,2,3,4,5,6,7 --master_port 6688 src/train/train
     --model_name_or_path $LOAD \
     --version v1 \
     --dataset_type pair \
-    --level_prefix "quality of the image is" \
+    --level_prefix "The quality of the image is" \
     --level_names excellent good fair poor bad \
     --softkl_loss True \
     --weight_rank 1.0 \

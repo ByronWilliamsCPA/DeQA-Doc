@@ -1,0 +1,61 @@
+{
+  "status": "ok",
+  "errors": [],
+  "warnings": [],
+  "train_train_diqa_overall.json_count": 3500,
+  "train_train_diqa_sharpness.json_count": 3500,
+  "train_train_diqa_color.json_count": 3500,
+  "train_meta_dir": "/metas",
+  "train_image_dir": "/diqa/diqa5000/train/res",
+  "train_image_count": 3500,
+  "train_path_resolution": "basename",
+  "train_sample_images": [
+    {
+      "name": "train_res_00001.jpg",
+      "width": 2268,
+      "height": 3024,
+      "mode": "RGB",
+      "aspect_ratio_hw": 1.333
+    },
+    {
+      "name": "train_res_03500.jpg",
+      "width": 2008,
+      "height": 2908,
+      "mode": "RGB",
+      "aspect_ratio_hw": 1.448
+    }
+  ],
+  "val_image_count": 500,
+  "test_top_level": [
+    "images",
+    "test.csv"
+  ],
+  "test_csv_path": "/test_data/test.csv",
+  "test_csv_count": 1000,
+  "test_csv_columns": [
+    "res",
+    "ori",
+    "overall",
+    "sharpness",
+    "color_fidelity"
+  ],
+  "test_image_dir": "/test_data/images",
+  "test_image_count": 1000,
+  "test_sample_images": [
+    {
+      "name": "test_res_00001.jpg",
+      "width": 2268,
+      "height": 3024,
+      "mode": "RGB",
+      "aspect_ratio_hw": 1.333
+    },
+    {
+      "name": "test_res_01000.jpg",
+      "width": 2044,
+      "height": 2940,
+      "mode": "RGB",
+      "aspect_ratio_hw": 1.438
+    }
+  ],
+  "test_csv_image_match": 1000
+}

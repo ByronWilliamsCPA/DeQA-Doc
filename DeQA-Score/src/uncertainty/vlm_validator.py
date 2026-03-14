@@ -111,9 +111,10 @@ def _parse_vlm_response(response_text: str) -> str | None:
         Quality level string or None if parsing failed.
     """
     text = response_text.strip().lower().rstrip(".")
-    # Handle responses with extra text
+    # Require word boundary to prevent "badly"→"bad", "goodness"→"good" false positives
+    import re
     for level in QUALITY_LEVEL_MAP:
-        if text == level or text.startswith(level):
+        if text == level or re.match(rf"^{level}\b", text):
             return level
     return None
 

@@ -1,0 +1,446 @@
+{
+  "google_gemini_3_flash_preview": {
+    "test_eval": {
+      "overall": {
+        "raw": {
+          "SRCC": 0.7072,
+          "PLCC": 0.7838,
+          "MAE": 0.7977,
+          "RMSE": 0.9127,
+          "MaxAE": 2.207
+        },
+        "linear": {
+          "SRCC": 0.7072,
+          "PLCC": 0.7838,
+          "MAE": 0.2786,
+          "RMSE": 0.3475,
+          "MaxAE": 1.09
+        },
+        "4PL": {
+          "SRCC": 0.7072,
+          "PLCC": 0.7891,
+          "MAE": 0.2755,
+          "RMSE": 0.3436,
+          "MaxAE": 1.1539
+        },
+        "isotonic": {
+          "SRCC": 0.7084,
+          "PLCC": 0.8084,
+          "MAE": 0.2632,
+          "RMSE": 0.33,
+          "MaxAE": 1.1975
+        }
+      },
+      "sharpness": {
+        "raw": {
+          "SRCC": 0.7361,
+          "PLCC": 0.7638,
+          "MAE": 0.844,
+          "RMSE": 0.9821,
+          "MaxAE": 2.193
+        },
+        "linear": {
+          "SRCC": 0.7361,
+          "PLCC": 0.7638,
+          "MAE": 0.2871,
+          "RMSE": 0.369,
+          "MaxAE": 1.4344
+        },
+        "4PL": {
+          "SRCC": 0.7361,
+          "PLCC": 0.775,
+          "MAE": 0.2798,
+          "RMSE": 0.361,
+          "MaxAE": 1.4281
+        },
+        "isotonic": {
+          "SRCC": 0.7431,
+          "PLCC": 0.7981,
+          "MAE": 0.261,
+          "RMSE": 0.3451,
+          "MaxAE": 1.5361
+        }
+      },
+      "color": {
+        "raw": {
+          "SRCC": 0.6806,
+          "PLCC": 0.7514,
+          "MAE": 0.8326,
+          "RMSE": 0.9422,
+          "MaxAE": 2.58
+        },
+        "linear": {
+          "SRCC": 0.6806,
+          "PLCC": 0.7514,
+          "MAE": 0.2808,
+          "RMSE": 0.3578,
+          "MaxAE": 1.9315
+        },
+        "4PL": {
+          "SRCC": 0.6806,
+          "PLCC": 0.7512,
+          "MAE": 0.281,
+          "RMSE": 0.3579,
+          "MaxAE": 1.9276
+        },
+        "isotonic": {
+          "SRCC": 0.7036,
+          "PLCC": 0.7669,
+          "MAE": 0.2736,
+          "RMSE": 0.3494,
+          "MaxAE": 1.9573
+        }
+      },
+      "weighted": {
+        "4PL": {
+          "wSRCC": 0.7078,
+          "wMAE": 0.278
+        },
+        "isotonic": {
+          "wSRCC": 0.7159,
+          "wMAE": 0.2652
+        },
+        "linear": {
+          "wSRCC": 0.7078,
+          "wMAE": 0.2813
+        },
+        "raw": {
+          "wSRCC": 0.7078,
+          "wMAE": 0.818
+        }
+      }
+    },
+    "ood_eval": {
+      "overall": {
+        "raw": {
+          "SRCC": 0.7534,
+          "PLCC": 0.7981,
+          "MAE": 0.54,
+          "RMSE": 0.6847,
+          "MaxAE": 2.0084
+        },
+        "linear": {
+          "SRCC": 0.7534,
+          "PLCC": 0.7981,
+          "MAE": 0.6405,
+          "RMSE": 0.7294,
+          "MaxAE": 1.6416
+        },
+        "4PL": {
+          "SRCC": 0.7534,
+          "PLCC": 0.7916,
+          "MAE": 0.6532,
+          "RMSE": 0.7443,
+          "MaxAE": 1.7986
+        },
+        "isotonic": {
+          "SRCC": 0.7534,
+          "PLCC": 0.7601,
+          "MAE": 0.6343,
+          "RMSE": 0.7523,
+          "MaxAE": 2.172
+        }
+      },
+      "sharpness": {
+        "raw": {
+          "SRCC": 0.7755,
+          "PLCC": 0.8143,
+          "MAE": 0.5859,
+          "RMSE": 0.7388,
+          "MaxAE": 2.1922
+        },
+        "linear": {
+          "SRCC": 0.7755,
+          "PLCC": 0.8143,
+          "MAE": 0.7617,
+          "RMSE": 0.8537,
+          "MaxAE": 1.6373
+        },
+        "4PL": {
+          "SRCC": 0.7755,
+          "PLCC": 0.8093,
+          "MAE": 0.7697,
+          "RMSE": 0.8774,
+          "MaxAE": 1.9627
+        },
+        "isotonic": {
+          "SRCC": 0.7779,
+          "PLCC": 0.791,
+          "MAE": 0.7287,
+          "RMSE": 0.854,
+          "MaxAE": 2.5261
+        }
+      },
+      "color": {
+        "raw": {
+          "SRCC": 0.6685,
+          "PLCC": 0.7835,
+          "MAE": 0.5959,
+          "RMSE": 0.7365,
+          "MaxAE": 2.1431
+        },
+        "linear": {
+          "SRCC": 0.6685,
+          "PLCC": 0.7835,
+          "MAE": 0.5268,
+          "RMSE": 0.6366,
+          "MaxAE": 1.8129
+        },
+        "4PL": {
+          "SRCC": 0.6685,
+          "PLCC": 0.7816,
+          "MAE": 0.5271,
+          "RMSE": 0.6366,
+          "MaxAE": 1.8159
+        },
+        "isotonic": {
+          "SRCC": 0.6884,
+          "PLCC": 0.7349,
+          "MAE": 0.5235,
+          "RMSE": 0.6461,
+          "MaxAE": 1.7823
+        }
+      },
+      "weighted": {
+        "4PL": {
+          "wSRCC": 0.7377,
+          "wMAE": 0.6508
+        },
+        "isotonic": {
+          "wSRCC": 0.7433,
+          "wMAE": 0.6302
+        },
+        "linear": {
+          "wSRCC": 0.7377,
+          "wMAE": 0.6424
+        },
+        "raw": {
+          "wSRCC": 0.7377,
+          "wMAE": 0.5655
+        }
+      }
+    }
+  },
+  "qwen_qwen3.5_122b_a10b": {
+    "test_eval": {
+      "overall": {
+        "raw": {
+          "SRCC": 0.7083,
+          "PLCC": 0.7614,
+          "MAE": 1.2317,
+          "RMSE": 1.3174,
+          "MaxAE": 2.313
+        },
+        "linear": {
+          "SRCC": 0.7083,
+          "PLCC": 0.7614,
+          "MAE": 0.2871,
+          "RMSE": 0.3624,
+          "MaxAE": 1.2527
+        },
+        "4PL": {
+          "SRCC": 0.7083,
+          "PLCC": 0.7629,
+          "MAE": 0.287,
+          "RMSE": 0.3614,
+          "MaxAE": 1.2371
+        },
+        "isotonic": {
+          "SRCC": 0.7099,
+          "PLCC": 0.7738,
+          "MAE": 0.28,
+          "RMSE": 0.3546,
+          "MaxAE": 1.2288
+        }
+      },
+      "sharpness": {
+        "raw": {
+          "SRCC": 0.7416,
+          "PLCC": 0.7876,
+          "MAE": 1.2579,
+          "RMSE": 1.3599,
+          "MaxAE": 2.553
+        },
+        "linear": {
+          "SRCC": 0.7416,
+          "PLCC": 0.7876,
+          "MAE": 0.2781,
+          "RMSE": 0.3525,
+          "MaxAE": 1.2404
+        },
+        "4PL": {
+          "SRCC": 0.7416,
+          "PLCC": 0.7918,
+          "MAE": 0.2752,
+          "RMSE": 0.3498,
+          "MaxAE": 1.2698
+        },
+        "isotonic": {
+          "SRCC": 0.7417,
+          "PLCC": 0.7987,
+          "MAE": 0.267,
+          "RMSE": 0.3443,
+          "MaxAE": 1.4433
+        }
+      },
+      "color": {
+        "raw": {
+          "SRCC": 0.7205,
+          "PLCC": 0.7414,
+          "MAE": 1.2583,
+          "RMSE": 1.3329,
+          "MaxAE": 2.583
+        },
+        "linear": {
+          "SRCC": 0.7205,
+          "PLCC": 0.7414,
+          "MAE": 0.2862,
+          "RMSE": 0.3636,
+          "MaxAE": 1.4593
+        },
+        "4PL": {
+          "SRCC": 0.7205,
+          "PLCC": 0.7406,
+          "MAE": 0.286,
+          "RMSE": 0.3637,
+          "MaxAE": 1.4336
+        },
+        "isotonic": {
+          "SRCC": 0.7218,
+          "PLCC": 0.7563,
+          "MAE": 0.2767,
+          "RMSE": 0.355,
+          "MaxAE": 1.4922
+        }
+      },
+      "weighted": {
+        "4PL": {
+          "wSRCC": 0.7197,
+          "wMAE": 0.2838
+        },
+        "isotonic": {
+          "wSRCC": 0.7208,
+          "wMAE": 0.2759
+        },
+        "linear": {
+          "wSRCC": 0.7197,
+          "wMAE": 0.2846
+        },
+        "raw": {
+          "wSRCC": 0.7197,
+          "wMAE": 1.2449
+        }
+      }
+    },
+    "ood_eval": {
+      "overall": {
+        "raw": {
+          "SRCC": 0.5842,
+          "PLCC": 0.628,
+          "MAE": 0.8331,
+          "RMSE": 0.9957,
+          "MaxAE": 2.4275
+        },
+        "linear": {
+          "SRCC": 0.5842,
+          "PLCC": 0.628,
+          "MAE": 0.8326,
+          "RMSE": 0.9795,
+          "MaxAE": 2.5566
+        },
+        "4PL": {
+          "SRCC": 0.5842,
+          "PLCC": 0.6298,
+          "MAE": 0.8448,
+          "RMSE": 0.9947,
+          "MaxAE": 2.6112
+        },
+        "isotonic": {
+          "SRCC": 0.5842,
+          "PLCC": 0.6359,
+          "MAE": 0.8391,
+          "RMSE": 1.0154,
+          "MaxAE": 2.8183
+        }
+      },
+      "sharpness": {
+        "raw": {
+          "SRCC": 0.6433,
+          "PLCC": 0.6588,
+          "MAE": 0.8988,
+          "RMSE": 1.0884,
+          "MaxAE": 2.8128
+        },
+        "linear": {
+          "SRCC": 0.6433,
+          "PLCC": 0.6588,
+          "MAE": 0.966,
+          "RMSE": 1.129,
+          "MaxAE": 2.7329
+        },
+        "4PL": {
+          "SRCC": 0.6433,
+          "PLCC": 0.6641,
+          "MAE": 0.9905,
+          "RMSE": 1.1659,
+          "MaxAE": 2.8942
+        },
+        "isotonic": {
+          "SRCC": 0.643,
+          "PLCC": 0.6724,
+          "MAE": 0.9676,
+          "RMSE": 1.1625,
+          "MaxAE": 3.2159
+        }
+      },
+      "color": {
+        "raw": {
+          "SRCC": 0.6252,
+          "PLCC": 0.6486,
+          "MAE": 0.8051,
+          "RMSE": 0.9608,
+          "MaxAE": 2.4957
+        },
+        "linear": {
+          "SRCC": 0.6252,
+          "PLCC": 0.6486,
+          "MAE": 0.6983,
+          "RMSE": 0.8169,
+          "MaxAE": 2.1474
+        },
+        "4PL": {
+          "SRCC": 0.6252,
+          "PLCC": 0.6465,
+          "MAE": 0.6939,
+          "RMSE": 0.8096,
+          "MaxAE": 2.1051
+        },
+        "isotonic": {
+          "SRCC": 0.6255,
+          "PLCC": 0.6477,
+          "MAE": 0.6335,
+          "RMSE": 0.7579,
+          "MaxAE": 2.1843
+        }
+      },
+      "weighted": {
+        "4PL": {
+          "wSRCC": 0.6092,
+          "wMAE": 0.8435
+        },
+        "isotonic": {
+          "wSRCC": 0.6092,
+          "wMAE": 0.8198
+        },
+        "linear": {
+          "wSRCC": 0.6092,
+          "wMAE": 0.8324
+        },
+        "raw": {
+          "wSRCC": 0.6092,
+          "wMAE": 0.8425
+        }
+      }
+    }
+  }
+}

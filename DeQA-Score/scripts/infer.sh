@@ -1,6 +1,6 @@
 export PYTHONPATH=./:$PYTHONPATH
 
-python src/evaluate/iqa_eval_prompt.py \
+python src/evaluate/iqa_eval.py \
 	--level-names excellent good fair poor bad\
 	--model-path  deqa_0618_color_norm_pair_1024 \
 	--save-dir results/deqa_color_1024\

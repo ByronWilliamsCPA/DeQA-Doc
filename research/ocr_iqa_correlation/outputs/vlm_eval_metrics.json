@@ -1,0 +1,234 @@
+{
+  "google/gemini-3-flash-preview": {
+    "num_samples": 1177,
+    "total_images": 1177,
+    "success_rate": 1.0,
+    "vs_deqa_mos": {
+      "srcc": 0.8183,
+      "srcc_ci": [
+        0.7953,
+        0.8378
+      ],
+      "plcc": 0.8264,
+      "plcc_ci": [
+        0.808,
+        0.8425
+      ],
+      "n": 1177
+    },
+    "vs_distortion_quality": {
+      "srcc": 0.487,
+      "srcc_ci": [
+        0.4419,
+        0.5287
+      ],
+      "plcc": 0.5018,
+      "plcc_ci": [
+        0.4589,
+        0.5394
+      ],
+      "n": 1177
+    },
+    "vs_ocr_cer": {
+      "easyocr": {
+        "srcc": -0.6389,
+        "srcc_ci": [
+          -0.6716,
+          -0.6037
+        ],
+        "plcc": -0.5332,
+        "plcc_ci": [
+          -0.6328,
+          -0.413
+        ],
+        "n": 1177
+      },
+      "gcloud_vision": {
+        "srcc": -0.2861,
+        "srcc_ci": [
+          -0.3415,
+          -0.2316
+        ],
+        "plcc": -0.2845,
+        "plcc_ci": [
+          -0.3436,
+          -0.2293
+        ],
+        "n": 1177
+      },
+      "rapidocr": {
+        "srcc": -0.4564,
+        "srcc_ci": [
+          -0.5016,
+          -0.4115
+        ],
+        "plcc": -0.3435,
+        "plcc_ci": [
+          -0.4609,
+          -0.2416
+        ],
+        "n": 1177
+      },
+      "tesseract": {
+        "srcc": -0.5826,
+        "srcc_ci": [
+          -0.6165,
+          -0.5463
+        ],
+        "plcc": -0.4791,
+        "plcc_ci": [
+          -0.5857,
+          -0.3875
+        ],
+        "n": 1177
+      }
+    },
+    "per_tier": {
+      "ORIGINAL": {
+        "mean_vlm_overall": 3.6751,
+        "n": 197
+      },
+      "PRISTINE": {
+        "mean_vlm_overall": 3.6714,
+        "n": 196
+      },
+      "HIGH": {
+        "mean_vlm_overall": 3.2316,
+        "n": 196
+      },
+      "MEDIUM": {
+        "mean_vlm_overall": 3.0679,
+        "n": 196
+      },
+      "LOW": {
+        "mean_vlm_overall": 2.9267,
+        "n": 195
+      },
+      "DEGRADED": {
+        "mean_vlm_overall": 2.9066,
+        "n": 197
+      }
+    },
+    "latency": {
+      "mean_ms": 11123.9,
+      "p50_ms": 2391.0,
+      "p95_ms": 3431.8
+    }
+  },
+  "openai/gpt-4.1": {
+    "num_samples": 1179,
+    "total_images": 1179,
+    "success_rate": 1.0,
+    "vs_deqa_mos": {
+      "srcc": 0.8471,
+      "srcc_ci": [
+        0.8274,
+        0.8644
+      ],
+      "plcc": 0.8372,
+      "plcc_ci": [
+        0.8204,
+        0.8518
+      ],
+      "n": 1179
+    },
+    "vs_distortion_quality": {
+      "srcc": 0.5493,
+      "srcc_ci": [
+        0.5089,
+        0.5899
+      ],
+      "plcc": 0.542,
+      "plcc_ci": [
+        0.5055,
+        0.581
+      ],
+      "n": 1179
+    },
+    "vs_ocr_cer": {
+      "easyocr": {
+        "srcc": -0.6509,
+        "srcc_ci": [
+          -0.6869,
+          -0.6156
+        ],
+        "plcc": -0.5319,
+        "plcc_ci": [
+          -0.6286,
+          -0.4099
+        ],
+        "n": 1179
+      },
+      "gcloud_vision": {
+        "srcc": -0.3221,
+        "srcc_ci": [
+          -0.3784,
+          -0.2666
+        ],
+        "plcc": -0.3236,
+        "plcc_ci": [
+          -0.377,
+          -0.2653
+        ],
+        "n": 1179
+      },
+      "rapidocr": {
+        "srcc": -0.506,
+        "srcc_ci": [
+          -0.5494,
+          -0.4588
+        ],
+        "plcc": -0.3859,
+        "plcc_ci": [
+          -0.5155,
+          -0.271
+        ],
+        "n": 1179
+      },
+      "tesseract": {
+        "srcc": -0.6553,
+        "srcc_ci": [
+          -0.6864,
+          -0.622
+        ],
+        "plcc": -0.514,
+        "plcc_ci": [
+          -0.63,
+          -0.4061
+        ],
+        "n": 1179
+      }
+    },
+    "per_tier": {
+      "ORIGINAL": {
+        "mean_vlm_overall": 4.1919,
+        "n": 197
+      },
+      "PRISTINE": {
+        "mean_vlm_overall": 4.1878,
+        "n": 197
+      },
+      "HIGH": {
+        "mean_vlm_overall": 3.5797,
+        "n": 197
+      },
+      "MEDIUM": {
+        "mean_vlm_overall": 3.4051,
+        "n": 196
+      },
+      "LOW": {
+        "mean_vlm_overall": 3.1388,
+        "n": 196
+      },
+      "DEGRADED": {
+        "mean_vlm_overall": 2.95,
+        "n": 196
+      }
+    },
+    "latency": {
+      "mean_ms": 10980.0,
+      "p50_ms": 3179.0,
+      "p95_ms": 4830.3
+    }
+  }
+}

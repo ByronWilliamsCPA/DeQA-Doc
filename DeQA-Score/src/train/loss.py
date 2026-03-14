@@ -5,6 +5,8 @@ import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModelForCausalLM, Seq2SeqTrainer
 from transformers import Qwen2_5_VLForConditionalGeneration, Qwen2_5_VLProcessor
 from typing import Optional, Union, Any, Dict
+from src.constants import LEVEL_NAMES
+from src.model.utils import find_prefix as _find_prefix_vectorized
 
 
 
@@ -22,14 +24,17 @@ class DeQAScoreLoss(nn.Module):
             "sharpness": "The sharpness of the image is",
             "color_fidelity": "The color_fidelity of the image is"
         },
-        level_names=["excellent", "good", "fair", "poor", "bad"],
+        level_names=None,
     ):
         super().__init__()
         self.weight_desp = weight_desp
         self.weight_next_token = weight_next_token
         self.weight_in_level = weight_in_level
         self.weight_softkl = weight_softkl
-        
+
+        if level_names is None:
+            level_names = LEVEL_NAMES
+
         # 转换level_names为token ids
         self.level_ids = []
         for name in level_names:
@@ -51,38 +56,42 @@ class DeQAScoreLoss(nn.Module):
         self.ce_loss = nn.CrossEntropyLoss()
 
     def find_prefix(self, labels, prefix):
-        """找到prefix在labels中的位置"""
-        batch_size = labels.shape[0]
-        prefix_len = len(prefix)
-        indices = []
-        
-        for i in range(batch_size):
-            for j in range(labels.shape[1] - prefix_len + 1):
-                if torch.all(labels[i, j:j+prefix_len] == prefix):
-                    indices.append(j + prefix_len)
-                    break
-                    
-        return torch.tensor(indices, device=labels.device)
+        """Find prefix end position in labels. Returns -1 for missing prefix."""
+        prefix_tensor = torch.tensor(prefix, device=labels.device) if not isinstance(prefix, torch.Tensor) else prefix
+        # _find_prefix_vectorized returns start positions; add prefix_len for end position
+        start_indices = _find_prefix_vectorized(labels, prefix_tensor, strict=False)
+        end_indices = torch.where(start_indices >= 0, start_indices + prefix_tensor.shape[0], start_indices)
+        return end_indices
 
     def softkl_loss(self, logits, labels, level_probs, prefix):
         """计算SoftKL损失"""
         batch_size = logits.shape[0]
         idx_prefix_label = self.find_prefix(labels, prefix)
         idx_level_label = idx_prefix_label
-        
+
+        # Filter out samples where prefix was not found (marked as -1)
+        valid_mask = idx_level_label >= 0
+        if not valid_mask.any():
+            return torch.tensor(0.0, device=logits.device), idx_level_label
+
+        valid_indices = torch.where(valid_mask)[0]
+        idx_level_label = idx_level_label[valid_indices]
+        logits_valid = logits[valid_indices]
+        level_probs_valid = level_probs[valid_indices] if level_probs.dim() > 1 else level_probs
+
         # 获取level token的logits
-        logits_level = logits[torch.arange(batch_size), idx_level_label]
-        
+        logits_level = logits_valid[torch.arange(len(valid_indices)), idx_level_label]
+
         # 计算预测的概率分布
         preds = torch.softmax(logits_level, dim=1)
-        
+
         # 创建目标分布
         target = torch.zeros_like(preds)
-        target[:, self.level_ids] = level_probs
+        target[:, self.level_ids] = level_probs_valid
         target = target.detach()
-        
+
         # 计算KL散度
-        pred_log = torch.log(preds)
+        pred_log = F.log_softmax(logits_level, dim=1)
         loss_kl = F.kl_div(pred_log, target, reduction="batchmean")
         
         return loss_kl, idx_level_label

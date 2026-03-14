@@ -150,6 +150,45 @@ def samples_to_training_json(
     return len(records)
 
 
+def metadata_to_training_json(
+    records: list,
+    output_path: str | Path,
+    dimension: str,
+    min_weight: float = 0.3,
+    seed: int = 42,
+) -> int:
+    """Convert ImageMetadataRecord list to DeQA training JSON file.
+
+    Args:
+        records: List of ImageMetadataRecord instances.
+        output_path: Path for output JSON file.
+        dimension: Quality dimension to export ("overall", "sharpness", "color").
+        min_weight: Minimum confidence weight to include.
+        seed: Random seed for reproducible question selection.
+
+    Returns:
+        Number of samples written.
+    """
+    from .metadata_convert import to_training_record
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    training_records = []
+    for i, metadata in enumerate(records):
+        rec = to_training_record(metadata, dimension, seed=seed + i)
+        if rec is None:
+            continue
+        if rec["confidence_weight"] < min_weight and rec["pseudo_label"]:
+            continue
+        training_records.append(rec)
+
+    with open(output_path, "w") as f:
+        json.dump(training_records, f, indent=2)
+
+    return len(training_records)
+
+
 def generate_per_dimension_json(
     samples: list[PseudoLabelSample],
     output_dir: str | Path,

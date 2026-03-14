@@ -154,7 +154,6 @@ def calculate_single_loss(
     if loss is not None and loss_kl is not None:
         # 获取weight_softkl，如果不存在则使用默认值1.0
         weight_softkl = getattr(actual_model.config, "weight_softkl", 1.0)
-        print("成功计算loss_kl:",loss_kl)
         loss = loss + weight_softkl * loss_kl
 
     return CausalLMOutputWithPast(
@@ -198,10 +197,22 @@ def softkl_loss(logits, labels, level_probs, model, level_prefix: Optional[str] 
         level_prefix = torch.tensor([0]).to(device)  # 使用一个默认的 token id
     #print("label为:",labels)
     idx_prefix_label = find_prefix(labels, level_prefix)  # [B]
+
+    # Filter out samples where prefix was not found (marked as -1)
+    valid_mask = idx_prefix_label >= 0
+    if not valid_mask.any():
+        return torch.tensor(0.0, device=device), torch.zeros(batch_size, dtype=torch.long, device=device), torch.zeros(batch_size, dtype=torch.long, device=device)
+
+    valid_indices = torch.where(valid_mask)[0]
+    idx_prefix_label = idx_prefix_label[valid_indices]
+    logits = logits[valid_indices]
+    labels = labels[valid_indices]
+    if level_probs is not None:
+        level_probs = level_probs[valid_indices] if level_probs.dim() > 1 else level_probs
+    batch_size = len(valid_indices)
+
     idx_level_label = idx_prefix_label + level_prefix.shape[0]  # [B]
-    #print("level_id为",level_ids)
     level_ids_label = labels[torch.arange(batch_size), idx_level_label]  # [B]
-    #print("level_ids_label为",level_ids_label)
     for level_id in level_ids_label:
         assert level_id in level_ids
 
@@ -214,19 +225,17 @@ def softkl_loss(logits, labels, level_probs, model, level_prefix: Optional[str] 
 
     preds = torch.softmax(logits_level_ids, dim=1)  # [B, V]
     target = torch.zeros_like(preds)  # [B, V]
-    
+
     # 确保level_probs的数据类型和设备与target一致
     if level_probs is not None:
         level_probs = level_probs.to(dtype=target.dtype, device=device)
-    
+
     # 确保level_ids在正确的设备上
     level_ids = torch.tensor(level_ids, device=device)
-    #print("preds的值:",sum(preds[level_ids]))
-    #print("batch维度:",sum(preds[:,level_ids],dim=1))
     target[:, level_ids] = level_probs
     target = target.detach()
 
-    pred_log = torch.log(preds)
+    pred_log = F.log_softmax(logits_level_ids, dim=1)
     loss_kl = F.kl_div(pred_log, target, reduction="batchmean")
     return loss_kl, idx_level_label, idx_level_logit
 
@@ -270,7 +279,8 @@ def find_prefix(labels, prefix):
                 found = True
                 break
         if not found:
-            print(f"样本 {b} 未找到前缀")
-            prefix_positions.append(0)  # 如果找不到前缀，使用默认位置0
+            import logging
+            logging.warning(f"find_prefix: prefix not found in sample {b}, skipping from SoftKL")
+            prefix_positions.append(-1)
             
     return torch.tensor(prefix_positions, device=labels.device) 

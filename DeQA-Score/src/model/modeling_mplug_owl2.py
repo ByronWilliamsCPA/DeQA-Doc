@@ -39,7 +39,6 @@ from .visual_encoder import MplugOwlVisionModel, MplugOwlVisualAbstractorModel
 IGNORE_INDEX = -100
 IMAGE_TOKEN_INDEX = -200
 DEFAULT_IMAGE_TOKEN = "<|image|>"
-from icecream import ic
 
 
 class MPLUGOwl2MetaModel:
@@ -400,7 +399,7 @@ class MPLUGOwl2LlamaForCausalLM(LlamaForCausalLM, MPLUGOwl2MetaForCausalLM):
         target[:, self.config.level_ids] = level_probs
         target = target.detach()
 
-        pred_log = torch.log(preds)
+        pred_log = F.log_softmax(logits_level_ids, dim=1)
         loss_kl = F.kl_div(pred_log, target, reduction="batchmean")
         return loss_kl, idx_level_label, idx_level_logit
 
@@ -462,7 +461,11 @@ class MPLUGOwl2LlamaForCausalLM(LlamaForCausalLM, MPLUGOwl2MetaForCausalLM):
 
         loss_kl = None
         if use_softkl_loss and labels is not None:
-            loss_kl, idx_level_label, idx_level_logit = self.softkl_loss(logits, labels, level_probs)
+            # Skip SoftKL for samples with sentinel level_probs (no ground truth)
+            if level_probs is not None and (level_probs < -9000).any():
+                loss_kl = None
+            else:
+                loss_kl, idx_level_label, idx_level_logit = self.softkl_loss(logits, labels, level_probs)
 
             def del_elements(source, idx):
                 """source: [B, N] / [B, N, V],
@@ -745,8 +748,6 @@ replace_llama_modality_adaptive()
 
 if __name__ == "__main__":
     config = MPLUGOwl2Config.from_pretrained("zhiyuanyou/DeQA-Score-Mix3")
-    from icecream import ic
-
     # config = MPLUGOwl2Config()
     model = AutoModelForCausalLM(config)
 
@@ -768,5 +769,5 @@ if __name__ == "__main__":
     # ic(image_feature.shape)
 
     output = model(images=images, input_ids=input_ids, labels=labels)
-    ic(output.loss)
-    ic(output.logits.shape)
+    print(output.loss)
+    print(output.logits.shape)

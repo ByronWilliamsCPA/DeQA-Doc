@@ -1,0 +1,242 @@
+[
+  {
+    "model_id": "google/gemini-3.1-pro-preview",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 1.0,
+    "reasoning": "The image is a heavily blurred night photograph, not a document. It contains no readable text or document structure, making it completely unusable for any document-related purpose.",
+    "raw_response": "{\n  \"overall\": 1.0,\n  \"sharpness\": 1.0,\n  \"color_fidelity\": 1.0,\n  \"reasoning\": \"The image is a heavily blurred night photograph, not a document. It contains no readable text or document structure, making it completely unusable for any document-related purpose.\"\n}",
+    "latency_ms": 9621,
+    "error": ""
+  },
+  {
+    "model_id": "openai/gpt-5.2",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 1.6,
+    "reasoning": "The image is heavily motion-blurred with no readable text or document content, making it unusable as a document scan/photo. Colors are dominated by low-light noise and light streaks with poor tonal consistency.",
+    "raw_response": "{\"overall\":1.0,\"sharpness\":1.0,\"color_fidelity\":1.6,\"reasoning\":\"The image is heavily motion-blurred with no readable text or document content, making it unusable as a document scan/photo. Colors are dominated by low-light noise and light streaks with poor tonal consistency.\"}",
+    "latency_ms": 6069,
+    "error": ""
+  },
+  {
+    "model_id": "openai/gpt-5.1",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 2.5,
+    "reasoning": "The image is heavily motion-blurred, making any potential text or document content completely illegible. While colors and contrast are somewhat preserved, the lack of sharpness renders it unusable as a document image.",
+    "raw_response": "{\"overall\": 1.0, \"sharpness\": 1.0, \"color_fidelity\": 2.5, \"reasoning\": \"The image is heavily motion-blurred, making any potential text or document content completely illegible. While colors and contrast are somewhat preserved, the lack of sharpness renders it unusable as a document image.\"}",
+    "latency_ms": 9162,
+    "error": ""
+  },
+  {
+    "model_id": "google/gemini-2.5-pro",
+    "overall": null,
+    "sharpness": null,
+    "color_fidelity": null,
+    "reasoning": "",
+    "raw_response": "\n\n",
+    "latency_ms": 11119,
+    "error": "Parse error: Cannot parse JSON from response: Expecting value: line 1 column 1 (char 0)"
+  },
+  {
+    "model_id": "openai/gpt-5",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 2.0,
+    "reasoning": "Severe motion blur makes any text or details illegible, so the image is unusable as a document. Colors show low contrast and a strong cast due to low-light capture, further reducing fidelity.",
+    "raw_response": "{\"overall\": 1.0, \"sharpness\": 1.0, \"color_fidelity\": 2.0, \"reasoning\": \"Severe motion blur makes any text or details illegible, so the image is unusable as a document. Colors show low contrast and a strong cast due to low-light capture, further reducing fidelity.\"}",
+    "latency_ms": 9387,
+    "error": ""
+  },
+  {
+    "model_id": "openai/gpt-4.1",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 2.0,
+    "reasoning": "The image is extremely blurry with no discernible text or details, making it completely unreadable. Color fidelity is slightly better, but overall quality and sharpness are severely compromised.",
+    "raw_response": "{\"overall\": 1.0, \"sharpness\": 1.0, \"color_fidelity\": 2.0, \"reasoning\": \"The image is extremely blurry with no discernible text or details, making it completely unreadable. Color fidelity is slightly better, but overall quality and sharpness are severely compromised.\"}",
+    "latency_ms": 6673,
+    "error": ""
+  },
+  {
+    "model_id": "mistralai/pixtral-large-2411",
+    "overall": 1.2,
+    "sharpness": 1.0,
+    "color_fidelity": 1.5,
+    "reasoning": "The image is extremely blurred and lacks any readable content, making it unusable. Color fidelity is poor due to severe motion blur and distorted lighting.",
+    "raw_response": "{{\"overall\": 1.2, \"sharpness\": 1.0, \"color_fidelity\": 1.5, \"reasoning\": \"The image is extremely blurred and lacks any readable content, making it unusable. Color fidelity is poor due to severe motion blur and distorted lighting.\"}}",
+    "latency_ms": 2627,
+    "error": ""
+  },
+  {
+    "model_id": "qwen/qwen3-vl-235b-a22b-instruct",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 1.0,
+    "reasoning": "This is not a document image; it is an abstract long-exposure photograph of light trails at night, making it entirely unsuitable for document evaluation.",
+    "raw_response": "{\n  \"overall\": 1.0,\n  \"sharpness\": 1.0,\n  \"color_fidelity\": 1.0,\n  \"reasoning\": \"This is not a document image; it is an abstract long-exposure photograph of light trails at night, making it entirely unsuitable for document evaluation.\"\n}",
+    "latency_ms": 2247,
+    "error": ""
+  },
+  {
+    "model_id": "qwen/qwen2.5-vl-72b-instruct",
+    "overall": 1.5,
+    "sharpness": 1.0,
+    "color_fidelity": 2.5,
+    "reasoning": "The image is extremely blurry with no discernible text, making it unusable. Colors are present but lack definition due to motion blur.",
+    "raw_response": "{\n  \"overall\": 1.5,\n  \"sharpness\": 1.0,\n  \"color_fidelity\": 2.5,\n  \"reasoning\": \"The image is extremely blurry with no discernible text, making it unusable. Colors are present but lack definition due to motion blur.\"\n}",
+    "latency_ms": 2618,
+    "error": ""
+  },
+  {
+    "model_id": "google/gemini-2.5-flash",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 2.0,
+    "reasoning": "The image is extremely blurry due to motion, making it impossible to discern any clear details or text. While colors are present, their fidelity is severely compromised by the blur.",
+    "raw_response": "{\"overall\": 1.0, \"sharpness\": 1.0, \"color_fidelity\": 2.0, \"reasoning\": \"The image is extremely blurry due to motion, making it impossible to discern any clear details or text. While colors are present, their fidelity is severely compromised by the blur.\"}",
+    "latency_ms": 1466,
+    "error": ""
+  },
+  {
+    "model_id": "google/gemini-3-flash-preview",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 2.5,
+    "reasoning": "This is not a document image, but a photograph of a night skyline with severe motion blur. As a document, it is completely unusable and illegible due to the lack of any text or structured information.",
+    "raw_response": "{\n  \"overall\": 1.0,\n  \"sharpness\": 1.0,\n  \"color_fidelity\": 2.5,\n  \"reasoning\": \"This is not a document image, but a photograph of a night skyline with severe motion blur. As a document, it is completely unusable and illegible due to the lack of any text or structured information.\"\n}",
+    "latency_ms": 1883,
+    "error": ""
+  },
+  {
+    "model_id": "mistralai/mistral-large-2512",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 1.5,
+    "reasoning": "The image is severely blurred due to motion, rendering text or document details completely illegible. Color fidelity is poor, with unnatural hues and low contrast.",
+    "raw_response": "```json\n{\n  \"overall\": 1.0,\n  \"sharpness\": 1.0,\n  \"color_fidelity\": 1.5,\n  \"reasoning\": \"The image is severely blurred due to motion, rendering text or document details completely illegible. Color fidelity is poor, with unnatural hues and low contrast.\"\n}\n```",
+    "latency_ms": 6230,
+    "error": ""
+  },
+  {
+    "model_id": "openai/gpt-4.1-mini",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 2.5,
+    "reasoning": "The image is extremely blurry with no readable text or clear details, resulting in very poor sharpness and overall usability. Color fidelity is moderate as the colors are distinguishable but the image is dark and lacks clarity.",
+    "raw_response": "{\"overall\": 1.0, \"sharpness\": 1.0, \"color_fidelity\": 2.5, \"reasoning\": \"The image is extremely blurry with no readable text or clear details, resulting in very poor sharpness and overall usability. Color fidelity is moderate as the colors are distinguishable but the image is dark and lacks clarity.\"}",
+    "latency_ms": 8874,
+    "error": ""
+  },
+  {
+    "model_id": "qwen/qwen3-vl-32b-instruct",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 2.0,
+    "reasoning": "The image exhibits extreme motion blur with no discernible text or structured content, making it completely illegible. Colors are distorted with streaks and low contrast, indicating poor capture quality.",
+    "raw_response": "{\"overall\": 1.0, \"sharpness\": 1.0, \"color_fidelity\": 2.0, \"reasoning\": \"The image exhibits extreme motion blur with no discernible text or structured content, making it completely illegible. Colors are distorted with streaks and low contrast, indicating poor capture quality.\"}",
+    "latency_ms": 3102,
+    "error": ""
+  },
+  {
+    "model_id": "x-ai/grok-4-fast",
+    "overall": 1.0,
+    "sharpness": 1.2,
+    "color_fidelity": 2.0,
+    "reasoning": "This image shows a blurred nighttime cityscape with no text or document content, making it completely unusable for reading. Sharpness is severely compromised by motion blur, and while colors are vibrant from lights, they lack the accuracy and clean background needed for document fidelity.",
+    "raw_response": "{\"overall\": 1.0, \"sharpness\": 1.2, \"color_fidelity\": 2.0, \"reasoning\": \"This image shows a blurred nighttime cityscape with no text or document content, making it completely unusable for reading. Sharpness is severely compromised by motion blur, and while colors are vibrant from lights, they lack the accuracy and clean background needed for document fidelity.\"}",
+    "latency_ms": 6128,
+    "error": ""
+  },
+  {
+    "model_id": "openai/gpt-5-mini",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 2.0,
+    "reasoning": "Image has extreme motion blur with no readable text or clear details, making it unusable as a document. Colors are visible but smeared and uneven with poor contrast and white balance.",
+    "raw_response": "{\"overall\": 1.0, \"sharpness\": 1.0, \"color_fidelity\": 2.0, \"reasoning\": \"Image has extreme motion blur with no readable text or clear details, making it unusable as a document. Colors are visible but smeared and uneven with poor contrast and white balance.\"}",
+    "latency_ms": 10281,
+    "error": ""
+  },
+  {
+    "model_id": "meta-llama/llama-4-maverick",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 2.0,
+    "reasoning": "The image is not a document but an abstract cityscape at night, making it completely unusable as a document. The blur and motion effects further degrade its quality.",
+    "raw_response": "{\"overall\": 1.0, \"sharpness\": 1.0, \"color_fidelity\": 2.0, \"reasoning\": \"The image is not a document but an abstract cityscape at night, making it completely unusable as a document. The blur and motion effects further degrade its quality.\"}",
+    "latency_ms": 2120,
+    "error": ""
+  },
+  {
+    "model_id": "qwen/qwen3-vl-8b-instruct",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 1.0,
+    "reasoning": "The image is heavily blurred with motion trails, making it completely illegible and unusable as a document image.",
+    "raw_response": "{\n  \"overall\": 1.0,\n  \"sharpness\": 1.0,\n  \"color_fidelity\": 1.0,\n  \"reasoning\": \"The image is heavily blurred with motion trails, making it completely illegible and unusable as a document image.\"\n}",
+    "latency_ms": 1561,
+    "error": ""
+  },
+  {
+    "model_id": "qwen/qwen-2.5-vl-7b-instruct",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 1.0,
+    "reasoning": "The image is completely unusable due to severe motion blur, making it impossible to discern any details or read any text. The sharpness and color fidelity are also compromised by the blurriness.",
+    "raw_response": "{\n  \"overall\": 1.0,\n  \"sharpness\": 1.0,\n  \"color_fidelity\": 1.0,\n  \"reasoning\": \"The image is completely unusable due to severe motion blur, making it impossible to discern any details or read any text. The sharpness and color fidelity are also compromised by the blurriness.\"\n}",
+    "latency_ms": 2595,
+    "error": ""
+  },
+  {
+    "model_id": "qwen/qwen2.5-vl-32b-instruct",
+    "overall": 1.5,
+    "sharpness": 1.0,
+    "color_fidelity": 2.5,
+    "reasoning": "The image is heavily blurred, making it impossible to discern any text or details, which significantly impacts overall readability. While some colors are visible, they are streaked and lack definition, indicating poor sharpness and moderate color fidelity issues.",
+    "raw_response": "```json\n{\n  \"overall\": 1.5,\n  \"sharpness\": 1.0,\n  \"color_fidelity\": 2.5,\n  \"reasoning\": \"The image is heavily blurred, making it impossible to discern any text or details, which significantly impacts overall readability. While some colors are visible, they are streaked and lack definition, indicating poor sharpness and moderate color fidelity issues.\"\n}\n```",
+    "latency_ms": 1586,
+    "error": ""
+  },
+  {
+    "model_id": "qwen/qwen-vl-max",
+    "overall": 1.5,
+    "sharpness": 1.0,
+    "color_fidelity": 2.0,
+    "reasoning": "The image exhibits significant motion blur and light trails, indicating poor sharpness and focus. Colors are present but distorted due to the blurring effect, making it difficult to discern details or content.",
+    "raw_response": "{\"overall\": 1.5, \"sharpness\": 1.0, \"color_fidelity\": 2.0, \"reasoning\": \"The image exhibits significant motion blur and light trails, indicating poor sharpness and focus. Colors are present but distorted due to the blurring effect, making it difficult to discern details or content.\"}",
+    "latency_ms": 2551,
+    "error": ""
+  },
+  {
+    "model_id": "nvidia/nemotron-nano-12b-v2-vl",
+    "overall": 1.5,
+    "sharpness": 1.0,
+    "color_fidelity": 2.0,
+    "reasoning": "The image is severely blurred with motion streaks, making details indiscernible. Colors are present but distorted by the blur, and sharpness is entirely lacking due to camera movement.",
+    "raw_response": "{\"overall\": 1.5, \"sharpness\": 1.0, \"color_fidelity\": 2.0, \"reasoning\": \"The image is severely blurred with motion streaks, making details indiscernible. Colors are present but distorted by the blur, and sharpness is entirely lacking due to camera movement.\"}\n",
+    "latency_ms": 3774,
+    "error": ""
+  },
+  {
+    "model_id": "baidu/ernie-4.5-vl-424b-a47b",
+    "overall": 1.5,
+    "sharpness": 1.0,
+    "color_fidelity": 2.5,
+    "reasoning": "The image is severely blurred, making details indistinguishable, which drastically reduces overall readability. Colors are vibrant but the extreme motion blur overshadows any fidelity.",
+    "raw_response": "{\n  \"overall\": 1.5,\n  \"sharpness\": 1.0,\n  \"color_fidelity\": 2.5,\n  \"reasoning\": \"The image is severely blurred, making details indistinguishable, which drastically reduces overall readability. Colors are vibrant but the extreme motion blur overshadows any fidelity.\"\n}",
+    "latency_ms": 5027,
+    "error": ""
+  },
+  {
+    "model_id": "google/gemini-2.5-pro",
+    "overall": 1.0,
+    "sharpness": 1.0,
+    "color_fidelity": 1.5,
+    "reasoning": "The image is not a document and is completely unusable due to extreme motion blur, which makes any potential content entirely illegible and unsharp.",
+    "raw_response": "{\"overall\": 1.0, \"sharpness\": 1.0, \"color_fidelity\": 1.5, \"reasoning\": \"The image is not a document and is completely unusable due to extreme motion blur, which makes any potential content entirely illegible and unsharp.\"}",
+    "latency_ms": 11119,
+    "error": ""
+  }
+]

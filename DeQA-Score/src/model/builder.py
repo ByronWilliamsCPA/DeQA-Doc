@@ -57,10 +57,7 @@ def load_pretrained_model(
         kwargs["torch_dtype"] = torch.float16
 
     if preprocessor_path is None:
-    # If model_base is provided, use it for the preprocessor, otherwise use model_path
-        #preprocessor_path = model_path
-        preprocessor_path = "/ossfs/workspace/MAGAer13__mplug-owl2-llama2-7b"
-    #import pdb;pdb.set_trace()
+        preprocessor_path = model_base if model_base is not None else model_path
     if "deqa" in model_name.lower():
         # Load LLaVA model
         if "lora" in model_name.lower() and model_base is None:
@@ -74,24 +71,28 @@ def load_pretrained_model(
             model = MPLUGOwl2LlamaForCausalLM.from_pretrained(
                 model_base, low_cpu_mem_usage=True, config=lora_cfg_pretrained, **kwargs
             )
-            token_num, tokem_dim = model.lm_head.out_features, model.lm_head.in_features
+            token_num, token_dim = model.lm_head.out_features, model.lm_head.in_features
             if model.lm_head.weight.shape[0] != token_num:
                 model.lm_head.weight = torch.nn.Parameter(
                     torch.empty(
-                        token_num, tokem_dim, device=model.device, dtype=model.dtype
+                        token_num, token_dim, device=model.device, dtype=model.dtype
                     )
                 )
                 model.model.embed_tokens.weight = torch.nn.Parameter(
                     torch.empty(
-                        token_num, tokem_dim, device=model.device, dtype=model.dtype
+                        token_num, token_dim, device=model.device, dtype=model.dtype
                     )
                 )
 
             print("Loading additional mPLUG-Owl2 weights...")
             if os.path.exists(os.path.join(model_path, "non_lora_trainables.bin")):
+                # weights_only=False required: non_lora_trainables.bin may contain
+                # custom objects from the upstream mPLUG-Owl2 training pipeline.
+                # Only loads from trusted local paths or HuggingFace Hub.
                 non_lora_trainables = torch.load(
                     os.path.join(model_path, "non_lora_trainables.bin"),
                     map_location="cpu",
+                    weights_only=False,
                 )
                 print(non_lora_trainables.keys())
             else:
@@ -102,7 +103,8 @@ def load_pretrained_model(
                     cache_file = hf_hub_download(
                         repo_id=repo_id, filename=filename, subfolder=subfolder
                     )
-                    return torch.load(cache_file, map_location="cpu")
+                    # weights_only=False: trusted HF Hub source (see note above)
+                    return torch.load(cache_file, map_location="cpu", weights_only=False)
 
                 non_lora_trainables = load_from_hf(
                     model_path, "non_lora_trainables.bin"
