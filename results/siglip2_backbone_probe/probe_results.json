@@ -1,0 +1,365 @@
+[
+  {
+    "model_id": "google/siglip2-large-patch16-512",
+    "embed_dim": 1024,
+    "n_train": 3500,
+    "n_test": 1000,
+    "skipped_train": 0,
+    "skipped_test": 0,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.8296338548520984,
+        "plcc": 0.8636788129806519,
+        "mae": 0.22071301937103271,
+        "best_alpha": 1000.0
+      },
+      "sharpness": {
+        "srcc": 0.8052626468150318,
+        "plcc": 0.8472095727920532,
+        "mae": 0.23529495298862457,
+        "best_alpha": 1000.0
+      },
+      "color": {
+        "srcc": 0.8229244249124524,
+        "plcc": 0.8526155948638916,
+        "mae": 0.2222377061843872,
+        "best_alpha": 1000.0
+      }
+    },
+    "wsrcc": 0.8218636953579203,
+    "model_load_time_s": 24.96938395500183,
+    "extract_time_s": 341.5832998752594,
+    "label": "large-p16-512",
+    "tests": "Scale + resolution (303M @ 512)"
+  },
+  {
+    "model_id": "google/siglip2-base-patch16-512",
+    "embed_dim": 768,
+    "n_train": 3500,
+    "n_test": 1000,
+    "skipped_train": 0,
+    "skipped_test": 0,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.8157321218678525,
+        "plcc": 0.824734091758728,
+        "mae": 0.2432674914598465,
+        "best_alpha": 1000.0
+      },
+      "sharpness": {
+        "srcc": 0.795683212050907,
+        "plcc": 0.8091530203819275,
+        "mae": 0.25537267327308655,
+        "best_alpha": 1000.0
+      },
+      "color": {
+        "srcc": 0.821948370314546,
+        "plcc": 0.8213824033737183,
+        "mae": 0.23298101127147675,
+        "best_alpha": 1000.0
+      }
+    },
+    "wsrcc": 0.8122739565252894,
+    "model_load_time_s": 24.010767221450806,
+    "extract_time_s": 446.5162179470062,
+    "label": "base-p16-512",
+    "tests": "Resolution ceiling @ Base"
+  },
+  {
+    "model_id": "google/siglip2-large-patch16-384",
+    "embed_dim": 1024,
+    "n_train": 3500,
+    "n_test": 1000,
+    "skipped_train": 0,
+    "skipped_test": 0,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.8105800380397592,
+        "plcc": 0.8397064208984375,
+        "mae": 0.23673009872436523,
+        "best_alpha": 1000.0
+      },
+      "sharpness": {
+        "srcc": 0.7806919646462437,
+        "plcc": 0.8260672688484192,
+        "mae": 0.24994778633117676,
+        "best_alpha": 1000.0
+      },
+      "color": {
+        "srcc": 0.8011924993588769,
+        "plcc": 0.829703688621521,
+        "mae": 0.23680639266967773,
+        "best_alpha": 1000.0
+      }
+    },
+    "wsrcc": 0.8007611350211598,
+    "model_load_time_s": 26.155481338500977,
+    "extract_time_s": 314.98874855041504,
+    "label": "large-p16-384",
+    "tests": "Scale step (303M)"
+  },
+  {
+    "model_id": "google/siglip2-so400m-patch16-384",
+    "embed_dim": 1152,
+    "n_train": 3500,
+    "n_test": 1000,
+    "skipped_train": 0,
+    "skipped_test": 0,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.7975571460372042,
+        "plcc": 0.8184562921524048,
+        "mae": 0.2419164776802063,
+        "best_alpha": 1000.0
+      },
+      "sharpness": {
+        "srcc": 0.7823976302566272,
+        "plcc": 0.8064997792243958,
+        "mae": 0.2530199885368347,
+        "best_alpha": 1000.0
+      },
+      "color": {
+        "srcc": 0.7960701522528502,
+        "plcc": 0.8145723938941956,
+        "mae": 0.2387426197528839,
+        "best_alpha": 1000.0
+      }
+    },
+    "wsrcc": 0.7933955186459715,
+    "model_load_time_s": 52.238948345184326,
+    "extract_time_s": 478.7388129234314,
+    "label": "so400m-p16-384",
+    "tests": "NaFlex vs fixed @ So400m"
+  },
+  {
+    "model_id": "google/siglip2-base-patch16-naflex",
+    "embed_dim": 768,
+    "n_train": 3500,
+    "n_test": 1000,
+    "skipped_train": 0,
+    "skipped_test": 0,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.7971178005476373,
+        "plcc": 0.8096396327018738,
+        "mae": 0.24886874854564667,
+        "best_alpha": 1000.0
+      },
+      "sharpness": {
+        "srcc": 0.7731011430680245,
+        "plcc": 0.7935361266136169,
+        "mae": 0.26278477907180786,
+        "best_alpha": 1000.0
+      },
+      "color": {
+        "srcc": 0.802719939333147,
+        "plcc": 0.8067777752876282,
+        "mae": 0.23666049540042877,
+        "best_alpha": 1000.0
+      }
+    },
+    "wsrcc": 0.7925141708741115,
+    "model_load_time_s": 40.21380257606506,
+    "extract_time_s": 427.66770482063293,
+    "label": "base-p16-naflex",
+    "tests": "Baseline (current student)"
+  },
+  {
+    "model_id": "google/siglip2-so400m-patch16-512",
+    "embed_dim": 1152,
+    "n_train": 3500,
+    "n_test": 1000,
+    "skipped_train": 0,
+    "skipped_test": 0,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.7935368675031101,
+        "plcc": 0.8174902200698853,
+        "mae": 0.23895394802093506,
+        "best_alpha": 1000.0
+      },
+      "sharpness": {
+        "srcc": 0.7744809122565727,
+        "plcc": 0.7956838011741638,
+        "mae": 0.2509857416152954,
+        "best_alpha": 1000.0
+      },
+      "color": {
+        "srcc": 0.7898232240232086,
+        "plcc": 0.812742292881012,
+        "mae": 0.2331671416759491,
+        "best_alpha": 1000.0
+      }
+    },
+    "wsrcc": 0.7878444678215004,
+    "model_load_time_s": 51.97245240211487,
+    "extract_time_s": 404.6912667751312,
+    "label": "so400m-p16-512",
+    "tests": "Resolution ceiling @ So400m"
+  },
+  {
+    "model_id": "google/siglip2-giant-opt-patch16-384",
+    "embed_dim": 1536,
+    "n_train": 3500,
+    "n_test": 1000,
+    "skipped_train": 0,
+    "skipped_test": 0,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.788893790352105,
+        "plcc": 0.813811182975769,
+        "mae": 0.24380315840244293,
+        "best_alpha": 1000.0
+      },
+      "sharpness": {
+        "srcc": 0.7567074880287193,
+        "plcc": 0.7948968410491943,
+        "mae": 0.25888848304748535,
+        "best_alpha": 1000.0
+      },
+      "color": {
+        "srcc": 0.7875791498625022,
+        "plcc": 0.8060277700424194,
+        "mae": 0.23762722313404083,
+        "best_alpha": 1000.0
+      }
+    },
+    "wsrcc": 0.780518554648858,
+    "model_load_time_s": 41.856499433517456,
+    "extract_time_s": 478.87832045555115,
+    "label": "giant-p16-384",
+    "tests": "Maximum capacity (1B vision)"
+  },
+  {
+    "model_id": "google/siglip2-base-patch16-384",
+    "embed_dim": 768,
+    "n_train": 3500,
+    "n_test": 1000,
+    "skipped_train": 0,
+    "skipped_test": 0,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.7834583036928151,
+        "plcc": 0.8091265559196472,
+        "mae": 0.24838586151599884,
+        "best_alpha": 1000.0
+      },
+      "sharpness": {
+        "srcc": 0.7669085650423934,
+        "plcc": 0.79583740234375,
+        "mae": 0.25945720076560974,
+        "best_alpha": 1000.0
+      },
+      "color": {
+        "srcc": 0.7802195087110656,
+        "plcc": 0.8006510138511658,
+        "mae": 0.24242202937602997,
+        "best_alpha": 1000.0
+      }
+    },
+    "wsrcc": 0.7785111702847722,
+    "model_load_time_s": 23.712522745132446,
+    "extract_time_s": 468.5198984146118,
+    "label": "base-p16-384",
+    "tests": "NaFlex vs fixed @ Base"
+  },
+  {
+    "model_id": "google/siglip2-so400m-patch16-naflex",
+    "embed_dim": 1152,
+    "n_train": 3500,
+    "n_test": 1000,
+    "skipped_train": 0,
+    "skipped_test": 0,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.7824828310638348,
+        "plcc": 0.8187482953071594,
+        "mae": 0.24971897900104523,
+        "best_alpha": 1000.0
+      },
+      "sharpness": {
+        "srcc": 0.7516090315629094,
+        "plcc": 0.7969698905944824,
+        "mae": 0.26716724038124084,
+        "best_alpha": 1000.0
+      },
+      "color": {
+        "srcc": 0.7756497710022172,
+        "plcc": 0.810795783996582,
+        "mae": 0.24689669907093048,
+        "best_alpha": 1000.0
+      }
+    },
+    "wsrcc": 0.773056116173199,
+    "model_load_time_s": 32.29671025276184,
+    "extract_time_s": 310.105943441391,
+    "label": "so400m-p16-naflex",
+    "tests": "Primary teacher candidate (NaFlex)"
+  },
+  {
+    "model_id": "google/siglip2-so400m-patch14-384",
+    "embed_dim": 1152,
+    "n_train": 3500,
+    "n_test": 1000,
+    "skipped_train": 0,
+    "skipped_test": 0,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.7747729336324347,
+        "plcc": 0.8103157877922058,
+        "mae": 0.24986299872398376,
+        "best_alpha": 1000.0
+      },
+      "sharpness": {
+        "srcc": 0.7523743646439065,
+        "plcc": 0.7911034822463989,
+        "mae": 0.2636387050151825,
+        "best_alpha": 1000.0
+      },
+      "color": {
+        "srcc": 0.7680978385808483,
+        "plcc": 0.8038848042488098,
+        "mae": 0.24792242050170898,
+        "best_alpha": 1000.0
+      }
+    },
+    "wsrcc": 0.767504517622406,
+    "model_load_time_s": 33.50462532043457,
+    "extract_time_s": 340.4150700569153,
+    "label": "so400m-p14-384",
+    "tests": "Patch-14 (729 tokens vs 576)"
+  },
+  {
+    "model_id": "google/siglip2-base-patch32-256",
+    "embed_dim": 768,
+    "n_train": 3500,
+    "n_test": 1000,
+    "skipped_train": 0,
+    "skipped_test": 0,
+    "dimensions": {
+      "overall": {
+        "srcc": 0.7623709022137527,
+        "plcc": 0.7613116502761841,
+        "mae": 0.271513432264328,
+        "best_alpha": 1000.0
+      },
+      "sharpness": {
+        "srcc": 0.7090903037253274,
+        "plcc": 0.7197213172912598,
+        "mae": 0.29957666993141174,
+        "best_alpha": 1000.0
+      },
+      "color": {
+        "srcc": 0.7543471887496676,
+        "plcc": 0.7601463198661804,
+        "mae": 0.2652316689491272,
+        "best_alpha": 1000.0
+      }
+    },
+    "wsrcc": 0.7470448242256251,
+    "model_load_time_s": 27.97268795967102,
+    "extract_time_s": 421.58339262008667,
+    "label": "base-p32-256",
+    "tests": "Coarse patch, ultra-light student"
+  }
+]
