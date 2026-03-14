@@ -1,0 +1,74 @@
+{
+  "uniform (baseline)": {
+    "weighted_mae": 0.1949170366382599,
+    "high_conf_mae": 0.1949170366382599,
+    "high_conf_n": 1500,
+    "effective_n": 1500.0,
+    "mean_weight": 1.0,
+    "min_weight": 1.0,
+    "active_srcc": 0.8833534920639916,
+    "pct_full_weight": 100.0,
+    "pct_downweighted": 0.0,
+    "pct_rejected": 0.0
+  },
+  "discrete tiers": {
+    "weighted_mae": 0.18049532360816745,
+    "high_conf_mae": 0.18402214301864306,
+    "high_conf_n": 1200,
+    "effective_n": 1269.2439709318523,
+    "mean_weight": 0.7254666666666666,
+    "min_weight": 0.0,
+    "active_srcc": 0.8492433589586855,
+    "pct_full_weight": 50.06666666666667,
+    "pct_downweighted": 29.933333333333334,
+    "pct_rejected": 20.0
+  },
+  "sigma_sq linear": {
+    "weighted_mae": 0.19346886126092525,
+    "high_conf_mae": 0.19461003015250825,
+    "high_conf_n": 1491,
+    "effective_n": 1492.3802190851766,
+    "mean_weight": 0.9130978224589043,
+    "min_weight": 0.30000000000000004,
+    "active_srcc": 0.8833534920639916,
+    "pct_full_weight": 25.733333333333334,
+    "pct_downweighted": 74.26666666666667,
+    "pct_rejected": 0.0
+  },
+  "sigma_sq exponential": {
+    "weighted_mae": 0.1905311410018342,
+    "high_conf_mae": 0.19387176328962977,
+    "high_conf_n": 1456,
+    "effective_n": 1461.251751113104,
+    "mean_weight": 0.7241281844718497,
+    "min_weight": 0.3,
+    "active_srcc": 0.8828858173042937,
+    "pct_full_weight": 1.1333333333333333,
+    "pct_downweighted": 98.73333333333333,
+    "pct_rejected": 0.13333333333333333
+  },
+  "sigma_sq + entropy": {
+    "weighted_mae": 0.187768562567123,
+    "high_conf_mae": 0.1866163937654782,
+    "high_conf_n": 1196,
+    "effective_n": 1416.6686372442164,
+    "mean_weight": 0.65,
+    "min_weight": 0.31027351567711814,
+    "active_srcc": 0.8833534920639916,
+    "pct_full_weight": 1.0666666666666667,
+    "pct_downweighted": 98.93333333333332,
+    "pct_rejected": 0.0
+  },
+  "sigma_sq quantile-step": {
+    "weighted_mae": 0.1885497641753121,
+    "high_conf_mae": 0.18759033290068308,
+    "high_conf_n": 1200,
+    "effective_n": 1373.438935806576,
+    "mean_weight": 0.8048965977318212,
+    "min_weight": 0.3003335557038026,
+    "active_srcc": 0.8833534920639916,
+    "pct_full_weight": 52.93333333333333,
+    "pct_downweighted": 47.06666666666667,
+    "pct_rejected": 0.0
+  }
+}

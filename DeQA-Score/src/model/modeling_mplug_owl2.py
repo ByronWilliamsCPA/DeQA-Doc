@@ -39,7 +39,6 @@ from .visual_encoder import MplugOwlVisionModel, MplugOwlVisualAbstractorModel
 IGNORE_INDEX = -100
 IMAGE_TOKEN_INDEX = -200
 DEFAULT_IMAGE_TOKEN = "<|image|>"
-from icecream import ic
 
 
 class MPLUGOwl2MetaModel:
@@ -749,8 +748,6 @@ replace_llama_modality_adaptive()
 
 if __name__ == "__main__":
     config = MPLUGOwl2Config.from_pretrained("zhiyuanyou/DeQA-Score-Mix3")
-    from icecream import ic
-
     # config = MPLUGOwl2Config()
     model = AutoModelForCausalLM(config)
 
@@ -772,5 +769,5 @@ if __name__ == "__main__":
     # ic(image_feature.shape)
 
     output = model(images=images, input_ids=input_ids, labels=labels)
-    ic(output.loss)
-    ic(output.logits.shape)
+    print(output.loss)
+    print(output.logits.shape)

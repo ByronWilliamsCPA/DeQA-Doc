@@ -71,16 +71,16 @@ def load_pretrained_model(
             model = MPLUGOwl2LlamaForCausalLM.from_pretrained(
                 model_base, low_cpu_mem_usage=True, config=lora_cfg_pretrained, **kwargs
             )
-            token_num, tokem_dim = model.lm_head.out_features, model.lm_head.in_features
+            token_num, token_dim = model.lm_head.out_features, model.lm_head.in_features
             if model.lm_head.weight.shape[0] != token_num:
                 model.lm_head.weight = torch.nn.Parameter(
                     torch.empty(
-                        token_num, tokem_dim, device=model.device, dtype=model.dtype
+                        token_num, token_dim, device=model.device, dtype=model.dtype
                     )
                 )
                 model.model.embed_tokens.weight = torch.nn.Parameter(
                     torch.empty(
-                        token_num, tokem_dim, device=model.device, dtype=model.dtype
+                        token_num, token_dim, device=model.device, dtype=model.dtype
                     )
                 )
 
@@ -89,6 +89,7 @@ def load_pretrained_model(
                 non_lora_trainables = torch.load(
                     os.path.join(model_path, "non_lora_trainables.bin"),
                     map_location="cpu",
+                    weights_only=False,
                 )
                 print(non_lora_trainables.keys())
             else:
@@ -99,7 +100,7 @@ def load_pretrained_model(
                     cache_file = hf_hub_download(
                         repo_id=repo_id, filename=filename, subfolder=subfolder
                     )
-                    return torch.load(cache_file, map_location="cpu")
+                    return torch.load(cache_file, map_location="cpu", weights_only=False)
 
                 non_lora_trainables = load_from_hf(
                     model_path, "non_lora_trainables.bin"

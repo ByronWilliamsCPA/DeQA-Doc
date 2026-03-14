@@ -52,6 +52,17 @@ research/ocr_iqa_correlation/data/
 research/vlm_calibration/data/
 research/vlm_calibration/calibrators/
 
+# qlty cache (config tracked in .qlty/qlty.toml)
+.qlty/out
+.qlty/plugin_cachedir
+.qlty/results
+
+# Claude Code local state
+.claude/
+
+# training data subsets
+DeQA-Score/Data-DeQA-Score/DIQA-5000_1/
+
 # secrets
 .env
 .gcp/

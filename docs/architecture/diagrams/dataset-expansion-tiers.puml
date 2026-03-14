@@ -1,0 +1,282 @@
+@startuml DIQA Dataset Expansion Tiers
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontSize 11
+skinparam noteFontSize 9
+skinparam legendFontSize 10
+skinparam arrowThickness 2
+
+title DIQA Dataset Expansion: 4-Tier Staged Strategy
+header Last updated: 2026-03-12
+
+start
+
+' ============================================================
+' TIER 0: VALIDATION INFRASTRUCTURE
+' ============================================================
+
+partition "**TIER 0: Validation Infrastructure** (Week 0-1)" #E3F2FD {
+
+  #E3F2FD:Create eval sets (never trained on)
+  - DIQA-5000 val: 500 (human GT)
+  - OOD doc-type: 500 (RVL-CDIP)
+  - OOD degradation: 200 (Tobacco800)
+  - OOD capture: 100 (SmartDoc-QA)
+  - OOD script: 200 (mdiw13, 4 scripts)
+  **Total eval: 1,500 images**;
+
+  #E3F2FD:Label OOD evals via
+  2-model VLM consensus
+  (Flash Lite + Qwen 3.5-122B)
+  **Cost: $2.00**;
+
+  #E3F2FD:Run SigLIP2-IQA baseline
+  on all eval sets
+  Record wSRCC, SRCC, MAE, PLCC;
+
+  if (VLM consensus wSRCC >= 0.70\non DIQA-5000 val?) then ([yes])
+  else ([no])
+    #FF8A80:Iterate on VLM prompt
+    optimization before
+    proceeding;
+    kill
+  endif
+}
+
+' ============================================================
+' TIER 1: QUALITY BALANCE
+' ============================================================
+
+partition "**TIER 1: Quality Balance + Domain Seed** (Week 2-4)" #E8F5E9 {
+
+  fork
+    #C8E6C9:Controlled degradation
+    1,400 from 350 DIQA-5000 base
+    **Labels: deterministic**
+    (degradation params, w=0.7);
+    note right
+      JPEG, blur, noise,
+      downscale at 4 levels
+      No VLM cost
+    end note
+
+  fork again
+    #C8E6C9:Synth-multiscript-v3
+    2,000 across 10+ scripts
+    Augraphy + Albumentations
+    **Labels: deterministic (w=0.7)**;
+    note right
+      Deferred degradation replay
+      v4 adversarial fonts (5%)
+      No VLM cost
+    end note
+
+  fork again
+    #C8E6C9:VLM pseudo-labels
+    2,700 from OHR-Bench (1,200),
+    RealDAE (600), Tobacco800 (400),
+    SmartDoc-QA (500)
+    **Labels: VLM consensus (w=0.5)**;
+    note right
+      Cost: $5.40
+      Prioritize text-GT sources
+      for OCR cross-validation
+    end note
+
+  end fork
+
+  #A5D6A7:Train: 5,490 new + 3,500 DIQA
+  = **8,990 total**
+  Phase 1: head warmup (10 ep)
+  Phase 2: full FT (40 ep)
+  **Compute: ~2-3 days 4x A100**;
+
+  if (Tier 1 validation gate?) then ([all pass])
+    note right
+      ID wSRCC >= baseline - 0.01
+      OOD wSRCC >= baseline + 0.02
+      Tail SRCC >= 0.50
+      All 5 levels > 2% mass
+    end note
+  else ([fail])
+    #FFE082:Rollback to baseline
+    Ablate by source dataset
+    Reduce weight to 0.3;
+    kill
+  endif
+}
+
+' ============================================================
+' TIER 2: SCRIPT + LAYOUT
+' ============================================================
+
+partition "**TIER 2: Script & Layout Diversity** (Week 5-8)" #FFF3E0 {
+
+  fork
+    #FFE0B2:Synth-multiscript-v3
+    2,000 (15+ new scripts)
+    **Labels: deterministic**;
+    note right
+      Cyrl, Grek, Armn, Geor,
+      Khmr, Sinh, Orya, etc.
+      No VLM cost
+    end note
+
+  fork again
+    #FFE0B2:Real document sources
+    4,600 VLM-labeled
+    - mdiw13: 1,500 (13 scripts)
+    - DocLayNet: 1,500 (11 layouts)
+    - Kuzushiji: 500
+    - 1000 Char Classic: 300
+    - RVL-CDIP: 800
+    **VLM cost: $9.20**;
+    note right
+      **Excluded:**
+      Binarized (SRCC -0.37)
+      DPI extremes (SRCC -0.41)
+      Pristine (SRCC -0.09)
+    end note
+
+  end fork
+
+  #FFE0B2:Train: 5,940 new + 8,990 Tier 1
+  = **14,930 total**
+  DIQA-5000 upsampled 2x
+  Vision encoder FROZEN
+  **Compute: ~3 days**;
+
+  #FFE0B2:Re-fit OOD detector
+  on new embeddings;
+
+  if (Tier 2 validation gate?) then ([all pass])
+    note right
+      ID wSRCC >= Tier 1 - 0.01
+      Script OOD += 0.03
+      Layout OOD += 0.02
+      Cross-script std <= 0.15
+    end note
+  else ([fail])
+    #FFE082:Per-script ablation
+    Remove non-improving scripts
+    Increase DIQA upsampling;
+    kill
+  endif
+}
+
+' ============================================================
+' TIER 3: DEGRADATION HARDENING
+' ============================================================
+
+partition "**TIER 3: Degradation Hardening** (Week 9-12)" #F3E5F5 {
+
+  fork
+    #E1BEE7:Compound degradation
+    2,000 synthetic samples
+    (blur+noise, shadow+blur, etc.)
+    **Labels: deterministic (w=0.7)**;
+
+  fork again
+    #E1BEE7:Camera + shadow + warp
+    sd7k (1,000), warpdoc (500),
+    SmartDoc-QA (800), midv500 (500),
+    AnyPhotoDoc (500)
+    **Labels: VLM consensus (w=0.5)**
+    3-model tiebreaker for disagree;
+
+  end fork
+
+  #CE93D8:Train: 4,770 new + 14,930 Tier 2
+  = **19,700 total**
+  DIQA-5000 upsampled 3x
+  **Vision encoder UNFROZEN** (LR=5e-7)
+  **Compute: ~3-4 days**;
+
+  #CE93D8:Re-fit OOD detector
+  (critical: encoder changed);
+
+  if (Tier 3 validation gate?) then ([all pass])
+    note right
+      ID wSRCC >= Tier 2 - 0.01
+      Degradation MAE <= 0.40
+      Shadow/warp SRCC >= 0.50
+      Compound SRCC >= 0.60
+    end note
+  else ([fail])
+    #FFE082:Re-freeze encoder
+    Reduce degradation weight
+    Recalibrate formulas;
+    kill
+  endif
+}
+
+' ============================================================
+' TIER 4: ACTIVE LEARNING
+' ============================================================
+
+partition "**TIER 4: Active Learning Refinement** (Week 13-16)" #FFEBEE {
+
+  #FFCDD2:Mine 3,000 highest-uncertainty
+  from unused source pools (~50K+)
+  via OOD distance + predicted variance
+  + VLM disagreement;
+
+  #FFCDD2:Label via 2-model (2,000) +
+  3-model tiebreaker (1,000)
+  Optional: 200 human annotations ($300);
+
+  #EF9A9A:Train: 2,700 new + 19,700 Tier 3
+  = **22,400 total**
+  DIQA-5000 upsampled 4x
+  Variable weight via confidence_weight
+  **Compute: ~3-4 days**;
+
+  if (Tier 4 validation gate?) then ([all pass])
+    note right
+      ID wSRCC >= Tier 3 - 0.005
+      Full OOD wSRCC >= Tier 3 + 0.01
+      ECE <= 0.10
+      OOD FPR@95% <= 10%
+    end note
+
+    #A5D6A7:**SHIP as v2.0**
+    22,400 training images
+    ~6.4x original dataset;
+    stop
+
+  else ([diminishing returns])
+
+    #90CAF9:Accept Tier 3 as final
+    19,700 training images
+    ~5.6x original dataset
+    Future gains require
+    human annotation;
+    stop
+
+  endif
+}
+
+' ============================================================
+' LEGEND
+' ============================================================
+
+legend bottom left
+  |= Tier |= New Samples |= Cumulative |= VLM Cost |= Key Focus |
+  | <#E3F2FD> 0: Validation | 0 (1,500 eval) | 3,500 | $2.00 | Measurement framework |
+  | <#E8F5E9> 1: Quality Balance | 5,490 | 8,990 | $5.40 | Tail + synth-multiscript-v3 |
+  | <#FFF3E0> 2: Script/Layout | 5,940 | 14,930 | $9.20 | 27 scripts + 11 layouts |
+  | <#F3E5F5> 3: Degradation | 4,770 | 19,700 | $10.60 | Compound + camera + shadow |
+  | <#FFEBEE> 4: Active Learning | 2,700 | 22,400 | $13-313 | Uncertainty-mined hard cases |
+
+  **Label sources:** Deterministic (degradation params)
+  + VLM consensus + OCR cross-validation
+
+  **Guardrails:**
+  - DIQA-5000 val (500, human GT) is sacred
+  - No SigLIP2 self-labeling
+  - Re-fit OOD detector after each tier
+  - Freeze encoder in Tiers 1-2
+  - Prioritize text-GT sources for OCR validation
+endlegend
+
+@enduml
