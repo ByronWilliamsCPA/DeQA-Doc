@@ -22,7 +22,7 @@ jobs:
       security-events: write
       pull-requests: write
       actions: read
-    uses: ByronWilliamsCPA/.github/.github/workflows/python-security-analysis.yml@c22009ccaab0d3234819d30d9d7a03d53c531cb9 # main
+    uses: ByronWilliamsCPA/.github/.github/workflows/python-security-analysis.yml@e8fc83c98c2971ad1ece71573d28171463e30c16 # main
     with:
       python-version: "3.12"
       run-safety: false
@@ -38,7 +38,7 @@ jobs:
     if: always()
     steps:
       - name: Harden runner
-        uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7  # v2.10.1
+        uses: step-security/harden-runner@a5ad31d6a139d249332a2605b85202e8c0b78450  # v2.19.1
         with:
           egress-policy: audit
       - name: Check security scan results
