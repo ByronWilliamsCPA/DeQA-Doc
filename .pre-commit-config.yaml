@@ -84,3 +84,21 @@ repos:
       - id: ruff-format
         files: ^DeQA-Score/src/uncertainty/
         stages: [pre-commit]
+
+  # ============================================================================
+  # Renovate config validation (PC-015)
+  # NOTE: `rev` pins the hook-WRAPPER repo (renovatebot/pre-commit-hooks). The
+  # validator RUNTIME is pinned separately, via additional_dependencies, to
+  # renovate@42.92.14 to match the homelab self-hosted Renovate server. These
+  # two versions are intentionally different and must NOT be "aligned": the
+  # default v43+ validator silently accepts invalid manager IDs (e.g. "uv")
+  # that the v42 server rejects, so the v42 runtime pin is what makes this hook
+  # catch the trap. Bump the runtime pin in lockstep with the homelab image;
+  # PC-015 in docs/standards-manifest.yaml is the source of truth.
+  # ============================================================================
+  - repo: https://github.com/renovatebot/pre-commit-hooks
+    rev: 2a27c9fda39c7c05bc7488a10920c7700979c263  # v43.150.0 (wrapper only; runtime pinned below)
+    hooks:
+      - id: renovate-config-validator
+        additional_dependencies: ["renovate@42.92.14"]
+        stages: [pre-commit]
