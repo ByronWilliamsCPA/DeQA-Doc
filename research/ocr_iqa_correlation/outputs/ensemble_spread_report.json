@@ -1,0 +1,248 @@
+{
+  "description": "Multi-engine CER ensemble and inter-engine spread analysis",
+  "ensemble_correlations": {
+    "traditional": {
+      "engines": [
+        "tesseract",
+        "easyocr",
+        "rapidocr"
+      ],
+      "n_engines": 3,
+      "srcc": -0.6777,
+      "srcc_pvalue": 3.7210324085479907e-162,
+      "plcc": -0.5489,
+      "plcc_pvalue": 2.187945879047574e-95,
+      "n_samples": 1200,
+      "mean_ensemble_cer": 0.6152
+    },
+    "neural": {
+      "engines": [
+        "paddleocr",
+        "doctr"
+      ],
+      "n_engines": 2,
+      "srcc": -0.6596,
+      "srcc_pvalue": 9.920029100530833e-151,
+      "plcc": -0.6184,
+      "plcc_pvalue": 1.6016461627161073e-127,
+      "n_samples": 1200,
+      "mean_ensemble_cer": 0.3115
+    },
+    "vlm": {
+      "engines": [
+        "glm-ocr",
+        "deepseek-ocr2"
+      ],
+      "n_engines": 2,
+      "srcc": -0.3882,
+      "srcc_pvalue": 1.8980833219787668e-44,
+      "plcc": -0.1871,
+      "plcc_pvalue": 6.481564511281507e-11,
+      "n_samples": 1200,
+      "mean_ensemble_cer": 0.7532
+    },
+    "traditional+neural": {
+      "engines": [
+        "tesseract",
+        "easyocr",
+        "rapidocr",
+        "paddleocr",
+        "doctr"
+      ],
+      "n_engines": 5,
+      "srcc": -0.6935,
+      "srcc_pvalue": 8.52288850441051e-173,
+      "plcc": -0.6247,
+      "plcc_pvalue": 7.306716249812039e-131,
+      "n_samples": 1200,
+      "mean_ensemble_cer": 0.4937
+    },
+    "non_vlm": {
+      "engines": [
+        "tesseract",
+        "easyocr",
+        "rapidocr",
+        "paddleocr",
+        "doctr",
+        "gcloud_vision",
+        "kraken"
+      ],
+      "n_engines": 7,
+      "srcc": -0.6948,
+      "srcc_pvalue": 1.059091715293563e-173,
+      "plcc": -0.6364,
+      "plcc_pvalue": 3.275603194533217e-137,
+      "n_samples": 1200,
+      "mean_ensemble_cer": 0.5312
+    },
+    "top4_correlated": {
+      "engines": [
+        "paddleocr",
+        "tesseract",
+        "easyocr",
+        "doctr"
+      ],
+      "n_engines": 4,
+      "srcc": -0.7097,
+      "srcc_pvalue": 1.8390858726005793e-184,
+      "plcc": -0.663,
+      "plcc_pvalue": 7.765883008915148e-153,
+      "n_samples": 1200,
+      "mean_ensemble_cer": 0.4922
+    },
+    "all": {
+      "engines": [
+        "tesseract",
+        "easyocr",
+        "rapidocr",
+        "paddleocr",
+        "doctr",
+        "gcloud_vision",
+        "kraken",
+        "glm-ocr",
+        "deepseek-ocr2"
+      ],
+      "n_engines": 9,
+      "srcc": -0.6488,
+      "srcc_pvalue": 2.8018832045564714e-144,
+      "plcc": -0.3408,
+      "plcc_pvalue": 5.142516012530472e-34,
+      "n_samples": 1200,
+      "mean_ensemble_cer": 0.5805
+    }
+  },
+  "spread_analysis": {
+    "engines": [
+      "tesseract",
+      "easyocr",
+      "rapidocr",
+      "paddleocr",
+      "doctr",
+      "gcloud_vision",
+      "kraken"
+    ],
+    "n_engines": 7,
+    "spread_vs_mos": {
+      "srcc": 0.278,
+      "srcc_pvalue": 9.605728039222537e-23,
+      "plcc": 0.1758,
+      "plcc_pvalue": 8.749009119537328e-10,
+      "n": 1200
+    },
+    "spread_vs_mean_cer": {
+      "srcc": -0.4735,
+      "srcc_pvalue": 4.280550118757017e-68
+    },
+    "per_tier": {
+      "ORIGINAL": {
+        "mean_spread": 0.2463,
+        "std_spread": 0.0765,
+        "mean_cer": 0.4125,
+        "n": 200
+      },
+      "PRISTINE": {
+        "mean_spread": 0.2463,
+        "std_spread": 0.0765,
+        "mean_cer": 0.4125,
+        "n": 200
+      },
+      "HIGH": {
+        "mean_spread": 0.2664,
+        "std_spread": 0.1151,
+        "mean_cer": 0.5558,
+        "n": 200
+      },
+      "MEDIUM": {
+        "mean_spread": 0.2678,
+        "std_spread": 0.0986,
+        "mean_cer": 0.569,
+        "n": 200
+      },
+      "LOW": {
+        "mean_spread": 0.2533,
+        "std_spread": 0.0876,
+        "mean_cer": 0.6216,
+        "n": 200
+      },
+      "DEGRADED": {
+        "mean_spread": 0.2703,
+        "std_spread": 0.1638,
+        "mean_cer": 0.6156,
+        "n": 200
+      }
+    }
+  },
+  "zscore_ensemble": {
+    "engines": [
+      "tesseract",
+      "easyocr",
+      "rapidocr",
+      "paddleocr",
+      "doctr",
+      "gcloud_vision",
+      "kraken"
+    ],
+    "srcc": -0.7106,
+    "srcc_pvalue": 3.774481442743381e-185,
+    "plcc": -0.6641,
+    "plcc_pvalue": 1.7759833380110963e-153,
+    "n_samples": 1200
+  },
+  "paired_ensemble": {
+    "top4_correlated": {
+      "engines": [
+        "paddleocr",
+        "tesseract",
+        "easyocr",
+        "doctr"
+      ],
+      "n_engines": 4,
+      "paired_srcc": -0.7854,
+      "paired_srcc_pvalue": 3.880667146735166e-210,
+      "paired_plcc": -0.6859,
+      "paired_plcc_pvalue": 6.2183199820765845e-140,
+      "n_pairs": 1000
+    },
+    "non_vlm": {
+      "engines": [
+        "tesseract",
+        "easyocr",
+        "rapidocr",
+        "paddleocr",
+        "doctr",
+        "gcloud_vision",
+        "kraken"
+      ],
+      "n_engines": 7,
+      "paired_srcc": -0.7867,
+      "paired_srcc_pvalue": 2.7161526869286015e-211,
+      "paired_plcc": -0.6681,
+      "paired_plcc_pvalue": 2.8497402614857503e-130,
+      "n_pairs": 1000
+    },
+    "all": {
+      "engines": [
+        "tesseract",
+        "easyocr",
+        "rapidocr",
+        "paddleocr",
+        "doctr",
+        "gcloud_vision",
+        "kraken",
+        "glm-ocr",
+        "deepseek-ocr2"
+      ],
+      "n_engines": 9,
+      "paired_srcc": -0.7451,
+      "paired_srcc_pvalue": 9.650815502378388e-178,
+      "paired_plcc": -0.2759,
+      "paired_plcc_pvalue": 6.263844368082839e-19,
+      "n_pairs": 1000
+    }
+  },
+  "best_single_engine": {
+    "engine": "paddleocr",
+    "srcc": -0.658,
+    "note": "PP-OCRv5 \u2014 strongest single-engine SRCC"
+  }
+}
