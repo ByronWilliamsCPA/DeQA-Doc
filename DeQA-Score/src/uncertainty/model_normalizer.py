@@ -2,7 +2,7 @@
 
 Fits mean/std per model on DIQA-5000 predictions, then normalizes new
 predictions to a common scale. Critical: normalization parameters MUST
-come from in-distribution data only — never fit on OOD data.
+come from in-distribution data only, never fit on OOD data.
 
 Serialization follows the OODDetectorWrapper.from_npz() pattern.
 """
@@ -31,7 +31,7 @@ class ModelNormalizer:
     """Z-score normalizer fitted on in-distribution model predictions.
 
     Fits per-model mean/std on DIQA-5000, then applies the same transform
-    to any new predictions. This preserves the spread signal — if models
+    to any new predictions. This preserves the spread signal, if models
     agree on ID data but disagree on OOD data, normalized spread will be
     larger for OOD.
 

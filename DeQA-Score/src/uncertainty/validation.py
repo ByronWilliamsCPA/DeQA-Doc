@@ -303,7 +303,7 @@ class PseudoLabelValidator:
             if rate > 0.95 and total >= 10:
                 logger.warning(
                     "BLIND SPOT WARNING: category '%s' has %.1f%% auto-accept rate "
-                    "(%d samples) — may indicate shared model blind spot",
+                    "(%d samples), may indicate shared model blind spot",
                     cat,
                     rate * 100,
                     total,

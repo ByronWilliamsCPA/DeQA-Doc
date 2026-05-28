@@ -5,11 +5,11 @@ pseudo-label should be accepted, down-weighted, sent to Tier-2 VLM validation,
 or rejected entirely.
 
 Signals:
-    1. Mahalanobis distance (d_M) — epistemic/OOD from SigLIP2 embeddings
-    2. Cross-model JSD — epistemic/disagreement between SigLIP2 and DeQA
-    3. SigLIP2 σ² — aleatoric uncertainty from GaussianNLL output
-    4. SigLIP2 entropy — H(discretized level_probs), free signal
-    5. Model spread — SD across normalized predictions from 3+ architecturally
+    1. Mahalanobis distance (d_M), epistemic/OOD from SigLIP2 embeddings
+    2. Cross-model JSD, epistemic/disagreement between SigLIP2 and DeQA
+    3. SigLIP2 σ², aleatoric uncertainty from GaussianNLL output
+    4. SigLIP2 entropy, H(discretized level_probs), free signal
+    5. Model spread, SD across normalized predictions from 3+ architecturally
        diverse models (SigLIP2 + DeQA specialist + Qwen2.5-VL-7B).
        Only evaluated when n_spread_models >= 2; backward-compatible default=0.0.
 """
@@ -35,7 +35,7 @@ class AcceptanceTier(str, Enum):
     AUTO_ACCEPT = "auto_accept"  # Full confidence (weight=1.0)
     LOW_WEIGHT = "low_weight"  # Accept with reduced weight (0.3-0.6)
     TIER2_TRIGGER = "tier2_trigger"  # Send to VLM for veto validation
-    HARD_REJECT = "hard_reject"  # Extremely OOD — skip entirely
+    HARD_REJECT = "hard_reject"  # Extremely OOD, skip entirely
 
 
 @dataclass(frozen=True)
