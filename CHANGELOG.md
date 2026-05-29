@@ -30,6 +30,26 @@ human-labeled DIQA-5000 images.
   active learning (`scripts/run_active_learning.py`), and OOD checkpoint
   validation (`scripts/validate_ood_checkpoint.py`).
 
+### Changed
+
+- Set `requires-python` to `>=3.10,<3.12` (the torch 2.0.1 cu118 wheel range),
+  so all transitive security floors resolve unconditionally with no vulnerable
+  Python 3.8/3.9 fallback.
+- Lowered the training `deepspeed` pin to `0.14.5`, the highest release still
+  compatible with the mandatory `pydantic<2` pin (0.15.x requires pydantic v2).
+
+### Removed
+
+- Removed the unused upstream `gradio` / `gradio_client` web-demo stack (and its
+  transitive web dependencies); it is not imported by any train/infer/eval path.
+
+### Security
+
+- Raised transitive dependency floors (idna, pillow, urllib3, requests,
+  starlette, h11, certifi, GitPython, pygments, filelock) to patched releases.
+- Documented residual unfixable CVEs (transformers, torch, sentencepiece,
+  scikit-learn, deepspeed/CVE-2024-43497) in `docs/known-vulnerabilities.md`.
+
 ## Baseline
 
 The upstream DeQA-Doc history was not previously tracked in a changelog. The

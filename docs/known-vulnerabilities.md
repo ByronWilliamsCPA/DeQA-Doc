@@ -18,8 +18,9 @@ tags:
 > residuals below stem from those pins. The remediation pass on
 > `fix/deps-vulnerability-remediation` removed the unused `gradio` web-demo
 > stack and raised every transitive floor that could be raised without
-> breaking a pin. Merging main (PR #19) raised `requires-python` to
-> `>=3.14,<3.15`, resolving all former Python-version-gated residuals.
+> breaking a pin. `requires-python` is `>=3.10,<3.12` (the torch 2.0.1 cu118
+> wheel range), so every transitive security floor applies unconditionally
+> with no vulnerable Python 3.8/3.9 fallback.
 
 Reassessment cadence: 2026-07-27 (60 days from documentation date 2026-05-28),
 unless an earlier review is triggered by a release that loosens a pin.
@@ -89,12 +90,38 @@ input.
 **Planned resolution**: Tied to the same model-stack migration as transformers.
 No committed timeline.
 
-### deepspeed: resolved in merge from main
+### deepspeed 0.14.5: PYSEC-2024-109 / CVE-2024-43497 (1 alert)
 
-`deepspeed` was previously pinned at `0.9.5` (advisory PYSEC-2024-109). This was
-remediated by [#14](https://github.com/ByronWilliamsCPA/DeQA-Doc/pull/14), which
-updated the pin to `deepspeed==0.15.1` (the patched release). Merged to this
-branch on 2026-05-29. No remaining alert.
+| Field | Value |
+| --- | --- |
+| **Severity** | High (remote code execution) |
+| **Affected package** | deepspeed == 0.14.5 (train extra only) |
+| **Patched version** | 0.15.1 (requires `pydantic>=2`, incompatible with the pinned `pydantic<2`) |
+| **Advisory** | PYSEC-2024-109 / CVE-2024-43497 |
+| **Date documented** | 2026-05-28 |
+| **Reassessment due** | 2026-07-27 |
+
+**Exploitation scenario**: CVE-2024-43497 is an RCE reachable through crafted
+DeepSpeed configuration input. In this project DeepSpeed is used only for
+training, with project-authored config (`scripts/zero3.json` and the training
+launch scripts); no attacker-supplied DeepSpeed config is ever loaded.
+
+**Why deferred**: [#14](https://github.com/ByronWilliamsCPA/DeQA-Doc/pull/14)
+bumped the pin to `deepspeed==0.15.1` (the first patched release), but DeepSpeed
+0.15.x requires `pydantic>=2`, which conflicts with the mandatory `pydantic<2`
+pin from the mPLUG-Owl2 stack. That bump made the `train` extra unsatisfiable
+(`uv lock` fails), so the pin was lowered to `deepspeed==0.14.5` (the highest
+release still compatible with `pydantic<2`). 0.14.5 predates the 0.15.1 fix, so
+the advisory is an accepted residual. DeepSpeed is an optional, training-only
+dependency.
+
+**Compensating control**: DeepSpeed runs only in controlled GPU training
+environments with project-owned configuration; it is not exposed to untrusted
+input and is absent from the inference/eval paths.
+
+**Planned resolution**: Fixed when the model stack migrates off `pydantic<2`
+(tied to the same mPLUG-Owl2 -> Qwen2.5-VL migration as transformers/torch),
+which unblocks `deepspeed>=0.15.1`. No committed timeline.
 
 ---
 
@@ -162,14 +189,15 @@ then bump. Tied to the model-stack revalidation.
 
 ---
 
-## Category C: Python 3.8 floor fallbacks (resolved — requires-python raised to >=3.14)
+## Category C: Python 3.8 floor fallbacks (resolved: requires-python set to >=3.10,<3.12)
 
 The project previously kept `requires-python = ">=3.8,<3.12"` and used
 `python_full_version` markers to apply security floors only on newer Pythons,
-leaving vulnerable fallbacks for Python 3.8. PR #19 on main raised
-`requires-python` to `>=3.14,<3.15`, which makes Python 3.8/3.9/3.10 impossible
-to install. All packages in this table now unconditionally resolve to their
-patched floors. No residuals remain from this category.
+leaving vulnerable fallbacks for Python 3.8/3.9. `requires-python` is now
+`>=3.10,<3.12`: the narrowest range where every floor below resolves to its
+patched release with no vulnerable fallback, while still inside the torch 2.0.1
+cu118 wheel set (cp310/cp311). All packages in this table now unconditionally
+resolve to their patched floors. No residuals remain from this category.
 
 | Package | Former py3.8 fallback | Now-required floor | Advisory | Severity |
 | --- | --- | --- | --- | --- |
@@ -181,7 +209,7 @@ patched floors. No residuals remain from this category.
 | starlette | 0.44.0 | 0.49.3 | GHSA-7f5h-v6xp-fcq8, GHSA-2c2j-9gv5-cj73 | High/Medium |
 | filelock | <3.20.1 | 3.20.1 | (advisory TBD) | Low |
 
-**Resolved**: 2026-05-29 (merge of main → this branch, `requires-python` raised).
+**Resolved**: 2026-05-29 (`requires-python` set to `>=3.10,<3.12`; floors apply unconditionally).
 
 ### starlette PYSEC-2026-161 (forward-looking)
 
