@@ -97,7 +97,7 @@ No committed timeline.
 | **Severity** | High (remote code execution) |
 | **Affected package** | deepspeed == 0.14.5 (train extra only) |
 | **Patched version** | 0.15.1 (requires `pydantic>=2`, incompatible with the pinned `pydantic<2`) |
-| **Advisory** | PYSEC-2024-109 / CVE-2024-43497 |
+| **Advisory** | PYSEC-2024-109 / CVE-2024-43497 / GHSA-8cp5-3rf8-8gfh |
 | **Date documented** | 2026-05-28 |
 | **Reassessment due** | 2026-07-27 |
 
@@ -117,7 +117,9 @@ dependency.
 
 **Compensating control**: DeepSpeed runs only in controlled GPU training
 environments with project-owned configuration; it is not exposed to untrusted
-input and is absent from the inference/eval paths.
+input and is absent from the inference/eval paths. The Dependency Review CI
+gates allow-list `GHSA-8cp5-3rf8-8gfh` so this tracked residual does not block
+merges; the allow-list entry is removed when the pin moves to `>=0.15.1`.
 
 **Planned resolution**: Fixed when the model stack migrates off `pydantic<2`
 (tied to the same mPLUG-Owl2 -> Qwen2.5-VL migration as transformers/torch),

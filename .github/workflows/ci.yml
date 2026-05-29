@@ -121,6 +121,11 @@ jobs:
         uses: actions/dependency-review-action@2031cfc080254a8a887f58cffee85186f0e49e48  # v4.9.0
         with:
           fail-on-severity: high
+          # Accepted residual: deepspeed (training-only) has no release that
+          # both fixes this RCE (<0.15.1) and keeps pydantic<2 (0.15.x needs
+          # pydantic>=2). Tracked in docs/known-vulnerabilities.md (reassess
+          # 2026-07-27; cleared by the pydantic-v2 / model-stack migration).
+          allow-ghsas: GHSA-8cp5-3rf8-8gfh
           comment-summary-in-pr: always
 
   # Aggregating gate that emits the exact context required by the org ruleset

@@ -31,4 +31,8 @@ jobs:
           # OSI-style); added so raising the Pillow security floor does not trip
           # the license gate.
           allow-licenses: MIT, MIT-CMU, HPND, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, MPL-2.0, LGPL-2.1, LGPL-3.0, Python-2.0, Unlicense, CC0-1.0, GPL-3.0-or-later
+          # Accepted residual: deepspeed (training-only) has no release that
+          # both fixes this RCE (<0.15.1) and keeps pydantic<2. Tracked in
+          # docs/known-vulnerabilities.md (reassess 2026-07-27).
+          allow-ghsas: GHSA-8cp5-3rf8-8gfh
           comment-summary-in-pr: on-failure
