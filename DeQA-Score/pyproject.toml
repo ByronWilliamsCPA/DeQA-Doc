@@ -27,7 +27,7 @@ dependencies = [
     "numpy",
     "scikit-learn==1.2.2",
     "gradio==3.35.2",
-    "gradio_client==0.2.9",
+    "gradio_client==2.5.0",
     "requests",
     "httpx>=0.24.0",
     "uvicorn",
