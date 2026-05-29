@@ -179,7 +179,7 @@ patched floors. No residuals remain from this category.
 | pytest (dev) | 8.3.5 | 9.0.3 | CVE-2025-71176 / GHSA-6w46-j5rx-g56g | Medium |
 | pygments | 2.19.2 | 2.20.0 | CVE-2026-4539 | Low |
 | starlette | 0.44.0 | 0.49.3 | GHSA-7f5h-v6xp-fcq8, GHSA-2c2j-9gv5-cj73 | High/Medium |
-| filelock | &lt;3.20.1 | 3.20.1 | (advisory TBD) | Low |
+| filelock | <3.20.1 | 3.20.1 | (advisory TBD) | Low |
 
 **Resolved**: 2026-05-29 (merge of main → this branch, `requires-python` raised).
 
