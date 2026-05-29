@@ -1,7 +1,10 @@
 MIT License
 
 Copyright (c) 2025 Depicted image Quality Assessment (DepictQA / DeQA)
-Copyright (c) 2025-2026 Byron Williams (DeQA-Doc fork)
+  [zhiyuanyou/DeQA-Score, https://github.com/zhiyuanyou/DeQA-Score]
+Copyright (c) 2025 Junjie Gao et al. (DeQA-Doc adaptation)
+  [Junjie-Gao19/DeQA-Doc, https://github.com/Junjie-Gao19/DeQA-Doc]
+Copyright (c) 2025-2026 Byron Williams (ByronWilliamsCPA/DeQA-Doc fork)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,3 +23,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+Attribution and scope notes (not part of the MIT grant):
+
+The MIT terms above are inherited from zhiyuanyou/DeQA-Score, which is
+MIT-licensed; its copyright notice (first line) is preserved as required.
+This fork derives from Junjie-Gao19/DeQA-Doc, which carries no repository-level
+license of its own. The MIT grant here applies cleanly to (a) the DeQA-Score
+subtree and (b) original contributions by Byron Williams. Contributions
+originating solely from Junjie-Gao19/DeQA-Doc are included under good-faith
+academic-research norms; for commercial use of that material, seek permission
+from that author. The bracketed source URLs are clarifying references, not
+additional license terms.
