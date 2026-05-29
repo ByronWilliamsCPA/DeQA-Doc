@@ -2,7 +2,7 @@
 
 Computes per-image spread (standard deviation of z-score-normalized
 predictions across architecturally diverse models) as an epistemic
-uncertainty signal. High spread indicates models disagree, a strong
+uncertainty signal. High spread indicates models disagree and is a strong
 proxy for out-of-distribution documents.
 
 Research basis: research/correlation/ood_spread_analysis.py demonstrated
@@ -11,7 +11,7 @@ uncorrelated to prediction error on ID data (pure OOD signal).
 
 Ensemble: SigLIP2 (vision regression) + DeQA specialist (mPLUG-Owl2
 generative) + Qwen2.5-VL-7B (Qwen generative). Architectural diversity
-is critical, homogeneous models produce weak spread signal.
+is critical because homogeneous models produce a weak spread signal.
 """
 
 from __future__ import annotations

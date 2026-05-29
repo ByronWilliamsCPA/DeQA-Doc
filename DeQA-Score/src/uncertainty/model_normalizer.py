@@ -31,7 +31,7 @@ class ModelNormalizer:
     """Z-score normalizer fitted on in-distribution model predictions.
 
     Fits per-model mean/std on DIQA-5000, then applies the same transform
-    to any new predictions. This preserves the spread signal, if models
+    to any new predictions. This preserves the spread signal: if models
     agree on ID data but disagree on OOD data, normalized spread will be
     larger for OOD.
 

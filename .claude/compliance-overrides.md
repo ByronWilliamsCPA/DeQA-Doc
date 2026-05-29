@@ -28,9 +28,16 @@ corresponding entry here, and vice versa.
      is forked from an upstream paper implementation, uses its own style, carries
      Chinese-language comments, and lacks type annotations and docstrings.
      It is intentionally exempt from strict org tooling.
-  2. **New project code**: `results/` and `DeQA-Score/src/uncertainty/`. New
-     modules follow org standards (conventional commits, type hints, docstrings,
-     Ruff formatting) and are the only paths that should be strictly checked.
+  2. **New production code**: `DeQA-Score/src/uncertainty/`. This is the only
+     path held to full org standards (conventional commits, type hints,
+     docstrings, Ruff formatting) and the only path strictly linted by
+     `.pre-commit-config.yaml` and CI.
+  3. **Research / experiment scripts**: `results/`. These are one-off
+     experiment and analysis scripts. They follow org commit conventions but
+     are deliberately excluded from strict Ruff enforcement in both
+     `.pre-commit-config.yaml` and `.qlty/qlty.toml`, which classify `results/`
+     as research code rather than production code. Do not strictly lint or
+     reformat them.
 
 ## Active Overrides
 
@@ -142,9 +149,9 @@ mistake them for accepted overrides.
   it contains a real vulnerability-reporting process and supported-version
   policy.
 - **CI lint steps are warnings-only.** Current CI lint steps emit
-  `|| echo ::warning::` rather than blocking. New code in `results/` and
-  `DeQA-Score/src/uncertainty/` is held to org standards, so once those paths
-  are lint-clean, make their lint steps blocking instead of advisory.
+  `|| echo ::warning::` rather than blocking. The production pipeline path
+  `DeQA-Score/src/uncertainty/` is held to org standards, so once it is
+  lint-clean, make its lint step blocking instead of advisory.
 
 ## How to Use
 
