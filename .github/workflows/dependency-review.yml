@@ -27,5 +27,8 @@ jobs:
         uses: actions/dependency-review-action@2031cfc080254a8a887f58cffee85186f0e49e48 # v4.9.0
         with:
           fail-on-severity: high
-          allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, MPL-2.0, LGPL-2.1, LGPL-3.0, Python-2.0, Unlicense, CC0-1.0, GPL-3.0-or-later
+          # MIT-CMU and HPND are Pillow's SPDX license identifiers (permissive,
+          # OSI-style); added so raising the Pillow security floor does not trip
+          # the license gate.
+          allow-licenses: MIT, MIT-CMU, HPND, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, MPL-2.0, LGPL-2.1, LGPL-3.0, Python-2.0, Unlicense, CC0-1.0, GPL-3.0-or-later
           comment-summary-in-pr: on-failure
