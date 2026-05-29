@@ -1,0 +1,581 @@
+{
+  "repo": "byronwilliamscpa/deqa-doc",
+  "generated_at": "2026-05-29T00:00:00Z",
+  "commit": "c7e7593",
+  "findings": [
+    {
+      "id": "CICD-01",
+      "title": "Compat matrix points at nonexistent src/tests and unsupported Python",
+      "domain": "cicd",
+      "severity": "High",
+      "effort": "S",
+      "files": [
+        ".github/workflows/python-compatibility.yml"
+      ],
+      "evidence": "python-compatibility.yml:9-21,40-46 filters paths src/** and tests/** and sets source-directory 'src' but repo has no top-level src/ or tests/; matrix includes Python 3.12/3.13 while pyproject pins >=3.10,<3.12.",
+      "recommendation": "Point source-directory, path filters, and test command at DeQA-Score/; drop 3.12/3.13 until torch upgrade.",
+      "cve": ""
+    },
+    {
+      "id": "CICD-02",
+      "title": "Production code linted only by local pre-commit, never in CI",
+      "domain": "cicd",
+      "severity": "High",
+      "effort": "S",
+      "files": [
+        ".pre-commit-config.yaml",
+        ".github/workflows/ci.yml"
+      ],
+      "evidence": "ruff on DeQA-Score/src/uncertainty/ exists only in .pre-commit-config.yaml:79-88; no workflow runs pre-commit (grep empty); CI ruff targets results/ only.",
+      "recommendation": "Add a blocking CI job running pre-commit run --all-files or scoped ruff on src/uncertainty/.",
+      "cve": ""
+    },
+    {
+      "id": "DOC-01",
+      "title": "Documented 'from src import Scorer' raises AttributeError",
+      "domain": "docs",
+      "severity": "High",
+      "effort": "S",
+      "files": [
+        "CLAUDE.md",
+        "DeQA-Score/README.md",
+        "DeQA-Score/src/__init__.py"
+      ],
+      "evidence": "CLAUDE.md:42 and README.md:103 show 'from src import Scorer'; src/__init__.py __getattr__ returns only MPLUGOwl2LlamaForCausalLM and raises AttributeError otherwise; Scorer is in src/evaluate/scorer.py:14.",
+      "recommendation": "Re-export Scorer in src/__init__.py or fix both docs to 'from src.evaluate.scorer import Scorer'.",
+      "cve": ""
+    },
+    {
+      "id": "ARCH-02",
+      "title": "Dimension name split: color vs color_fidelity",
+      "domain": "architecture",
+      "severity": "High",
+      "effort": "S",
+      "files": [
+        "research/papers/shared/constants.py",
+        "DeQA-Score/src/uncertainty/pseudo_label.py",
+        "modal/siglip2_v2_model.py"
+      ],
+      "evidence": "research/papers/shared/constants.py:18 uses 'color_fidelity'; pseudo_label.py:27, siglip2_v2_model.py:30, run_sweep.py:48, results/siglip2_v2_pseudo_label_validation/*.py use 'color'. Dicts keyed on one spelling miss the other.",
+      "recommendation": "Add canonical DIMENSIONS to src/constants.py (use 'color'), import everywhere, fix the color_fidelity spelling.",
+      "cve": ""
+    },
+    {
+      "id": "ARCH-01",
+      "title": "Quality-level constants re-declared in 9+ modules",
+      "domain": "architecture",
+      "severity": "High",
+      "effort": "M",
+      "files": [
+        "DeQA-Score/src/uncertainty/cross_validator.py",
+        "DeQA-Score/src/uncertainty/format_training_data.py",
+        "DeQA-Score/src/expansion/iqa_to_deqa.py",
+        "modal/run_deqa_ocr_iqa.py",
+        "research/ocr_iqa_correlation/deqa/scorer_wrapper.py"
+      ],
+      "evidence": "LEVEL_NAMES = [excellent,good,fair,poor,bad] redefined verbatim in 7+ modules outside src/constants.py:16, which already exports it and is imported by the core.",
+      "recommendation": "Import LEVEL_NAMES/LEVEL_PREFIX from src.constants in the satellite modules and delete local copies.",
+      "cve": ""
+    },
+    {
+      "id": "CQ-01",
+      "title": "No real coverage measurement despite a coverage pipeline",
+      "domain": "code-quality",
+      "severity": "High",
+      "effort": "M",
+      "files": [
+        ".github/workflows/coverage.yml",
+        ".github/workflows/ci.yml",
+        ".github/workflows/python-compatibility.yml"
+      ],
+      "evidence": "coverage.yml:30-33 downloads coverage-reports/coverage.xml on CI success but ci.yml runs no pytest and uploads no coverage artifact; python-compatibility.yml:46 sets coverage-report:false. No coverage figure exists.",
+      "recommendation": "Run the non-torch test subset in CI with pytest --cov and upload coverage.xml, or remove coverage.yml.",
+      "cve": ""
+    },
+    {
+      "id": "DEP-01",
+      "title": "Core ML stack pinned to 2-3 year old releases",
+      "domain": "dependencies",
+      "severity": "High",
+      "effort": "L",
+      "files": [
+        "DeQA-Score/pyproject.toml"
+      ],
+      "evidence": "pyproject.toml:16-29: torch==2.0.1 (2023-05-08), transformers==4.36.1 (2023-12-18), accelerate==0.21.0 (2023-07), peft==0.4.0 (2023-07), scikit-learn==1.2.2 (2023-03), timm==0.6.13 (2023-01); all >18 months as of 2026-05-29.",
+      "recommendation": "Keep pins (required/documented) but track the model-stack migration as a dated epic, not an open deferral.",
+      "cve": ""
+    },
+    {
+      "id": "DEP-02",
+      "title": "torch 2.0.1 caps runtime at Python 3.11 / CUDA 11.8",
+      "domain": "dependencies",
+      "severity": "High",
+      "effort": "L",
+      "files": [
+        "DeQA-Score/pyproject.toml"
+      ],
+      "evidence": "pyproject.toml:11 requires-python >=3.10,<3.12; torch 2.0.1 cu118 wheels only for py3.8-3.11. Python 3.10 EOL 2026-10 (~5 months out). CUDA 11.8 two generations behind.",
+      "recommendation": "Plan the 3.12 move with the torch upgrade; do not let 3.10 reach EOL as the floor. Document CUDA 11.8 in README.",
+      "cve": ""
+    },
+    {
+      "id": "LEG-01",
+      "title": "Vendored transformers internals coupled to the transformers==4.36.1 pin",
+      "domain": "legacy-code",
+      "severity": "High",
+      "effort": "L",
+      "files": [
+        "DeQA-Score/src/model/modeling_llama2.py",
+        "DeQA-Score/src/model/modeling_attn_mask_utils.py",
+        "DeQA-Score/src/model/modeling_mplug_owl2.py"
+      ],
+      "evidence": "modeling_llama2.py:14-23,35 imports private transformers.models.llama symbols and does 'import *'; :859 monkeypatches LlamaFlashAttention2; modeling_attn_mask_utils.py is a verbatim HF copy. pyproject.toml:18 pins transformers==4.36.1; any bump breaks these.",
+      "recommendation": "Record the exact transformers version these internals track in a code comment; do not unvendor without re-running training.",
+      "cve": ""
+    },
+    {
+      "id": "DEP-03",
+      "title": "research/ocr_iqa_correlation has no lockfile",
+      "domain": "dependencies",
+      "severity": "Medium",
+      "effort": "S",
+      "files": [
+        "research/ocr_iqa_correlation/pyproject.toml"
+      ],
+      "evidence": "No research/ocr_iqa_correlation/uv.lock; ranged deps (jiwer>=3.0, datasets>=2.14, docling>=2.0, google-cloud-vision>=3.0) make builds non-reproducible.",
+      "recommendation": "Run uv lock and commit the lockfile, or fold deps into a root optional extra.",
+      "cve": ""
+    },
+    {
+      "id": "LEG-02",
+      "title": "sys.path.insert import hack in vendored model loader",
+      "domain": "legacy-code",
+      "severity": "Medium",
+      "effort": "S",
+      "files": [
+        "DeQA-Score/src/model/modeling_llama2.py"
+      ],
+      "evidence": "modeling_llama2.py:30-31 inserts dir into sys.path before a try/except relative import of .modeling_attn_mask_utils; the relative import already works, making the insert redundant.",
+      "recommendation": "Remove the redundant sys.path insert if the file is ever touched.",
+      "cve": ""
+    },
+    {
+      "id": "SEC-01",
+      "title": "No git-history secret scan and no detect-secrets baseline",
+      "domain": "security",
+      "severity": "Medium",
+      "effort": "S",
+      "files": [
+        ".pre-commit-config.yaml",
+        ".github/workflows/ci.yml"
+      ],
+      "evidence": ".pre-commit-config.yaml:34-40 trufflehog scans staged files only; CI uses a regex grep not a scanner; no .secrets.baseline exists. A secret committed earlier or in a missed file type is not caught.",
+      "recommendation": "Add a CI job running trufflehog/gitleaks in full-history mode on push to main.",
+      "cve": ""
+    },
+    {
+      "id": "CICD-03",
+      "title": "CI ruff/bandit gates are advisory-only",
+      "domain": "cicd",
+      "severity": "Medium",
+      "effort": "S",
+      "files": [
+        ".github/workflows/ci.yml"
+      ],
+      "evidence": "ci.yml ruff-format, ruff-lint, and bandit steps end in '|| echo \"::warning::\"', so failures become annotations and the job still passes. Only the secret grep and .env check can fail.",
+      "recommendation": "Drop the '|| echo' fallback on at least the ruff lint step so lint regressions block merge.",
+      "cve": ""
+    },
+    {
+      "id": "CICD-04",
+      "title": "Redundant coverage uploaders consuming a missing artifact",
+      "domain": "cicd",
+      "severity": "Medium",
+      "effort": "S",
+      "files": [
+        ".github/workflows/coverage.yml",
+        ".github/workflows/qlty.yml"
+      ],
+      "evidence": "coverage.yml:18-33 and qlty.yml:13-27 both trigger on workflow_run CI completed and both call python-qlty-coverage.yml with coverage-artifact-name coverage-reports; CI produces no such artifact.",
+      "recommendation": "Delete one workflow; make the survivor depend on a CI step that emits coverage.xml.",
+      "cve": ""
+    },
+    {
+      "id": "CICD-05",
+      "title": "Contradictory CodeQL setup instructions",
+      "domain": "cicd",
+      "severity": "Medium",
+      "effort": "S",
+      "files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/codeql.yml"
+      ],
+      "evidence": "ci.yml comment says default setup handles CodeQL and forbids an advanced config; codeql.yml is an advanced config (init+analyze, security-extended) and says default setup must be DISABLED. The two cannot both hold.",
+      "recommendation": "Confirm default setup is disabled and delete the stale contradicting comment in ci.yml.",
+      "cve": ""
+    },
+    {
+      "id": "CICD-06",
+      "title": "Mutable @main reference for a reusable workflow",
+      "domain": "cicd",
+      "severity": "Medium",
+      "effort": "S",
+      "files": [
+        ".github/workflows/qlty.yml",
+        ".github/workflows/coverage.yml"
+      ],
+      "evidence": "qlty.yml:14 and coverage.yml:26 reference python-qlty-coverage.yml@main (mutable) while compatibility/security/scorecard workflows pin their org reusable workflows to a SHA.",
+      "recommendation": "Pin the qlty/coverage reusable workflow to a commit SHA and let Renovate bump it.",
+      "cve": ""
+    },
+    {
+      "id": "DOC-02",
+      "title": "Documented GEMINI_API_KEY unused; ANTHROPIC_API_KEY undocumented",
+      "domain": "docs",
+      "severity": "Medium",
+      "effort": "S",
+      "files": [
+        "CLAUDE.md",
+        ".env.example"
+      ],
+      "evidence": "CLAUDE.md:157 says VLM scripts require GEMINI_API_KEY; git grep GEMINI in *.py returns 0. Code reads ANTHROPIC_API_KEY, OPENROUTER_API_KEY, GCP_SA_KEY, GOOGLE_APPLICATION_CREDENTIALS, ADOBE_CLIENT_ID/SECRET.",
+      "recommendation": "Update CLAUDE.md and .env.example to the env vars the code reads; remove or wire up GEMINI_API_KEY.",
+      "cve": ""
+    },
+    {
+      "id": "DOC-03",
+      "title": "Prior review report reads as live but findings persist",
+      "domain": "docs",
+      "severity": "Medium",
+      "effort": "S",
+      "files": [
+        "PROJECT_REVIEW_REPORT.md"
+      ],
+      "evidence": "PROJECT_REVIEW_REPORT.md dated 2026-03-09 claims 8 critical/10 high and names constants-in-5-7-locations as top finding; still present 2.5 months later (ARCH-01/02). No resolution-status column.",
+      "recommendation": "Add a status column or date each finding's state, or move the report under docs/audit/.",
+      "cve": ""
+    },
+    {
+      "id": "DOC-04",
+      "title": "Llamafactory patch-apply process underdocumented",
+      "domain": "docs",
+      "severity": "Medium",
+      "effort": "S",
+      "files": [
+        "CLAUDE.md",
+        "Llamafactory/"
+      ],
+      "evidence": "CLAUDE.md describes Llamafactory/ files as patches to copy into a LLaMA-Factory install but gives no target commit and no apply steps; the Qwen backend is not reproducible from this.",
+      "recommendation": "Add the pinned LLaMA-Factory commit and a copy/apply command to the Qwen section of CLAUDE.md.",
+      "cve": ""
+    },
+    {
+      "id": "DEP-04",
+      "title": "Manual transitive-floor list with no automated check",
+      "domain": "dependencies",
+      "severity": "Medium",
+      "effort": "M",
+      "files": [
+        "DeQA-Score/pyproject.toml"
+      ],
+      "evidence": "pyproject.toml:30-50 pins 11 transitive security floors by hand (idna, pillow, GitPython, h11, certifi, pygments, requests, starlette, urllib3, filelock). No automated check keeps the list ahead of new advisories.",
+      "recommendation": "Add a scheduled osv-scanner/pip-audit job against uv.lock to flag when a new floor is needed.",
+      "cve": ""
+    },
+    {
+      "id": "CQ-03",
+      "title": "Duplicated experiment-harness scaffolding",
+      "domain": "code-quality",
+      "severity": "Medium",
+      "effort": "M",
+      "files": [
+        "research/",
+        "results/",
+        "modal/"
+      ],
+      "evidence": "Repeated main() bodies (arg parse, env load, model x image loop, JSON write, markdown table) across results/vlm_teacher_eval/run_eval.py, full_eval/run_full_diqa_eval.py, research/vlm_calibration/evaluate_calibration.py; reset_parameters monkeypatch copied in modal/benchmark_synthetic_ood.py:707-708 and run_deqa_ocr_iqa.py:271-272.",
+      "recommendation": "Extract a shared runner if more eval arms are coming; otherwise accept the duplication.",
+      "cve": ""
+    },
+    {
+      "id": "ARCH-03",
+      "title": "Satellite tiers reach the core via 35 sys.path inserts",
+      "domain": "architecture",
+      "severity": "Medium",
+      "effort": "M",
+      "files": [
+        "research/",
+        "results/",
+        "modal/"
+      ],
+      "evidence": "git grep counts 35 sys.path.insert/append in new code; run_sweep.py:39-43 inserts a path then imports from src.uncertainty with # noqa: E402. The core is not installed as a package.",
+      "recommendation": "Install DeQA-Score as an editable package in the research/modal environments so imports resolve without path hacks.",
+      "cve": ""
+    },
+    {
+      "id": "ARCH-05",
+      "title": "Qwen backend relies on copy-into-install patching, no pinned commit",
+      "domain": "architecture",
+      "severity": "Medium",
+      "effort": "M",
+      "files": [
+        "Llamafactory/src/llamafactory/"
+      ],
+      "evidence": "CLAUDE.md states Llamafactory/ files are patches to copy into a LLaMA-Factory install; no pinned upstream version and no apply step. Patches break silently if upstream refactors the touched files.",
+      "recommendation": "Pin the exact LLaMA-Factory commit and add a one-line apply script.",
+      "cve": ""
+    },
+    {
+      "id": "CQ-02",
+      "title": "High-complexity functions in experiment scripts",
+      "domain": "code-quality",
+      "severity": "Medium",
+      "effort": "L",
+      "files": [
+        "modal/",
+        "results/",
+        "research/"
+      ],
+      "evidence": "ruff --select C901 (threshold 10) reports 40 functions over the limit, 37 in research/results/modal. Worst: dry_run_check (30), train (27), main (27,24), run_evaluations (23), compute_all_metrics (22), run_deqa_scoring (22). Only 3 are in src/.",
+      "recommendation": "Refactor the 3 in src/ when next touched; leave the run-once script tier as-is.",
+      "cve": ""
+    },
+    {
+      "id": "SEC-02",
+      "title": "Pinned dependencies with open CVEs (trusted-input control)",
+      "domain": "security",
+      "severity": "Medium",
+      "effort": "L",
+      "files": [
+        "DeQA-Score/pyproject.toml",
+        "docs/known-vulnerabilities.md"
+      ],
+      "evidence": "known-vulnerabilities.md lists 32 transformers advisories and deepspeed RCE GHSA-8cp5-3rf8-8gfh (allowlisted in dependency-review.yml). Reachable only via malicious model/tokenizer files; project loads only its own trusted artifacts.",
+      "recommendation": "Compensating control holds; keep documented, hold to 2026-07-27 reassessment. Not Critical (no untrusted-input path).",
+      "cve": "CVE-2024-3568;CVE-2025-5197;GHSA-8cp5-3rf8-8gfh"
+    },
+    {
+      "id": "DEP-05",
+      "title": "No SBOM generated",
+      "domain": "dependencies",
+      "severity": "Low",
+      "effort": "S",
+      "files": [
+        ".github/workflows/"
+      ],
+      "evidence": "No workflow emits CycloneDX/SPDX/syft output; grep matches only reuse.yml (license) and dependency-review.yml (PR diff). No artifact inventories the resolved dependency graph.",
+      "recommendation": "Add a CycloneDX SBOM step from uv.lock if release provenance matters. Low priority for an internal fork.",
+      "cve": ""
+    },
+    {
+      "id": "LEG-04",
+      "title": "os.path where pathlib fits (new code)",
+      "domain": "legacy-code",
+      "severity": "Low",
+      "effort": "S",
+      "files": [
+        "modal/",
+        "DeQA-Score/src/uncertainty/"
+      ],
+      "evidence": "Per-dir os.path counts: modal/ 7 hits, uncertainty/ 2; research and results are pathlib-first (0 os.path). Only modal/ and uncertainty/ mix both.",
+      "recommendation": "Convert residual os.path calls in modal/ and uncertainty/ to pathlib.Path. Upstream exempt.",
+      "cve": ""
+    },
+    {
+      "id": "LEG-05",
+      "title": "Bare except clauses in upstream inference/data paths",
+      "domain": "legacy-code",
+      "severity": "Low",
+      "effort": "S",
+      "files": [
+        "DeQA-Score/src/datasets/utils.py",
+        "DeQA-Score/src/evaluate/iqa_eval.py",
+        "DeQA-Score/src/evaluate/iqa_eval_qwen.py"
+      ],
+      "evidence": "3 bare 'except:' at datasets/utils.py:26, iqa_eval.py:100, iqa_eval_qwen.py:126, catching KeyboardInterrupt/SystemExit.",
+      "recommendation": "Narrow to 'except Exception:' if these files are ever modified.",
+      "cve": ""
+    },
+    {
+      "id": "LEG-06",
+      "title": "'.format()' residue in new code",
+      "domain": "legacy-code",
+      "severity": "Low",
+      "effort": "S",
+      "files": [
+        "research/threshold_sensitivity/run_sweep.py",
+        "results/vlm_teacher_eval/prompts.py",
+        "DeQA-Score/src/uncertainty/format_training_data.py"
+      ],
+      "evidence": "Real %-formatting in new code = 0. .format() survives in 5 spots; run_sweep.py:760,923 could be f-strings; the template-based .format() calls (prompts.py:71, format_training_data.py:89) are idiomatic.",
+      "recommendation": "Optionally convert the two run_sweep.py lines to f-strings; keep template .format() calls.",
+      "cve": ""
+    },
+    {
+      "id": "LEG-07",
+      "title": "pydantic v1 API (deliberate, documented)",
+      "domain": "legacy-code",
+      "severity": "Low",
+      "effort": "S",
+      "files": [
+        "DeQA-Score/src/uncertainty/metadata_schema.py",
+        "DeQA-Score/src/uncertainty/metadata_io.py"
+      ],
+      "evidence": "metadata_schema.py:12 docstring states v1 API for pydantic<2 pin; :24 imports validator; metadata_io.py uses .dict() at 130,147,154,156,162,166,169. pyproject.toml:25 pins pydantic<2 for mPLUG-Owl2.",
+      "recommendation": "No change now; migrate validator->field_validator and .dict()->.model_dump() when the pin lifts (track with LEG-01).",
+      "cve": ""
+    },
+    {
+      "id": "CQ-04",
+      "title": "type-ignore/noqa escape hatches (justified)",
+      "domain": "code-quality",
+      "severity": "Low",
+      "effort": "S",
+      "files": [
+        "DeQA-Score/tests/uncertainty/",
+        "Llamafactory/src/llamafactory/data/loader.py"
+      ],
+      "evidence": "19 type: ignore and 6 noqa, all reason-coded: frozen-dataclass test mutations ([misc]), optional-import stubs in vendored Llamafactory (loader.py:122-142), dict typing in research, E402 after sys.path inserts, one S301 on a self-owned pickle.",
+      "recommendation": "No action; localized and reason-coded.",
+      "cve": ""
+    },
+    {
+      "id": "CQ-05",
+      "title": "TODO/FIXME debt small and old",
+      "domain": "code-quality",
+      "severity": "Low",
+      "effort": "S",
+      "files": [
+        "DeQA-Score/src/train/train_mem.py",
+        "modal/benchmark_synthetic_ood.py"
+      ],
+      "evidence": "14 markers total, 10 in vendored upstream. Oldest actionable: train_mem.py:488 'TODO I dont like auto resume << REMOVE IT' dates to 2025-07-10 (~10.5 months). modal/benchmark_synthetic_ood.py:1087 is the only new-code marker.",
+      "recommendation": "Resolve or delete the train_mem.py:488 auto-resume TODO; upstream markers stay.",
+      "cve": ""
+    },
+    {
+      "id": "CQ-06",
+      "title": "Assert-based validation in data/inference paths",
+      "domain": "code-quality",
+      "severity": "Low",
+      "effort": "S",
+      "files": [
+        "DeQA-Score/src/datasets/pair_dataset.py",
+        "DeQA-Score/src/datasets/single_dataset.py",
+        "DeQA-Score/src/mm_utils.py"
+      ],
+      "evidence": "ruff S101 reports 88 asserts; most are in tests. 3 are control-flow asserts in data/inference paths (pair_dataset.py:125, single_dataset.py:79, mm_utils.py:101) that python -O strips.",
+      "recommendation": "Raise explicit exceptions instead of asserts in the 3 data-path sites. Low risk (training rarely uses -O).",
+      "cve": ""
+    },
+    {
+      "id": "SEC-03",
+      "title": "eval() on a path component in weight conversion",
+      "domain": "security",
+      "severity": "Low",
+      "effort": "S",
+      "files": [
+        "DeQA-Score/src/model/convert_mplug_owl2_weight_to_hf.py"
+      ],
+      "evidence": "convert_mplug_owl2_weight_to_hf.py:118 uses eval(input_base_path.split('/')[-1]...) on a local checkpoint dir name (ruff S307). Operator-controlled input, low injection risk.",
+      "recommendation": "Replace with int(...) or ast.literal_eval. Change only if touched.",
+      "cve": ""
+    },
+    {
+      "id": "SEC-04",
+      "title": "requests calls without timeout",
+      "domain": "security",
+      "severity": "Low",
+      "effort": "S",
+      "files": [
+        "DeQA-Score/src/evaluate/iqa_eval.py",
+        "DeQA-Score/src/evaluate/eval_qbench_mcq.py",
+        "DeQA-Score/src/evaluate/iqa_eval_qwen.py"
+      ],
+      "evidence": "ruff S113 flags 3 requests calls without timeout= at eval_qbench_mcq.py:32, iqa_eval.py:30, iqa_eval_qwen.py:26. A hung server stalls eval.",
+      "recommendation": "Add timeout= (e.g. 30s) to each call.",
+      "cve": ""
+    },
+    {
+      "id": "SEC-05",
+      "title": "pickle.load on a cache file",
+      "domain": "security",
+      "severity": "Low",
+      "effort": "S",
+      "files": [
+        "research/vlm_calibration/evaluate_calibration.py"
+      ],
+      "evidence": "evaluate_calibration.py:139 'return pickle.load(f)  # noqa: S301' on a self-written calibration cache. Self-owned input; a tampered cache deserializes arbitrary objects.",
+      "recommendation": "Acceptable for a self-written cache; switch to JSON/npz if the cache is ever shared.",
+      "cve": ""
+    },
+    {
+      "id": "CICD-07",
+      "title": "harden-runner pinned to two different versions",
+      "domain": "cicd",
+      "severity": "Low",
+      "effort": "S",
+      "files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/codeql.yml",
+        ".github/workflows/security-analysis.yml"
+      ],
+      "evidence": "step-security/harden-runner at SHA a5ad31d6 (v2.19.1) in ci.yml/reuse.yml and 91182ccc (v2.10.1) in codeql.yml/security-analysis.yml. Version drift on a security action.",
+      "recommendation": "Align all harden-runner uses to one SHA; let Renovate's grouping keep them together.",
+      "cve": ""
+    },
+    {
+      "id": "LEG-03",
+      "title": "typing.List/Dict generics instead of builtins (new code)",
+      "domain": "legacy-code",
+      "severity": "Low",
+      "effort": "M",
+      "files": [
+        "DeQA-Score/src/uncertainty/"
+      ],
+      "evidence": "Counts of List[/Dict[/Optional[/Tuple[/Union[: new uncertainty=59 (actionable); upstream model=91, Llamafactory=92 (exempt). Runtime 3.11 supports list[], dict[], X | None.",
+      "recommendation": "For new code only, prefer builtin generics and X | None; the 59 hits in uncertainty/ are the target.",
+      "cve": ""
+    },
+    {
+      "id": "ARCH-04",
+      "title": "research/ and results/ overlap in purpose",
+      "domain": "architecture",
+      "severity": "Low",
+      "effort": "M",
+      "files": [
+        "research/",
+        "results/"
+      ],
+      "evidence": "Both hold experiment runners plus outputs (results/vlm_teacher_eval/run_eval.py and research/vlm_calibration/evaluate_calibration.py are both eval drivers; both mix .py with .json/.csv/.png). The boundary is not stated in CLAUDE.md.",
+      "recommendation": "Document the intended split in CLAUDE.md or merge them. Low priority while work is active.",
+      "cve": ""
+    },
+    {
+      "id": "SEC-06",
+      "title": "Broad except Exception handlers (43 sites)",
+      "domain": "security",
+      "severity": "Low",
+      "effort": "M",
+      "files": [
+        "repo-wide *.py"
+      ],
+      "evidence": "git grep -c 'except Exception' returns 43; 0 are 'except: pass' swallow blocks, so sampled handlers log or re-raise. Breadth is the concern, not silent swallowing.",
+      "recommendation": "No bulk change; narrow exception types in new code when a handler is edited.",
+      "cve": ""
+    },
+    {
+      "id": "DOC-05",
+      "title": "No ADRs for load-bearing decisions",
+      "domain": "docs",
+      "severity": "Low",
+      "effort": "M",
+      "files": [
+        "docs/architecture/"
+      ],
+      "evidence": "docs/architecture/ holds strategy docs and PlantUML diagrams but no ADR records for the pydantic<2 pin, the gradio removal, the two-backend split, or the uncertainty-pipeline design. Rationale lives partly in CHANGELOG and known-vulnerabilities.md.",
+      "recommendation": "Add short ADRs for the pin policy and two-backend split. Low priority.",
+      "cve": ""
+    }
+  ]
+}
