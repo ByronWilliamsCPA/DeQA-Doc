@@ -7,15 +7,12 @@ pipeline layers) into unified per-image records.
 
 from __future__ import annotations
 
-import json
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Iterator, List, Optional, Union
+from typing import Dict, Iterator, List, Union
 
 from .metadata_schema import (
-    DimensionRecord,
     ImageMetadataRecord,
-    VLMEvalRecord,
 )
 
 

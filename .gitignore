@@ -70,8 +70,9 @@ DeQA-Score/Data-DeQA-Score/DIQA-5000_1/
 .qlty/plugin_cachedir
 .qlty/results
 
-# Claude Code local state
-.claude/
+# Claude Code local state (ignore everything except the tracked compliance registry)
+.claude/*
+!.claude/compliance-overrides.md
 
 # secrets
 .env

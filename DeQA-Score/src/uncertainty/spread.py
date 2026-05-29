@@ -2,7 +2,7 @@
 
 Computes per-image spread (standard deviation of z-score-normalized
 predictions across architecturally diverse models) as an epistemic
-uncertainty signal. High spread indicates models disagree — a strong
+uncertainty signal. High spread indicates models disagree and is a strong
 proxy for out-of-distribution documents.
 
 Research basis: research/correlation/ood_spread_analysis.py demonstrated
@@ -11,7 +11,7 @@ uncorrelated to prediction error on ID data (pure OOD signal).
 
 Ensemble: SigLIP2 (vision regression) + DeQA specialist (mPLUG-Owl2
 generative) + Qwen2.5-VL-7B (Qwen generative). Architectural diversity
-is critical — homogeneous models produce weak spread signal.
+is critical because homogeneous models produce a weak spread signal.
 """
 
 from __future__ import annotations
@@ -56,10 +56,10 @@ class BaselineSpreadStats:
         mean: Mean spread across DIQA-5000 images.
         std: Standard deviation of spread distribution.
         median: Median spread.
-        q75: 75th percentile — candidate for auto-accept threshold.
-        q90: 90th percentile — soft OOD threshold.
+        q75: 75th percentile, candidate for auto-accept threshold.
+        q90: 90th percentile, soft OOD threshold.
         q95: 95th percentile.
-        q99: 99th percentile — hard OOD threshold.
+        q99: 99th percentile, hard OOD threshold.
         soft_threshold: Spread above which image is soft OOD (default: q90).
         hard_threshold: Spread above which image is strong OOD (default: q99).
         n_images: Number of images used to compute baseline.
@@ -217,14 +217,10 @@ class SpreadComputer:
     def _compute_cluster_divergence(self, normalized: dict[str, float]) -> float:
         """Compute |mean(vision) - mean(mllm)| from normalized scores."""
         vision_scores = [
-            normalized[m]
-            for m in self.config.vision_models
-            if m in normalized
+            normalized[m] for m in self.config.vision_models if m in normalized
         ]
         mllm_scores = [
-            normalized[m]
-            for m in self.config.mllm_models
-            if m in normalized
+            normalized[m] for m in self.config.mllm_models if m in normalized
         ]
 
         if not vision_scores or not mllm_scores:
@@ -257,7 +253,7 @@ class SpreadComputer:
     ) -> BaselineSpreadStats:
         """Compute baseline spread statistics from DIQA-5000 predictions.
 
-        This is the calibration step — run once offline on in-distribution
+        This is the calibration step, run once offline on in-distribution
         data to establish the spread distribution and thresholds.
 
         Args:

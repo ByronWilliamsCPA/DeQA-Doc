@@ -190,7 +190,10 @@ def native_10bin_jsd(
         JSD in nats, bounded in [0, ln(2) ≈ 0.693].
     """
     siglip2_10bin = gaussian_to_10bin(
-        siglip2_mu, siglip2_sigma_sq, bin_centers, bin_width,
+        siglip2_mu,
+        siglip2_sigma_sq,
+        bin_centers,
+        bin_width,
     )
     q = np.asarray(hyperiqa_10bin, dtype=np.float64).ravel()
     # Compute JSD for arbitrary-length distributions (discrete_metrics.discrete_jsd

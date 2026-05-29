@@ -32,7 +32,11 @@ jobs:
       run-bandit: false
 
   security-gate-validation:
-    name: Security Gate Validation
+    # Job name is set to the exact context string required by the org ruleset
+    # (ByronWilliamsCPA-default-branch-baseline). For a non-reusable job the
+    # required-check context equals this name verbatim, so naming it
+    # "Security Analysis / Security Gate Validation" satisfies that requirement.
+    name: Security Analysis / Security Gate Validation
     runs-on: ubuntu-latest
     needs: [security]
     if: always()

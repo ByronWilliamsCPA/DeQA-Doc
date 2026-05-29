@@ -119,7 +119,7 @@ class PseudoLabelPipeline:
                 cross_val, ood_result.mahalanobis_distance, spread_result
             )
         else:
-            # No DeQA prediction — use OOD score only
+            # No DeQA prediction, use OOD score only
             from .cross_validator import CrossValidationResult
             from .discrete_metrics import discrete_entropy
 
@@ -195,9 +195,7 @@ class PseudoLabelPipeline:
                 try:
                     spread_results[i] = self.spread_computer.compute(preds)
                 except ValueError:
-                    logger.debug(
-                        "Spread skipped for image %d: insufficient models", i
-                    )
+                    logger.debug("Spread skipped for image %d: insufficient models", i)
 
         # Pass 1: Process all without VLM
         for i, output in enumerate(siglip2_outputs):

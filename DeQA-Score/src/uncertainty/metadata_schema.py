@@ -76,9 +76,7 @@ class DocumentContext(BaseModel):
         ...,
         description="Capture method: scanner_flatbed, camera_smartphone, etc.",
     )
-    resolution_category: str = Field(
-        ..., description="low, medium, standard_300, high"
-    )
+    resolution_category: str = Field(..., description="low, medium, standard_300, high")
     effective_dpi: Optional[int] = None
     orientation_class: Optional[int] = Field(
         None, description="Detected orientation: 0, 90, 180, or 270"
@@ -198,7 +196,9 @@ class SpreadRecord(BaseModel):
 
     spread: float = Field(..., ge=0.0)
     cluster_divergence: float = Field(..., ge=0.0)
-    ood_category: int = Field(..., ge=0, le=2, description="0=in-dist, 1=soft OOD, 2=strong OOD")
+    ood_category: int = Field(
+        ..., ge=0, le=2, description="0=in-dist, 1=soft OOD, 2=strong OOD"
+    )
     n_models: int = Field(..., ge=0)
 
     class Config:
@@ -298,17 +298,13 @@ class ImageMetadataRecord(BaseModel):
     """Master metadata record for one image across all pipeline layers.
 
     This is the per-line schema for the master JSONL file. All optional
-    fields support incremental enrichment — a minimal record needs only
+    fields support incremental enrichment, a minimal record needs only
     ``canonical_id``, ``dataset``, and ``image_path_res``.
     """
 
     schema_version: str = SCHEMA_VERSION
-    canonical_id: str = Field(
-        ..., description="Numeric ID portion, e.g. '00001'"
-    )
-    dataset: str = Field(
-        ..., description="Dataset identifier, e.g. 'diqa5000'"
-    )
+    canonical_id: str = Field(..., description="Numeric ID portion, e.g. '00001'")
+    dataset: str = Field(..., description="Dataset identifier, e.g. 'diqa5000'")
     split: Optional[str] = Field(
         None, description="train, val, test, or None for unlabeled"
     )

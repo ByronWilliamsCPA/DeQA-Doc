@@ -5,7 +5,7 @@ the Tier 1 OOD detector. Scores SigLIP2 embeddings to flag out-of-distribution
 documents relative to the DIQA-5000 training set.
 
 Thresholds calibrated against ground truth labels (1,150 ID + 370 OOD synthetic):
-    - 55.37: TPR=95%, FPR=14.6% (default — balanced operating point)
+    - 55.37: TPR=95%, FPR=14.6% (default, balanced operating point)
     - 61.62: TPR=80%, FPR=12.6% (conservative, used as hard_reject in fusion)
 
 See research/ood_baselines/RESULTS.md for full evaluation methodology.

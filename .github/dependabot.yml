@@ -1,7 +1,22 @@
+# Dependabot configuration for DeQA-Doc
+#
+# Two ecosystems are tracked:
+#   1. pip            -> /DeQA-Score (pyproject.toml + uv.lock live here)
+#   2. github-actions -> / (workflow files in .github/workflows)
+#
+# The Python dependencies torch, torchvision, transformers, accelerate, peft,
+# and deepspeed are intentionally pinned to legacy versions for mPLUG-Owl2
+# compatibility (see .claude/compliance-overrides.md, DEP-PINS). Routine version
+# bumps for those packages would break the training/inference pipeline, so they
+# are ignored below. Dependabot SECURITY updates still flow for them, because
+# update-types ignore conditions do not suppress security-advisory updates. All
+# other Python dependencies and the SHA-pinned GitHub Actions receive normal
+# weekly updates.
+
 version: 2
 updates:
   - package-ecosystem: "pip"
-    directory: "/"
+    directory: "/DeQA-Score"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -12,13 +27,45 @@ updates:
     assignees:
       - "ByronWilliamsCPA"
     commit-message:
-      prefix: "chore(deps):"
-      prefix-development: "chore(deps-dev):"
-      include: "scope"
-    pull-request-branch-name:
-      separator: "/"
-    allow:
-      - dependency-type: "all"
+      # Scoped prefix WITHOUT include:scope. Combining a scope-bearing prefix
+      # with include:scope produces double-scope titles (e.g. chore(deps):(pip):)
+      # that fail conventional-commit validation.
+      prefix: "chore(deps)"
+    labels:
+      - "dependencies"
+    ignore:
+      # Legacy pins required for mPLUG-Owl2 compatibility. Block routine version
+      # bumps only; security-advisory updates are unaffected by update-types.
+      - dependency-name: "torch"
+        update-types:
+          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
+      - dependency-name: "torchvision"
+        update-types:
+          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
+      - dependency-name: "transformers"
+        update-types:
+          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
+      - dependency-name: "accelerate"
+        update-types:
+          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
+      - dependency-name: "peft"
+        update-types:
+          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
+      - dependency-name: "deepspeed"
+        update-types:
+          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -32,9 +79,6 @@ updates:
     assignees:
       - "ByronWilliamsCPA"
     commit-message:
-      prefix: "ci(actions):"
-      include: "scope"
-    pull-request-branch-name:
-      separator: "/"
-    allow:
-      - dependency-type: "all"
+      prefix: "ci(actions)"
+    labels:
+      - "dependencies"

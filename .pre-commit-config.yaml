@@ -1,5 +1,10 @@
 # Pre-commit hooks: file checks and secret scanning.
 # See pre-commit-authoring skill for hook authoring guidance.
+#
+# Tier 1 (universal hygiene + secret scanning + no-em-dash) runs repo-wide.
+# Tier 2 (ruff lint/format) is SCOPED to the NEW production pipeline only
+# (DeQA-Score/src/uncertainty/). Upstream / vendored code uses its own style,
+# carries Chinese-language comments, and is intentionally never linted here.
 
 default_install_hook_types: [pre-commit]
 
@@ -33,4 +38,49 @@ repos:
         entry: bash -c 'command -v trufflehog >/dev/null 2>&1 && (git diff --cached -z --diff-filter=d --name-only 2>/dev/null | xargs -0 -r trufflehog filesystem --fail --no-update --results=verified,unknown) || echo "TruffleHog not installed - skipping secret scan"'
         language: system
         pass_filenames: false
+        stages: [pre-commit]
+
+  # ============================================================================
+  # no-em-dash guard (repo-wide). Fails if U+2014 appears in any staged text
+  # file. The em-dash byte sequence is generated via printf so this config file
+  # itself contains no literal em-dash character. The exclude keeps the hook off
+  # virtual envs, caches, large data blobs, model weights, and logs.
+  # ============================================================================
+  - repo: local
+    hooks:
+      - id: no-em-dash
+        name: Block em-dashes
+        entry: bash -c 'if grep -RIl "$(printf "\xe2\x80\x94")" "$@" >/dev/null 2>&1; then grep -RIn "$(printf "\xe2\x80\x94")" "$@"; echo "em-dash found (U+2014) - replace with comma/semicolon/colon"; exit 1; fi' --
+        language: system
+        types: [text]
+        stages: [pre-commit]
+        exclude: |
+          (?x)^(
+            .*/\.venv/.*|
+            \.venv/.*|
+            .*__pycache__/.*|
+            \.git/.*|
+            DeQA-Score/Data-DeQA-Score/.*|
+            .*\.json|
+            .*\.jsonl|
+            .*\.pth|
+            .*\.pt|
+            .*\.bin|
+            .*\.log
+          )$
+
+  # ============================================================================
+  # TIER 2: code quality (NEW production pipeline ONLY)
+  #   files: ^DeQA-Score/src/uncertainty/
+  # SHA-pinned to match the org pinning standard used by the hooks above.
+  # ============================================================================
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: f0b5944bef86f50d875305821a0ab0d8c601e465  # v0.8.4
+    hooks:
+      - id: ruff
+        args: ['--fix']
+        files: ^DeQA-Score/src/uncertainty/
+        stages: [pre-commit]
+      - id: ruff-format
+        files: ^DeQA-Score/src/uncertainty/
         stages: [pre-commit]
