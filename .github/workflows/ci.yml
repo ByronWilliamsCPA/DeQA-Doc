@@ -2,7 +2,7 @@
 # Basic CI for DeQA-Doc
 # ============================================================================
 # Lightweight checks suited for a research codebase with heavy GPU deps.
-# Tests requiring torch/CUDA are excluded — run those locally with GPU.
+# Tests requiring torch/CUDA are excluded; run those locally with GPU.
 # ============================================================================
 
 name: CI
@@ -65,7 +65,7 @@ jobs:
           find . -name "*.py" -not -path "./.git/*" -not -path "./.venv/*" | \
             xargs python -m py_compile 2>&1 | tee /tmp/syntax.log || true
           if [ -s /tmp/syntax.log ]; then
-            echo "::warning::Syntax issues found — see log above"
+            echo "::warning::Syntax issues found; see log above"
           fi
 
       - name: Bandit security scan (results/)
@@ -96,7 +96,7 @@ jobs:
           echo "No secrets detected."
 
   # CodeQL security analysis is handled by GitHub's default setup.
-  # Do not add an advanced CodeQL configuration here — it conflicts
+  # Do not add an advanced CodeQL configuration here; it conflicts
   # with the default setup and causes SARIF upload failures.
 
   dependency-review:
@@ -121,3 +121,40 @@ jobs:
         with:
           fail-on-severity: high
           comment-summary-in-pr: always
+
+  # Aggregating gate that emits the exact context required by the org ruleset
+  # (ByronWilliamsCPA-default-branch-baseline). For a non-reusable job the
+  # required-check context equals the job name verbatim, so this job is named
+  # "Dependency & Standards Validation". It passes only when the quality and
+  # dependency-review jobs both succeed (dependency-review is skipped on push,
+  # which is acceptable; it always runs on the pull_request merge gate).
+  dependency-standards-validation:
+    name: Dependency & Standards Validation
+    runs-on: ubuntu-latest
+    needs: [quality, dependency-review]
+    if: always()
+    permissions:
+      contents: read
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@a5ad31d6a139d249332a2605b85202e8c0b78450  # v2.19.1
+        with:
+          egress-policy: audit
+
+      - name: Validate dependency and standards checks
+        env:
+          QUALITY_RESULT: ${{ needs.quality.result }}
+          DEPREVIEW_RESULT: ${{ needs.dependency-review.result }}
+        run: |
+          echo "Quality Checks:    $QUALITY_RESULT"
+          echo "Dependency Review: $DEPREVIEW_RESULT"
+          if [ "$QUALITY_RESULT" != "success" ]; then
+            echo "::error::Dependency & Standards Validation failed: Quality Checks result is $QUALITY_RESULT"
+            exit 1
+          fi
+          if [ "$DEPREVIEW_RESULT" != "success" ] && [ "$DEPREVIEW_RESULT" != "skipped" ]; then
+            echo "::error::Dependency & Standards Validation failed: Dependency Review result is $DEPREVIEW_RESULT"
+            exit 1
+          fi
+          echo "Dependency & Standards Validation passed"
