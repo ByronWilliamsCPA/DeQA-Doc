@@ -7,7 +7,7 @@ name = "DeQA-Score"
 version = "1.2.0"
 description = "Teaching Large Language Models to Regress Accurate Image Quality Scores using Score Distribution (based on mPLUG-Owl2)"
 readme = "README.md"
-requires-python = ">=3.14,<3.15"
+requires-python = ">=3.10,<3.12"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: Apache Software License",
@@ -39,8 +39,10 @@ dependencies = [
     # Security floors for transitive deps (pulled in via transformers,
     # huggingface_hub, matplotlib, etc.). Raised to the nearest non-vulnerable
     # release compatible with the pinned core (torch/transformers, pydantic<2).
-    # requires-python is >=3.14,<3.15 so all packages below resolve to the
-    # patched release; see docs/known-vulnerabilities.md for remaining residuals.
+    # requires-python is >=3.10,<3.12 (the torch 2.0.1 cu118 wheel range, real
+    # runtime 3.11), so every floor below resolves unconditionally to its
+    # patched release with no vulnerable py3.8/3.9 fallback; see
+    # docs/known-vulnerabilities.md for remaining residuals.
     "idna>=3.15",
     "pillow>=12.2.0",
     "GitPython>=3.1.50",
@@ -54,7 +56,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-train = ["deepspeed==0.15.1", "ninja", "wandb"]
+train = ["deepspeed==0.14.5", "ninja", "wandb"]
 dev = ["pytest>=9.0.3", "ruff", "protobuf"]
 api = ["anthropic>=0.43.0", "openai>=1.0.0"]
 # NOTE: gradio (the upstream mPLUG-Owl2 web demo / gradio_web_server) was
@@ -77,6 +79,8 @@ exclude = ["assets*", "benchmark*", "docs", "dist*", "playground*", "scripts*", 
 exclude = ["assets*", "benchmark*", "docs", "dist*", "playground*", "scripts*", "tests*"]
 
 [tool.uv]
+# torch 2.0.1 only has wheels for Python 3.8-3.11; requires-python is pinned to
+# >=3.10,<3.12 above so resolution always finds a compatible cu118 wheel.
 python-preference = "managed"
 
 [tool.uv.sources]
