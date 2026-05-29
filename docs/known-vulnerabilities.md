@@ -18,9 +18,8 @@ tags:
 > residuals below stem from those pins. The remediation pass on
 > `fix/deps-vulnerability-remediation` removed the unused `gradio` web-demo
 > stack and raised every transitive floor that could be raised without
-> breaking a pin or `requires-python = ">=3.8,<3.12"`, cutting live py3.11
-> `pip-audit` findings from 114 to 49. The remaining findings are documented
-> here.
+> breaking a pin. Merging main (PR #19) raised `requires-python` to
+> `>=3.14,<3.15`, resolving all former Python-version-gated residuals.
 
 Reassessment cadence: 2026-07-27 (60 days from documentation date 2026-05-28),
 unless an earlier review is triggered by a release that loosens a pin.
@@ -90,28 +89,12 @@ input.
 **Planned resolution**: Tied to the same model-stack migration as transformers.
 No committed timeline.
 
-### deepspeed 0.9.5 (1 alert, train extra)
+### deepspeed: resolved in merge from main
 
-| Field | Value |
-| --- | --- |
-| **Severity** | Medium |
-| **Affected package** | deepspeed == 0.9.5 |
-| **Patched version** | 0.15.1 |
-| **Advisory** | PYSEC-2024-109 |
-| **Date documented** | 2026-05-28 |
-| **Reassessment due** | 2026-07-27 |
-
-**Exploitation scenario**: Unsafe deserialization in DeepSpeed checkpoint
-loading. Only project-owned training checkpoints are loaded.
-
-**Why deferred**: `deepspeed==0.9.5` is pinned for compatibility with the
-pinned torch 2.0.1 / mPLUG-Owl2 ZeRO-3 training path. Only installed via the
-`train` extra. Upgrading risks breaking the training pipeline.
-
-**Compensating control**: Train-only dependency; not installed for
-inference/eval. Only trusted checkpoints loaded.
-
-**Planned resolution**: Tied to the torch/transformers migration.
+`deepspeed` was previously pinned at `0.9.5` (advisory PYSEC-2024-109). This was
+remediated by [#14](https://github.com/ByronWilliamsCPA/DeQA-Doc/pull/14), which
+updated the pin to `deepspeed==0.15.1` (the patched release). Merged to this
+branch on 2026-05-29. No remaining alert.
 
 ---
 
@@ -179,43 +162,26 @@ then bump. Tied to the model-stack revalidation.
 
 ---
 
-## Category C: Python 3.8 floor fallbacks (fixed on py3.9+/py3.10+, residual on py3.8)
+## Category C: Python 3.8 floor fallbacks (resolved — requires-python raised to >=3.14)
 
-The project keeps `requires-python = ">=3.8,<3.12"` (torch 2.0.1 cu118 ships
-cp38-cp311 wheels). Several security fixes require Python >=3.9 or >=3.10. These
-were applied with `python_full_version` markers so the **real runtime (py3.11)
-is fully patched**, but the resolver keeps a vulnerable fallback for py3.8.
-These residuals only apply if the project is actually installed on Python 3.8.
+The project previously kept `requires-python = ">=3.8,<3.12"` and used
+`python_full_version` markers to apply security floors only on newer Pythons,
+leaving vulnerable fallbacks for Python 3.8. PR #19 on main raised
+`requires-python` to `>=3.14,<3.15`, which makes Python 3.8/3.9/3.10 impossible
+to install. All packages in this table now unconditionally resolve to their
+patched floors. No residuals remain from this category.
 
-| Package | py3.8 fallback (vulnerable) | py3.10+/py3.9+ (patched) | Advisory | Severity | Fix needs |
-| --- | --- | --- | --- | --- | --- |
-| urllib3 | 2.2.3 | 2.7.0 | PYSEC-2026-141/142, GHSA-qccp-gfcp-xxvc | High/Medium | py3.10 |
-| pillow | 10.4.0 | 12.2.0 | GHSA-whj4-6x5x-4v2j, GHSA-pwv6-vv43-88gr, et al. | High/Medium | py3.10 |
-| requests | 2.32.x | 2.34.2 | CVE-2026-25645 / GHSA-gc5v-m9x4-r6x2 | Medium | py3.10 |
-| pytest (dev) | 8.3.5 | 9.0.3 | CVE-2025-71176 / GHSA-6w46-j5rx-g56g | Medium | py3.10 |
-| pygments | 2.19.2 | 2.20.0 | CVE-2026-4539 | Low | py3.9 |
-| starlette | 0.44.0 | 0.49.3 / 0.50.0 | GHSA-7f5h-v6xp-fcq8, GHSA-2c2j-9gv5-cj73 | High/Medium | py3.9 |
-| fonttools | 4.57.0 | (not raised) | GHSA (>=4.33.0,<4.60.2) | Medium | py3.9 |
+| Package | Former py3.8 fallback | Now-required floor | Advisory | Severity |
+| --- | --- | --- | --- | --- |
+| urllib3 | 2.2.3 | 2.7.0 | PYSEC-2026-141/142, GHSA-qccp-gfcp-xxvc | High/Medium |
+| pillow | 10.4.0 | 12.2.0 | GHSA-whj4-6x5x-4v2j, GHSA-pwv6-vv43-88gr, et al. | High/Medium |
+| requests | 2.32.x | 2.34.2 | CVE-2026-25645 / GHSA-gc5v-m9x4-r6x2 | Medium |
+| pytest (dev) | 8.3.5 | 9.0.3 | CVE-2025-71176 / GHSA-6w46-j5rx-g56g | Medium |
+| pygments | 2.19.2 | 2.20.0 | CVE-2026-4539 | Low |
+| starlette | 0.44.0 | 0.49.3 | GHSA-7f5h-v6xp-fcq8, GHSA-2c2j-9gv5-cj73 | High/Medium |
+| filelock | &lt;3.20.1 | 3.20.1 | (advisory TBD) | Low |
 
-**Date documented**: 2026-05-28. **Reassessment due**: 2026-07-27.
-
-**Exploitation scenario**: Mostly ReDoS / parsing DoS (urllib3, pygments,
-starlette, fonttools) and image-parsing DoS (pillow) on crafted input. The
-project does not run a network service on these; pillow processes
-project-owned document images.
-
-**Why deferred**: The patched releases drop Python 3.8 support. The project's
-`requires-python` floor of 3.8 is treated as a hard constraint (torch 2.0.1
-cu118 supports cp38). On any Python >=3.10 install (the actual deployment uses
-3.11) all of the above except fonttools are fully patched.
-
-**Compensating control**: Real environments run Python 3.11, where these are
-patched. fonttools is only pulled transitively via matplotlib in the research
-extras, not in the core train/infer/eval path.
-
-**Planned resolution**: Drop Python 3.8 from `requires-python` (move floor to
->=3.10) once it is confirmed no contributor environment uses 3.8. That single
-change would clear the entire Category C list including fonttools.
+**Resolved**: 2026-05-29 (merge of main → this branch, `requires-python` raised).
 
 ### starlette PYSEC-2026-161 (forward-looking)
 
