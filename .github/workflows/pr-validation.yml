@@ -9,6 +9,7 @@ on:
       - main
       - master
 
+  merge_group:
 permissions: {}
 
 concurrency:
