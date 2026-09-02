@@ -101,44 +101,21 @@ jobs:
   # Do not add an advanced CodeQL configuration here; it conflicts
   # with the default setup and causes SARIF upload failures.
 
-  dependency-review:
-    name: Dependency Review
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-
-    steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@a5ad31d6a139d249332a2605b85202e8c0b78450  # v2.19.1
-        with:
-          egress-policy: audit
-
-      - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
-
-      - name: Dependency Review
-        uses: actions/dependency-review-action@2031cfc080254a8a887f58cffee85186f0e49e48  # v4.9.0
-        with:
-          fail-on-severity: high
-          # Accepted residual: deepspeed (training-only) has no release that
-          # both fixes this RCE (<0.15.1) and keeps pydantic<2 (0.15.x needs
-          # pydantic>=2). Tracked in docs/known-vulnerabilities.md (reassess
-          # 2026-07-27; cleared by the pydantic-v2 / model-stack migration).
-          allow-ghsas: GHSA-8cp5-3rf8-8gfh
-          comment-summary-in-pr: always
+  # actions/dependency-review-action was removed fleet-wide: GitHub now bills
+  # Advanced Security (Code Security) for this action, so it no longer runs
+  # on repos without that add-on. The standalone "Dependency Review" job that
+  # used to live here is gone; the gate below now validates Quality Checks
+  # only.
 
   # Aggregating gate that emits the exact context required by the org ruleset
   # (ByronWilliamsCPA-default-branch-baseline). For a non-reusable job the
-  # required-check context equals the job name verbatim, so this job is named
-  # "Dependency & Standards Validation". It passes only when the quality and
-  # dependency-review jobs both succeed (dependency-review is skipped on push,
-  # which is acceptable; it always runs on the pull_request merge gate).
+  # required-check context equals the job name verbatim, so this job stays
+  # named "Dependency & Standards Validation" even though it now gates only
+  # the quality job (renaming would break the required status check).
   dependency-standards-validation:
     name: Dependency & Standards Validation
     runs-on: ubuntu-latest
-    needs: [quality, dependency-review]
+    needs: [quality]
     if: always()
     permissions:
       contents: read
@@ -152,16 +129,10 @@ jobs:
       - name: Validate dependency and standards checks
         env:
           QUALITY_RESULT: ${{ needs.quality.result }}
-          DEPREVIEW_RESULT: ${{ needs.dependency-review.result }}
         run: |
           echo "Quality Checks:    $QUALITY_RESULT"
-          echo "Dependency Review: $DEPREVIEW_RESULT"
           if [ "$QUALITY_RESULT" != "success" ]; then
             echo "::error::Dependency & Standards Validation failed: Quality Checks result is $QUALITY_RESULT"
-            exit 1
-          fi
-          if [ "$DEPREVIEW_RESULT" != "success" ] && [ "$DEPREVIEW_RESULT" != "skipped" ]; then
-            echo "::error::Dependency & Standards Validation failed: Dependency Review result is $DEPREVIEW_RESULT"
             exit 1
           fi
           echo "Dependency & Standards Validation passed"

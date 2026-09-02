@@ -42,6 +42,17 @@ human-labeled DIQA-5000 images.
 
 - Removed the unused upstream `gradio` / `gradio_client` web-demo stack (and its
   transitive web dependencies); it is not imported by any train/infer/eval path.
+- Removed `.github/workflows/codeql.yml` and `.github/workflows/dependency-review.yml`,
+  and the inline `actions/dependency-review-action` step (and its now-empty
+  `dependency-review` job) from `ci.yml`. GitHub now bills Advanced Security
+  (Code Security) for CodeQL code scanning and the dependency-review action,
+  so neither ran anymore on this repo. Ruff, Bandit, and the secrets-grep
+  step in `ci.yml`'s Quality Checks job, and the SonarCloud Code Analysis
+  gate, remain as the active static-analysis controls. Automated dependency
+  vulnerability scanning is not currently running in CI (all scanner inputs
+  in `security-analysis.yml`'s reusable workflow call are `false`); known
+  residual CVEs continue to be tracked manually in
+  `docs/known-vulnerabilities.md`.
 
 ### Security
 
