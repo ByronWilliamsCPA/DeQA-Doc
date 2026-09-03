@@ -1,0 +1,439 @@
+{
+  "description": "FCA vs CER correlation comparison with DeQA MOS",
+  "engines": [
+    "deepseek-ocr2",
+    "doctr",
+    "easyocr",
+    "gcloud_vision",
+    "glm-ocr",
+    "kraken",
+    "paddleocr",
+    "rapidocr",
+    "tesseract"
+  ],
+  "correlation_comparison": {
+    "deepseek-ocr2": {
+      "cer_srcc": -0.3386,
+      "cer_plcc": -0.1482,
+      "fca_srcc": -0.2918,
+      "fca_plcc": -0.2908,
+      "srcc_improvement": -0.0468,
+      "mean_cer_minus_fca": 0.2703,
+      "n_samples": 1200,
+      "per_tier": {
+        "DEGRADED": {
+          "mean_cer": 1.1659,
+          "mean_fca": 0.8843,
+          "mean_diff": 0.2816,
+          "n": 200
+        },
+        "HIGH": {
+          "mean_cer": 1.8498,
+          "mean_fca": 0.8795,
+          "mean_diff": 0.9703,
+          "n": 200
+        },
+        "LOW": {
+          "mean_cer": 1.4486,
+          "mean_fca": 0.8866,
+          "mean_diff": 0.562,
+          "n": 200
+        },
+        "MEDIUM": {
+          "mean_cer": 1.2176,
+          "mean_fca": 0.8816,
+          "mean_diff": 0.336,
+          "n": 200
+        },
+        "ORIGINAL": {
+          "mean_cer": 0.5936,
+          "mean_fca": 0.8576,
+          "mean_diff": -0.264,
+          "n": 200
+        },
+        "PRISTINE": {
+          "mean_cer": 0.5936,
+          "mean_fca": 0.8576,
+          "mean_diff": -0.264,
+          "n": 200
+        }
+      }
+    },
+    "doctr": {
+      "cer_srcc": -0.6315,
+      "cer_plcc": -0.5805,
+      "fca_srcc": -0.4979,
+      "fca_plcc": -0.4919,
+      "srcc_improvement": -0.1336,
+      "mean_cer_minus_fca": -0.588,
+      "n_samples": 1200,
+      "per_tier": {
+        "DEGRADED": {
+          "mean_cer": 0.3851,
+          "mean_fca": 0.9048,
+          "mean_diff": -0.5198,
+          "n": 200
+        },
+        "HIGH": {
+          "mean_cer": 0.3323,
+          "mean_fca": 0.9036,
+          "mean_diff": -0.5713,
+          "n": 200
+        },
+        "LOW": {
+          "mean_cer": 0.4073,
+          "mean_fca": 0.9098,
+          "mean_diff": -0.5025,
+          "n": 200
+        },
+        "MEDIUM": {
+          "mean_cer": 0.3491,
+          "mean_fca": 0.9011,
+          "mean_diff": -0.552,
+          "n": 200
+        },
+        "ORIGINAL": {
+          "mean_cer": 0.1871,
+          "mean_fca": 0.8783,
+          "mean_diff": -0.6912,
+          "n": 200
+        },
+        "PRISTINE": {
+          "mean_cer": 0.1871,
+          "mean_fca": 0.8783,
+          "mean_diff": -0.6912,
+          "n": 200
+        }
+      }
+    },
+    "easyocr": {
+      "cer_srcc": -0.6374,
+      "cer_plcc": -0.5527,
+      "fca_srcc": -0.5526,
+      "fca_plcc": -0.5418,
+      "srcc_improvement": -0.0848,
+      "mean_cer_minus_fca": -0.235,
+      "n_samples": 1200,
+      "per_tier": {
+        "DEGRADED": {
+          "mean_cer": 0.8104,
+          "mean_fca": 0.9373,
+          "mean_diff": -0.1269,
+          "n": 200
+        },
+        "HIGH": {
+          "mean_cer": 0.6911,
+          "mean_fca": 0.9217,
+          "mean_diff": -0.2306,
+          "n": 200
+        },
+        "LOW": {
+          "mean_cer": 0.8038,
+          "mean_fca": 0.9402,
+          "mean_diff": -0.1363,
+          "n": 200
+        },
+        "MEDIUM": {
+          "mean_cer": 0.7447,
+          "mean_fca": 0.9273,
+          "mean_diff": -0.1827,
+          "n": 200
+        },
+        "ORIGINAL": {
+          "mean_cer": 0.5238,
+          "mean_fca": 0.8904,
+          "mean_diff": -0.3666,
+          "n": 200
+        },
+        "PRISTINE": {
+          "mean_cer": 0.5238,
+          "mean_fca": 0.8904,
+          "mean_diff": -0.3666,
+          "n": 200
+        }
+      }
+    },
+    "gcloud_vision": {
+      "cer_srcc": -0.4347,
+      "cer_plcc": -0.4329,
+      "fca_srcc": -0.199,
+      "fca_plcc": -0.2299,
+      "srcc_improvement": -0.2357,
+      "mean_cer_minus_fca": -0.5686,
+      "n_samples": 1200,
+      "per_tier": {
+        "DEGRADED": {
+          "mean_cer": 0.3386,
+          "mean_fca": 0.8852,
+          "mean_diff": -0.5466,
+          "n": 200
+        },
+        "HIGH": {
+          "mean_cer": 0.3283,
+          "mean_fca": 0.8883,
+          "mean_diff": -0.56,
+          "n": 200
+        },
+        "LOW": {
+          "mean_cer": 0.3489,
+          "mean_fca": 0.8842,
+          "mean_diff": -0.5353,
+          "n": 200
+        },
+        "MEDIUM": {
+          "mean_cer": 0.3146,
+          "mean_fca": 0.8863,
+          "mean_diff": -0.5717,
+          "n": 200
+        },
+        "ORIGINAL": {
+          "mean_cer": 0.2837,
+          "mean_fca": 0.8826,
+          "mean_diff": -0.5989,
+          "n": 200
+        },
+        "PRISTINE": {
+          "mean_cer": 0.2837,
+          "mean_fca": 0.8826,
+          "mean_diff": -0.5989,
+          "n": 200
+        }
+      }
+    },
+    "glm-ocr": {
+      "cer_srcc": -0.3431,
+      "cer_plcc": -0.1459,
+      "fca_srcc": -0.109,
+      "fca_plcc": -0.1177,
+      "srcc_improvement": -0.234,
+      "mean_cer_minus_fca": -0.4738,
+      "n_samples": 1200,
+      "per_tier": {
+        "DEGRADED": {
+          "mean_cer": 0.6281,
+          "mean_fca": 0.8364,
+          "mean_diff": -0.2083,
+          "n": 200
+        },
+        "HIGH": {
+          "mean_cer": 0.266,
+          "mean_fca": 0.8361,
+          "mean_diff": -0.5701,
+          "n": 200
+        },
+        "LOW": {
+          "mean_cer": 0.4892,
+          "mean_fca": 0.8399,
+          "mean_diff": -0.3507,
+          "n": 200
+        },
+        "MEDIUM": {
+          "mean_cer": 0.2711,
+          "mean_fca": 0.8366,
+          "mean_diff": -0.5654,
+          "n": 200
+        },
+        "ORIGINAL": {
+          "mean_cer": 0.2573,
+          "mean_fca": 0.8314,
+          "mean_diff": -0.5741,
+          "n": 200
+        },
+        "PRISTINE": {
+          "mean_cer": 0.2573,
+          "mean_fca": 0.8314,
+          "mean_diff": -0.5741,
+          "n": 200
+        }
+      }
+    },
+    "kraken": {
+      "cer_srcc": -0.3687,
+      "cer_plcc": -0.293,
+      "fca_srcc": -0.5004,
+      "fca_plcc": -0.4386,
+      "srcc_improvement": 0.1316,
+      "mean_cer_minus_fca": -0.0461,
+      "n_samples": 1200,
+      "per_tier": {
+        "DEGRADED": {
+          "mean_cer": 0.9696,
+          "mean_fca": 0.9898,
+          "mean_diff": -0.0202,
+          "n": 200
+        },
+        "HIGH": {
+          "mean_cer": 0.9618,
+          "mean_fca": 0.9854,
+          "mean_diff": -0.0236,
+          "n": 200
+        },
+        "LOW": {
+          "mean_cer": 0.9495,
+          "mean_fca": 0.9842,
+          "mean_diff": -0.0347,
+          "n": 200
+        },
+        "MEDIUM": {
+          "mean_cer": 0.9581,
+          "mean_fca": 0.9844,
+          "mean_diff": -0.0263,
+          "n": 200
+        },
+        "ORIGINAL": {
+          "mean_cer": 0.88,
+          "mean_fca": 0.966,
+          "mean_diff": -0.086,
+          "n": 200
+        },
+        "PRISTINE": {
+          "mean_cer": 0.88,
+          "mean_fca": 0.966,
+          "mean_diff": -0.086,
+          "n": 200
+        }
+      }
+    },
+    "paddleocr": {
+      "cer_srcc": -0.6582,
+      "cer_plcc": -0.6238,
+      "fca_srcc": -0.393,
+      "fca_plcc": -0.4243,
+      "srcc_improvement": -0.2652,
+      "mean_cer_minus_fca": -0.5855,
+      "n_samples": 1200,
+      "per_tier": {
+        "DEGRADED": {
+          "mean_cer": 0.4097,
+          "mean_fca": 0.9086,
+          "mean_diff": -0.4988,
+          "n": 200
+        },
+        "HIGH": {
+          "mean_cer": 0.337,
+          "mean_fca": 0.9058,
+          "mean_diff": -0.5688,
+          "n": 200
+        },
+        "LOW": {
+          "mean_cer": 0.4223,
+          "mean_fca": 0.9084,
+          "mean_diff": -0.4861,
+          "n": 200
+        },
+        "MEDIUM": {
+          "mean_cer": 0.3429,
+          "mean_fca": 0.902,
+          "mean_diff": -0.5591,
+          "n": 200
+        },
+        "ORIGINAL": {
+          "mean_cer": 0.1892,
+          "mean_fca": 0.8893,
+          "mean_diff": -0.7001,
+          "n": 200
+        },
+        "PRISTINE": {
+          "mean_cer": 0.1892,
+          "mean_fca": 0.8893,
+          "mean_diff": -0.7001,
+          "n": 200
+        }
+      }
+    },
+    "rapidocr": {
+      "cer_srcc": -0.5431,
+      "cer_plcc": -0.415,
+      "fca_srcc": -0.3174,
+      "fca_plcc": -0.3597,
+      "srcc_improvement": -0.2257,
+      "mean_cer_minus_fca": -0.3939,
+      "n_samples": 1200,
+      "per_tier": {
+        "DEGRADED": {
+          "mean_cer": 0.5845,
+          "mean_fca": 0.9029,
+          "mean_diff": -0.3185,
+          "n": 200
+        },
+        "HIGH": {
+          "mean_cer": 0.5113,
+          "mean_fca": 0.8962,
+          "mean_diff": -0.3849,
+          "n": 200
+        },
+        "LOW": {
+          "mean_cer": 0.6005,
+          "mean_fca": 0.9078,
+          "mean_diff": -0.3073,
+          "n": 200
+        },
+        "MEDIUM": {
+          "mean_cer": 0.5297,
+          "mean_fca": 0.8964,
+          "mean_diff": -0.3668,
+          "n": 200
+        },
+        "ORIGINAL": {
+          "mean_cer": 0.3869,
+          "mean_fca": 0.8799,
+          "mean_diff": -0.493,
+          "n": 200
+        },
+        "PRISTINE": {
+          "mean_cer": 0.3869,
+          "mean_fca": 0.8799,
+          "mean_diff": -0.493,
+          "n": 200
+        }
+      }
+    },
+    "tesseract": {
+      "cer_srcc": -0.6469,
+      "cer_plcc": -0.5313,
+      "fca_srcc": -0.5756,
+      "fca_plcc": -0.5571,
+      "srcc_improvement": -0.0714,
+      "mean_cer_minus_fca": -0.2339,
+      "n_samples": 1200,
+      "per_tier": {
+        "DEGRADED": {
+          "mean_cer": 0.8111,
+          "mean_fca": 0.9288,
+          "mean_diff": -0.1177,
+          "n": 200
+        },
+        "HIGH": {
+          "mean_cer": 0.7285,
+          "mean_fca": 0.9009,
+          "mean_diff": -0.1724,
+          "n": 200
+        },
+        "LOW": {
+          "mean_cer": 0.8189,
+          "mean_fca": 0.9394,
+          "mean_diff": -0.1205,
+          "n": 200
+        },
+        "MEDIUM": {
+          "mean_cer": 0.7441,
+          "mean_fca": 0.9165,
+          "mean_diff": -0.1724,
+          "n": 200
+        },
+        "ORIGINAL": {
+          "mean_cer": 0.4367,
+          "mean_fca": 0.8468,
+          "mean_diff": -0.4101,
+          "n": 200
+        },
+        "PRISTINE": {
+          "mean_cer": 0.4367,
+          "mean_fca": 0.8468,
+          "mean_diff": -0.4101,
+          "n": 200
+        }
+      }
+    }
+  }
+}

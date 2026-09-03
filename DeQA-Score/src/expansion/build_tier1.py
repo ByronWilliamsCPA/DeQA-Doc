@@ -14,9 +14,12 @@ Output structure:
             stream1_degradation/         # 1,400 degraded DIQA images
             stream2_synth_multiscript/   # 2,000 synth-multiscript images
             stream3_ohr_bench/           # VLM-labeled real documents
-            stream3_realdae/
             stream3_tobacco800/
             stream3_smartdoc_qa/
+            stream3_realdae/
+            stream3_funsd_plus/
+            stream3_ocr_quality/
+            stream3_sroie/
 
 Usage:
     python -m src.expansion.build_tier1 --config tier1_config.json
@@ -316,20 +319,27 @@ def build_tier1(config: Tier1Config) -> DatasetManifest:
         logger.info("Stream 2: %d records", len(s2_records))
 
     # ── Stream 3: VLM Consensus ───────────────────────────────────────────
-    if config.stream3_enabled and config.stream3_sources:
+    if config.stream3_enabled:
         logger.info("=== Stream 3: VLM Consensus ===")
-        from .stream3_vlm_consensus import SourceDataset, generate_stream3
+        from .stream3_vlm_consensus import TIER1_SOURCES, SourceDataset, generate_stream3
 
-        sources = [
-            SourceDataset(
-                name=s["name"],
-                image_dir=s["image_dir"],
-                count=s.get("count", 500),
-                has_text_gt=s.get("has_text_gt", False),
-                glob_pattern=s.get("glob_pattern", "*.png"),
-            )
-            for s in config.stream3_sources
-        ]
+        # Use configured sources if provided, else default TIER1_SOURCES
+        if config.stream3_sources:
+            sources = [
+                SourceDataset(
+                    name=s["name"],
+                    image_dir=Path(s["image_dir"]),
+                    count=s.get("count", 500),
+                    has_text_gt=s.get("has_text_gt", False),
+                    glob_patterns=tuple(s.get("glob_patterns", ("*.png", "*.jpg", "*.jpeg"))),
+                    split_filter=s.get("split_filter"),
+                    exclude_suffix=s.get("exclude_suffix"),
+                    recursive=s.get("recursive", False),
+                )
+                for s in config.stream3_sources
+            ]
+        else:
+            sources = list(TIER1_SOURCES)
 
         s3_records = generate_stream3(
             sources=sources,
