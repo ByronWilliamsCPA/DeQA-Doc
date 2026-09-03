@@ -7,7 +7,7 @@ name = "DeQA-Score"
 version = "1.2.0"
 description = "Teaching Large Language Models to Regress Accurate Image Quality Scores using Score Distribution (based on mPLUG-Owl2)"
 readme = "README.md"
-requires-python = ">=3.10,<3.12"
+requires-python = ">=3.14,<3.15"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: Apache Software License",
