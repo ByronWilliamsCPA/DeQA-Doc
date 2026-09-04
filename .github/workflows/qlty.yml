@@ -15,7 +15,7 @@ concurrency:
 jobs:
   qlty:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    uses: ByronWilliamsCPA/.github/.github/workflows/python-qlty-coverage.yml@main
+    uses: ByronWilliamsCPA/.github/.github/workflows/python-qlty-coverage.yml@7d12f5486ab5c856397ebaa4acd3c99ca385227c # main
     permissions:
       contents: read
       actions: read
