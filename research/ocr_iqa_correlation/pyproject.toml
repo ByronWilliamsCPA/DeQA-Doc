@@ -10,7 +10,7 @@ dependencies = [
     "scipy>=1.10",
     # Security floor: Pillow < 12.2.0 has multiple CVEs (GHSA-whj4-6x5x-4v2j,
     # GHSA-pwv6-vv43-88gr, et al.). requires-python >=3.10 allows the fix.
-    "Pillow>=12.2.0",
+    "Pillow>=12.3.0",
     "numpy>=1.24",
 ]
 
