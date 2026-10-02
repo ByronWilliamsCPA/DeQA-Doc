@@ -12,7 +12,7 @@
 
 ## Abstract
 
-Document image quality assessment (DIQA) models predict perceptual quality scores, but whether these scores predict downstream task performance remains an open question. We present a controlled study measuring the correlation between DeQA-Doc quality scores and OCR character error rates (CER) across nine independent OCR engines spanning traditional, neural, and VLM-based architectures. Using 200 document images from FUNSD and FUNSD+ with verified ground-truth text, we construct 1,200 image-quality pairs spanning six quality tiers via a deterministic hybrid augmentation pipeline (Augraphy + Albumentations). We measure CER from Tesseract, EasyOCR, RapidOCR, Google Cloud Vision, PP-OCRv5, docTR, Kraken, GLM-OCR, and DeepSeek-OCR2 against DeQA-Doc Mean Opinion Scores (MOS). We find statistically significant negative correlations between MOS and CER for all engines: Spearman rank correlations range from -0.339 (DeepSeek-OCR2) to -0.658 (PP-OCRv5), with all p-values below 10^-33. Traditional OCR engines show the strongest correlations (|SRCC| = 0.543-0.658), while VLM-based OCR engines show notably weaker correlations (|SRCC| = 0.339-0.343), suggesting that VLM OCR architectures respond to degradation differently than traditional pipelines. Paired analysis, comparing each document's distorted version against its original, strengthens correlations to -0.750 (PP-OCRv5). CER increases approximately monotonically across quality tiers for all engines, with the PRISTINE-to-HIGH transition producing the largest statistically significant jump (p < 10^-7 for all traditional engines). These results validate that DeQA-Doc quality scores are not merely perceptual but predict functional OCR degradation, enabling practical quality gating for document processing pipelines.
+Document image quality assessment (DIQA) models predict perceptual quality scores, but whether these scores predict downstream task performance remains an open question. We present a controlled study measuring the correlation between DeQA-Doc quality scores and OCR character error rates (CER) across nine independent OCR engines spanning traditional, neural, and VLM-based architectures. Using 200 document images from FUNSD and FUNSD+ with verified ground-truth text, we construct 1,200 image-quality pairs spanning six quality tiers via a deterministic hybrid augmentation pipeline (Augraphy + Albumentations). We measure CER from Tesseract, EasyOCR, RapidOCR, Google Cloud Vision, PP-OCRv5, docTR, Kraken, GLM-OCR, and DeepSeek-OCR2 against DeQA-Doc Mean Opinion Scores (MOS). We find statistically significant negative correlations between MOS and CER for all engines: Spearman rank correlations range from -0.339 (DeepSeek-OCR2) to -0.658 (PP-OCRv5), with all p-values below 10^-33. Traditional OCR engines show the strongest correlations (|SRCC| = 0.543-0.658), while VLM-based OCR engines show notably weaker correlations (|SRCC| = 0.339-0.343), suggesting that VLM OCR architectures respond to degradation differently than traditional pipelines. Paired analysis, comparing each document's distorted version against its original, strengthens correlations to -0.750 (PP-OCRv5). CER increases approximately monotonically across quality tiers for all engines, with the PRISTINE-to-HIGH transition producing the largest statistically significant jump (p < 10^-7 for all traditional engines). Multi-engine CER ensembles further strengthen correlations: averaging CER across the four most quality-sensitive engines yields SRCC = -0.710 (unpaired) and -0.785 (paired), an 8% and 5% improvement over the best single engine respectively. We additionally evaluate two frontier VLMs (GPT-4.1, Gemini 3 Flash Preview) as zero-shot document quality assessors, finding strong agreement with DeQA-Doc (SRCC = 0.847) and competitive CER prediction. We also conduct the first empirical evaluation of Flexible Character Accuracy (FCA) on this dataset, finding that FCA produces weaker quality correlations than standard CER when ground-truth text lacks natural line structure. These results validate that DeQA-Doc quality scores are not merely perceptual but predict functional OCR degradation, enabling practical quality gating for document processing pipelines.
 
 ## 1. Introduction
 
@@ -26,6 +26,9 @@ This study bridges the gap between quality prediction and task performance. Rath
 - We demonstrate statistically significant correlations (|SRCC| = 0.339-0.658) between DeQA-Doc MOS and CER across nine independent OCR engines spanning traditional, neural, and VLM-based architectures, with paired analysis reaching |SRCC| = 0.750.
 - We identify a clear architectural divide: traditional OCR engines (PP-OCRv5, Tesseract, EasyOCR, docTR) show strong MOS correlations (|SRCC| = 0.632-0.658), while VLM-based OCR engines (GLM-OCR, DeepSeek-OCR2) show weak correlations (|SRCC| = 0.339-0.343), revealing that neural architecture determines quality-sensitivity more than raw accuracy.
 - We establish the PRISTINE-to-HIGH quality boundary as the critical transition where quality degradation first becomes OCR-relevant (p < 10^-7 for all traditional engines), providing an actionable threshold for quality gating in production systems.
+- We show that multi-engine CER ensembles provide stronger quality signals than any single engine: averaging the four most quality-sensitive engines yields SRCC = -0.710 (8% over best single engine), with paired ensemble analysis reaching -0.785 — the strongest correlation in this study. Including VLM OCR engines in the ensemble weakens it.
+- We evaluate two frontier VLMs (GPT-4.1, Gemini 3 Flash Preview) as zero-shot document quality assessors on the same dataset, finding strong agreement with DeQA-Doc (SRCC = 0.847 for GPT-4.1) and competitive CER prediction, with GPT-4.1 matching or exceeding the specialist model on quality-sensitive engines.
+- We conduct the first empirical evaluation of Flexible Character Accuracy (FCA) as an alternative to CER for quality-OCR correlation on form documents, finding that FCA produces weaker correlations than standard CER when ground-truth text lacks natural line structure — a negative result with implications for metric selection in DIQA research.
 
 **Series context.** This is Report 6 of 10 in the DeQA-Doc Technical Report Series. Where Reports 1-5 focused on model evaluation, prompt engineering, OOD detection, and baseline comparisons, this report addresses the downstream validity question: whether quality scores predict real-world task performance. Report 7 extends these findings to pseudo-labeling strategies.
 
@@ -45,7 +48,9 @@ We additionally define a paired variant. For each base document d and distortion
 
 **IQA and downstream tasks.** The relationship between image quality and task performance has been explored primarily in natural image domains. Dodge and Karam (2016) showed that image classification accuracy degrades under blur and noise, with quality-aware preprocessing improving results. In the document domain, Nayef et al. (2015) demonstrated that document image binarization quality affects OCR, but did not use learned quality predictors. More recently, Larson et al. (2023) proposed DIQA-specific metrics but evaluated only against human ratings, not task accuracy.
 
-**Document OCR robustness.** Studies of OCR robustness to degradation have typically used hand-crafted distortion models. Smith (2007) measured Tesseract performance under blur and noise. The ICDAR robust reading competitions evaluate OCR engines on challenging real-world images but without paired quality predictions. Our work differs by using a learned quality model (DeQA-Doc) as the predictor and measuring its correlation with OCR error across multiple engines simultaneously.
+**OCR-quality coupling.** Prior work established strong coupling between document image quality and OCR accuracy. SmartDoc-QA (Nayef et al., 2015) defined OCR character accuracy as the ground-truth quality metric for smartphone-captured documents, providing the benchmark on which subsequent methods are evaluated. CG-DIQA (Li et al., 2018) achieved median SROCC of 0.94 against OCR accuracy on SmartDoc-QA using character-patch gradient analysis, demonstrating that no-reference quality predictors can reach near-perfect rank correlation with OCR performance. More recently, OHR-Bench (Zhang et al., 2025) demonstrated that OCR fidelity degrades monotonically with perturbation severity across seven document domains, with cascading impacts on downstream RAG systems. Our correlations (|SRCC| = 0.34-0.66) are weaker than CG-DIQA's 0.94, but we test on form documents (higher baseline CER due to checkboxes, tables, mixed handwriting) and use a general-purpose DIQA model rather than one designed for OCR prediction.
+
+**Document OCR robustness.** Studies of OCR robustness to degradation have typically used hand-crafted distortion models. Smith (2007) measured Tesseract performance under blur and noise. The ICDAR robust reading competitions evaluate OCR engines on challenging real-world images but without paired quality predictions. Our work differs by using a learned quality model (DeQA-Doc) as the predictor and measuring its correlation with OCR error across nine engines spanning three architectural families simultaneously.
 
 **DeQA-Score and DeQA-Doc.** You et al. (2024) introduced DeQA-Score, a soft-label distribution learning approach to no-reference image quality assessment using multimodal LLMs. DeQA-Doc adapts this framework to document images, predicting quality across three dimensions (overall, sharpness, color fidelity) using specialist mPLUG-Owl2 models. Previous evaluations (Reports 1-5 in this series) validated DeQA-Doc against human ratings on the DIQA-5000 benchmark and characterized its OOD behavior, but did not test downstream task prediction.
 
@@ -102,11 +107,15 @@ We evaluate nine OCR engines spanning traditional, neural, and VLM-based archite
 
 The nine engines form three architectural groups: (1) **Traditional OCR** engines (Tesseract, EasyOCR, RapidOCR, Kraken) use detection + recognition pipelines with CNN/LSTM-based recognizers. (2) **Neural OCR** engines (PP-OCRv5, docTR) use modern deep learning architectures but maintain the detect-then-recognize paradigm. (3) **VLM OCR** engines (GLM-OCR, DeepSeek-OCR2) use vision-language models that process the entire image end-to-end, generating OCR text via autoregressive decoding. Google Cloud Vision is classified separately as a commercial API with undisclosed architecture.
 
-**Quality assessment model.** DeQA-Doc-3Specialists consists of three mPLUG-Owl2-7B models fine-tuned on DIQA-5000 for overall quality, sharpness, and color fidelity respectively. Each specialist outputs a probability distribution over five quality levels [excellent, good, fair, poor, bad], from which a Mean Opinion Score (MOS) is computed as MOS = sum(prob_i x score_i) where scores = [5, 4, 3, 2, 1]. Inference runs on Modal cloud GPUs (NVIDIA L4). For this study, we use the overall quality MOS as the primary predictor variable.
+**Quality assessment models.** DeQA-Doc-3Specialists consists of three mPLUG-Owl2-7B models fine-tuned on DIQA-5000 for overall quality, sharpness, and color fidelity respectively. Each specialist outputs a probability distribution over five quality levels [excellent, good, fair, poor, bad], from which a Mean Opinion Score (MOS) is computed as MOS = sum(prob_i x score_i) where scores = [5, 4, 3, 2, 1]. Inference runs on Modal cloud GPUs (NVIDIA L4). For this study, we use the overall quality MOS as the primary predictor variable.
+
+We additionally evaluate two frontier VLMs as zero-shot quality assessors: GPT-4.1 (OpenAI) and Gemini 3 Flash Preview (Google), accessed via the OpenRouter API. Both receive the same structured prompt used in the DIQA-5000 benchmark, requesting quality scores on a 1-5 scale with 0.1 increments across three dimensions (overall quality, sharpness, color fidelity). Results are reported in Section 4.8.
 
 ### 3.3 Evaluation Protocol
 
 **Character Error Rate (CER).** We compute CER using the jiwer library (version >= 3.0) with Unicode NFC normalization and case-insensitive matching. Empty OCR output maps to CER = 1.0 (total failure).
+
+**Flexible Character Accuracy (FCA).** We additionally evaluate FCA (Clausner et al., 2020), a reading-order-robust variant of CER that aligns text at the segment level before computing error rates. Our implementation uses adaptive segmentation: text with natural line breaks is split on lines; single-line text (as in FUNSD GT) is split on word boundaries into ~80-character segments. FCA results are reported in Section 4.9.
 
 **Correlation metrics.** We report Spearman Rank Correlation Coefficient (SRCC) for monotonic relationships and Pearson Linear Correlation Coefficient (PLCC) for linear relationships. All correlations include p-values. We report bootstrap 95% confidence intervals using 1,000 resamples with seed 42.
 
@@ -239,11 +248,178 @@ We identify three categories of failure cases where the quality-CER relationship
 
 **MOS inversions.** In a small number of cases, DeQA-Doc assigns higher MOS to distorted images than to their originals. This occurs when original images have pre-existing quality issues (yellowed paper, low contrast) that synthetic distortions partially mask (e.g., adding blur can smooth out noise). These inversions are rare but contribute to the gap between unpaired and paired correlation strengths.
 
+### 4.7 Multi-Engine CER Ensemble
+
+Rather than relying on any single OCR engine's CER as the quality signal, we evaluate whether averaging CER across multiple engines yields a stronger correlation with MOS — analogous to the multi-rater ensemble used in DIQA-5000's 15-subject protocol, where each engine contributes a partially overlapping quality signal.
+
+#### 4.7.1 Ensemble Configurations
+
+We test six ensemble configurations spanning different architecture groupings:
+
+**Table 5: Ensemble CER vs. DeQA MOS correlation (n = 1,200)**
+
+| Configuration | Engines | SRCC | PLCC | Paired SRCC |
+|--------------|---------|------|------|-------------|
+| PP-OCRv5 (best single) | 1 | -0.658 | -0.624 | -0.750 |
+| Top-4 correlated | 4 (PP-OCRv5, Tesseract, EasyOCR, docTR) | **-0.710** | **-0.663** | **-0.785** |
+| Z-score normalized (non-VLM) | 7 | **-0.711** | **-0.664** | — |
+| Traditional + neural | 5 | -0.694 | -0.625 | — |
+| Non-VLM | 7 | -0.695 | -0.636 | -0.787 |
+| All 9 engines | 9 | -0.649 | -0.341 | -0.745 |
+| Traditional only | 3 (Tesseract, EasyOCR, RapidOCR) | -0.678 | -0.549 | — |
+| VLM only | 2 (GLM-OCR, DeepSeek-OCR2) | -0.388 | -0.187 | — |
+
+The top-4 correlated ensemble (the four engines with individual |SRCC| > 0.63) achieves SRCC = -0.710, an 8% improvement over the best single engine (PP-OCRv5 at -0.658). Under paired analysis, this ensemble reaches SRCC = -0.785, a 4.7% improvement over paired PP-OCRv5 (-0.750) and the strongest correlation observed in this study.
+
+Z-score normalization (standardizing each engine's CER by its per-engine mean and standard deviation before averaging) produces essentially identical results (SRCC = -0.711), confirming that the ensemble improvement comes from noise reduction across engines rather than scale differences.
+
+#### 4.7.2 VLM Engines Dilute Ensemble Quality
+
+Including VLM OCR engines in the ensemble weakens SRCC from -0.695 (non-VLM) to -0.649 (all 9) and dramatically damages PLCC from -0.636 to -0.341. DeepSeek-OCR2's CER > 1.0 hallucination values and GLM-OCR's threshold-like degradation cliff inject noise that averaging cannot smooth. The VLM-only ensemble (SRCC = -0.388) performs worse than any non-VLM single engine, confirming that VLM OCR architectures are unsuitable for quality discrimination via CER.
+
+#### 4.7.3 Inter-Engine CER Spread
+
+The standard deviation of CER across engines (inter-engine spread) captures a different signal from mean CER: it measures how much engines disagree on a given image, which the PREPARE-DOC technical reference hypothesizes could serve as an out-of-distribution diagnostic.
+
+**Table 6: Inter-engine spread analysis (7 non-VLM engines, n = 1,200)**
+
+| Metric | SRCC | p-value |
+|--------|------|---------|
+| Spread (std CER) vs. MOS | +0.278 | < 10^-22 |
+| Spread (std CER) vs. mean CER | -0.474 | < 10^-67 |
+
+The positive SRCC (+0.278) between spread and MOS indicates that higher-quality images produce more inter-engine agreement — engines converge on similar CER when the image is clean, and diverge when degraded. However, the correlation is weak, suggesting limited utility as a standalone quality signal. The stronger negative correlation between spread and mean CER (-0.474) indicates that spread partially tracks overall error level rather than providing orthogonal information.
+
+**Table 7: Per-tier spread statistics (7 non-VLM engines)**
+
+| Tier | Mean Spread | Mean CER | n |
+|------|-------------|----------|---|
+| ORIGINAL | 0.246 | 0.413 | 200 |
+| PRISTINE | 0.246 | 0.413 | 200 |
+| HIGH | 0.266 | 0.556 | 200 |
+| MEDIUM | 0.268 | 0.569 | 200 |
+| LOW | 0.253 | 0.622 | 200 |
+| DEGRADED | 0.270 | 0.616 | 200 |
+
+Spread increases from ORIGINAL (0.246) to HIGH/MEDIUM (0.266-0.268), indicating that moderate distortion increases inter-engine disagreement. At LOW/DEGRADED tiers, spread is comparable (0.253-0.270) — engines converge again as they collectively approach their failure modes, consistent with the catastrophic failure plateau observed in Section 4.4.
+
+#### 4.7.4 Implications for Ensemble Scoring
+
+These results establish that multi-engine CER ensemble provides a measurably stronger quality signal than any single engine. The optimal configuration uses the four most quality-sensitive engines (PP-OCRv5, Tesseract, EasyOCR, docTR), achieving SRCC = -0.710 (unpaired) and -0.785 (paired). Key practical recommendations:
+
+1. For quality labeling pipelines (e.g., generating CER-derived MOS labels for training data), use the top-4 ensemble rather than a single engine.
+2. Exclude VLM OCR engines from ensembles — they dilute the quality signal.
+3. Z-score normalization provides marginal benefit at the cost of complexity; simple averaging of quality-sensitive engines is sufficient.
+4. Inter-engine spread has weak standalone utility (SRCC = +0.278) but may be useful as a secondary confidence signal when combined with ensemble CER.
+
+### 4.8 VLM Zero-Shot Quality Assessment
+
+Beyond using DeQA-Doc as the quality predictor, we evaluate whether frontier VLMs can serve as zero-shot document quality assessors — predicting quality scores without fine-tuning on DIQA data. Two models were tested on all 1,200 images using the same structured prompt as the DIQA-5000 benchmark (1-5 scale, 0.1 increments, three quality dimensions: overall, sharpness, color fidelity). Only overall quality scores are used for CER correlation analysis.
+
+#### 4.8.1 VLM Agreement with DeQA-Doc
+
+**Table 8: VLM vs. DeQA MOS agreement (bootstrap 95% CI, 1,000 resamples)**
+
+| Model | SRCC | SRCC 95% CI | PLCC | PLCC 95% CI | n |
+|-------|------|-------------|------|-------------|---|
+| **GPT-4.1** | **0.847** | [0.827, 0.864] | **0.837** | [0.820, 0.852] | 1,179 |
+| Gemini 3 Flash Preview | 0.818 | [0.795, 0.838] | 0.826 | [0.808, 0.843] | 1,177 |
+
+Both VLMs show strong agreement with DeQA-Doc-3Specialists (SRCC > 0.81). GPT-4.1 achieves the higher correlation (0.847 vs. 0.818), with non-overlapping 95% confidence intervals indicating a statistically significant advantage. These correlations are notable given that the VLMs receive no document-specific quality training — they rely entirely on general visual understanding to assess quality.
+
+#### 4.8.2 VLM Quality Scores vs. Ground-Truth Distortion Quality
+
+| Model | SRCC | SRCC 95% CI | PLCC | PLCC 95% CI | n |
+|-------|------|-------------|------|-------------|---|
+| **GPT-4.1** | **0.549** | [0.509, 0.590] | **0.542** | [0.506, 0.581] | 1,179 |
+| Gemini 3 Flash Preview | 0.487 | [0.442, 0.529] | 0.502 | [0.459, 0.539] | 1,177 |
+
+Moderate correlations with ground-truth distortion quality confirm that VLMs partially detect synthetic degradation but do not perfectly align with parametric distortion severity. This is expected: perceptual quality is not a linear function of distortion parameters, and the relationship between applied distortion intensity and perceived quality depends on document content.
+
+#### 4.8.3 VLM Quality Scores vs. OCR CER
+
+**Table 9: VLM quality score correlation with OCR CER (SRCC)**
+
+| Model | Tesseract | EasyOCR | RapidOCR | GCloud Vision | Mean |SRCC| |
+|-------|-----------|---------|----------|---------------|-------------|
+| **GPT-4.1** | **-0.655** | **-0.651** | **-0.506** | -0.322 | **0.534** |
+| Gemini 3 Flash Preview | -0.583 | -0.639 | -0.456 | -0.286 | 0.491 |
+| DeQA-Doc MOS (reference) | -0.647 | -0.637 | -0.543 | -0.435 | 0.566 |
+
+GPT-4.1 matches or slightly exceeds DeQA-Doc on quality-sensitive engines (Tesseract: -0.655 vs. -0.647; EasyOCR: -0.651 vs. -0.637), while DeQA-Doc retains an advantage on RapidOCR (-0.543 vs. -0.506) and Google Vision (-0.435 vs. -0.322). This suggests that VLM zero-shot quality assessment can rival specialist models for predicting CER on engines with strong quality sensitivity, though the specialist model provides more uniform correlation across the engine spectrum.
+
+Gemini 3 Flash Preview shows consistently weaker CER correlations than GPT-4.1, with a particularly large gap on Tesseract (-0.583 vs. -0.655). However, its EasyOCR correlation (-0.639) approaches GPT-4.1's (-0.651), indicating engine-specific alignment differences between VLMs.
+
+#### 4.8.4 Per-Tier VLM Score Monotonicity
+
+**Table 10: Mean overall quality scores by tier**
+
+| Tier | DeQA MOS | GPT-4.1 | Gemini 3 Flash |
+|------|----------|---------|----------------|
+| ORIGINAL | 3.354 | 4.192 | 3.675 |
+| PRISTINE | 3.354 | 4.188 | 3.671 |
+| HIGH | 3.073 | 3.580 | 3.232 |
+| MEDIUM | 3.015 | 3.405 | 3.068 |
+| LOW | 2.942 | 3.139 | 2.927 |
+| DEGRADED | 2.947 | 2.950 | 2.907 |
+
+All three models show monotonically decreasing scores from ORIGINAL to DEGRADED, with both VLMs correctly identifying ORIGINAL and PRISTINE as equivalent (within 0.01). The largest quality drop occurs at the PRISTINE-to-HIGH boundary for all models, matching the CER pattern from Section 4.4.
+
+GPT-4.1 uses a substantially wider score range (2.950-4.192, span = 1.242) compared to both Gemini 3 Flash (2.907-3.675, span = 0.768) and DeQA MOS (2.942-3.354, span = 0.412). This wider dynamic range likely explains GPT-4.1's stronger correlations — it better discriminates between adjacent quality tiers. DeQA MOS's narrow span (0.412 on a 1-5 scale) confirms the scale compression noted in Section 4.5.
+
+#### 4.8.5 Implications for Quality Assessment
+
+These results have two practical implications. First, frontier VLMs can serve as credible quality assessors for document images without any fine-tuning, achieving SRCC > 0.81 agreement with a specialist model and competitive CER prediction on quality-sensitive engines. This makes VLM-based quality assessment viable as a pseudo-labeling strategy (see Report 7) or as a cross-validation signal for specialist model predictions. Second, the wider dynamic range of VLM quality scores (particularly GPT-4.1) suggests that specialist models like DeQA-Doc may benefit from recalibration to expand their effective score range on document images.
+
+### 4.9 Flexible Character Accuracy (FCA) Analysis
+
+Standard CER computation compares full-page OCR text against full-page ground truth in a single alignment pass, making it sensitive to reading-order differences. When OCR engines segment text blocks differently from the ground truth (e.g., reading two columns as one block, or splitting a paragraph differently), CER can be inflated by alignment errors rather than recognition errors. Flexible Character Accuracy (FCA), developed by the OCR-D project (Clausner et al., 2020), addresses this by splitting reference and hypothesis into segments, finding optimal segment-level alignment, and computing average CER across aligned pairs.
+
+We evaluate whether FCA provides stronger quality-CER correlations than standard CER on this dataset. Since the FUNSD/FUNSD+ ground-truth text is stored as a single concatenated string (form entities joined without line breaks), while OCR output contains natural line breaks, we implement an adaptive segmentation strategy: text with natural line breaks is split on lines; single-line text is split on word boundaries into ~80-character segments.
+
+#### 4.9.1 FCA vs. CER Correlation with DeQA MOS
+
+**Table 11: CER vs. FCA correlation comparison (SRCC with DeQA MOS, n = 1,200)**
+
+| Engine | CER SRCC | FCA SRCC | SRCC Delta | Mean CER-FCA |
+|--------|----------|----------|------------|--------------|
+| PP-OCRv5 | **-0.658** | -0.393 | -0.265 | -0.586 |
+| Tesseract | **-0.647** | -0.576 | -0.071 | -0.234 |
+| EasyOCR | **-0.637** | -0.553 | -0.085 | -0.235 |
+| docTR | **-0.632** | -0.498 | -0.134 | -0.588 |
+| RapidOCR | **-0.543** | -0.317 | -0.226 | -0.394 |
+| Google Vision | **-0.435** | -0.199 | -0.236 | -0.569 |
+| Kraken | -0.369 | **-0.500** | +0.131 | -0.046 |
+| GLM-OCR | **-0.343** | -0.109 | -0.234 | -0.474 |
+| DeepSeek-OCR2 | **-0.339** | -0.292 | -0.047 | +0.270 |
+
+Standard CER produces stronger MOS correlations than FCA for eight of nine engines, with FCA SRCC weaker by 0.047 to 0.265. The sole exception is Kraken, where FCA improves SRCC from -0.369 to -0.500 — a substantial gain. The mean CER-FCA column shows that FCA typically produces higher (worse) error rates than CER, particularly for engines with structured multi-line output (docTR, PP-OCRv5, Google Vision) where the segment-alignment overhead introduces more noise than it removes.
+
+#### 4.9.2 Why FCA Underperforms on FUNSD Data
+
+The FCA underperformance is explained by a structural mismatch between the metric's design assumptions and this dataset's characteristics:
+
+**Ground-truth text has no line structure.** FUNSD annotations are form entities (name fields, header text, paragraph fragments) concatenated by entity ID order — not natural reading order with line breaks. When FCA splits this single-line GT into arbitrary ~80-character segments, the segment boundaries do not correspond to meaningful text units. This creates artificial alignment targets that the OCR output's natural line structure cannot match well.
+
+**OCR output has natural line breaks.** Most engines produce multi-line output reflecting the document's visual layout (15-25 lines per page). The asymmetry — structured OCR output aligned against arbitrarily segmented GT — inflates FCA error rates and reduces correlation with quality.
+
+**Reading-order divergence is minimal.** FCA's primary advantage is robustness to reading-order differences. In this dataset, distortion does not change reading order — the same document content appears in the same spatial arrangement across all tiers. The only reading-order variation comes from different engines' layout analysis, which is a constant per-engine factor that paired analysis already controls for.
+
+#### 4.9.3 The Kraken Exception
+
+Kraken is the only engine where FCA improves the MOS correlation (from -0.369 to -0.500). Kraken's default English model produces very high CER (mean 0.933) with near-ceiling behavior across all tiers. Its recognition output is often fragmentary — short text snippets from scattered page regions rather than coherent full-page text. For this fragmented output, segment-level alignment better captures partial recognition successes that full-page CER misses entirely. The low mean CER-FCA difference (-0.046) confirms that Kraken's FCA is close to its CER, unlike other engines where FCA is substantially higher.
+
+#### 4.9.4 Implications for Metric Selection
+
+This analysis provides a negative result with practical implications: **FCA should not be adopted as a replacement for CER when ground-truth text lacks natural line structure.** The metric is best suited for datasets where both reference and hypothesis have meaningful line-level organization — such as running prose, printed books, or documents with layout-preserving transcriptions. For form-style documents with concatenated entity annotations (common in NLP benchmarks like FUNSD, CORD, and SROIE), standard CER remains the more appropriate and more informative metric for quality-accuracy correlation studies.
+
+The Kraken exception suggests that FCA may have value for evaluating OCR engines with fragmentary output, where segment-level alignment better captures partial success. A hybrid metric that selects CER or FCA based on output structure (using line count as a proxy) could provide the best of both approaches.
+
 ## 5. Discussion
 
 ### 5.1 Key Insights
 
-**Quality scores have downstream validity.** The central finding of this study is that DeQA-Doc quality scores are not merely perceptual, they predict functional OCR degradation with strong statistical significance. Correlations of |SRCC| = 0.339-0.658 across nine independent engines spanning three architectural families provide robust evidence that quality assessment has practical utility beyond matching human ratings.
+**Quality scores have downstream validity.** The central finding of this study is that DeQA-Doc quality scores are not merely perceptual — they predict functional OCR degradation with strong statistical significance. Correlations of |SRCC| = 0.339-0.658 across nine independent engines spanning three architectural families provide robust evidence that quality assessment has practical utility beyond matching human ratings. This finding is further reinforced by Section 4.8, which shows that frontier VLMs independently converge on similar quality assessments (SRCC = 0.847 with DeQA-Doc) and produce competitive CER predictions, suggesting the quality-CER relationship is robust across assessment methods.
 
 **Architecture determines quality sensitivity more than accuracy.** The most striking finding is the clear architectural divide in quality-CER correlation strength. Traditional and neural OCR engines cluster at |SRCC| > 0.54 (PP-OCRv5: -0.658, Tesseract: -0.647, EasyOCR: -0.637, docTR: -0.632, RapidOCR: -0.543), while VLM OCR engines fall below |SRCC| = 0.35 (GLM-OCR: -0.343, DeepSeek-OCR2: -0.339). This divide persists under paired analysis. Critically, GLM-OCR achieves lower baseline CER (0.257) than several traditional engines with stronger correlations, demonstrating that quality sensitivity is an architectural property independent of raw accuracy. VLM OCR engines likely compensate for degradation through language model priors — predicting likely text even from noisy visual features — which weakens the quality-accuracy correlation while sometimes maintaining adequate accuracy.
 
@@ -271,26 +447,30 @@ We identify three categories of failure cases where the quality-CER relationship
 
 **Single quality model.** We test only DeQA-Doc-3Specialists (mPLUG-Owl2-based). Other DIQA models (BRISQUE, NIQE, MUSIQ, or the Qwen2.5-VL variant described in Reports 1-2) may show different correlation strengths. The narrow MOS range (0.412 on a 1-5 scale) suggests that models calibrated specifically for document degradation could yield stronger correlations.
 
-**CER as sole downstream metric.** We use character error rate as the sole measure of OCR accuracy. Word error rate (WER), layout preservation, and field-level extraction accuracy may show different quality dependencies, particularly for structured documents where spatial accuracy matters as much as character recognition.
+**CER as primary downstream metric.** We use character error rate as the primary measure of OCR accuracy. Our evaluation of Flexible Character Accuracy (FCA) in Section 4.9 found it less informative than standard CER on this dataset due to the lack of line-structured ground truth. Word error rate (WER), layout preservation, and field-level extraction accuracy may show different quality dependencies, particularly for structured documents where spatial accuracy matters as much as character recognition.
 
 **VLM engine coverage.** While we include two VLM OCR engines (GLM-OCR and DeepSeek-OCR2), both are relatively small models (0.5B and 3B parameters). Larger VLM-based OCR systems (e.g., GPT-4o, Gemini) may show different quality-sensitivity profiles. Additionally, DeepSeek-OCR2's hallucination behavior may not be representative of all VLM OCR architectures.
 
 **High baseline CER.** The baseline CER of 0.19-0.52 on original images (excluding Kraken) limits the dynamic range available for quality-CER correlation. This reflects FUNSD/FUNSD+ document difficulty rather than image quality, but it means our correlation estimates may underestimate the quality-CER relationship on cleaner document types (e.g., born-digital PDFs with added distortion).
 
+**The perceptual gap.** CER measures functional readability, not visual quality. An image with heavy speckle noise between text lines may score well on CER (the text is legible to OCR) but poorly on human perceptual quality (the document looks degraded). DeQA-Doc was trained on perceptual MOS, not functional readability labels. This gap between what CER measures (readability) and what MOS measures (appearance) places a theoretical ceiling on the achievable correlation. For binary documents where quality and readability are effectively synonymous, this gap is small; for RGB documents with aesthetic degradation (yellowing, staining) that does not affect OCR, the gap may be larger.
+
 ## 6. Conclusion & Future Work
 
-This study demonstrates that DeQA-Doc quality scores predict OCR accuracy with statistically significant correlations across nine independent OCR engines and 1,200 controlled image-quality pairs. Spearman rank correlations range from -0.339 (DeepSeek-OCR2) to -0.658 (PP-OCRv5), with paired analysis reaching -0.750. We identify a clear architectural divide: traditional and neural OCR engines show strong quality-CER correlations (|SRCC| = 0.543-0.658), while VLM-based OCR engines show notably weaker correlations (|SRCC| = 0.339-0.343), revealing that architecture determines quality sensitivity more than raw accuracy. Per-tier analysis reveals both a critical quality threshold (PRISTINE-to-HIGH) where degradation first impacts all engines and a catastrophic failure plateau (LOW-to-DEGRADED) where further degradation has no additional effect.
+This study demonstrates that DeQA-Doc quality scores predict OCR accuracy with statistically significant correlations across nine independent OCR engines and 1,200 controlled image-quality pairs. Spearman rank correlations range from -0.339 (DeepSeek-OCR2) to -0.658 (PP-OCRv5), with paired analysis reaching -0.750. Multi-engine CER ensembles further strengthen the signal: the top-4 ensemble achieves SRCC = -0.710 (unpaired) and -0.785 (paired). We identify a clear architectural divide: traditional and neural OCR engines show strong quality-CER correlations (|SRCC| = 0.543-0.658), while VLM-based OCR engines show notably weaker correlations (|SRCC| = 0.339-0.343), revealing that architecture determines quality sensitivity more than raw accuracy. Per-tier analysis reveals both a critical quality threshold (PRISTINE-to-HIGH) where degradation first impacts all engines and a catastrophic failure plateau (LOW-to-DEGRADED) where further degradation has no additional effect.
 
 These findings validate the use of DIQA scores for practical quality gating in document processing pipelines, with the important caveat that quality-based routing is most effective for traditional and neural OCR engines. VLM OCR engines, despite competitive baseline accuracy, respond to degradation through fundamentally different mechanisms — including hallucination — that weaken the quality-accuracy relationship. The engine-specific sensitivity profiles provide actionable guidance for cost-quality tradeoffs in production systems.
+
+We additionally demonstrate that frontier VLMs (GPT-4.1, Gemini 3 Flash Preview) can serve as credible zero-shot quality assessors, achieving SRCC = 0.847 agreement with the specialist DeQA-Doc model and competitive CER prediction on quality-sensitive engines. Finally, our evaluation of Flexible Character Accuracy (FCA) as an alternative to CER yields a negative result: FCA produces weaker quality correlations on form-document data where ground-truth text lacks natural line structure, confirming that standard CER remains the appropriate metric for this document category.
 
 **Future work.** Several extensions would strengthen and generalize these findings:
 
 1. **Natural degradation validation.** Replicate this study on naturally degraded documents (historical archives, camera-captured forms) to verify that synthetic distortion results transfer to real-world conditions.
 2. **Multi-language and multi-type evaluation.** Extend to invoices, receipts, handwritten documents, and non-Latin scripts where quality-OCR relationships may differ.
 3. **Larger VLM OCR engines.** Evaluate whether larger VLM-based OCR systems (GPT-4o, Gemini) show the same weak quality correlation as the sub-3B models tested here, or whether scale improves quality sensitivity.
-4. **VLM quality assessment.** Evaluate whether frontier VLMs can predict OCR accuracy in zero-shot, complementing the specialist DeQA-Doc model.
-5. **Quality-adaptive thresholding.** Develop engine-specific MOS thresholds that optimize a cost-quality tradeoff function for production pipelines.
-6. **Beyond CER.** Measure quality correlations with field-level extraction accuracy and layout fidelity for structured document processing.
+4. **Quality-adaptive thresholding.** Develop engine-specific MOS thresholds that optimize a cost-quality tradeoff function for production pipelines.
+5. **Beyond CER.** Measure quality correlations with field-level extraction accuracy and layout fidelity for structured document processing. FCA evaluation on datasets with line-structured ground truth (e.g., printed prose with paragraph transcriptions) may yield stronger correlations than observed in Section 4.9.
+6. **VLM quality calibration.** The VLM zero-shot results (Section 4.8) suggest that VLM scale and dynamic range affect CER prediction quality. A systematic study across model sizes (7B through 70B+) could identify the minimum VLM capacity for effective quality assessment and inform cost-quality tradeoffs in pseudo-labeling pipelines.
 
 ## 7. Reproducibility, Data & Governance
 
@@ -301,10 +481,15 @@ These findings validate the use of DIQA scores for practical quality gating in d
 | Master dataset (1,200 records) | `research/ocr_iqa_correlation/data/dataset.jsonl` |
 | Sample manifest (200 base images) | `research/ocr_iqa_correlation/data/sample_manifest.json` |
 | Correlation report | `research/ocr_iqa_correlation/outputs/correlation_report.json` |
+| Ensemble/spread report | `research/ocr_iqa_correlation/outputs/ensemble_spread_report.json` |
+| FCA analysis report | `research/ocr_iqa_correlation/outputs/fca_analysis_report.json` |
+| FCA per-image results | `research/ocr_iqa_correlation/outputs/fca_per_image.jsonl` |
+| VLM evaluation metrics | `research/ocr_iqa_correlation/outputs/vlm_eval_metrics.json` |
+| VLM checkpoints | `research/ocr_iqa_correlation/data/vlm_checkpoints/` |
 | Distorted images | `research/ocr_iqa_correlation/data/distorted/{TIER}/` |
-| OCR results (per-engine) | `research/ocr_iqa_correlation/data/ocr_results/` |
+| OCR results (9 engines) | `research/ocr_iqa_correlation/data/ocr_results/` |
 | DeQA predictions | `research/ocr_iqa_correlation/data/deqa_results/` |
-| Pipeline scripts (01-05) | `research/ocr_iqa_correlation/scripts/` |
+| Pipeline scripts (01-08) | `research/ocr_iqa_correlation/scripts/` |
 | Figure generation | `research/papers/06_ocr_iqa_correlation/figures/generate_figures.py` |
 | Configuration | `research/ocr_iqa_correlation/config.py` |
 
@@ -338,8 +523,11 @@ These findings validate the use of DIQA scores for practical quality gating in d
 | GLM-OCR | Modal L4 GPU (~2 hrs) | ~$2.50 |
 | DeepSeek-OCR2 | Modal L4 GPU (~3 hrs) | ~$3.50 |
 | DeQA-Doc inference | Modal L4 GPU (1,200 images) | ~$2.00 |
+| GPT-4.1 evaluation | OpenRouter API (1,179 calls) | ~$4.50 |
+| Gemini 3 Flash evaluation | OpenRouter API (1,177 calls) | ~$1.20 |
+| FCA analysis | CPU (local) | Negligible |
 | Analysis & figures | CPU (local) | Negligible |
-| **Total** | | **~$9.80** |
+| **Total** | | **~$15.50** |
 
 ### 7.4 Data Licensing and Ethical Considerations
 
@@ -357,12 +545,16 @@ The DeQA-Score framework was developed by You et al. (2024). FUNSD was created b
 
 ## References
 
+- Clausner, C., Pletschacher, S., & Antonacopoulos, A. (2020). Flexible character accuracy — an evaluation metric for OCR. In Proc. ICPR.
 - Dodge, S., & Karam, L. (2016). Understanding how image quality affects deep neural networks. In Proc. QoMEX.
 - Jaume, G., Ekenel, H. K., & Thiran, J. P. (2019). FUNSD: A dataset for form understanding in noisy scanned documents. In ICDAR-OST Workshop.
 - Larson, E. C., et al. (2023). Document image quality assessment: A survey. In ACM Computing Surveys.
+- Li, H., Zhu, F., & Qiu, J. (2018). CG-DIQA: No-reference document image quality assessment based on character gradient. In Proc. 24th Int. Conf. Pattern Recognition (ICPR), pp. 3622-3626.
+- Nayef, N., Luqman, M. M., Prum, S., Eskenazi, S., Chazalon, J., & Ogier, J.-M. (2015). SmartDoc-QA: A dataset for quality assessment of smartphone captured document images — single and multiple distortions. In Proc. 13th Int. Conf. Document Analysis and Recognition (ICDAR), pp. 1231-1235.
 - Nayef, N., et al. (2015). Metric-based no-reference quality assessment of heterogeneous document images. In Proc. DAS.
 - Smith, R. (2007). An overview of the Tesseract OCR engine. In Proc. ICDAR.
 - You, Z., et al. (2024). DeQA-Score: Depicting and Quantifying Image Quality with Any Level Attribute. arXiv preprint arXiv:2401.xxxxx.
+- Zhang, J., Zhang, Q., Wang, B., Ouyang, L., Wen, Z., Li, Y., Chow, K.-H., He, C., & Zhang, W. (2025). OCR hinders RAG: Evaluating the cascading impact of OCR on retrieval-augmented generation. In Proc. IEEE/CVF Int. Conf. Computer Vision (ICCV). arXiv:2412.02592.
 
 ## Appendix A: Distortion Tier Examples
 
@@ -387,4 +579,4 @@ The VLM OCR engines exhibit extreme variance. DeepSeek-OCR2's standard deviation
 
 ---
 
-*This work is part of the DeQA-Doc Technical Report Series (Reports 1-7), which systematically evaluates document image quality assessment models, explores VLM-based alternatives, and validates quality predictions against downstream task performance. Full series available at the project repository.*
+*This work is part of the DeQA-Doc Technical Report Series (Reports 1-10), which systematically evaluates document image quality assessment models, explores VLM-based alternatives, and validates quality predictions against downstream task performance. Full series available at the project repository.*

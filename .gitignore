@@ -77,3 +77,7 @@ DeQA-Score/Data-DeQA-Score/DIQA-5000_1/
 # secrets
 .env
 .gcp/
+
+# Large regenerable analysis outputs (kept on disk, not in history).
+# Small .json reports remain tracked; only per-image/per-sample .jsonl dumps are ignored.
+research/**/outputs/*.jsonl
